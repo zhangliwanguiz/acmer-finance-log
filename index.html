@@ -1,120 +1,62 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="QqQv8wMKSbaBAOxyVwKWQb">
-<head data-page-node-id="9oX4Z3x9UxlL9wafAJk2lB">
-<meta charset="UTF-8" data-page-node-id="7NRnHAAa2MbvvaG0vyHKqP">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="hBJAKZfLhjsKd5qsztJN6l">
-<title>acmer理财普及录 · 把算法的严谨写进你的钱包</title>
-<meta name="description" content="acmer理财普及录 —— 由算法竞赛选手自发组成的理财交流记录群。大事记、共享文件库、理财认知图谱，不荐股、不代客理财，只做认知普及。" data-page-node-id="ZFUzKfXPhqe8sNZzq3roJh">
-<meta name="theme-color" content="#F5F5F0" data-page-node-id="IFNywpVuflIBCm9ZRIXqGf">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>acmer理财普及录 · 在线自学理财认知</title>
+<meta name="description" content="acmer理财普及录 —— 由算法竞赛选手搭建的在线理财认知学习站。复利计算器、奖金决策树、现金流预算、反诈图鉴、入门手册，点开即学，不加群。">
+<meta name="theme-color" content="#F5F5F0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="iy7Wp4PXl6lmBD9vZ3oEvO">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="ENCVnrPjCmHrvjXuGtFOw3">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" data-page-node-id="2MYzPrZPdx4GUSHgs6AC1I">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* ==========================================================================
-   acmer理财普及录 — Neo-Brutalism Design System
-   规则：纯黑实线边框 2-4px / 零模糊纯黑硬阴影 / 无渐变 / 无毛玻璃
-   ========================================================================== */
 :root{
-  /* 基底 */
-  --ink:      #0A0A0A;   /* 近黑文字 */
-  --line:     #000000;   /* 边框纯黑 */
-  --paper:    #F5F5F0;   /* 页面底 */
-  --white:    #FFFFFF;
-
-  /* 饱和糖果色 + 各自淡色底 */
-  --pink:      #FF1493;  --pink-soft:   #FFD3E9;
-  --yellow:    #FFE135;  --yellow-soft: #FFF7C4;
-  --blue:      #00BFFF;  --blue-soft:   #C6EDFF;
-  --lime:      #32CD32;  --lime-soft:   #C6F6C3;
-  --orange:    #FF6B35;  --orange-soft: #FFD8C6;
-  --purple:    #A855F7;  --purple-soft: #E7D6FF;
-
-  /* 边框 */
-  --b2: 2px solid var(--line);
-  --b3: 3px solid var(--line);
-  --b4: 4px solid var(--line);
-
-  /* 硬阴影（零模糊） */
-  --s3: 3px 3px 0 var(--line);
-  --s5: 5px 5px 0 var(--line);
-  --s7: 7px 7px 0 var(--line);
-  --s9: 9px 9px 0 var(--line);
-
-  /* 字体 */
+  --ink:#0A0A0A; --line:#000; --paper:#F5F5F0; --white:#FFF;
+  --pink:#FF1493; --pink-soft:#FFD3E9;
+  --yellow:#FFE135; --yellow-soft:#FFF7C4;
+  --blue:#00BFFF; --blue-soft:#C6EDFF;
+  --lime:#32CD32; --lime-soft:#C6F6C3;
+  --orange:#FF6B35; --orange-soft:#FFD8C6;
+  --purple:#A855F7; --purple-soft:#E7D6FF;
+  --b2:2px solid var(--line); --b3:3px solid var(--line); --b4:4px solid var(--line);
+  --s3:3px 3px 0 var(--line); --s5:5px 5px 0 var(--line); --s7:7px 7px 0 var(--line); --s9:9px 9px 0 var(--line);
   --f-display:'Plus Jakarta Sans','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
   --f-body:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
   --f-mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
-
-  --r: 14px;
-  --container: 1180px;
-  --sect: clamp(4.5rem, 9vw, 8rem);
+  --r:14px; --container:1180px; --sect:clamp(4.5rem,9vw,8rem);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:96px}
-body{
-  font-family:var(--f-body);
-  font-size:1rem;
-  line-height:1.7;
-  color:var(--ink);
-  background:var(--paper);
-  -webkit-font-smoothing:antialiased;
-}
+body{font-family:var(--f-body);font-size:1rem;line-height:1.7;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
 ul,ol{list-style:none}
-
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
-.footer :focus-visible{outline-color:#FFFFFF}
-
+.footer :focus-visible{outline-color:#FFF}
 .container{width:min(var(--container),100% - 2rem);margin-inline:auto}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-.skip-link{
-  position:absolute;left:50%;top:-200px;transform:translateX(-50%);z-index:200;
-  background:var(--yellow);color:var(--ink);border:var(--b3);box-shadow:var(--s5);
-  padding:.7rem 1.2rem;font-weight:800;font-family:var(--f-display);transition:top .15s;
-}
+.skip-link{position:absolute;left:50%;top:-200px;transform:translateX(-50%);z-index:200;background:var(--yellow);color:var(--ink);border:var(--b3);box-shadow:var(--s5);padding:.7rem 1.2rem;font-weight:800;font-family:var(--f-display);transition:top .15s}
 .skip-link:focus{top:12px}
 
-/* SVG 装饰资源库（隐藏但可被引用） */
 .svg-defs{position:absolute;width:0;height:0;overflow:hidden}
 
-/* ---------- 通用组件 ---------- */
-.eyebrow{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--f-mono);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  background:var(--white);border:var(--b2);box-shadow:var(--s3);
-  padding:.4rem .8rem;border-radius:99px;
-}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--white);border:var(--b2);box-shadow:var(--s3);padding:.4rem .8rem;border-radius:99px}
 .eyebrow .dot{width:8px;height:8px;background:var(--pink);border:2px solid var(--line);border-radius:99px}
-
-.sect-head{margin-bottom:2.8rem}
-.sect-head h2{
-  font-family:var(--f-display);font-weight:800;
-  font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.08;letter-spacing:-.02em;
-  margin:1rem 0 .9rem;
-}
-.sect-head p{font-size:1.03rem;max-width:62ch;color:#2A2A2A}
+.sect-head{margin-bottom:2.6rem}
+.sect-head h2{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:1rem 0 .9rem}
+.sect-head p{font-size:1.03rem;max-width:64ch;color:#2A2A2A}
 .mark{position:relative;display:inline-block;padding:0 .18em;background:var(--yellow);border:var(--b3);box-shadow:var(--s3);border-radius:6px}
 .mark--pink{background:var(--pink-soft)}
 .mark--blue{background:var(--blue-soft)}
 .mark--lime{background:var(--lime-soft)}
+.mark--orange{background:var(--orange-soft)}
 
-.btn{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.9rem 1.6rem;border:var(--b3);border-radius:10px;
-  background:var(--white);color:var(--ink);
-  font-family:var(--f-display);font-weight:800;font-size:.98rem;letter-spacing:-.01em;
-  box-shadow:var(--s5);
-  transition:transform .13s ease, box-shadow .13s ease, background-color .15s ease;
-}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.9rem 1.6rem;border:var(--b3);border-radius:10px;background:var(--white);color:var(--ink);font-family:var(--f-display);font-weight:800;font-size:.98rem;letter-spacing:-.01em;box-shadow:var(--s5);transition:transform .13s ease,box-shadow .13s ease,background-color .15s ease}
 .btn:hover{transform:translate(-2px,-2px);box-shadow:var(--s7)}
 .btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
-.btn svg{flex:none}
 .btn--pink{background:var(--pink);color:var(--white)}
 .btn--yellow{background:var(--yellow)}
 .btn--blue{background:var(--blue)}
@@ -122,195 +64,80 @@ ul,ol{list-style:none}
 .btn--black{background:var(--ink);color:var(--white)}
 .btn--sm{padding:.6rem 1.1rem;font-size:.88rem;border-width:2px;box-shadow:var(--s3)}
 .btn--sm:active{transform:translate(3px,3px)}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:.72rem;font-weight:700;padding:.25rem .6rem;border:var(--b2);border-radius:6px;background:var(--white);letter-spacing:.02em}
+.tag--pink{background:var(--pink-soft)} .tag--yellow{background:var(--yellow-soft)} .tag--blue{background:var(--blue-soft)} .tag--lime{background:var(--lime-soft)} .tag--orange{background:var(--orange-soft)} .tag--purple{background:var(--purple-soft)}
 
-.tag{
-  display:inline-block;font-family:var(--f-mono);font-size:.72rem;font-weight:700;
-  padding:.25rem .6rem;border:var(--b2);border-radius:6px;background:var(--white);
-  letter-spacing:.02em;
-}
-.tag--pink{background:var(--pink-soft)}
-.tag--yellow{background:var(--yellow-soft)}
-.tag--blue{background:var(--blue-soft)}
-.tag--lime{background:var(--lime-soft)}
-.tag--orange{background:var(--orange-soft)}
-.tag--purple{background:var(--purple-soft)}
-
-/* ==========================================================================
-   1. STICKY NAV
-   ========================================================================== */
-.nav{
-  position:sticky;top:0;z-index:100;
-  background:var(--paper);border-bottom:var(--b3);
-}
-.nav__inner{
-  display:flex;align-items:center;gap:1.2rem;
-  padding:.85rem 0;
-}
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:var(--b3)}
+.nav__inner{display:flex;align-items:center;gap:1.2rem;padding:.85rem 0}
 .nav__brand{display:flex;align-items:center;gap:.7rem;flex:none}
-.nav__mark{
-  width:42px;height:42px;flex:none;display:grid;place-items:center;
-  background:var(--pink);border:var(--b3);box-shadow:var(--s3);border-radius:9px;
-  font-family:var(--f-display);font-weight:800;font-size:1.15rem;color:var(--white);
-  letter-spacing:-.04em;
-}
+.nav__mark{width:42px;height:42px;flex:none;display:grid;place-items:center;background:var(--pink);border:var(--b3);box-shadow:var(--s3);border-radius:9px;font-family:var(--f-display);font-weight:800;font-size:1.15rem;color:var(--white);letter-spacing:-.04em}
 .nav__name{font-family:var(--f-display);font-weight:800;font-size:1.03rem;line-height:1.15;letter-spacing:-.02em}
 .nav__name span{display:block;font-family:var(--f-mono);font-size:.66rem;font-weight:700;letter-spacing:.12em;color:#444}
-
 .nav__links{display:flex;align-items:center;gap:.3rem;margin-left:auto}
-.nav__link{
-  font-weight:600;font-size:.94rem;padding:.5rem .8rem;border-radius:8px;
-  border:2px solid transparent;transition:background-color .15s, border-color .15s, transform .13s;
-}
+.nav__link{font-weight:600;font-size:.94rem;padding:.5rem .8rem;border-radius:8px;border:2px solid transparent;transition:background-color .15s,border-color .15s,transform .13s}
 .nav__link:hover{background:var(--yellow-soft);border-color:var(--line)}
 .nav__link.is-active{background:var(--white);border-color:var(--line);box-shadow:var(--s3)}
-.nav__cta{margin-left:.6rem;flex:none}
-
-.nav__toggle{
-  display:none;margin-left:auto;width:44px;height:44px;flex:none;
-  border:var(--b3);background:var(--white);box-shadow:var(--s3);border-radius:9px;
-  place-items:center;
-}
-.nav__toggle:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+.nav__links .nav__cta{margin-left:.6rem}
+.nav__toggle{display:none;margin-left:auto;width:44px;height:44px;flex:none;border:var(--b3);background:var(--white);box-shadow:var(--s3);border-radius:9px;place-items:center}
 .nav__toggle span{display:block;width:20px;height:3px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
 .nav__toggle span+span{margin-top:4px}
 .nav__toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav__toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
 .nav__toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
 .nav__progress{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--pink);border-right:2px solid var(--line);transition:width .1s linear}
 
-/* ==========================================================================
-   2. HERO
-   ========================================================================== */
+/* HERO */
 .hero{position:relative;padding:clamp(3rem,6vw,5rem) 0 clamp(3.5rem,7vw,6rem);overflow:hidden}
 .hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;position:relative;z-index:2}
-
-.hero h1{
-  font-family:var(--f-display);font-weight:800;
-  font-size:clamp(2.4rem,6.4vw,4.5rem);line-height:1.02;letter-spacing:-.035em;
-  margin:1.4rem 0 1.3rem;
-}
-.hero h1 em{font-style:normal}
-.hero__lead{font-size:1.08rem;max-width:52ch;color:#262626;margin-bottom:1.6rem}
-.hero__lead code{font-family:var(--f-mono);font-size:.9em;background:var(--white);border:2px solid var(--line);padding:.05em .35em;border-radius:4px}
+.hero h1{font-family:var(--f-display);font-weight:800;font-size:clamp(2.4rem,6.4vw,4.5rem);line-height:1.02;letter-spacing:-.035em;margin:1.4rem 0 1.3rem}
+.hero__lead{font-size:1.08rem;max-width:54ch;color:#262626;margin-bottom:1.6rem}
 .hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.8rem}
-
 .hero__facts{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
-.fact{
-  background:var(--white);border:var(--b3);box-shadow:var(--s5);border-radius:12px;padding:.85rem .8rem;
-  transition:transform .16s ease, box-shadow .16s ease;
-}
+.fact{background:var(--white);border:var(--b3);box-shadow:var(--s5);border-radius:12px;padding:.85rem .8rem;transition:transform .16s ease,box-shadow .16s ease}
 .fact:hover{transform:translate(-3px,-3px);box-shadow:var(--s7)}
 .fact b{display:block;font-family:var(--f-display);font-weight:800;font-size:1.45rem;line-height:1.1;letter-spacing:-.03em}
 .fact span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;color:#555}
-.fact--pink b{color:var(--pink)}
-.fact--blue b{color:#0090C0}
-.fact--lime b{color:#1E9E1E}
-.fact--orange b{color:var(--orange)}
-
-/* Hero 视觉面板 */
+.fact--pink b{color:var(--pink)} .fact--blue b{color:#0090C0} .fact--lime b{color:#1E9E1E} .fact--orange b{color:var(--orange)}
 .hero__visual{position:relative}
-.panel{
-  background:var(--white);border:var(--b4);box-shadow:9px 9px 0 var(--line);border-radius:var(--r);
-  overflow:hidden;position:relative;z-index:2;
-}
-.panel__bar{
-  display:flex;align-items:center;gap:.45rem;padding:.65rem .9rem;
-  background:var(--yellow);border-bottom:var(--b3);
-}
+.panel{background:var(--white);border:var(--b4);box-shadow:9px 9px 0 var(--line);border-radius:var(--r);overflow:hidden;position:relative;z-index:2}
+.panel__bar{display:flex;align-items:center;gap:.45rem;padding:.65rem .9rem;background:var(--yellow);border-bottom:var(--b3)}
 .panel__bar i{width:12px;height:12px;border:2px solid var(--line);border-radius:99px;background:var(--white)}
-.panel__bar i:nth-child(2){background:var(--pink)}
-.panel__bar i:nth-child(3){background:var(--lime)}
+.panel__bar i:nth-child(2){background:var(--pink)} .panel__bar i:nth-child(3){background:var(--lime)}
 .panel__bar span{margin-left:auto;font-family:var(--f-mono);font-size:.72rem;font-weight:700}
 .panel__body{padding:1.1rem}
-
-.chart-tip{
-  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;justify-content:space-between;
-  font-family:var(--f-mono);font-size:.72rem;font-weight:700;margin-bottom:.6rem;
-}
-.legend{display:flex;gap:.7rem;align-items:center}
-.legend i{display:inline-block;width:11px;height:11px;border:2px solid var(--line);margin-right:.25rem;vertical-align:-1px}
-.legend .up{background:var(--pink)}
-.legend .dn{background:var(--lime)}
-
-.code{
-  background:var(--ink);color:#F5F5F0;border:var(--b3);border-radius:10px;
-  padding:.9rem 1rem;font-family:var(--f-mono);font-size:.78rem;line-height:1.85;
-  overflow-x:auto;
-}
-.code .c-comment{color:#8E8E8E}
-.code .c-key{color:var(--yellow)}
-.code .c-str{color:var(--blue)}
-.code .c-out{color:var(--lime)}
-
-.badge-float{
-  position:absolute;z-index:3;
-  background:var(--pink);color:var(--white);
-  border:var(--b3);box-shadow:var(--s5);border-radius:99px;
-  padding:.55rem 1rem;font-family:var(--f-display);font-weight:800;font-size:.85rem;
-  transform:rotate(-6deg);
-}
-.badge-float--1{top:-20px;right:6px}
-.badge-float--2{bottom:-22px;left:-6px;background:var(--blue);color:var(--ink);transform:rotate(5deg)}
-
-/* 装饰层 */
+.code{background:var(--ink);color:#F5F5F0;border:var(--b3);border-radius:10px;padding:.9rem 1rem;font-family:var(--f-mono);font-size:.78rem;line-height:1.85;overflow-x:auto}
+.code .c-comment{color:#8E8E8E} .code .c-key{color:var(--yellow)} .code .c-str{color:var(--blue)} .code .c-out{color:var(--lime)}
+.badge-float{position:absolute;z-index:3;background:var(--pink);color:var(--white);border:var(--b3);box-shadow:var(--s5);border-radius:99px;padding:.55rem 1rem;font-family:var(--f-display);font-weight:800;font-size:.85rem;transform:rotate(-6deg)}
+.badge-float--1{top:-20px;right:6px} .badge-float--2{bottom:-22px;left:-6px;background:var(--blue);color:var(--ink);transform:rotate(5deg)}
 .deco{position:absolute;pointer-events:none;z-index:0}
 .deco--hero-dots{top:4%;right:-40px;width:190px;height:230px;opacity:.55}
-.deco--hero-stripe{bottom:2%;left:-60px;width:280px;height:120px;opacity:.5}
 
-/* ==========================================================================
-   3. 技能卡 / 进度条
-   ========================================================================== */
+/* SKILLS */
 .section{padding:var(--sect) 0;position:relative;overflow:hidden}
 .section--alt{background:var(--white);border-top:var(--b3);border-bottom:var(--b3)}
 .section--paper{background:var(--paper)}
-
 .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.skill{
-  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
-  padding:1.4rem 1.4rem 1.2rem;position:relative;overflow:hidden;
-  transition:transform .16s ease, box-shadow .16s ease;
-}
+.skill{background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.4rem;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
 .skill:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
 .skill__top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.9rem}
-.skill__icon{
-  width:46px;height:46px;flex:none;display:grid;place-items:center;
-  border:var(--b3);border-radius:10px;box-shadow:var(--s3);background:var(--c-soft);
-}
+.skill__icon{width:46px;height:46px;flex:none;display:grid;place-items:center;border:var(--b3);border-radius:10px;box-shadow:var(--s3);background:var(--c-soft)}
 .skill h3{font-family:var(--f-display);font-weight:800;font-size:1.12rem;line-height:1.25;letter-spacing:-.02em}
 .skill__mono{font-family:var(--f-mono);font-size:.68rem;font-weight:700;color:#666;letter-spacing:.05em}
 .skill p{font-size:.92rem;color:#333;margin-bottom:1.1rem}
+.skill p code{font-family:var(--f-mono);font-size:.85em;background:var(--white);border:2px solid var(--line);padding:0 .3em;border-radius:4px}
 .skill__meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.4rem}
 .skill__meta span{font-family:var(--f-mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;color:#555}
 .skill__meta b{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.03em}
-.bar{
-  height:24px;background:var(--white);border:var(--b3);border-radius:8px;overflow:hidden;position:relative;
-}
-.skill p code{font-family:var(--f-mono);font-size:.85em;background:var(--white);border:2px solid var(--line);padding:0 .3em;border-radius:4px}
-.bar__fill{
-  position:relative;
-  height:100%;width:0;background:var(--c);border-right:3px solid var(--line);
-  transition:width 1.15s cubic-bezier(.22,.85,.25,1);
-}
-.bar__fill::after{
-  content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0,8 L8,0' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E");
-  opacity:.22;
-}
+.bar{height:24px;background:var(--white);border:var(--b3);border-radius:8px;overflow:hidden;position:relative}
+.bar__fill{position:relative;height:100%;width:0;background:var(--c);border-right:3px solid var(--line);transition:width 1.15s cubic-bezier(.22,.85,.25,1)}
+.bar__fill::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0,8 L8,0' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E");opacity:.22}
 
-/* ==========================================================================
-   4. BENTO 项目网格
-   ========================================================================== */
+/* LEARNING CENTER */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1.4rem}
-.tile{
-  grid-column:span 2;
-  display:flex;flex-direction:column;
-  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
-  padding:1.4rem;position:relative;overflow:hidden;
-  transition:transform .16s ease, box-shadow .16s ease;
-}
+.tile{grid-column:span 2;display:flex;flex-direction:column;background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.4rem;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease;text-align:left;width:100%}
 .tile:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
-.tile:focus-within{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.tile:focus-visible{transform:translate(-4px,-4px);box-shadow:var(--s9)}
 .tile--hero{grid-column:span 3;grid-row:span 2;background:var(--c-soft)}
 .tile--wide{grid-column:span 3}
 .tile--half{grid-column:span 3}
@@ -322,65 +149,81 @@ ul,ol{list-style:none}
 .tile--hero p{font-size:1rem}
 .tile__foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding-top:.9rem;border-top:var(--b2)}
 .tile__tags{display:flex;flex-wrap:wrap;gap:.4rem}
-.tile__go{
-  display:inline-flex;align-items:center;gap:.4rem;flex:none;
-  font-family:var(--f-mono);font-size:.76rem;font-weight:700;
-  padding:.4rem .7rem;border:var(--b2);border-radius:8px;background:var(--white);
-  transition:transform .13s, box-shadow .13s, background-color .15s;
-}
+.tile__go{display:inline-flex;align-items:center;gap:.4rem;flex:none;font-family:var(--f-mono);font-size:.76rem;font-weight:700;padding:.4rem .7rem;border:var(--b2);border-radius:8px;background:var(--white);transition:transform .13s,box-shadow .13s,background-color .15s}
 .tile__go:hover{background:var(--yellow);transform:translate(-2px,-2px);box-shadow:var(--s3)}
 .tile__go:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+.tile__art{border:var(--b3);border-radius:10px;background:var(--white);box-shadow:var(--s3);padding:.9rem;margin-bottom:1rem;overflow:hidden}
 
-.tile__list{margin:.2rem 0 1rem;display:grid;gap:.5rem}
-.tile__list li{display:flex;gap:.6rem;align-items:flex-start;font-size:.92rem}
-.tile__list svg{flex:none;margin-top:.3rem}
+/* TOOLS */
+.tool{background:var(--white);border:var(--b4);border-radius:var(--r);box-shadow:var(--s7);padding:clamp(1.4rem,3vw,2.4rem);position:relative;overflow:hidden}
+.tool__grid{display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:start}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#444;margin-bottom:.4rem}
+.field input{width:100%;font-family:var(--f-body);font-size:1rem;padding:.7rem .8rem;background:var(--white);border:var(--b3);border-radius:10px;color:var(--ink);transition:transform .12s,box-shadow .12s}
+.field input:focus{outline:none;transform:translate(-2px,-2px);box-shadow:var(--s3)}
+.field .hint{font-family:var(--f-mono);font-size:.66rem;color:#777;margin-top:.3rem;display:block}
+.calc__out{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:1.2rem}
+.stat{background:var(--c-soft,var(--yellow-soft));border:var(--b3);border-radius:10px;padding:.9rem 1rem;box-shadow:var(--s3)}
+.stat span{display:block;font-family:var(--f-mono);font-size:.7rem;font-weight:700;color:#555;letter-spacing:.04em}
+.stat b{font-family:var(--f-display);font-weight:800;font-size:1.5rem;letter-spacing:-.03em;word-break:break-all}
+.stat--big{grid-column:span 2;background:var(--ink);color:#fff}
+.stat--big span{color:var(--yellow)}
+.chart-wrap{border:var(--b3);border-radius:10px;background:var(--white);box-shadow:var(--s3);padding:.9rem;overflow-x:auto;margin-bottom:1.2rem}
+.chart-wrap svg{width:100%;height:auto;min-width:420px}
+.table-wrap{margin-top:.4rem;border:var(--b3);border-radius:10px;overflow:hidden;box-shadow:var(--s3)}
+.table-scroll{max-height:280px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{padding:.55rem .7rem;text-align:right;border-bottom:2px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{background:var(--yellow);font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;position:sticky;top:0;z-index:1}
+tbody tr:nth-child(even){background:var(--paper)}
+.note{font-family:var(--f-mono);font-size:.72rem;color:#555;margin-top:1rem;display:flex;gap:.4rem;align-items:flex-start;line-height:1.6}
+.note b{color:var(--pink);flex:none}
 
-.tile__art{
-  border:var(--b3);border-radius:10px;background:var(--white);box-shadow:var(--s3);
-  padding:.9rem;margin-bottom:1rem;overflow:hidden;
-}
-.mini-code{font-family:var(--f-mono);font-size:.74rem;line-height:1.9;white-space:pre;color:var(--ink)}
-.mini-code .k{color:#B3006B;font-weight:700}
-.mini-code .s{color:#0077A8}
-.mini-code .cm{color:#777}
+/* DECISION TREE */
+.dtree{display:grid;gap:.9rem}
+.dnode{background:var(--c-soft,var(--orange-soft));border:var(--b3);border-radius:10px;padding:1.2rem;box-shadow:var(--s3)}
+.dnode.q b{font-family:var(--f-display);font-weight:800;font-size:1.08rem;display:block;margin-bottom:.9rem;line-height:1.5}
+.dnode .opts{display:flex;flex-wrap:wrap;gap:.8rem}
+.dbtn{font-family:var(--f-display);font-weight:800;font-size:.95rem;padding:.75rem 1.2rem;border:var(--b3);border-radius:9px;background:var(--white);box-shadow:var(--s3);transition:transform .12s,box-shadow .12s}
+.dbtn:hover{transform:translate(-2px,-2px);box-shadow:var(--s5)}
+.dbtn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+.dresult{background:var(--lime-soft)}
+.dresult b{font-family:var(--f-display);font-weight:800;font-size:1.1rem;display:block;margin-bottom:.5rem}
+.dreset{margin-top:.9rem}
 
-/* ==========================================================================
-   5. 时间线
-   ========================================================================== */
+/* SCAMS */
+.scamgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.scam{background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
+.scam:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.scam__top{display:flex;align-items:center;gap:.7rem;padding:1rem 1.1rem .4rem}
+.scam__ic{width:40px;height:40px;flex:none;display:grid;place-items:center;border:var(--b3);border-radius:9px;background:var(--c-soft);box-shadow:var(--s3);font-family:var(--f-mono);font-weight:700;font-size:.9rem}
+.scam h3{font-family:var(--f-display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.scam__tag{font-family:var(--f-mono);font-size:.68rem;font-weight:700;padding:.2rem .5rem;border:var(--b2);border-radius:5px;background:var(--c-soft);white-space:nowrap}
+.scam__body{padding:.4rem 1.1rem 1.1rem;font-size:.9rem;color:#2E2E2E}
+.scam__body dl{display:grid;gap:.5rem;margin-top:.4rem}
+.scam__body dt{font-family:var(--f-mono);font-size:.7rem;font-weight:700;color:#444;letter-spacing:.04em}
+.scam__body dd{font-size:.9rem}
+.scam__body .fix{color:#0F6E2E;font-weight:600}
+
+/* TIMELINE */
 .timeline{position:relative;padding-left:0}
-.timeline::before{
-  content:'';position:absolute;left:11px;top:10px;bottom:10px;width:4px;background:var(--line);
-}
+.timeline::before{content:'';position:absolute;left:11px;top:10px;bottom:10px;width:4px;background:var(--line)}
 .tl-item{position:relative;padding-left:3rem;padding-bottom:2.2rem}
 .tl-item:last-child{padding-bottom:0}
-.tl-item::before{
-  content:'';position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:99px;
-  background:var(--c,var(--pink));border:var(--b3);box-shadow:var(--s3);
-}
-.tl-card{
-  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
-  padding:1.2rem 1.3rem;transition:transform .16s ease, box-shadow .16s ease;
-}
+.tl-item::before{content:'';position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:99px;background:var(--c,var(--pink));border:var(--b3);box-shadow:var(--s3)}
+.tl-card{background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.2rem 1.3rem;transition:transform .16s ease,box-shadow .16s ease;cursor:pointer;width:100%;text-align:left;display:block}
 .tl-card:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
 .tl-card__top{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-bottom:.55rem}
 .tl-date{font-family:var(--f-mono);font-size:.76rem;font-weight:700;padding:.25rem .6rem;border:var(--b2);border-radius:6px;background:var(--c-soft,var(--pink-soft))}
 .tl-card h3{font-family:var(--f-display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:.35rem}
 .tl-card p{font-size:.93rem;color:#2E2E2E}
 
-/* ==========================================================================
-   6. 关于
-   ========================================================================== */
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:1.6rem;align-items:start}
-.about-card{
-  background:var(--blue-soft);border:var(--b4);border-radius:var(--r);box-shadow:var(--s7);
-  padding:1.6rem;position:relative;overflow:hidden;
-}
+.about-card{background:var(--blue-soft);border:var(--b4);border-radius:var(--r);box-shadow:var(--s7);padding:1.6rem;position:relative;overflow:hidden}
 .about-card__top{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-.avatar{
-  width:78px;height:78px;flex:none;display:grid;place-items:center;border-radius:14px;
-  background:var(--ink);border:var(--b3);box-shadow:var(--s3);
-  font-family:var(--f-display);font-weight:800;font-size:1.7rem;color:var(--yellow);letter-spacing:-.05em;
-}
+.avatar{width:78px;height:78px;flex:none;display:grid;place-items:center;border-radius:14px;background:var(--ink);border:var(--b3);box-shadow:var(--s3);font-family:var(--f-display);font-weight:800;font-size:1.7rem;color:var(--yellow);letter-spacing:-.05em}
 .about-card h3{font-family:var(--f-display);font-weight:800;font-size:1.4rem;letter-spacing:-.02em;line-height:1.2}
 .about-card__role{font-family:var(--f-mono);font-size:.74rem;font-weight:700;color:#333;letter-spacing:.05em}
 .about-card p{font-size:.95rem;margin-bottom:.9rem}
@@ -388,52 +231,26 @@ ul,ol{list-style:none}
 .about-stats div{background:var(--white);border:var(--b2);border-radius:9px;padding:.6rem;text-align:center}
 .about-stats b{display:block;font-family:var(--f-display);font-weight:800;font-size:1.25rem;letter-spacing:-.03em}
 .about-stats span{font-family:var(--f-mono);font-size:.64rem;color:#555;letter-spacing:.05em}
-
 .principles{display:grid;gap:1rem}
-.principle{
-  display:flex;gap:1rem;align-items:flex-start;
-  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
-  padding:1.15rem 1.25rem;
-  transition:transform .16s ease, box-shadow .16s ease;
-}
+.principle{display:flex;gap:1rem;align-items:flex-start;background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.15rem 1.25rem;transition:transform .16s ease,box-shadow .16s ease}
 .principle:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
-.principle__no{
-  width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:10px;
-  border:var(--b3);box-shadow:var(--s3);background:var(--c);
-  font-family:var(--f-display);font-weight:800;font-size:1.1rem;
-}
+.principle__no{width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:10px;border:var(--b3);box-shadow:var(--s3);background:var(--c);font-family:var(--f-display);font-weight:800;font-size:1.1rem}
 .principle h3{font-family:var(--f-display);font-weight:800;font-size:1.08rem;letter-spacing:-.02em;margin-bottom:.2rem}
 .principle p{font-size:.92rem;color:#2E2E2E}
 
-/* ==========================================================================
-   7. CTA（黄底）
-   ========================================================================== */
-.cta{
-  background:var(--yellow);border-top:var(--b4);border-bottom:var(--b4);
-  position:relative;overflow:hidden;
-}
+/* CTA */
+.cta{background:var(--yellow);border-top:var(--b4);border-bottom:var(--b4);position:relative;overflow:hidden}
 .cta__inner{padding:clamp(3.2rem,7vw,5.5rem) 0;text-align:center;position:relative;z-index:2}
 .cta h2{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.06;letter-spacing:-.035em;margin-bottom:1rem}
 .cta p{font-size:1.05rem;max-width:56ch;margin:0 auto 1.9rem;color:#1F1F1F}
 .cta__actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-bottom:1.6rem}
-.cta__note{
-  display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center;
-  font-family:var(--f-mono);font-size:.76rem;font-weight:700;
-  background:var(--white);border:var(--b2);box-shadow:var(--s3);border-radius:99px;padding:.45rem 1rem;
-}
-.copy-pill{
-  display:inline-flex;align-items:center;gap:.55rem;
-  font-family:var(--f-mono);font-size:.85rem;font-weight:700;
-  background:var(--ink);color:#fff;border:var(--b3);box-shadow:var(--s5);border-radius:99px;padding:.6rem 1.1rem;
-  transition:transform .13s, box-shadow .13s;
-}
+.cta__note{display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center;font-family:var(--f-mono);font-size:.76rem;font-weight:700;background:var(--white);border:var(--b2);box-shadow:var(--s3);border-radius:99px;padding:.45rem 1rem}
+.copy-pill{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--f-mono);font-size:.85rem;font-weight:700;background:var(--ink);color:#fff;border:var(--b3);box-shadow:var(--s5);border-radius:99px;padding:.6rem 1.1rem;transition:transform .13s,box-shadow .13s}
 .copy-pill:hover{transform:translate(-2px,-2px);box-shadow:var(--s7)}
 .copy-pill:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
 .copy-pill[data-copied="true"]{background:var(--lime);color:var(--ink)}
 
-/* ==========================================================================
-   8. FOOTER（黑底）
-   ========================================================================== */
+/* FOOTER */
 .footer{background:var(--ink);color:#F2F2EE;border-top:var(--b4);position:relative;overflow:hidden}
 .footer__inner{padding:clamp(3rem,6vw,4.5rem) 0 1.6rem;position:relative;z-index:2}
 .footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.6rem}
@@ -442,1019 +259,764 @@ ul,ol{list-style:none}
 .footer__brand .nav__mark{background:var(--yellow);color:var(--ink)}
 .footer p{font-size:.92rem;color:#C9C9C4;max-width:38ch}
 .footer__list li+li{margin-top:.55rem}
-.footer__list a{font-size:.93rem;color:#E4E4DF;transition:color .15s, background-color .15s;padding:.1rem .2rem;border-radius:4px}
+.footer__list a{font-size:.93rem;color:#E4E4DF;transition:color .15s,background-color .15s;padding:.1rem .2rem;border-radius:4px}
 .footer__list a:hover{color:var(--yellow);background:#1C1C1C;text-decoration:underline;text-underline-offset:3px}
-.footer__bar{
-  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
-  border-top:2px solid #333;padding-top:1.3rem;
-  font-family:var(--f-mono);font-size:.74rem;color:#9A9A95;
-}
-.footer__bar a{color:#C9C9C4}
-.footer__bar a:hover{color:var(--yellow)}
+.footer__bar{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;border-top:2px solid #333;padding-top:1.3rem;font-family:var(--f-mono);font-size:.74rem;color:#9A9A95}
 
-/* 回到顶部 */
-.totop{
-  position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;
-  width:52px;height:52px;display:grid;place-items:center;border-radius:12px;
-  background:var(--pink);color:var(--white);border:var(--b3);box-shadow:var(--s5);
-  opacity:0;visibility:hidden;transform:translateY(10px);
-  transition:opacity .2s, transform .2s, visibility .2s, box-shadow .13s;
-}
+/* DRAWER */
+.drawer{position:fixed;inset:0;z-index:200;display:none}
+.drawer.is-open{display:block}
+.drawer__backdrop{position:absolute;inset:0;background:rgba(10,10,10,.55);animation:fade .2s ease}
+.drawer__panel{position:absolute;top:0;right:0;height:100%;width:min(680px,100%);background:var(--paper);border-left:var(--b4);box-shadow:-9px 0 0 rgba(0,0,0,.14);overflow-y:auto;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.85,.25,1);padding:1.4rem clamp(1.2rem,4vw,2.4rem) 3rem}
+.drawer.is-open .drawer__panel{transform:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.drawer__head{display:flex;align-items:center;gap:.8rem;padding-bottom:.8rem;margin-bottom:1.2rem;border-bottom:var(--b3)}
+.drawer__head h2{font-family:var(--f-display);font-weight:800;font-size:1.4rem;line-height:1.2}
+.drawer__close{margin-left:auto;width:44px;height:44px;flex:none;border:var(--b3);background:var(--white);box-shadow:var(--s3);border-radius:9px;display:grid;place-items:center;font-size:1.1rem;font-weight:800}
+.drawer__close:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+.drawer__body h2{font-family:var(--f-display);font-weight:800;font-size:1.65rem;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2}
+.drawer__body h3{font-family:var(--f-display);font-weight:800;font-size:1.2rem;margin:1.6rem 0 .6rem;letter-spacing:-.02em}
+.drawer__body p{font-size:.98rem;margin-bottom:.8rem;color:#262626}
+.drawer__body ul{list-style:disc;padding-left:1.3rem;margin-bottom:.8rem}
+.drawer__body li{margin-bottom:.5rem;font-size:.96rem;color:#262626}
+.drawer__body .code2{background:var(--ink);color:#F5F5F0;border:var(--b3);border-radius:10px;padding:.9rem 1rem;font-family:var(--f-mono);font-size:.82rem;line-height:1.85;overflow-x:auto;margin:.6rem 0 1rem;white-space:pre}
+.drawer__body .callout{border:var(--b3);border-left:8px solid var(--pink);background:var(--pink-soft);border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.92rem;color:#262626}
+.drawer__body .data-sample{border:var(--b3);border-radius:10px;overflow-x:auto;box-shadow:var(--s3);margin:1rem 0}
+.drawer__body .data-sample table{font-size:.82rem}
+.drawer__toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .4rem}
+.chip{display:inline-block;font-family:var(--f-mono);font-size:.7rem;font-weight:700;border:var(--b2);border-radius:5px;padding:.15rem .5rem;margin:.1rem .1rem;background:var(--white)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.22,.85,.25,1),transform .55s cubic-bezier(.22,.85,.25,1)}
+.reveal.is-in{opacity:1;transform:none}
+
+.totop{position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;width:52px;height:52px;display:grid;place-items:center;border-radius:12px;background:var(--pink);color:var(--white);border:var(--b3);box-shadow:var(--s5);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s,box-shadow .13s}
 .totop.is-on{opacity:1;visibility:visible;transform:none}
 .totop:hover{background:var(--yellow);color:var(--ink)}
 .totop:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
 
-/* ---------- 滚动揭示 ---------- */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.22,.85,.25,1),transform .55s cubic-bezier(.22,.85,.25,1)}
-.reveal.is-in{opacity:1;transform:none}
-
-/* ---------- 响应式 ---------- */
-@media (max-width:1080px){
-  .footer__grid{grid-template-columns:1fr 1fr}
-}
+@media (max-width:1080px){.footer__grid{grid-template-columns:1fr 1fr}.tool__grid{grid-template-columns:1fr}}
 @media (max-width:960px){
-  .hero__grid{grid-template-columns:1fr}
-  .hero__visual{order:2}
+  .hero__grid{grid-template-columns:1fr}.hero__visual{order:2}
   .about-grid{grid-template-columns:1fr}
   .bento{grid-template-columns:repeat(4,1fr)}
-  .tile{grid-column:span 4}
-  .tile--hero,.tile--wide,.tile--half{grid-column:span 4;grid-row:auto}
-  .nav__links{
-    position:absolute;left:0;right:0;top:100%;
-    display:grid;gap:.2rem;padding:1rem;margin:0;
-    background:var(--paper);border-bottom:var(--b3);box-shadow:0 6px 0 rgba(0,0,0,.06);
-    max-height:0;overflow:hidden;padding-block:0;transition:max-height .25s ease, padding .25s ease;
-  }
-  .nav__links.is-open{max-height:420px;padding-block:1rem}
-  .nav__links .nav__cta{margin:0;justify-content:center}
+  .tile,.tile--hero,.tile--wide,.tile--half{grid-column:span 4;grid-row:auto}
+  .nav__links{position:absolute;left:0;right:0;top:100%;display:grid;gap:.2rem;padding:.6rem 1rem;margin:0;background:var(--paper);border-bottom:var(--b3);box-shadow:0 6px 0 rgba(0,0,0,.06);max-height:0;overflow:hidden;transition:max-height .25s ease}
+  .nav__links.is-open{max-height:480px}
+  .nav__links .nav__link{padding:.6rem .6rem}
+  .nav__links .nav__cta{margin:.4rem 0 0;justify-content:center}
   .nav__toggle{display:grid}
-  .nav__cta--desktop{display:none}
 }
 @media (max-width:720px){
   .hero__facts{grid-template-columns:repeat(2,1fr)}
   .skillgrid{grid-template-columns:1fr}
   .footer__grid{grid-template-columns:1fr}
   .about-stats{grid-template-columns:1fr}
-  .deco--hero-dots,.deco--hero-stripe{display:none}
+  .calc__out{grid-template-columns:1fr}
+  .stat--big{grid-column:span 1}
 }
-
-/* ---------- 减少动效 ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .reveal{opacity:1!important;transform:none!important}
   .bar__fill{transition:none!important}
+  .drawer__panel{transition:none!important}
 }
-/* ---------- 打印 ---------- */
-@media print{
-  .nav,.totop,.deco{display:none!important}
-  body{background:#fff}
-  .card,.tile,.skill,.tl-card,.panel{box-shadow:none}
-}
+@media print{.nav,.totop,.deco,.drawer{display:none!important}body{background:#fff}.tool,.tile,.skill,.panel{box-shadow:none}}
 </style>
 </head>
-<body data-page-node-id="DqgZeKFflDYuFYgmkO6ABx">
+<body>
 
-<a class="skip-link" href="#main" data-page-node-id="Kn87gdZ19wyqESI7CmncoG">跳到主要内容</a>
+<a class="skip-link" href="#main">跳到主要内容</a>
 
-<!-- ==========================================================
-     SVG 装饰资源（噪点 / 斜条纹 / 圆点矩阵 / 网格）
-     ========================================================== -->
-<svg class="svg-defs" aria-hidden="true" focusable="false" data-page-node-id="pjkxpnQLXTIVm21cySx2So">
-  <defs data-page-node-id="zurd6lfFWCpo6dcEQyedbV">
-    <filter id="fx-noise" data-page-node-id="dqd0sILtB4OzwjTXKvHAV4">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" data-page-node-id="UV0H3CEuLqV5BKuGxrMOEA"/>
-      <feColorMatrix type="saturate" values="0" data-page-node-id="Z0dl2saFszCzteZ9PWqGuT"/>
-    </filter>
-    <pattern id="p-noise" width="180" height="180" patternUnits="userSpaceOnUse" data-page-node-id="QJTliHGzyLVZXHyEn1bS6D">
-      <rect width="180" height="180" filter="url(#fx-noise)" opacity="0.16" data-page-node-id="whljoaBWmezOjA48eXlOuP"/>
-    </pattern>
-    <pattern id="p-dots" width="16" height="16" patternUnits="userSpaceOnUse" data-page-node-id="GZtD1LQYm5PabiZqDGLWQ1">
-      <circle cx="4" cy="4" r="1.9" fill="#000" data-page-node-id="YThv1EDZiFj6Y8bx80hnBf"/>
-      <circle cx="12" cy="12" r="1.9" fill="#000" data-page-node-id="qhblfcUHPFWUrOlZkji3gO"/>
-    </pattern>
-    <pattern id="p-stripe" width="8" height="8" patternUnits="userSpaceOnUse" data-page-node-id="aWbPEGsBouGhIhXCiHdhfS">
-      <path d="M0,8 L8,0" stroke="#000" stroke-width="2" data-page-node-id="CotzzLOzxd6trpSZDqIqk3"/>
-    </pattern>
-    <pattern id="p-grid" width="30" height="30" patternUnits="userSpaceOnUse" data-page-node-id="ZT6tn1SbqgMkzz3mVJXI6N">
-      <path d="M30,0 L0,0 L0,30" fill="none" stroke="#000" stroke-width="1.4" data-page-node-id="sCBEodRkl1NyMVmpgeCmtJ"/>
-    </pattern>
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="p-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.9" fill="#000"/><circle cx="12" cy="12" r="1.9" fill="#000"/></pattern>
+    <pattern id="p-stripe" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0,8 L8,0" stroke="#000" stroke-width="2"/></pattern>
+    <pattern id="p-grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30,0 L0,0 L0,30" fill="none" stroke="#000" stroke-width="1.4"/></pattern>
   </defs>
 </svg>
 
-<!-- ==========================================================
-     1. STICKY 导航
-     ========================================================== -->
-<header class="nav" id="top" data-page-node-id="Ndzx4DcEueIPwiHnr31s2S">
-  <div class="container nav__inner" data-page-node-id="JkoHR4jU9Jzew8SKQ3zASC">
-    <a class="nav__brand" href="#top" aria-label="acmer理财普及录 首页" data-page-node-id="bjTFy5uCTrSVmHEEN9oQUj">
-      <span class="nav__mark" aria-hidden="true" data-page-node-id="rHfd7YsikQcA3pW9dB4B5w">A</span>
-      <span class="nav__name" data-page-node-id="8vBX4g8sT8724ijlOBQkPb">acmer理财普及录<span data-page-node-id="hZ8nsCEfFY5kIDp2BoTkEq">ACM × FINANCE LOG</span></span>
+<!-- NAV -->
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#top" aria-label="acmer理财普及录 首页">
+      <span class="nav__mark" aria-hidden="true">A</span>
+      <span class="nav__name">acmer理财普及录<span>在线自学理财认知</span></span>
     </a>
-
-    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单" data-page-node-id="NaELPRG4EUuaiTAU6EEoXD">
-      <span data-page-node-id="uDp2kuDopGc1tm60EPwV17"></span><span data-page-node-id="0dLjkWC8SIjFSTwCA2YBDl"></span><span data-page-node-id="VxykDOM6AopW3FHokACk9y"></span>
-    </button>
-
-    <nav class="nav__links" id="navMenu" aria-label="主导航" data-page-node-id="J335giTYMOUADrHqBTjEj5">
-      <a class="nav__link" href="#timeline" data-page-node-id="7cjmYPHRAzuyIcDwRbNEeT">大事记</a>
-      <a class="nav__link" href="#files" data-page-node-id="B9TmlWC2BQQAQhqck99Z7L">文件库</a>
-      <a class="nav__link" href="#skills" data-page-node-id="Xj15RpkJnTXJ98597a56Bk">认知图谱</a>
-      <a class="nav__link" href="#about" data-page-node-id="vI8u5siz0QMQAKj7CnePEJ">关于我们</a>
-      <a class="nav__link nav__cta btn btn--sm btn--pink" href="#contact" data-page-node-id="WsoQlOd5Dw1ycUUc23CQqG">申请入群</a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+    <nav class="nav__links" id="navMenu" aria-label="主导航">
+      <a class="nav__link" href="#learn">学习中心</a>
+      <a class="nav__link" href="#calc">复利计算器</a>
+      <a class="nav__link" href="#tree">奖金决策</a>
+      <a class="nav__link" href="#scams">反诈图鉴</a>
+      <a class="nav__link" href="#timeline">大事记</a>
+      <a class="nav__link" href="#about">关于我们</a>
+      <a class="nav__link nav__cta btn btn--sm btn--pink" href="#contact">联系交流</a>
     </nav>
-
-    <div class="nav__progress" id="navProgress" aria-hidden="true" data-page-node-id="zwHmyW5yUCADAyhmk8Bx0s"></div>
+    <div class="nav__progress" id="navProgress" aria-hidden="true"></div>
   </div>
 </header>
 
-<main id="main" data-page-node-id="gLxCjwWNwBFlhY2aEPU3pa">
+<main id="main">
 
-<!-- ==========================================================
-     2. HERO
-     ========================================================== -->
-<section class="hero" aria-labelledby="hero-title" data-page-node-id="SjLZvX7BJ8MNdgNc230ofl">
-  <svg class="deco deco--hero-dots" aria-hidden="true" viewBox="0 0 190 230" data-page-node-id="VJtAY7sYetFxKmmSoQskU9">
-    <rect width="190" height="230" fill="url(#p-dots)" data-page-node-id="3qmOIOmivKbbTG3EEsonlM"/>
-  </svg>
-  <svg class="deco deco--hero-stripe" aria-hidden="true" viewBox="0 0 280 120" data-page-node-id="VCsHi57SvOcS53f9FasNDs">
-    <rect width="280" height="120" fill="url(#p-stripe)" opacity="0.35" data-page-node-id="TnCggwbtQJPErS6C2ZeH4Y"/>
-  </svg>
-
-  <div class="container hero__grid" data-page-node-id="d4go56QYxNJvgFIFhKPhBN">
-    <div class="hero__text" data-page-node-id="Ddbb7qDP46gnLwKWSM6lrJ">
-      <p class="eyebrow" data-page-node-id="OL70PCQmq3uMuGjYCBnUhu"><span class="dot" data-page-node-id="P4K5E4iWeR7GqCsKXqXUiT"></span>自 2023 · 算法选手的理财记录群</p>
-
-      <h1 id="hero-title" data-page-node-id="uhmOSP1yJsF4OOiY5L9hxH">
-        把算法竞赛的<em class="mark mark--pink" data-page-node-id="9U6ni6JlTUoH9PQeF8c8SD">严谨</em><br data-page-node-id="ny5pevjXomQYfZMdssfh1Q">
-        写进你的<em class="mark" data-page-node-id="Re5ghBqyDL95JYH9nDVaaP">钱包</em>
-      </h1>
-
-      <p class="hero__lead" data-page-node-id="yNhpvwniR5hUAx5OGuHeBH">
-        <code data-page-node-id="kFnPeI9ihjTYqd9wXp6yeV">acmer理财普及录</code> 是一群 ACM-ICPC / CCPC 选手自发组成的理财交流记录群。
-        我们用 <strong data-page-node-id="wkfg8ehwPVjBTQfO7h8aBD">AC 一道题的耐心</strong> 去回测策略，用 <strong data-page-node-id="loC0fZlQ2PDucnbmWD8ziU">Debug 的态度</strong> 审视每一笔支出——
-        把复杂的金融术语，翻译成一段可以照着跑的伪代码。
-      </p>
-
-      <div class="hero__actions" data-page-node-id="aZwpBwBXxWn3WXJ5ouSEGt">
-        <a class="btn btn--pink" href="#files" data-page-node-id="JvBnhIVPxAJ7kKdxZpdRsa">
-          翻阅共享文件库
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="jVb2L6XT1AAMlZrPfHCrnP"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="DcyAMxuDQnDI34xZg9aeTo"/></svg>
-        </a>
-        <a class="btn btn--yellow" href="#timeline" data-page-node-id="wIGD5irIwY20Hg1p0m099w">
-          看看大事记
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="VAfmvvCm4GpVbcAiFc2T1I"><path d="M12 5v14M5 12h14" data-page-node-id="W1BZ2d2BBKR6PGuC6AmiSq"/></svg>
-        </a>
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <svg class="deco deco--hero-dots" aria-hidden="true" viewBox="0 0 190 230"><rect width="190" height="230" fill="url(#p-dots)"/></svg>
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <p class="eyebrow"><span class="dot"></span>不用加群 · 点开就学</p>
+      <h1 id="hero-title">一个能<span class="mark mark--pink">在线自学</span>的<br>理财认知站</h1>
+      <p class="hero__lead">由算法竞赛选手搭建。我们把复杂金融翻译成可执行的伪代码——<strong>复利计算器、奖金决策树、现金流预算、反诈图鉴、入门手册</strong>，全部在页面里点开即用。不收费、不荐股、不加群也能学。</p>
+      <div class="hero__actions">
+        <a class="btn btn--pink" href="#calc">打开复利计算器 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+        <a class="btn btn--yellow" href="#learn">进入学习中心 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M12 5v14M5 12h14"/></svg></a>
       </div>
-
-      <p class="cta__note" style="background:#fff" data-page-node-id="qPXjmIIZFfOgJAGsg7DjD0">
-        <span aria-hidden="true" data-page-node-id="nsU22zChnJ1mqiVQG8myEa">#</span> 不荐股 · 不代客理财 · 所有结论附数据源与时间戳
-      </p>
+      <p class="cta__note" style="background:#fff"><span aria-hidden="true">#</span> 所有结论附数据源与时间戳 · 不构成投资建议</p>
     </div>
-
-    <div class="hero__visual" data-page-node-id="5H7cg69Va8jBWPWb68cmC9">
-      <span class="badge-float badge-float--1" data-page-node-id="i1dmry4EybGlzuSdsaCK72">复利 = 耐心 × 时间</span>
-
-      <div class="panel" data-page-node-id="y2Xt5kq0xClZcYn6YPhcA4">
-        <div class="panel__bar" data-page-node-id="cfU1ELXyeQdG1KIE8ZZH9W">
-          <i data-page-node-id="N8Xd7KcJ9rFBmlYAo2mDtU"></i><i data-page-node-id="J8FcrR5A1FZJ7tWRdYhGp0"></i><i data-page-node-id="cbL1Dam5ddMQrHMjhDTH74"></i>
-          <span data-page-node-id="092W5Q2udHb7spIhWwrLBt">portfolio_backtest.py</span>
-        </div>
-        <div class="panel__body" data-page-node-id="9ZAAQGJFK0jpqEJ7huJIuE">
-          <div class="chart-tip" data-page-node-id="mMpPgHZ1qZO1A3FmrlxRVv">
-            <span class="legend" aria-hidden="true" data-page-node-id="7F1WLW1x2DpRCfzvWbdLe4">
-              <span data-page-node-id="skM0lgx4l8qtaMzvMMvPdr"><i class="up" data-page-node-id="BMDXuoLbbzsDW7AHe4FCfB"></i>红涨</span>
-              <span data-page-node-id="kPn6H2Gww4KzxjJdYImbwT"><i class="dn" data-page-node-id="stFxdEQNVlXBuEGiLUGKLs"></i>绿跌</span>
-            </span>
-            <span data-page-node-id="wLiC1wBjgOjYHxtrS6xJhw">定投 20 年 · 月度再平衡</span>
-          </div>
-
-          <!-- 蜡烛图：红涨绿跌（A 股配色习惯） -->
-          <svg viewBox="0 0 400 220" role="img" aria-label="群组示范组合净值蜡烛示意图，整体呈上升趋势，红涨绿跌" style="border:2px solid #000;border-radius:8px;background:#fff" data-page-node-id="RZpxGSij1cDB7UziPqWrJY">
-            <rect width="400" height="220" fill="url(#p-grid)" opacity="0.07" data-page-node-id="pIfroAHRDoJvAYYYgjw1vL"/>
-            <!-- 网格横线 -->
-            <g stroke="#000" stroke-width="1" opacity="0.18" data-page-node-id="lyORrzajWJvi0SZMHhpoHq">
-              <path d="M24 40H392" data-page-node-id="Zz0efIV1c93Kv0M1nKbk7R"/><path d="M24 78H392" data-page-node-id="wehO0ye50tp9v5yJiNK5fN"/><path d="M24 116H392" data-page-node-id="XL2ktSZGDK3VajYILQjCAw"/><path d="M24 154H392" data-page-node-id="scDJwY7uip1nbqd1s6rwJb"/>
-            </g>
-            <path d="M24 192H392" stroke="#000" stroke-width="2.5" data-page-node-id="M8BAVOhqEtN0ukpA5grCxz"/>
-            <path d="M24 16V192" stroke="#000" stroke-width="2.5" data-page-node-id="Ya7w1AugQusMdwUjliEWiG"/>
-            <!-- 趋势线 -->
-            <path d="M24 182 L392 60" stroke="#0A0A0A" stroke-width="3" stroke-dasharray="10 8" opacity="0.75" fill="none" data-page-node-id="w1CcxnNwpzZYrC7kjjGfdz"/>
-
-            <g stroke="#000" stroke-width="2.4" data-page-node-id="UU4lNy5kgyiYMpmzpJKXFk">
-              <!-- 1 up -->
-              <path d="M62 148V176" data-page-node-id="gePTcgMElHOqWxf0ucCwab"/>
-              <rect x="54" y="155" width="16" height="15" fill="#FF1493" data-page-node-id="9VqkC67onFhixudYn6cwpN"/>
-              <!-- 2 down -->
-              <path d="M102 150V173" data-page-node-id="gKZQLEmBNaKlkOcqFtIglN"/>
-              <rect x="94" y="155" width="16" height="10" fill="#32CD32" data-page-node-id="56KrKxcTOzwp507wBQi8aO"/>
-              <!-- 3 up -->
-              <path d="M142 134V170" data-page-node-id="Ru3ZfW0rfFskUrQmrUptNl"/>
-              <rect x="134" y="140" width="16" height="25" fill="#FF1493" data-page-node-id="FpqlbBIDKF8R9LcNmq16Dn"/>
-              <!-- 4 down -->
-              <path d="M182 136V156" data-page-node-id="kp5E0LrypyH1YZiI7RLdVj"/>
-              <rect x="174" y="140" width="16" height="10" fill="#32CD32" data-page-node-id="sLFtKDs59gNh5T6m8KgUMI"/>
-              <!-- 5 up -->
-              <path d="M222 120V154" data-page-node-id="IJpcOvCMtTzed0IMXYHKdm"/>
-              <rect x="214" y="125" width="16" height="25" fill="#FF1493" data-page-node-id="aorikE1QIF0S5TO3Ceopxs"/>
-              <!-- 6 up -->
-              <path d="M262 112V130" data-page-node-id="7HiuUZ4z4l6Y4FnORAO4gm"/>
-              <rect x="254" y="118" width="16" height="7" fill="#FF1493" data-page-node-id="KBUk2VFYAW69xVnTnPkzAL"/>
-              <!-- 7 down -->
-              <path d="M302 114V136" data-page-node-id="vJxumAcubk26ZmVxiGPans"/>
-              <rect x="294" y="118" width="16" height="12" fill="#32CD32" data-page-node-id="NCZYcv5XuCPhNqLQGTS3l4"/>
-              <!-- 8 up -->
-              <path d="M342 88V134" data-page-node-id="l2fhNGGp01r9AKuXEqFYOU"/>
-              <rect x="334" y="95" width="16" height="35" fill="#FF1493" data-page-node-id="xZkqQRD20YWHepHTcUMshH"/>
-              <!-- 9 up -->
-              <path d="M382 66V100" data-page-node-id="5DRbrPJPBHqsDFeZ9R9Eof"/>
-              <rect x="374" y="72" width="16" height="23" fill="#FF1493" data-page-node-id="04V6tPbKeyVLdA60tSMIwO"/>
-            </g>
-          </svg>
-
-          <div class="code" style="margin-top:1rem" data-page-node-id="FphGgJnvTn2r086Uo9eVSW">
-<span class="c-comment" data-page-node-id="mtgPcewa3B8O92FG5zCPOg"># 纪律比预测更值钱</span>
-$ acmer-compound <span class="c-key" data-page-node-id="bGBDkvnK90Cueox1XQ0FB5">--monthly</span> <span class="c-str" data-page-node-id="HLBc10m6TCpvfdR5hEQXm8">3000</span> <span class="c-key" data-page-node-id="SQnHyoLnlXTello0V1HI5d">--years</span> <span class="c-str" data-page-node-id="35qaSq1GLhlYFUgJSnHpXF">20</span> <span class="c-key" data-page-node-id="OAoI91NFgmwIrDbtWHI6TG">--rate</span> <span class="c-str" data-page-node-id="B2TDblgJsihVB44WwroPDg">0.08</span>
-<span class="c-out" data-page-node-id="frkG3RBKPM6UBIQYedafyU">→ 累计投入 ¥720,000</span>
-<span class="c-out" data-page-node-id="pDlUXDFIRXYbUE724pYwqf">→ 期末资产 ¥1,768,387</span>
-<span class="c-out" data-page-node-id="OZE1QMxBSzMQ0hNVq84KiE">→ 其中 ¥1,048,387 来自时间</span>
+    <div class="hero__visual">
+      <span class="badge-float badge-float--1">复利 = 耐心 × 时间</span>
+      <div class="panel">
+        <div class="panel__bar"><i></i><i></i><i></i><span>acmer-compound</span></div>
+        <div class="panel__body">
+          <div class="code" aria-label="复利回测示例代码">
+<span class="c-comment"># 纪律比预测更值钱</span>
+$ acmer-compound --monthly 3000 --years 20 --rate 0.08
+<span class="c-out">→ 累计投入 ¥720,000</span>
+<span class="c-out">→ 期末资产 ¥1,644,740</span>
+<span class="c-out">→ 收益 ¥924,740（费率 0.3%）</span>
+<span class="c-comment"># 数值与本页计算器默认参数一致，可现场复算</span>
           </div>
         </div>
       </div>
-
-      <span class="badge-float badge-float--2" data-page-node-id="k1mQoy0oxGy6FEtMfFx6E6">No Financial Advice</span>
+      <span class="badge-float badge-float--2">No Financial Advice</span>
     </div>
   </div>
-
-  <div class="container" style="position:relative;z-index:2;margin-top:clamp(2.4rem,5vw,3.6rem)" data-page-node-id="ae47vNOm0DuaghdDwxZ3Ez">
-    <ul class="hero__facts" data-page-node-id="MVgJaFMXgB9gl7KbTErO0K">
-      <li class="fact fact--pink reveal" data-page-node-id="RGrq5LIj2EW1OWIqc6ibjS"><b data-page-node-id="fafXQotsKc8ZaKfGjhHz40">3 年</b><span data-page-node-id="h1HRqhFky37DOSJCo58fRQ">持续记录</span></li>
-      <li class="fact fact--blue reveal" data-page-node-id="4HHYn6DPscsGNJKBwMJDny"><b data-page-node-id="EjHo2UgF9Kr0hzpnaAS7hY">1,250</b><span data-page-node-id="sFwcIXJGFsJQoviJFmqJ3X">群友人数</span></li>
-      <li class="fact fact--lime reveal" data-page-node-id="zDF76QglVvGlCH4GGjISiT"><b data-page-node-id="5ycDxw1nKa2XVG0E5LBiHC">47 份</b><span data-page-node-id="93VrgmpFwwUCLufBjpZYaq">共享文件</span></li>
-      <li class="fact fact--orange reveal" data-page-node-id="M2FoAwWSIZlFHIhDer3HBU"><b data-page-node-id="QVg1xM94dbW3AZEPJQQmq2">210 场</b><span data-page-node-id="FMPuQRGjqv9HWgN8wvVw8k">线上复盘</span></li>
+  <div class="container" style="position:relative;z-index:2;margin-top:clamp(2.4rem,5vw,3.6rem)">
+    <ul class="hero__facts">
+      <li class="fact fact--pink reveal"><b>6 章</b><span>入门手册</span></li>
+      <li class="fact fact--blue reveal"><b>12 种</b><span>骗局图鉴</span></li>
+      <li class="fact fact--lime reveal"><b>3 个</b><span>交互工具</span></li>
+      <li class="fact fact--orange reveal"><b>0 元</b><span>全部免费</span></li>
     </ul>
   </div>
 </section>
 
-<!-- ==========================================================
-     3. 认知图谱 / 技能进度条
-     ========================================================== -->
-<section class="section section--alt" id="skills" aria-labelledby="skills-title" data-page-node-id="89EYtDuN2LLzpYqKaLoWsa">
-  <svg class="deco" aria-hidden="true" viewBox="0 0 200 400" style="right:-60px;top:8%;width:180px;height:340px;opacity:.4" data-page-node-id="1vPBecWY62RLl7uD6yqSBH">
-    <rect width="200" height="400" fill="url(#p-stripe)" opacity="0.5" data-page-node-id="RKCzPLNHTm22cAvkyU3rGV"/>
-  </svg>
-
-  <div class="container" data-page-node-id="cdGiPMK3KdQZNI9DEk8HRN">
-    <header class="sect-head reveal" data-page-node-id="bWYKBTWxC1b5b0W5lSlxxm">
-      <p class="eyebrow" data-page-node-id="Q9T0eAFMCGQKWLDOYWHkbD"><span class="dot" data-page-node-id="PSXXFnSAX7QLD3oXgR1eoZ"></span>Chapter 01 — 认知图谱</p>
-      <h2 id="skills-title" data-page-node-id="rN9pvo5maI7S95FLWStmiC">先补齐<span class="mark mark--blue" data-page-node-id="7NuKejJIUnSO3oyJYaUFIG">心智模型</span>，<br data-page-node-id="7G2mJ443mTtJPlr3dm2Iqd">再谈收益率</h2>
-      <p data-page-node-id="Jt4ZdbAqQFqZYtHOTA1U91">我们把群友三年里踩过的坑抽象成六项能力。每项都是可以量化、可以练习、可以复盘的——就像刷题一样，先看清题型，再上强度。</p>
+<!-- SKILLS -->
+<section class="section section--alt" id="skills" aria-labelledby="skills-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 01 — 先建立心智模型</p>
+      <h2 id="skills-title">把理财拆成<span class="mark mark--blue">六项能力</span></h2>
+      <p>每项都是可量化、可练习、可复盘的——像刷题一样，先看清题型，再上强度。</p>
     </header>
-
-    <ul class="skillgrid" data-page-node-id="BGOnAzMsDM9vcKv4Oca0HP">
-      <li class="skill reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="3D1W2acEfAjm4uQUEcy1xF">
-        <div class="skill__top" data-page-node-id="qxDiBM9fOqArxrLHzm2Yml">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="5hEwisqidUDKuo6TzZVajt">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="zYvM3lfb17waCvBNRq9jNG"><rect x="3" y="3" width="7" height="7" data-page-node-id="jMTJWfSErdWr18flGcVyrt"/><rect x="14" y="3" width="7" height="7" data-page-node-id="pySYms14YzN32ntjPfzH19"/><rect x="3" y="14" width="7" height="7" data-page-node-id="opF7JMPdeNh8yEgsXqMSBd"/><rect x="14" y="14" width="7" height="7" data-page-node-id="41qabUTXoH4gCurfCGhDAX"/></svg>
-          </span>
-          <div data-page-node-id="gcJtn1bTvG1EG9BW5xhGNO">
-            <h3 data-page-node-id="34CzEN1bAQqfnOT3XPkYBt">资产配置与再平衡</h3>
-            <p class="skill__mono" data-page-node-id="3Px2VOO5nJDiBQpOF9tEdG">SPLIT / CONQUER</p>
-          </div>
-        </div>
-        <p data-page-node-id="VrDaACGivLBUnmZOTuAvVf">用「分治」思想拆账户：进攻端、防守端、现金流端各司其职，偏离阈值 5% 触发再平衡。</p>
-        <div class="skill__meta" data-page-node-id="YOaLsCIhlEu8G4tdYaFSqw"><span data-page-node-id="JEr8F3SqSRRtz5aSoPC8G3">熟练度</span><b data-page-node-id="7ss1z4FTGkTeCJqpQ6Zblr">88%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 88%" data-page-node-id="5hP8mWyXC0tbINOCgrDngt"><div class="bar__fill" data-w="88" data-page-node-id="p8tgmihRcPYR0Azx8ezG1q"></div></div>
-      </li>
-
-      <li class="skill reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)" data-page-node-id="nb6FPaqDKovlexyGGXKcPt">
-        <div class="skill__top" data-page-node-id="0O352wEuddngWReFDYa1xi">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="wFR9oxzQJGoC0vJ68QAV2Q">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="VRP4KxoLFjgYxHgoptt4ov"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2" data-page-node-id="PSoOvVl1HuKoLEfz03MDJ3"/></svg>
-          </span>
-          <div data-page-node-id="hE94u5mt57ZFUYVxFq8MlG">
-            <h3 data-page-node-id="EDgnfCCjwdFUNVq53wQz7h">指数基金定投</h3>
-            <p class="skill__mono" data-page-node-id="EFShhGobs2JDOLHF7xHvB9">FOR-LOOP INVESTING</p>
-          </div>
-        </div>
-        <p data-page-node-id="7aNC1RpqzfSVFwt9Dj1dDG">把定投写成一个 <code data-page-node-id="EMD6B9VrMnBqQwqPe5e6YF">for</code> 循环：固定时间、固定金额、不看盘。靠纪律跑赢情绪波动。</p>
-        <div class="skill__meta" data-page-node-id="P7ePGL65Rne6bqGdPe8JXq"><span data-page-node-id="oQqqWKuqQ5Dluul4hpeSEq">熟练度</span><b data-page-node-id="AFYjAL1nMK7UEcE2ZwS1wz">92%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 92%" data-page-node-id="msP6G4S6yFdB9vDdbXoGgW"><div class="bar__fill" data-w="92" data-page-node-id="YhHUyKaiXFgb85ugHKrce1"></div></div>
-      </li>
-
-      <li class="skill reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)" data-page-node-id="Dzufaro0uI4eWRHiW03j9c">
-        <div class="skill__top" data-page-node-id="ziecuKbHFy4sf5aAJJglhA">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="kigCV2ZZFAxctkDJ76v7rB">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="1wYLNP5zsIzh6T2Egttxr6"><path d="M12 3l9 16H3l9-16z" data-page-node-id="lYSSFFYy3rovJLiW4loJ6g"/><path d="M12 9v5" data-page-node-id="QcQxqCkpWJ79gRsF7DgM8N"/><path d="M12 17h.01" data-page-node-id="LzCdYLAthxWIJxtbESEVPQ"/></svg>
-          </span>
-          <div data-page-node-id="zTstHzdZOnYQ90X4BteSnO">
-            <h3 data-page-node-id="MtQuZSpt3zLVBNKU8OQCIN">风险识别与仓位管理</h3>
-            <p class="skill__mono" data-page-node-id="N8lrQEkXdApEcEI5mvprlr">DRAWDOWN LIMIT</p>
-          </div>
-        </div>
-        <p data-page-node-id="3CTUQ5MrFsx2576Ok5A1di">单笔最大回撤上限 = 那个你还能睡着的数。先定义可承受损失，再决定下注规模。</p>
-        <div class="skill__meta" data-page-node-id="2wUeal1Gek4jTRpd4fPzQa"><span data-page-node-id="8M2wze2hBvXjjWd8HDlZlv">熟练度</span><b data-page-node-id="eGkXEywZ2AsFewL84jpC3B">80%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 80%" data-page-node-id="xeMCI6uyA8awIGNLpW4NXg"><div class="bar__fill" data-w="80" data-page-node-id="rzwlOXPAEh2ITedIE5yQYJ"></div></div>
-      </li>
-
-      <li class="skill reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)" data-page-node-id="nLA1uClBUfNOQr99I8OwHn">
-        <div class="skill__top" data-page-node-id="UDgN03FLeyCqHZPX2rIiIi">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="oCYkCgpLjM5dL0VWfK0HxD">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="bKFueyPUrwQhrPBsXYOpOr"><circle cx="12" cy="12" r="9" data-page-node-id="g2UKPxC0FP9RFInVuopHi0"/><path d="M12 7v5l4 2" data-page-node-id="uUBfGn6BuGZuvoh8CUTAsr"/></svg>
-          </span>
-          <div data-page-node-id="EKms5idu65sHIzs2LYh4FE">
-            <h3 data-page-node-id="OecqtRgknN1TEMpYr5zKys">复利与时间成本</h3>
-            <p class="skill__mono" data-page-node-id="T5Ik06jbetN7qPe9hKENpU">O(log n) PATIENCE</p>
-          </div>
-        </div>
-        <p data-page-node-id="ZGKcGU61mbh37cHZEfCt94">复利的本质不是暴富公式，而是「不中断」。理解它，就理解了为什么早开始比多投入更重要。</p>
-        <div class="skill__meta" data-page-node-id="xM1PoSmTEFNXOcOb8uSTTq"><span data-page-node-id="aMNEde2Ha1shE56MeFZeJZ">熟练度</span><b data-page-node-id="b0DXbBu6oonS7CsrpSaRZm">95%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 95%" data-page-node-id="5CDDlXnCakUgajm4DBBzg3"><div class="bar__fill" data-w="95" data-page-node-id="mb4c2PgHMnYnWBfe2nQ6Ze"></div></div>
-      </li>
-
-      <li class="skill reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="UjtSr1YASXGAChexzW4fFT">
-        <div class="skill__top" data-page-node-id="oVzWu5c4s3W7zR6sxqJtUY">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="11ECwhJThwTdMCE7AhDrHl">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="osESazD69NKnE6V5weo2EF"><path d="M9 3h6v5l5 13H4L9 8V3z" data-page-node-id="K3dFexWjx8NWE9BKxFcH86"/></svg>
-          </span>
-          <div data-page-node-id="fxtAUavWxH401CrCMknem0">
-            <h3 data-page-node-id="8BeKEPRIySU1t6I3NFETBK">行为金融学防坑</h3>
-            <p class="skill__mono" data-page-node-id="lurRWcWES3szN6SlEnxCSZ">DEBUG YOUR BRAIN</p>
-          </div>
-        </div>
-        <p data-page-node-id="xxHICX2StsbeFFVYX6RZw6">识别三个经典 bug：FOMO 追高、损失厌恶扛单、锚定效应。看见它们，就已经修好一半。</p>
-        <div class="skill__meta" data-page-node-id="ucCuB4aL7fubNXvGKcbIdE"><span data-page-node-id="bbR6WtExU9AGblyYlYrpkX">熟练度</span><b data-page-node-id="XoiIIQQErY0TmzWPJE2fCj">76%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 76%" data-page-node-id="HE5v0LKFGAkHaAkCn6AhHy"><div class="bar__fill" data-w="76" data-page-node-id="tChfZjcYhjU7oWA28I3S83"></div></div>
-      </li>
-
-      <li class="skill reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)" data-page-node-id="VKO70ItylxCfflfNVWvpeg">
-        <div class="skill__top" data-page-node-id="b5WFZNRTeipDbk8uU3QjS4">
-          <span class="skill__icon" aria-hidden="true" data-page-node-id="fnB0zSyvDBeVLXRHCMXrZA">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="tPQkuSjOnMt8QoPAhHpRyc"><path d="M3 7h18v12H3z" data-page-node-id="nAF7ZeBuUTckVDRXsjbfOk"/><path d="M3 11h18" data-page-node-id="xgZsXgXntEQBRGJeme4otE"/><path d="M7 15h4" data-page-node-id="bOoPWq59wL3cPDxbHslM3z"/></svg>
-          </span>
-          <div data-page-node-id="lcvIeZO9HiiBHnBnq9IDc8">
-            <h3 data-page-node-id="IZPIqEDFXTtEDkKk3SeZt4">费率、税务与摩擦成本</h3>
-            <p class="skill__mono" data-page-node-id="b9tLXPzLGYKSyYHIrDjeB1">HIDDEN CONSTANT</p>
-          </div>
-        </div>
-        <p data-page-node-id="Z4F1SAiTafBeznYAaDvGBy">申赎费、管理费、汇兑损耗、滑点——这些隐藏常数，长期看是收益的主要杀手。</p>
-        <div class="skill__meta" data-page-node-id="tuN5HPXLZuJtLz7OhoFORZ"><span data-page-node-id="Q4p0rWQ75T2STAl0MbRbEA">熟练度</span><b data-page-node-id="Im4CbWUpQByKbUXiXva072">68%</b></div>
-        <div class="bar" role="img" aria-label="熟练度 68%" data-page-node-id="B6hjaenDgau6BLKT21gIOI"><div class="bar__fill" data-w="68" data-page-node-id="14Gg6FKqKhNQ53nrie6s2x"></div></div>
-      </li>
+    <ul class="skillgrid">
+      <li class="skill reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><div><h3>资产配置与再平衡</h3><p class="skill__mono">SPLIT / CONQUER</p></div></div><p>用「分治」拆账户：进攻、防守、现金流各司其职，偏离阈值 5% 触发再平衡。</p><div class="skill__meta"><span>熟练度</span><b>88%</b></div><div class="bar"><div class="bar__fill" data-w="88"></div></div></li>
+      <li class="skill reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2"/></svg></span><div><h3>指数基金定投</h3><p class="skill__mono">FOR-LOOP INVESTING</p></div></div><p>把定投写成一个 <code>for</code> 循环：固定时间、固定金额、不看盘。靠纪律跑赢情绪。</p><div class="skill__meta"><span>熟练度</span><b>92%</b></div><div class="bar"><div class="bar__fill" data-w="92"></div></div></li>
+      <li class="skill reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M12 3l9 16H3l9-16z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg></span><div><h3>风险识别与仓位</h3><p class="skill__mono">DRAWDOWN LIMIT</p></div></div><p>单笔最大回撤上限 = 那个你还能睡着的数。先定义可承受损失，再决定下注规模。</p><div class="skill__meta"><span>熟练度</span><b>80%</b></div><div class="bar"><div class="bar__fill" data-w="80"></div></div></li>
+      <li class="skill reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></span><div><h3>复利与时间成本</h3><p class="skill__mono">O(log n) PATIENCE</p></div></div><p>复利的本质不是暴富公式，而是「不中断」。理解它，就理解了为什么早开始比多投入重要。</p><div class="skill__meta"><span>熟练度</span><b>95%</b></div><div class="bar"><div class="bar__fill" data-w="95"></div></div></li>
+      <li class="skill reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M9 3h6v5l5 13H4L9 8V3z"/></svg></span><div><h3>行为金融学防坑</h3><p class="skill__mono">DEBUG YOUR BRAIN</p></div></div><p>识别三个经典 bug：FOMO 追高、损失厌恶扛单、锚定效应。看见它们，就修好一半。</p><div class="skill__meta"><span>熟练度</span><b>76%</b></div><div class="bar"><div class="bar__fill" data-w="76"></div></div></li>
+      <li class="skill reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h18v12H3z"/><path d="M3 11h18"/><path d="M7 15h4"/></svg></span><div><h3>费率税务与摩擦</h3><p class="skill__mono">HIDDEN CONSTANT</p></div></div><p>申赎费、管理费、汇兑损耗、滑点——这些隐藏常数，长期看是收益主要杀手。</p><div class="skill__meta"><span>熟练度</span><b>68%</b></div><div class="bar"><div class="bar__fill" data-w="68"></div></div></li>
     </ul>
   </div>
 </section>
 
-<!-- ==========================================================
-     4. 文件库 / BENTO 网格
-     ========================================================== -->
-<section class="section section--paper" id="files" aria-labelledby="files-title" data-page-node-id="VzzqrJcuiREnkNi7uxcVRY">
-  <div class="container" data-page-node-id="Yy6cajr3ozq6ghGcILHSY9">
-    <header class="sect-head reveal" data-page-node-id="DoPzKQVEHqal82ohegJMLx">
-      <p class="eyebrow" data-page-node-id="08bkvsKmAX73sXfXINpbnw"><span class="dot" data-page-node-id="AHvtZ5khFDE1rmxgZuV3IZ"></span>Chapter 02 — 共享文件库</p>
-      <h2 id="files-title" data-page-node-id="HTrgtAZwpw8sOj7Fgi04hB">群友共建的 <span class="mark mark--lime" data-page-node-id="KxjzW4BKZfx4vDXjFH7P48">47 份</span> 公开资料</h2>
-      <p data-page-node-id="FPYBmaXwBGMWUFfTSCt4Qm">从入门手册到回测工具，从反诈图鉴到脱敏数据集。全部可自由取用，唯一的请求是：看完请回来分享你的复盘。</p>
+<!-- LEARNING CENTER -->
+<section class="section section--paper" id="learn" aria-labelledby="learn-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 02 — 学习中心</p>
+      <h2 id="learn-title">点开任意板块<span class="mark mark--lime">即学即用</span></h2>
+      <p>「打开课程」会弹出完整内容；「打开工具」会跳到可直接操作的在线计算器与决策树。</p>
     </header>
-
-    <div class="bento" data-page-node-id="AooXeR2B1w99aSRGR3stCn">
-
-      <!-- 01 大卡 -->
-      <article class="tile tile--hero reveal" style="--c-soft:var(--pink-soft)" data-page-node-id="3p6FWi63fCtVOj1Ua299BG">
-        <div class="tile__head" data-page-node-id="rlHOSjPwk1gJizlunnfIR3">
-          <span class="tag tag--pink" data-page-node-id="hF81OHQOmxWRMvHLUrJSga">PDF · 68 页</span>
-          <span class="tile__no" data-page-node-id="aizQVelHGeMBARhVZEP0pQ">FILE / 001</span>
-        </div>
-        <h3 data-page-node-id="LIOeCYUyeBgNgscNBr9Il2">《ACMer 理财入门手册 v3.0》</h3>
-        <p data-page-node-id="JIrE0ZED1s8O5rU02K7Z1d">把资产配置写成算法流程：从「先备 6 个月应急金」这条 base case 开始，一路推导到跨市场再平衡。全篇无术语黑箱，每个结论都给出可复现的计算过程。</p>
-
-        <div class="tile__art" data-page-node-id="gq6RaoZWbbn3ojoAXcf1gG">
-          <svg viewBox="0 0 360 130" role="img" aria-label="手册目录结构示意：四章递进" style="background:#fff" data-page-node-id="QfG61YG2mkxmI55qEEN7r9">
-            <rect width="360" height="130" fill="url(#p-dots)" opacity="0.12" data-page-node-id="cp5akPGCHwc6PCBymvcDEA"/>
-            <g stroke="#000" stroke-width="2.5" fill="#FFD3E9" data-page-node-id="I8bYu6L10jbShDk6ku5WTQ">
-              <rect x="16" y="20" width="72" height="34" rx="4" data-page-node-id="XJhBGljCpCRP10giDxrXsC"/>
-              <rect x="16" y="76" width="72" height="34" rx="4" data-page-node-id="dNtgrEjNFSSESSfpNPneJU"/>
-            </g>
-            <g stroke="#000" stroke-width="2.5" fill="#FFF7C4" data-page-node-id="D6BjC3cLixiu8QdFh0Fsaj">
-              <rect x="112" y="20" width="72" height="34" rx="4" data-page-node-id="diliNJdKp0W1tOySw3J531"/>
-              <rect x="112" y="76" width="72" height="34" rx="4" data-page-node-id="LDeP40J9vaAjrnzRYd2ZZj"/>
-            </g>
-            <g stroke="#000" stroke-width="2.5" fill="#C6EDFF" data-page-node-id="PHcIHfYF4vJmw0dViRQRrc">
-              <rect x="208" y="20" width="72" height="34" rx="4" data-page-node-id="g69eoMmsjGLDuNRBvJZxP5"/>
-              <rect x="208" y="76" width="72" height="34" rx="4" data-page-node-id="X0mhFLVK4EwMQh4UfXFpFn"/>
-            </g>
-            <g stroke="#000" stroke-width="2.5" fill="#C6F6C3" data-page-node-id="XeVr3P70QP3Q3e8dvH0199">
-              <rect x="304" y="48" width="44" height="34" rx="4" data-page-node-id="B4sv6dUmcvkdkuhWgHLCH6"/>
-            </g>
-            <g stroke="#000" stroke-width="2.5" fill="none" data-page-node-id="DdB3eHwy8IMboAnzlimfm9">
-              <path d="M88 37h24M184 37h24M280 37h24M184 93h24M280 93h24M280 65h24" data-page-node-id="uLzee7FsWYQzRDvFXRKC5F"/>
-            </g>
-            <g font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#0A0A0A" data-page-node-id="GUHl4M3Cf7MaaUZ27yQ6p1">
-              <text x="52" y="41" text-anchor="middle" data-page-node-id="XLjZ1C34BvqVhmaWTtPn4z">CH.1</text>
-              <text x="52" y="97" text-anchor="middle" data-page-node-id="atpKzS6kfkeRGWquqfysjw">CH.2</text>
-              <text x="148" y="41" text-anchor="middle" data-page-node-id="Q0mGEN5OC4UeMXmozkH5zB">CH.3</text>
-              <text x="148" y="97" text-anchor="middle" data-page-node-id="hMI3OIeS5Dhif2YaECYEI2">CH.4</text>
-              <text x="244" y="41" text-anchor="middle" data-page-node-id="mvel4TSRMCImCJ0oOh1fzj">CH.5</text>
-              <text x="244" y="97" text-anchor="middle" data-page-node-id="u56sCCDRP4TN9ql36hi1d8">CH.6</text>
-              <text x="326" y="69" text-anchor="middle" data-page-node-id="Xmcee9KNfLZ5FgLjDO8UdD">Q&amp;A</text>
-            </g>
-          </svg>
-        </div>
-
-        <ul class="tile__list" data-page-node-id="RFNLhlrRVQfVxwwsWFW4LQ">
-          <li data-page-node-id="3xvJlxgmGMlQTRtRdpPFpv">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="yNFiONGSD9wfbpE7Ci5H9P"><path d="M4 12l5 5L20 6" data-page-node-id="RY8pnAa3rEOHKUqaV9wKYQ"/></svg>
-            <span data-page-node-id="JUmkYerrrmiC5qgqojLdV9">6 章主线 + 21 个「伪代码决策流」</span>
-          </li>
-          <li data-page-node-id="U1rNS1415AIGYSifa946oo">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="jrlkaCtoyjNphypjSmoRgS"><path d="M4 12l5 5L20 6" data-page-node-id="oauUinBpouKTUpdpeJfsX9"/></svg>
-            <span data-page-node-id="sI80N8XfqjVE07r3WXvDAu">含 2026 版费率对照表与税务提示</span>
-          </li>
-          <li data-page-node-id="dyHuZR7202PcsIjrXScAco">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="rRX2GcM4ImKe4VKb1fVwXQ"><path d="M4 12l5 5L20 6" data-page-node-id="X4PD3vM7AJmkbUMEF2FnJX"/></svg>
-            <span data-page-node-id="sMf5TDXnH7RZDcJOL7L9g1">累计下载 12,400+ 次，勘误 3 版</span>
-          </li>
-        </ul>
-
-        <div class="tile__foot" data-page-node-id="3IGPOB3m33PvhVtljRKA6Z">
-          <span class="tile__tags" data-page-node-id="jGMnXci0roioZ5CrGFMSLZ"><span class="tag" data-page-node-id="BD39pwyyl4OQITZf5dfX9u">入门</span><span class="tag tag--pink" data-page-node-id="kF2Q41vUuLK7tIAHfiGzks">手册</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="mquQekkShIoKjUC6F8RuTn">索取 PDF
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="RuRo7BboGMCe5fD8cBpkoe"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="D0XLNZeTjF6XrnlVsnUgND"/></svg>
-          </a>
-        </div>
+    <div class="bento">
+      <article class="tile tile--hero reveal" style="--c-soft:var(--pink-soft)">
+        <div class="tile__head"><span class="tag tag--pink">6 章课程</span><span class="tile__no">FILE / 001</span></div>
+        <h3>《ACMer 理财入门手册》</h3>
+        <p>把资产配置写成算法流程：从「先备 6 个月应急金」这条 base case 开始，一路推导到跨市场再平衡。全篇无术语黑箱。</p>
+        <div class="tile__art"><svg viewBox="0 0 360 118" role="img" aria-label="手册六章目录" style="background:#fff"><rect width="360" height="118" fill="url(#p-dots)" opacity="0.12"/><g stroke="#000" stroke-width="2.5" fill="#FFD3E9"><rect x="14" y="12" width="104" height="40" rx="4"/></g><g stroke="#000" stroke-width="2.5" fill="#FFF7C4"><rect x="128" y="12" width="104" height="40" rx="4"/></g><g stroke="#000" stroke-width="2.5" fill="#C6EDFF"><rect x="242" y="12" width="104" height="40" rx="4"/></g><g stroke="#000" stroke-width="2.5" fill="#C6F6C3"><rect x="14" y="66" width="104" height="40" rx="4"/></g><g stroke="#000" stroke-width="2.5" fill="#E7D6FF"><rect x="128" y="66" width="104" height="40" rx="4"/></g><g stroke="#000" stroke-width="2.5" fill="#FFD8C6"><rect x="242" y="66" width="104" height="40" rx="4"/></g><g font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" fill="#0A0A0A"><text x="66" y="37" text-anchor="middle">应急金</text><text x="180" y="37" text-anchor="middle">四宫格</text><text x="294" y="37" text-anchor="middle">定投</text><text x="66" y="91" text-anchor="middle">费率摩擦</text><text x="180" y="91" text-anchor="middle">行为防坑</text><text x="294" y="91" text-anchor="middle">税务</text></g></svg></div>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag">入门</span><span class="tag tag--pink">免费</span></span><button class="tile__go" data-lesson="manual">打开课程 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 02 -->
-      <article class="tile tile--wide reveal" style="background:var(--blue-soft)" data-page-node-id="hvgCZos445RMDb87Xr6p1U">
-        <div class="tile__head" data-page-node-id="K7lRYBluSE99U2phoC0oAz">
-          <span class="tag tag--blue" data-page-node-id="AzNFVrwCK7ypFi7k8H18O7">CLI · 开源</span>
-          <span class="tile__no" data-page-node-id="WjRdetGWGtEg6BQyTuezz5">FILE / 002</span>
-        </div>
-        <h3 data-page-node-id="07IR7rA1Tqpn1ilJpPFJpU">acmer-compound 复利回测器</h3>
-        <p data-page-node-id="lGvxmcneg8EeUNm3cECwSb">命令行小工具，支持定投、再平衡、费率扣除与多组合对比，内置 2015–2025 主流指数数据。</p>
-        <div class="tile__art" style="margin-bottom:.9rem" data-page-node-id="tatMj57SRTvsGdCBjl2wZl">
-          <pre class="mini-code" aria-label="使用示例" data-page-node-id="qTBjvkIUy36fnP16vIV76C"><span class="cm" data-page-node-id="o8vzMwme82amRVwJJR71eS"># 安装 & 运行</span>
-$ pipx install acmer-compound
-$ acmer backtest <span class="k" data-page-node-id="3JaT90ydaA8TMGOZusqP1B">--plan</span> <span class="s" data-page-node-id="9FCW0tDkIvEYa4cKE8baph">spx70_ndx30</span> \
-              <span class="k" data-page-node-id="6BNKlGSeT3DAfKGjAlH5AC">--rebalance</span> <span class="s" data-page-node-id="nCGR4poyuoTmUBo0yO7GeC">quarterly</span> \
-              <span class="k" data-page-node-id="cBoTgQy4WM6a3ispTvvHP3">--fee</span> <span class="s" data-page-node-id="HrsShrFAae1nPIjUMTd1Qr">0.0015</span>
-<span class="cm" data-page-node-id="HbtubdwPji5yJ5P4ukDeue">→ CAGR 9.42% | MaxDD -24.7%</span></pre>
-        </div>
-        <div class="tile__foot" data-page-node-id="5kKADiJxIierk0piaLZ2VZ">
-          <span class="tile__tags" data-page-node-id="FTz1IrM0c60GH6eijaesN6"><span class="tag tag--blue" data-page-node-id="DPLE0i5CCqLMZRAmWtC6C1">Python</span><span class="tag" data-page-node-id="KZblMwEmXiynUU4yJHM8hA">MIT</span><span class="tag" data-page-node-id="r8K3DkIjmx1zs6D6Yn5XZq">1.2k ★</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="9RgEvZ9xu0vO1Qf2KnDGB6">查看仓库
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="ktEYLNyh9nXryrqFt5kppg"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="XBZaX7j1UoBjBmlDh4BKzJ"/></svg>
-          </a>
-        </div>
+      <article class="tile tile--wide reveal" style="background:var(--blue-soft)">
+        <div class="tile__head"><span class="tag tag--blue">在线工具</span><span class="tile__no">TOOL / 002</span></div>
+        <h3>复利计算器（网页版）</h3>
+        <p>输入本金、每月定投、年化、年限与费率，实时算出期末资产、收益占比，并画出资产增长曲线。原 CLI 已搬进浏览器。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--blue">交互</span><span class="tag">SVG 曲线</span></span><button class="tile__go" data-tool="calc">打开工具 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 03 -->
-      <article class="tile tile--wide reveal" style="background:var(--yellow-soft)" data-page-node-id="7ck1RsPX1n6zHeDjA3G7iD">
-        <div class="tile__head" data-page-node-id="w6WEIQPF56e8eocQSu4Zf8">
-          <span class="tag tag--yellow" data-page-node-id="I61hvkPF1FE1897kIbEUCl">年度合集</span>
-          <span class="tile__no" data-page-node-id="wuLSHtqlO0yG5aRizYG8Rd">FILE / 003</span>
-        </div>
-        <h3 data-page-node-id="1rQhab135RsbHGAFBMYXZA">群内大事记年刊 2025</h3>
-        <p data-page-node-id="7lgqztEotId4DfB5CkeEFe">把一年 68 场讨论压缩成一份 32 页的复盘：我们吵过什么、错在哪里、第二年打算怎么改。含全部数据快照与时间戳。</p>
-        <div class="tile__foot" data-page-node-id="e7OCG478f65eZ8neyaa49U">
-          <span class="tile__tags" data-page-node-id="tJgQQOSrFgHF5C0EhCmT7u"><span class="tag tag--yellow" data-page-node-id="4WdLOd0otYgfwSMEAdeGIB">复盘</span><span class="tag" data-page-node-id="4dcKqCgFeA3P46NF2kT7yJ">32 页</span></span>
-          <a class="tile__go" href="#timeline" data-page-node-id="QMgsVQOdCfx1cwJJhGXk0m">跳转大事记
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="DklO9ANYCZDEmXuwcosxUF"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="03HRH0PQJG3Ex4vEtGPTdO"/></svg>
-          </a>
-        </div>
+      <article class="tile tile--wide reveal" style="background:var(--yellow-soft)">
+        <div class="tile__head"><span class="tag tag--yellow">年度合集</span><span class="tile__no">FILE / 003</span></div>
+        <h3>群内大事记年刊 2025</h3>
+        <p>把一年 68 场讨论压缩成一份复盘：我们吵过什么、错在哪里、第二年打算怎么改。含全部数据快照与时间戳。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--yellow">复盘</span><span class="tag">12 条纪律</span></span><button class="tile__go" data-lesson="yearbook">打开课程 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 04 -->
-      <article class="tile reveal" style="background:var(--lime-soft)" data-page-node-id="BFIdJiGhJyqwwUtVnu9jS1">
-        <div class="tile__head" data-page-node-id="IELsPYInokbYw4EGAHXRwv">
-          <span class="tag tag--lime" data-page-node-id="i59UncawhiesY0E17HlnTE">模板</span>
-          <span class="tile__no" data-page-node-id="pFYasz8cIouMkV2i5VUoIe">004</span>
-        </div>
-        <h3 data-page-node-id="ORDl6mdr6GJbdWJrIw56BV">现金流记账模板</h3>
-        <p data-page-node-id="JVsQ7hCz1BpgBpclrpp8N0">Notion / 飞书双版本，自动算储蓄率与「拿铁因子」——先看见，才谈得上优化。</p>
-        <div class="tile__foot" data-page-node-id="KhjIqFeYrYgh2rV8bchIK1">
-          <span class="tile__tags" data-page-node-id="oiIGXJKaUsPGHB9M53g6Ce"><span class="tag tag--lime" data-page-node-id="9UGyg64wb2WowRc0DEJQxD">Notion</span><span class="tag" data-page-node-id="ipTATxA9McdmZWwr7oRtvP">飞书</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="XfWNHfFY18UJ4VKb1AxCfq">领取
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="LCohT0PAARRjwNtpPEC50F"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="8LYuFslx0Jco8j0rZfmBOT"/></svg>
-          </a>
-        </div>
+      <article class="tile reveal" style="background:var(--lime-soft)">
+        <div class="tile__head"><span class="tag tag--lime">在线工具</span><span class="tile__no">004</span></div>
+        <h3>现金流 / 预算计算器</h3>
+        <p>输入收支，自动算储蓄率与「拿铁因子」——先看见，才谈得上优化。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--lime">交互</span><span class="tag">储蓄率</span></span><button class="tile__go" data-tool="budget">打开工具 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 05 -->
-      <article class="tile reveal" style="background:var(--orange-soft)" data-page-node-id="FO8JDK6ogCjQW7hKSrfS5E">
-        <div class="tile__head" data-page-node-id="MJt23vbUBO9rw2EAhWlqKU">
-          <span class="tag tag--orange" data-page-node-id="bWVHJUSBqfCgej4UAH8rTB">决策树</span>
-          <span class="tile__no" data-page-node-id="bBlnaAFIL2Vur8gNx0Ss4k">005</span>
-        </div>
-        <h3 data-page-node-id="ipky5oN3CjgVRbA8J6SQsu">竞赛奖金怎么投</h3>
-        <p data-page-node-id="PtDG1psjwdck6b02bKrP2R">一次性大额收入（奖金 / 奖学金 / offer 签字费）的分配决策树：先补应急金，再清高息负债，最后才谈投资。</p>
-        <div class="tile__art" style="padding:.7rem;margin-bottom:.9rem" data-page-node-id="dOhzv4d83CxZgwAmxDJED0">
-          <svg viewBox="0 0 300 96" role="img" aria-label="奖金分配决策树：先应急金、再还高息负债、最后投资" data-page-node-id="HLSLzC2RnQ8B3CyU4O0LgI">
-            <g stroke="#000" stroke-width="2.4" fill="#FFD8C6" data-page-node-id="LD2WJYxcOsDOsaD6PrTCbl">
-              <rect x="6" y="34" width="76" height="30" rx="4" data-page-node-id="0jbTlJji01pk1ujQaibxk6"/>
-              <rect x="112" y="6" width="76" height="28" rx="4" data-page-node-id="yEDkDMaRMWvCJjrYtXcCpQ"/>
-              <rect x="112" y="62" width="76" height="28" rx="4" data-page-node-id="6CPRQbT26Cc45lzwZ7R8o9"/>
-              <rect x="218" y="34" width="76" height="30" rx="4" fill="#C6F6C3" data-page-node-id="bZ0Bl3OuILEEO4NiScTqtm"/>
-            </g>
-            <g stroke="#000" stroke-width="2.4" fill="none" data-page-node-id="486adj1BHW4lJpDXv9BGmb">
-              <path d="M82 49h30M188 20c18 0 12 29 30 29M188 76c18 0 12 -27 30 -27" data-page-node-id="TlXBAIm3e9KZt1MpSsAW6X"/>
-            </g>
-            <g font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#0A0A0A" data-page-node-id="ojzrdmNEPjH0ErUDzJCzlr">
-              <text x="44" y="53" text-anchor="middle" data-page-node-id="0TkNEagvcZhOXoP0ZPg1ZI">BONUS</text>
-              <text x="150" y="24" text-anchor="middle" data-page-node-id="kleuLDWzLgoBtyBMGis1ka">应急金?</text>
-              <text x="150" y="80" text-anchor="middle" data-page-node-id="KtLObmXNK5XWYDq9ewXl59">高息债?</text>
-              <text x="256" y="53" text-anchor="middle" data-page-node-id="FJBc0Mj9VFCQHuD6iqBW0r">再投资</text>
-            </g>
-          </svg>
-        </div>
-        <div class="tile__foot" data-page-node-id="LcFz3WKxz6KSJ8WjqUHDvr">
-          <span class="tile__tags" data-page-node-id="4HJ1dAp6SjYecvjthnv8UJ"><span class="tag tag--orange" data-page-node-id="dnJpkcUp9TBYByONbKSwD9">1 页</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="9Efspk6jY4qcAtBGcqLOXI">查看
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="V2wvmCEkdenWQmWN2ceA6r"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="eVW9VZM8u0urqmSuIjjyRW"/></svg>
-          </a>
-        </div>
+      <article class="tile reveal" style="background:var(--orange-soft)">
+        <div class="tile__head"><span class="tag tag--orange">在线工具</span><span class="tile__no">005</span></div>
+        <h3>竞赛奖金怎么投</h3>
+        <p>一次性大额收入（奖金 / 奖学金 / 签字费）的分配决策树：先补应急金，再清高息债，最后才投资。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--orange">交互</span><span class="tag">决策树</span></span><button class="tile__go" data-tool="tree">打开工具 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 06 -->
-      <article class="tile reveal" style="background:var(--purple-soft)" data-page-node-id="B22IMVOokzLJhTqey84FXU">
-        <div class="tile__head" data-page-node-id="RJF4Bk3rMHwcsfWs2INcsz">
-          <span class="tag tag--purple" data-page-node-id="VNyaOxlmSnRcu6GdrTEvkC">图鉴</span>
-          <span class="tile__no" data-page-node-id="3OcPbPkSpVxa4FcMeEq1LL">006</span>
-        </div>
-        <h3 data-page-node-id="S1g9R2qdila4MNRbpK4fXZ">反诈防坑图鉴</h3>
-        <p data-page-node-id="IXE9OitgMXHd4d1aqZqEGY">12 种高频骗局的「时间复杂度」分析：保本高息、内幕消息、代客操盘……每一种都给出可验证的识别信号。</p>
-        <div class="tile__foot" data-page-node-id="zoIFn53UvKsBFFO49RzqxP">
-          <span class="tile__tags" data-page-node-id="6CmM5Y8Q0eQQX4eJ6x1VKZ"><span class="tag tag--purple" data-page-node-id="4sl5rV6cVYV3sq3MzvbepZ">12 例</span><span class="tag" data-page-node-id="LjVpJ4lrVVINTNCmiMWsdK">必读</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="0YBVPR06r0T18AiQ1G1k54">查看
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="cxXiAEWQhGVYYJzzN6J7zw"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="gqWJCtnV1UgQtCCaWVeaSH"/></svg>
-          </a>
-        </div>
+      <article class="tile reveal" style="background:var(--purple-soft)">
+        <div class="tile__head"><span class="tag tag--purple">图鉴</span><span class="tile__no">006</span></div>
+        <h3>反诈防坑图鉴</h3>
+        <p>12 种高频骗局的「时间复杂度」分析：每种都给可验证的识别信号与正确做法。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--purple">12 例</span><span class="tag">必读</span></span><button class="tile__go" data-tool="scams">查看图鉴 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 07 -->
-      <article class="tile tile--half reveal" data-page-node-id="3zblmpLDRs4F7lXvFlyVld">
-        <div class="tile__head" data-page-node-id="TvFPz1u9EJu0VjE7rbkzfX">
-          <span class="tag tag--pink" data-page-node-id="hAAECltAqiGQeRxs73OErO">共读会</span>
-          <span class="tile__no" data-page-node-id="mR8HWwhS9uKI1TNLHuQdDL">007</span>
-        </div>
-        <h3 data-page-node-id="vZQlDZ5VC5GzGnopjEzKE1">每周共读会 · 第 92 期《聪明的投资者》</h3>
-        <p data-page-node-id="vNKgJoPuS5Qfm9Ewr3RkgW">每周三晚 21:00，一章精读 + 一次当周市场复盘。笔记全部归档公开，含群友提问与分歧记录——分歧比共识更有价值。</p>
-        <div class="tile__foot" data-page-node-id="gCF2F85zW4WSCQ5Vt8wVb7">
-          <span class="tile__tags" data-page-node-id="oagSr8M4NQpwP0AaNiBZH5"><span class="tag tag--pink" data-page-node-id="C9CiJ4ssS6IDwnPrgBC4Bf">92 期</span><span class="tag" data-page-node-id="NluGbLNJz5aqBlWVORifOj">笔记</span><span class="tag" data-page-node-id="HdHSups7VCATEouEZCTZv2">录音</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="15Evy0jSMXFAwb4yvViDIV">进入归档
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="NXpWCZvpzUfpEzzQfttW7C"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="AI1f3RjX4VCvIeRGLr76LY"/></svg>
-          </a>
-        </div>
+      <article class="tile tile--half reveal" style="background:var(--pink-soft)">
+        <div class="tile__head"><span class="tag tag--pink">共读会</span><span class="tile__no">007</span></div>
+        <h3>每周共读会书单</h3>
+        <p>6 本经典 + 第 92 期《聪明的投资者》精读笔记摘要。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--pink">书单</span><span class="tag">笔记</span></span><button class="tile__go" data-lesson="bookclub">打开课程 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
 
-      <!-- 08 -->
-      <article class="tile tile--half reveal" style="background:var(--blue-soft)" data-page-node-id="2SH9S9n5APKLBpoPoPCeJR">
-        <div class="tile__head" data-page-node-id="fHHFoB01kIBRFirhtGs7vu">
-          <span class="tag tag--blue" data-page-node-id="LGZl68WdkgzPhZoKK6EFNJ">数据集</span>
-          <span class="tile__no" data-page-node-id="qU3ByZnGhzaN0bAqTpnjTD">008</span>
-        </div>
-        <h3 data-page-node-id="PEskw26DxQ6Lpp8DMKXxA6">群友持仓匿名脱敏数据集</h3>
-        <p data-page-node-id="JCLYhzEerdhZPLKxIQHgkY">1,200+ 份经脱敏处理的持仓快照，字段含年龄区间、风险偏好、持仓结构。仅用于回测教学，不含任何身份信息。</p>
-        <div class="tile__foot" data-page-node-id="gGgT4niQTezcZusyXznEyD">
-          <span class="tile__tags" data-page-node-id="F2FQDCfu3Zz5ah7bOpvcol"><span class="tag tag--blue" data-page-node-id="znscQo4jj0WgMUCvQXkfnD">CSV</span><span class="tag" data-page-node-id="yqaPO2BOKvxwT1BxIJPBv1">脱敏</span><span class="tag" data-page-node-id="yPrM5KlhaANTJgm2tHXI7S">教学用</span></span>
-          <a class="tile__go" href="#contact" data-page-node-id="jbv9RSvgzRts1JusqL4wcM">申请下载
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="Ed5XRo5kWiBQKUNmdfFbjA"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="v3X72GaWbQEXSRirlOeDv3"/></svg>
-          </a>
-        </div>
+      <article class="tile tile--half reveal" style="background:var(--blue-soft)">
+        <div class="tile__head"><span class="tag tag--blue">数据集</span><span class="tile__no">008</span></div>
+        <h3>匿名脱敏数据集</h3>
+        <p>字段说明 + 脱敏样本，用于回测教学，不含任何身份信息。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--blue">CSV</span><span class="tag">脱敏</span></span><button class="tile__go" data-lesson="dataset">打开课程 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
       </article>
-
     </div>
   </div>
 </section>
 
-<!-- ==========================================================
-     5. 大事记时间线
-     ========================================================== -->
-<section class="section section--alt" id="timeline" aria-labelledby="tl-title" data-page-node-id="NiOWT1xul3zizES2UCLzdo">
-  <svg class="deco" aria-hidden="true" viewBox="0 0 160 500" style="left:-70px;bottom:4%;width:150px;height:420px;opacity:.35" data-page-node-id="Xw3u33de719Oh0xVMHaFc3">
-    <rect width="160" height="500" fill="url(#p-noise)" opacity="0.5" data-page-node-id="FEe4kJoGTpQvccqODpeSIC"/>
-  </svg>
-
-  <div class="container" data-page-node-id="gKqOtQnUmJs78wJ0O8iqrB">
-    <header class="sect-head reveal" data-page-node-id="VDpDKHonqYGuLOPD73yXDQ">
-      <p class="eyebrow" data-page-node-id="rrFRv53YUomj2Y1fXuXOF6"><span class="dot" data-page-node-id="2ksKcBhPDAMxPy8pBeAHgf"></span>Chapter 03 — 群内大事记</p>
-      <h2 id="tl-title" data-page-node-id="NQkVlKgW5nbEii8533rAyS">三年，<span class="mark mark--pink" data-page-node-id="054zbjxxBQcABUkvOtoDD1">八个</span>值得记下的瞬间</h2>
-      <p data-page-node-id="MxKNjhTN7FUSnLDja3G6LC">从一场深夜的 Codeforces 讨论开始。没有宏大叙事，只有一群习惯较真的人，把每一笔决策都记下来。</p>
+<!-- 复利计算器 -->
+<section class="section section--alt" id="calc" aria-labelledby="calc-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>TOOL 01 — 复利计算器</p>
+      <h2 id="calc-title">算清<span class="mark">时间</span>到底值多少钱</h2>
+      <p>输入即算。默认示例：每月定投 ¥3,000、年化 8%、20 年——看看「不中断」如何把投入变成复利。</p>
     </header>
-
-    <ol class="timeline" data-page-node-id="sQyCzhcOxlv4B2dlkpEhet">
-      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="EFAYQdHA4G2pFcjJeveoK4">
-        <div class="tl-card" data-page-node-id="WtsspaEhsa55Yd9jHWRXE3">
-          <div class="tl-card__top" data-page-node-id="ppFXQssP0eesvmaKXMxdi3">
-            <span class="tl-date" data-page-node-id="90PhGXuvGuRJQvIBs8j6FX">2023.03</span>
-            <span class="tag tag--pink" data-page-node-id="Ii1j1RamR39QBdHNLiPxw3">起点</span>
-          </div>
-          <h3 data-page-node-id="9dP0CoH3GEnJBqkOgXTlqW">建群：从一场深夜讨论开始</h3>
-          <p data-page-node-id="MhRXrqgEWzC3MJwROqDxwk">区域赛出线后，群里聊起「奖金要不要买显卡」。三小时后话题变成资产配置，于是有了这个群。初始成员 7 人。</p>
+    <div class="tool reveal">
+      <div class="tool__grid">
+        <div>
+          <div class="field"><label for="c-init">初始本金（¥）</label><input id="c-init" type="number" inputmode="decimal" value="0" min="0" step="1000"><span class="hint">一次性投入，可为 0</span></div>
+          <div class="field"><label for="c-month">每月定投（¥）</label><input id="c-month" type="number" inputmode="decimal" value="3000" min="0" step="500"></div>
+          <div class="field"><label for="c-rate">预期年化收益率（%）</label><input id="c-rate" type="number" inputmode="decimal" value="8" min="0" max="30" step="0.5"><span class="hint">权益参考 7–10%，债券 2–4%</span></div>
+          <div class="field"><label for="c-years">投资年限（年）</label><input id="c-years" type="number" inputmode="decimal" value="20" min="1" max="60" step="1"></div>
+          <div class="field"><label for="c-fee">年费率 / 摩擦（%）</label><input id="c-fee" type="number" inputmode="decimal" value="0.3" min="0" max="5" step="0.1"><span class="hint">管理费+申赎费+滑点，常被低估</span></div>
         </div>
-      </li>
-
-      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="omnSpYVDzCyrrKCavTMPPH">
-        <div class="tl-card" data-page-node-id="ZpZ7Kma4CtmY5QMEKJrhn1">
-          <div class="tl-card__top" data-page-node-id="C7C2CyBQD6MuTY0Ld6KZjb">
-            <span class="tl-date" data-page-node-id="UKsSMhEl77pR0xKX06e4eK">2023.07</span>
-            <span class="tag tag--blue" data-page-node-id="V57N9kjycb8RVUaJtJY8P1">第一次分享</span>
+        <div>
+          <div class="calc__out">
+            <div class="stat stat--big"><span>期末总资产</span><b id="c-final">¥0</b></div>
+            <div class="stat"><span>累计投入</span><b id="c-in">¥0</b></div>
+            <div class="stat"><span>累计收益</span><b id="c-gain">¥0</b></div>
+            <div class="stat"><span>收益占比</span><b id="c-pct">0%</b></div>
+            <div class="stat"><span>收益 / 投入</span><b id="c-mult">0×</b></div>
           </div>
-          <h3 data-page-node-id="xYzwuK3qZrA2OTZAqNXT6n">《复利不是魔法，是指数函数》</h3>
-          <p data-page-node-id="jK8egBsidz6u0ecIGDMelm">第一次线上分享，到场 43 人。核心结论只有一句：复利最大的敌人不是低收益，而是中断。</p>
+          <div class="chart-wrap"><svg id="c-chart" viewBox="0 0 600 260" role="img" aria-label="资产增长曲线"></svg></div>
+          <div class="table-wrap"><div class="table-scroll"><table><thead><tr><th>年末</th><th>资产（¥）</th><th>累计投入（¥）</th><th>收益（¥）</th></tr></thead><tbody id="c-rows"></tbody></table></div></div>
+          <p class="note"><b>!</b> 演示工具，按你给的参数做确定性测算；真实市场有波动。不构成投资建议。</p>
         </div>
-      </li>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <li class="tl-item reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)" data-page-node-id="21B7Cn7HNxJ9h7tF0GHMv2">
-        <div class="tl-card" data-page-node-id="ATJoL0KW7BZuy6D4UZKQbM">
-          <div class="tl-card__top" data-page-node-id="J1wdwhRE4FeCHmI2TILEGP">
-            <span class="tl-date" data-page-node-id="QIybzBcgxEQfg8sPNUyMEQ">2023.11</span>
-            <span class="tag tag--yellow" data-page-node-id="2UqQNStOJVLqTziOPYCA24">发布</span>
-          </div>
-          <h3 data-page-node-id="Nwk8YSgwDy7spafVCfNqyH">《ACMer 理财入门手册》v1.0 发布</h3>
-          <p data-page-node-id="8sOk6zVKNKRgkQ2SZofUOC">群友协作 5 个月，把零散讨论整理成 28 页系统文档。发布当周被 12 所高校 ACM 队转发。</p>
-        </div>
-      </li>
+<!-- 奖金决策树 -->
+<section class="section section--paper" id="tree" aria-labelledby="tree-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>TOOL 02 — 奖金决策树</p>
+      <h2 id="tree-title">一笔钱到手<span class="mark mark--orange">先问三步</span></h2>
+      <p>收到奖金 / 奖学金 / 签字费？别急着投。顺着问题点下去，得到属于你的分配结论。</p>
+    </header>
+    <div class="tool reveal">
+      <div class="dtree" id="dtree" aria-live="polite"></div>
+      <p class="note" style="margin-top:1rem"><b>!</b> 结论来自群内共识，仅作思路参考；大额决策请结合自身情况。</p>
+    </div>
+  </div>
+</section>
 
-      <li class="tl-item reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)" data-page-node-id="BRPV9gbxcpV1ppjtaHC41l">
-        <div class="tl-card" data-page-node-id="DZto2dueT4N4sOQTRvklbj">
-          <div class="tl-card__top" data-page-node-id="02L6ihNwjglN6viUjTvjiw">
-            <span class="tl-date" data-page-node-id="qi0dQV7Xy3NGCwXuzoDTFg">2024.04</span>
-            <span class="tag tag--purple" data-page-node-id="lLbTX3mdsPPsWfHYWiPzQX">出圈</span>
-          </div>
-          <h3 data-page-node-id="HcFzECOCVaJTovnJEpbEk9">反诈图鉴上线，30+ 高校队伍转发</h3>
-          <p data-page-node-id="glvsH329omqipGO03E0Sa4">起因是两位群友差点踩坑。我们把骗局拆成「承诺收益率」这一个可验证指标，做成一页图鉴。</p>
+<!-- 现金流预算 -->
+<section class="section section--alt" id="budget" aria-labelledby="budget-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>TOOL 03 — 现金流 / 预算</p>
+      <h2 id="budget-title">先看见<span class="mark mark--lime">你的现金流</span></h2>
+      <p>填完月度收支，立刻得到储蓄率与「拿铁因子」——那杯每天的小额，一年到底吃掉多少。</p>
+    </header>
+    <div class="tool reveal">
+      <div class="tool__grid">
+        <div>
+          <div class="field"><label for="b-inc">月收入（¥）</label><input id="b-inc" type="number" inputmode="decimal" value="15000" min="0" step="500"></div>
+          <div class="field"><label for="b-rent">房租 / 房贷（¥）</label><input id="b-rent" type="number" inputmode="decimal" value="4500" min="0" step="100"></div>
+          <div class="field"><label for="b-food">餐饮（¥）</label><input id="b-food" type="number" inputmode="decimal" value="2500" min="0" step="100"></div>
+          <div class="field"><label for="b-trans">交通通勤（¥）</label><input id="b-trans" type="number" inputmode="decimal" value="800" min="0" step="50"></div>
+          <div class="field"><label for="b-fun">娱乐 / 订阅（¥）</label><input id="b-fun" type="number" inputmode="decimal" value="1200" min="0" step="50"></div>
+          <div class="field"><label for="b-other">其他固定（¥）</label><input id="b-other" type="number" inputmode="decimal" value="1000" min="0" step="50"></div>
+          <div class="field"><label for="b-latte">每日小额 / 拿铁因子（¥/天）</label><input id="b-latte" type="number" inputmode="decimal" value="35" min="0" step="5"><span class="hint">奶茶 / 咖啡 / 便利店等随手花</span></div>
         </div>
-      </li>
+        <div>
+          <div class="calc__out">
+            <div class="stat stat--big"><span>月储蓄率</span><b id="b-rate">0%</b></div>
+            <div class="stat"><span>月储蓄（¥）</span><b id="b-save">¥0</b></div>
+            <div class="stat"><span>拿铁因子（年）</span><b id="b-lattey">¥0</b></div>
+            <div class="stat"><span>储蓄评级</span><b id="b-grade">—</b></div>
+          </div>
+          <div class="chart-wrap"><svg id="b-chart" viewBox="0 0 600 170" role="img" aria-label="支出与储蓄结构图"></svg></div>
+          <p class="note"><b>!</b> 储蓄率 ≥30% 优秀、≥20% 良好、≥10% 一般、&lt;10% 危险。先覆盖必要支出，再谈投资。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <li class="tl-item reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)" data-page-node-id="HyC6mM6HQregpjviAia1KO">
-        <div class="tl-card" data-page-node-id="JoU8J0xxXTwZwrT5fYXo2n">
-          <div class="tl-card__top" data-page-node-id="WrSfTtS6ohw995SGHlyYXk">
-            <span class="tl-date" data-page-node-id="Oy5w1RfsdHDuY4sn1Qiv5f">2024.09</span>
-            <span class="tag tag--lime" data-page-node-id="eMpaAiRmzeWqdsieBnoxor">开源</span>
-          </div>
-          <h3 data-page-node-id="GKGTCPlumef7Z3tWAdcbvb">acmer-compound 回测器开源</h3>
-          <p data-page-node-id="3d22peoSxjN2FaTZY3kOTD">「别信感觉，跑一下数据。」工具上线半年 GitHub 破 1.2k star，收到 47 个 PR，其中 11 个来自群友。</p>
-        </div>
-      </li>
+<!-- 反诈图鉴 -->
+<section class="section section--paper" id="scams" aria-labelledby="scams-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 03 — 反诈图鉴</p>
+      <h2 id="scams-title">12 种骗局<span class="mark mark--pink">逐个拆穿</span></h2>
+      <p>每个骗局都给一套「可验证的识别信号」。记住一句话：凡是让你觉得「稳赚不赔」的，先假设是骗局。</p>
+    </header>
+    <div class="scamgrid" id="scamGrid"></div>
+  </div>
+</section>
 
-      <li class="tl-item reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)" data-page-node-id="oeQ8Snn45pvoHWBPY7e2Eu">
-        <div class="tl-card" data-page-node-id="v52MIxdalORUiobDUyL8s7">
-          <div class="tl-card__top" data-page-node-id="23yUvpB8jyDCFNEgzPIHxC">
-            <span class="tl-date" data-page-node-id="CJQk93AtkWPagnbm0HOYWA">2025.03</span>
-            <span class="tag tag--orange" data-page-node-id="HeeqwtwsIipg5E3XcTKpXi">线下</span>
-          </div>
-          <h3 data-page-node-id="wDZNTZRPYDWTLst0H6gIFm">两周年：第一次线下面基（杭州）</h3>
-          <p data-page-node-id="lq9UDS1LuQAP7CWuGEcScE">到场 68 人，从下午两点聊到晚上十点。最大的共识是：理财的难点从来不在知识，而在执行。</p>
-        </div>
-      </li>
-
-      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="sFsBlIOp0lQZyLUsQEtcHm">
-        <div class="tl-card" data-page-node-id="UitVtQt7IPC1kaLCSZRceM">
-          <div class="tl-card__top" data-page-node-id="Rv5MPAHOrXpsE0MamMZApF">
-            <span class="tl-date" data-page-node-id="M32u8HocJIUcbzBEhc0otC">2025.11</span>
-            <span class="tag tag--pink" data-page-node-id="9W47KngLsWEuELKcgXTNbQ">沉淀</span>
-          </div>
-          <h3 data-page-node-id="vF01InkR9dN28Am77c0vVB">《210 场讨论提炼出的 12 条纪律》</h3>
-          <p data-page-node-id="V3RGGiJ3s5e12eZxfwOHtu">年度复盘：把三年里反复出现的错误归并为 12 条可执行纪律，其中第 1 条是「先写下你的卖出理由」。</p>
-        </div>
-      </li>
-
-      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="BJSRqlxHuEpH3HRuTmxsVb">
-        <div class="tl-card" data-page-node-id="JUvy42fcH5Ssj9bBvxIyRl">
-          <div class="tl-card__top" data-page-node-id="o3t3pbiEYyeRFZ2M2YTBbc">
-            <span class="tl-date" data-page-node-id="Z63xWnBin8hHlD6n8mOFPp">2026.06</span>
-            <span class="tag tag--blue" data-page-node-id="GWZwUTD9OVgoWDc8ApT1qZ">当下</span>
-          </div>
-          <h3 data-page-node-id="zVm4aCyAjTIF3qqQnn3LCB">手册 v3.0 + 匿名脱敏数据集发布</h3>
-          <p data-page-node-id="HbeyPKqVLtgMGBLto4JrgB">新增跨境资产、费率对照与税务章节；同步开放 1,200+ 份脱敏持仓快照供回测教学使用。</p>
-        </div>
-      </li>
+<!-- 大事记 -->
+<section class="section section--alt" id="timeline" aria-labelledby="tl-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 04 — 群内大事记</p>
+      <h2 id="tl-title">三年，<span class="mark mark--pink">八个</span>值得记下的瞬间</h2>
+      <p>从一场深夜讨论开始。点击任意一条，展开当时的完整记录。</p>
+    </header>
+    <ol class="timeline">
+      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)"><button class="tl-card" data-lesson="tl1" aria-label="展开 2023.03 建群详情"><span class="tl-card__top"><span class="tl-date">2023.03</span><span class="tag tag--pink">起点</span></span><h3>建群：从一场深夜讨论开始</h3><p>区域赛出线后，群里聊起「奖金要不要买显卡」。三小时后话题变成资产配置，于是有了这个群。初始成员 7 人。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)"><button class="tl-card" data-lesson="tl2" aria-label="展开 2023.07 详情"><span class="tl-card__top"><span class="tl-date">2023.07</span><span class="tag tag--blue">第一次分享</span></span><h3>《复利不是魔法，是指数函数》</h3><p>第一次线上分享，到场 43 人。核心结论只有一句：复利最大的敌人不是低收益，而是中断。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)"><button class="tl-card" data-lesson="tl3" aria-label="展开 2023.11 详情"><span class="tl-card__top"><span class="tl-date">2023.11</span><span class="tag tag--yellow">发布</span></span><h3>《ACMer 理财入门手册》v1.0 发布</h3><p>群友协作 5 个月，把零散讨论整理成 28 页系统文档。发布当周被 12 所高校 ACM 队转发。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)"><button class="tl-card" data-lesson="tl4" aria-label="展开 2024.04 详情"><span class="tl-card__top"><span class="tl-date">2024.04</span><span class="tag tag--purple">出圈</span></span><h3>反诈图鉴上线，30+ 高校队伍转发</h3><p>起因是两位群友差点踩坑。我们把骗局拆成「承诺收益率」这一个可验证指标，做成一页图鉴。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)"><button class="tl-card" data-lesson="tl5" aria-label="展开 2024.09 详情"><span class="tl-card__top"><span class="tl-date">2024.09</span><span class="tag tag--lime">开源</span></span><h3>acmer-compound 回测器开源</h3><p>「别信感觉，跑一下数据。」工具上线半年破 1.2k star。现在已升级为网页版复利计算器。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)"><button class="tl-card" data-lesson="tl6" aria-label="展开 2025.03 详情"><span class="tl-card__top"><span class="tl-date">2025.03</span><span class="tag tag--orange">线下</span></span><h3>两周年：第一次线下面基（杭州）</h3><p>到场 68 人，从下午两点聊到晚上十点。最大的共识是：理财的难点从来不在知识，而在执行。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)"><button class="tl-card" data-lesson="tl7" aria-label="展开 2025.11 详情"><span class="tl-card__top"><span class="tl-date">2025.11</span><span class="tag tag--pink">沉淀</span></span><h3>《210 场讨论提炼出的 12 条纪律》</h3><p>年度复盘把三年反复出现的错误归并为 12 条可执行纪律，第 1 条是「先写下你的卖出理由」。</p></button></li>
+      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)"><button class="tl-card" data-lesson="tl8" aria-label="展开 2026.06 详情"><span class="tl-card__top"><span class="tl-date">2026.06</span><span class="tag tag--blue">当下</span></span><h3>手册 v3.0 + 匿名脱敏数据集发布</h3><p>新增跨境资产、费率对照与税务章节；开放 1,200+ 份脱敏持仓快照，并把全部内容搬上本网站。</p></button></li>
     </ol>
   </div>
 </section>
 
-<!-- ==========================================================
-     6. 关于
-     ========================================================== -->
-<section class="section section--paper" id="about" aria-labelledby="about-title" data-page-node-id="6qdfrt8WxjLam46ZMtVEQs">
-  <div class="container" data-page-node-id="IA3cm51haQk8MhtNZqbefX">
-    <header class="sect-head reveal" data-page-node-id="IQBWslnl4wSYcr3F7YmcsB">
-      <p class="eyebrow" data-page-node-id="THx8Wfe2RqQI7PwCuWXykC"><span class="dot" data-page-node-id="ZaNNaX2s6eQlE0CqRndJ7U"></span>Chapter 04 — 关于我们</p>
-      <h2 id="about-title" data-page-node-id="1b4koB4W2UCQ7kjh0NKKqK">一群<span class="mark mark--blue" data-page-node-id="mYAqMVevmxygzqN0TSsHbe">不信运气</span>的人</h2>
+<!-- 关于 -->
+<section class="section section--paper" id="about" aria-labelledby="about-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 05 — 关于我们</p>
+      <h2 id="about-title">一群<span class="mark mark--blue">不信运气</span>的人</h2>
     </header>
-
-    <div class="about-grid" data-page-node-id="6Ah1XK1YHvcBJ2SY3ddgO3">
-      <aside class="about-card reveal" aria-labelledby="about-card-title" data-page-node-id="60PrvsFmnMtOxHSc4lQArA">
-        <svg class="deco" aria-hidden="true" viewBox="0 0 200 200" style="right:-50px;bottom:-50px;width:180px;height:180px;opacity:.35" data-page-node-id="9VDoWG6ZZA8VLy8Lg1dgC8">
-          <rect width="200" height="200" fill="url(#p-dots)" data-page-node-id="IAgJ8yBILgqpKJWLUD07bp"/>
-        </svg>
-
-        <div class="about-card__top" data-page-node-id="w4WnOiN5qA6sSfNCHH2n6B">
-          <span class="avatar" aria-hidden="true" data-page-node-id="OyX0j3Qj3gVyvaU7HuCcMH">AC</span>
-          <div data-page-node-id="KOwm2lWFajzJ3xRaZW7VuQ">
-            <h3 id="about-card-title" data-page-node-id="5CVRdbEWtXwkV65E0Po43N">acmer理财普及录</h3>
-            <p class="about-card__role" data-page-node-id="Q3knPwkLh7cR0Xe3doTRMj">EST. 2023 · 非营利交流社群</p>
-          </div>
+    <div class="about-grid">
+      <aside class="about-card reveal" aria-labelledby="about-card-title">
+        <div class="about-card__top">
+          <span class="avatar" aria-hidden="true">AC</span>
+          <div><h3 id="about-card-title">acmer理财普及录</h3><p class="about-card__role">EST. 2023 · 非营利交流社群</p></div>
         </div>
-
-        <p data-page-node-id="ExfIEn5EeMkv57umpGfYGP">我们不是机构，也不打算成为机构。群里没有「老师」，只有一群愿意把自己的持仓、判断和错误都摊开给人看的人。</p>
-        <p data-page-node-id="ceZMcoyWgud7qZW8XPHJkJ">所有内容免费、开源、可质疑。如果发现我们算错了，请直接拍过来——勘误记录本身就是最好的教材。</p>
-
-        <ul class="about-stats" data-page-node-id="tmDYPNzSbs6X9dCsiqN6Ip">
-          <li data-page-node-id="ZJvGUm0aBQk8mnEFxKuDmE"><b data-page-node-id="kE1qBT1KOCmxjDwAiJm6a1">1,250</b><span data-page-node-id="OJ2QtI7v458KvAxI84fWxo">群友</span></li>
-          <li data-page-node-id="fDwqyJLv1GNMNndFl9wq1z"><b data-page-node-id="zfL2dCqWmgDOzmkjcmzFVl">47</b><span data-page-node-id="Ww5n2LQ3Riu89jwpmWlVff">文件</span></li>
-          <li data-page-node-id="EqFbLHho7G4lOukw1tkU3E"><b data-page-node-id="EInF9mRjJjhlcXoowy03WT">210</b><span data-page-node-id="BppyjzH04gYf9uJQIhfeeU">复盘</span></li>
+        <p>我们不是机构，也不打算成为机构。群里没有「老师」，只有一群愿意把自己的持仓、判断和错误都摊开给人看的人。</p>
+        <p>所有内容免费、开源、可质疑。如果发现我们算错了，请直接拍过来——勘误记录本身就是最好的教材。</p>
+        <ul class="about-stats">
+          <li><b>1,286</b><span>群友</span></li>
+          <li><b>47</b><span>文件</span></li>
+          <li><b>210</b><span>复盘</span></li>
         </ul>
       </aside>
-
-      <div class="principles" data-page-node-id="8tEaqfFCCm9mqCYOO6hD7M">
-        <article class="principle reveal" style="--c:var(--pink)" data-page-node-id="45N2oCfy5LkVmymlC4FpPF">
-          <span class="principle__no" aria-hidden="true" data-page-node-id="AXXA6TiSleuVRMFvpLvsH2">01</span>
-          <div data-page-node-id="XgpFPUvJbEqabm6nbHjSjW">
-            <h3 data-page-node-id="YBFXU0I4jLiAFhEilo9bzF">不荐股、不代客理财、不收费</h3>
-            <p data-page-node-id="NqsHEA5R0iSBkIGM4oSSMQ">任何以本群名义推荐具体标的或收取费用的行为，都是假的。我们只输出方法、数据与思维框架。</p>
-          </div>
-        </article>
-
-        <article class="principle reveal" style="--c:var(--yellow)" data-page-node-id="WrpZ8JavWVf924HYb5miRr">
-          <span class="principle__no" aria-hidden="true" data-page-node-id="9MkwQ4xDlMfcRHQOr6Lzlg">02</span>
-          <div data-page-node-id="dSeI1SimjXsznQZE8ttt5B">
-            <h3 data-page-node-id="P95gy2WHpKkLAuBcnkoFuc">所有结论必须带数据源与时间戳</h3>
-            <p data-page-node-id="mYdmeAC7gkduaKMlS7m47L">没有时间戳的收益率等于没有收益。群里每条数据都要标注取数口径（整体法 / 加权平均）与参考日期。</p>
-          </div>
-        </article>
-
-        <article class="principle reveal" style="--c:var(--lime)" data-page-node-id="YUx2TJJ10YkRHcCUPtaBZD">
-          <span class="principle__no" aria-hidden="true" data-page-node-id="ZVgPE3L4bfWRkSyOPCqg1s">03</span>
-          <div data-page-node-id="sdPUOcHPxIfCZqdLvJdAwH">
-            <h3 data-page-node-id="tonERVPuSP5Mcz697w52s1">承认无知，错了就发勘误</h3>
-            <p data-page-node-id="U5GIpKRXolIQxn0YBGtSpc">我们公开过 3 版手册勘误，其中最严重的一次是把加权平均口径当成了整体法。承认它，比掩盖它更重要。</p>
-          </div>
-        </article>
-
-        <article class="principle reveal" style="--c:var(--blue)" data-page-node-id="ZXow9E7LgBsIByzQhd38Xa">
-          <span class="principle__no" aria-hidden="true" data-page-node-id="96EPg3uJeVkQK4v4oBrbza">04</span>
-          <div data-page-node-id="lsYIUZ4HnN09WlSh2NuiCi">
-            <h3 data-page-node-id="rQt9cgKpg43KELcPPRwpir">把「不知道」当成合法答案</h3>
-            <p data-page-node-id="YFKFmhuH9CUycpZRBpvOxh">宏观预测、短期择时、个股 alpha——这些我们都承认做不好，所以干脆不做。能力圈之外，不下注。</p>
-          </div>
-        </article>
+      <div class="principles">
+        <article class="principle reveal" style="--c:var(--pink)"><span class="principle__no" aria-hidden="true">01</span><div><h3>不荐股、不代客理财、不收费</h3><p>任何以本站名义推荐具体标的或收取费用的行为，都是假的。我们只输出方法、数据与思维框架。</p></div></article>
+        <article class="principle reveal" style="--c:var(--yellow)"><span class="principle__no" aria-hidden="true">02</span><div><h3>所有结论必须带数据源与时间戳</h3><p>没有时间戳的收益率等于没有收益。每条数据都标注取数口径与参考日期。</p></div></article>
+        <article class="principle reveal" style="--c:var(--lime)"><span class="principle__no" aria-hidden="true">03</span><div><h3>承认无知，错了就发勘误</h3><p>我们公开过 3 版手册勘误。承认错误，比掩盖它更重要。</p></div></article>
+        <article class="principle reveal" style="--c:var(--blue)"><span class="principle__no" aria-hidden="true">04</span><div><h3>把「不知道」当成合法答案</h3><p>宏观预测、短期择时、个股 alpha——这些我们都承认做不好，所以干脆不做。能力圈之外，不下注。</p></div></article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==========================================================
-     7. 联系 CTA（黄底）
-     ========================================================== -->
-<section class="cta" id="contact" aria-labelledby="cta-title" data-page-node-id="lET3eu9MqptZQuwgW9DRHR">
-  <svg class="deco" aria-hidden="true" viewBox="0 0 400 200" style="left:-40px;top:6%;width:300px;height:150px;opacity:.28" data-page-node-id="lbSEK0D4DJhEWn5iDwQFpV">
-    <rect width="400" height="200" fill="url(#p-stripe)" data-page-node-id="pcw86ldTrlGyLSc44UecJq"/>
-  </svg>
-  <svg class="deco" aria-hidden="true" viewBox="0 0 300 300" style="right:-60px;bottom:-40px;width:260px;height:260px;opacity:.3" data-page-node-id="cyX3C0ysi8UB1iACvhPQqs">
-    <rect width="300" height="300" fill="url(#p-dots)" data-page-node-id="mWqR0OMzpvrwaDh8VGr5xd"/>
-  </svg>
-
-  <div class="container cta__inner" data-page-node-id="QBetNAP2TnGC3BjXtP9hEV">
-    <p class="eyebrow reveal" style="background:#fff" data-page-node-id="WFvAzPE3YzNGB7g8NfC5SR"><span class="dot" data-page-node-id="odedN8SMiCPz871Fd6AA3J"></span>Chapter 05 — 加入我们</p>
-    <h2 id="cta-title" class="reveal" data-page-node-id="3WUTKgSFbtzqAcsTz9mmKM">准备好写你的<br data-page-node-id="ZEToPi8tfaLTBaCKzqamsO">第一行<span class="mark mark--pink" style="background:#fff" data-page-node-id="pja4Jkds2a5jAoEk8tzDBx">财务代码</span>了吗？</h2>
-    <p class="reveal" data-page-node-id="SdhCq3VEzNL8mIWxYFSGzr">入群没有门槛，只有一个要求：愿意把自己的思考过程写下来。写下来，才谈得上复盘；能复盘，才算真的学会。</p>
-
-    <div class="cta__actions reveal" data-page-node-id="HNpoUIelyV9Lfh6MQ1FmUw">
-      <a class="btn btn--black" href="mailto:hello@acmer-finance.dev?subject=申请加入%20acmer理财普及录" data-page-node-id="eWKIWMQtGjuB2xfkxGoXgd">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" data-page-node-id="5a0M09MHfdsXiWCNRZzPKH"><path d="M3 6h18v12H3z" data-page-node-id="6tz032StOOPnZg4grzGNHu"/><path d="M3 7l9 6 9-6" data-page-node-id="1P90FCNMWD0EtmthVEPXds"/></svg>
-        申请入群
-      </a>
-      <a class="btn btn--pink" href="#files" data-page-node-id="7sio3xUQhKWj0T0OXYneT3">
-        先翻文件库
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="EvzcYHeLNQZACm8jQVPj8f"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="KVbE3dYGrY9aLBC75Li96b"/></svg>
-      </a>
+<!-- CTA -->
+<section class="cta" id="contact" aria-labelledby="cta-title">
+  <div class="container cta__inner">
+    <p class="eyebrow reveal" style="background:#fff"><span class="dot"></span>Chapter 06 — 一起完善</p>
+    <h2 id="cta-title" class="reveal">资料都<span class="mark mark--pink" style="background:#fff">免费公开</span>了<br>为什么还来交流？</h2>
+    <p class="reveal">网站解决「学」，社群解决「执行与纠偏」。你算完、读完、踩过坑之后，带上你的复盘来聊，会快很多。</p>
+    <div class="cta__actions reveal">
+      <a class="btn btn--black" href="mailto:hello@acmer-finance.dev?subject=%E6%83%B3%E5%8A%A0%E5%85%A5%20acmer%E7%90%86%E8%B4%A2%E6%99%AE%E5%8F%8A%E5%BD%95"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><rect x="3" y="6" width="18" height="12"/><path d="M3 7l9 6 9-6"/></svg>邮件交流</a>
+      <a class="btn btn--pink" href="#learn">回到学习中心 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
     </div>
-
-    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;align-items:center" data-page-node-id="VU0yC99eVlEQOJPK6QhIyh">
-      <button class="copy-pill" id="copyMail" type="button" data-mail="hello@acmer-finance.dev" data-page-node-id="d4dDc8eOaoUk6MbyFZWHaQ">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" data-page-node-id="V88JHLUxLEmKMCUPrjQBRv"><rect x="9" y="9" width="11" height="11" rx="1" data-page-node-id="aE4SIK7N9nOgjiJN3yXEGU"/><path d="M5 15V4h11" data-page-node-id="rvA4DZQ9i0ljbvRmXr37e5"/></svg>
-        <span id="copyMailText" data-page-node-id="J5d84rrBEujGGZbyHSW5Bk">hello@acmer-finance.dev</span>
-      </button>
-      <p class="cta__note" data-page-node-id="GEZkQk1HkkULCWCCTxLAXr"><span aria-hidden="true" data-page-node-id="ByipGPWDUJlNlhofBIoqcv">!</span> 本群不提供任何投资建议，入群即视为已知悉风险</p>
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;align-items:center">
+      <button class="copy-pill" id="copyMail" type="button" data-mail="hello@acmer-finance.dev"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><rect x="9" y="9" width="11" height="11" rx="1"/><path d="M5 15V4h11"/></svg><span id="copyMailText">hello@acmer-finance.dev</span></button>
+      <p class="cta__note"><span aria-hidden="true">!</span> 本站不构成投资建议 · 内容仅供学习交流</p>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ==========================================================
-     8. FOOTER（黑底）
-     ========================================================== -->
-<footer class="footer" data-page-node-id="1nPYlQp4f8dwxtHoSPBnLE">
-  <div class="container footer__inner" data-page-node-id="lyKOUUhZ8v12LWR7yjDGGM">
-    <div class="footer__grid" data-page-node-id="QBFjBhvG910HDCqtZGRlox">
-      <div data-page-node-id="Ahhv02Ak0huN6cmfQtNEmp">
-        <div class="footer__brand" data-page-node-id="Rb2cHICGM8wXrH0ihPondS">
-          <span class="nav__mark" aria-hidden="true" data-page-node-id="FfluvP7FtOzC8wAd0rZD9q">A</span>
-          <span class="nav__name" style="color:#fff" data-page-node-id="WFYGvsaDD0sdEi2NwIr0h5">acmer理财普及录<span style="color:#8E8E88" data-page-node-id="XiuoDMxra9x5MOdyKhLnjg">ACM × FINANCE LOG</span></span>
-        </div>
-        <p data-page-node-id="pPmVw0WoPhNPzqYpzPTZTl">把算法竞赛的严谨写进你的钱包。一个由选手自发组成、坚持了三年的理财认知记录群。</p>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand"><span class="nav__mark" aria-hidden="true">A</span><span class="nav__name" style="color:#fff">acmer理财普及录<span style="color:#8E8E88">在线自学理财认知</span></span></div>
+        <p>由算法竞赛选手搭建的理财认知学习站。把算法的严谨写进钱包——免费、开源、可质疑。</p>
       </div>
-
-      <div data-page-node-id="DkAsK7eBz8g7abDPlQES4e">
-        <h4 data-page-node-id="AqJonjNM4gENyBdUn6Qk0r">站内导航</h4>
-        <ul class="footer__list" data-page-node-id="rMqOGG24Hu8hRY3XJViAiw">
-          <li data-page-node-id="agL4GEOwwRsO5OQoaoRGvJ"><a href="#skills" data-page-node-id="Yt2eRcRqAXg4UHri9INenn">认知图谱</a></li>
-          <li data-page-node-id="EGi4ArKWrkm9w7EEo1fhio"><a href="#files" data-page-node-id="mHSFEhv9N4p4fhCEEa7ZBx">共享文件库</a></li>
-          <li data-page-node-id="MAq94J0nN9HGIAAUsVNRQ7"><a href="#timeline" data-page-node-id="GlCzHZj2CIpZaUVsmTRMjq">群内大事记</a></li>
-          <li data-page-node-id="QhDfT3KBC2i6LDovogQXDq"><a href="#about" data-page-node-id="tziEnbR8EgIw6o5zI4rkJW">关于我们</a></li>
-        </ul>
-      </div>
-
-      <div data-page-node-id="FEBrKDOKq3Sd74OEX4rAf6">
-        <h4 data-page-node-id="9pOTLOBx8APT4lwPApgZhQ">热门文件</h4>
-        <ul class="footer__list" data-page-node-id="U5TKKM6cQGd1YdB6xk1zm1">
-          <li data-page-node-id="cKjU0wogeZio9fDGs7QLoF"><a href="#files" data-page-node-id="1GnWcLEAqtFdDipmVAeOvj">入门手册 v3.0</a></li>
-          <li data-page-node-id="C91sruQppJmQTxFDFc07rk"><a href="#files" data-page-node-id="Py2EVKkKa0CMRRDMmFqJ26">acmer-compound</a></li>
-          <li data-page-node-id="5ViEcB6Ak4idc40MqhcHzx"><a href="#files" data-page-node-id="WrjT8d9fvjKkhfVfxD0EGQ">反诈防坑图鉴</a></li>
-          <li data-page-node-id="2zNyf93K13BjSWvrs8nrkC"><a href="#files" data-page-node-id="ZOi278JDOMtsqv65dTP83M">脱敏数据集</a></li>
-        </ul>
-      </div>
-
-      <div data-page-node-id="hkzo2QvrYhHNoADGtO0C89">
-        <h4 data-page-node-id="OTBOSMfSqQCEBsxHfvPyLY">联系</h4>
-        <ul class="footer__list" data-page-node-id="gFiaT2qwNmjt4sCcMjxePo">
-          <li data-page-node-id="C8WXmamaHbuW7t68cpJqlg"><a href="mailto:hello@acmer-finance.dev" data-page-node-id="ezA18NhgZ21V8BSRJmU0Ib">hello@acmer-finance.dev</a></li>
-          <li data-page-node-id="dhAUPDRLxF0PfrRwHwzm4v"><a href="#contact" data-page-node-id="6jpX3HnlDUMLyCFY7Abe24">申请入群</a></li>
-          <li data-page-node-id="dqLAQGgtdlReRdtF6lOh9H"><a href="#files" data-page-node-id="iOalZq8dkbv4ZXb0kU881Q">投稿 / 分享复盘</a></li>
-          <li data-page-node-id="m2mhMEopTweRQaHq4YsInA"><a href="#about" data-page-node-id="qF2Ruf7rXJltqYcIoK1ekK">勘误反馈</a></li>
-        </ul>
-      </div>
+      <div><h4>在线工具</h4><ul class="footer__list"><li><a href="#calc">复利计算器</a></li><li><a href="#tree">奖金决策树</a></li><li><a href="#budget">现金流预算</a></li><li><a href="#scams">反诈图鉴</a></li></ul></div>
+      <div><h4>学习内容</h4><ul class="footer__list"><li><a href="#learn">学习中心</a></li><li><a href="#" data-lesson="manual">入门手册</a></li><li><a href="#" data-lesson="yearbook">年度年刊</a></li><li><a href="#" data-lesson="bookclub">共读会书单</a></li><li><a href="#" data-lesson="dataset">脱敏数据集</a></li></ul></div>
+      <div><h4>联系</h4><ul class="footer__list"><li><a href="mailto:hello@acmer-finance.dev">hello@acmer-finance.dev</a></li><li><a href="#contact">邮件交流</a></li><li><a href="#about">勘误反馈</a></li></ul></div>
     </div>
-
-    <div class="footer__bar" data-page-node-id="9T1JyLVFLa4sFxRGNcNgHc">
-      <p data-page-node-id="8CxhWHCAIPQy4DKWJsyiGN">© <span id="year" data-page-node-id="YaxHK4IFBys7rS2dF8xyne">2026</span> acmer理财普及录 · 内容采用 CC BY-NC-SA 4.0 协议共享</p>
-      <p data-page-node-id="MZEHnTpBaoCr1IHq4CXjh2">本站所有内容不构成投资建议 · 数据仅供学习交流</p>
-    </div>
+    <div class="footer__bar"><p>© <span id="year">2026</span> acmer理财普及录 · 内容采用 CC BY-NC-SA 4.0 共享</p><p>本站所有内容不构成投资建议 · 数据仅供学习交流</p></div>
   </div>
 </footer>
 
-<button class="totop" id="toTop" type="button" aria-label="回到页面顶部" data-page-node-id="kM7jzDnEH69hyJnxtfvEZO">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="4p7XGF0fc4EKixtCSMNnI5"><path d="M12 19V6M5 12l7-7 7 7" data-page-node-id="CH5MzJaI0rHGTpSQb5D4GU"/></svg>
-</button>
+<button class="totop" id="toTop" type="button" aria-label="回到页面顶部"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M12 19V6M5 12l7-7 7 7"/></svg></button>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__backdrop" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="drawer__head">
+      <h2 id="drawerTitle">课程内容</h2>
+      <button class="drawer__close" id="drawerClose" aria-label="关闭课程">✕</button>
+    </div>
+    <div class="drawer__body" id="drawerBody"></div>
+  </div>
+</div>
+
+<!-- 课程内容模板 -->
+<template id="tpl-manual">
+  <h2>《ACMer 理财入门手册》</h2>
+  <p class="drawer__toc"><span class="chip">① 应急金</span><span class="chip">② 四宫格</span><span class="chip">③ 定投</span><span class="chip">④ 费率摩擦</span><span class="chip">⑤ 行为防坑</span><span class="chip">⑥ 税务再平衡</span></p>
+  <div class="callout">手册 v3.0 全文结构化到本页。以下六章即正文精要；数据口径见各章脚注。</div>
+  <h3>① 先备应急金（base case）</h3>
+  <p>任何投资前的第一步：留足 <b>6 个月</b>必要生活费，放在随时能取、本金几乎不波动的地方（货币基金 / 活期 + 短债）。</p>
+  <p>它的作用不是收益，而是让你在失业、生病、市场暴跌时<strong>不必卖出资产</strong>。没有它，所有的「长期持有」都会在最低点被迫中断。</p>
+  <div class="code2">function allocate(income):
+  emergency = 6 * monthly_necessity
+  if cash &lt; emergency:
+      return "先存应急金"   # 最高优先级
+  else:
+      go to 资产配置()</div>
+  <h3>② 资产配置四宫格（分治）</h3>
+  <ul>
+    <li><b>进攻端</b>：指数基金 / 股票，负责长期增值，承受波动。</li>
+    <li><b>防守端</b>：债券 / 货基，平滑回撤，提供再平衡弹药。</li>
+    <li><b>现金流</b>：覆盖 1–2 年要用的钱，不进权益。</li>
+    <li><b>保险</b>：用小额保费转移极端风险（重疾 / 意外）。</li>
+  </ul>
+  <p>示例配置（年轻、能承受波动）：进攻 60% / 防守 30% / 现金流 10%，保险另算。偏离阈值 5% 触发再平衡。</p>
+  <h3>③ 指数基金定投（for 循环）</h3>
+  <p>定投 = 固定时间、固定金额、买入宽基指数。它不预测市场，而是用「多次买入」摊平成本，靠纪律跑赢情绪。</p>
+  <div class="code2">for month in range(1, N*12 + 1):
+    buy(index_fund, monthly_amount)   # 不看盘
+    if drift(exposure) &gt; 5%:
+        rebalance()                   # 回到目标比例</div>
+  <p>宽基指数（如沪深300、标普500）长期跟随经济本身，费率低、分散好，适合作为进攻端核心。</p>
+  <h3>④ 费率与摩擦成本（隐藏常数）</h3>
+  <p>管理费、申赎费、买卖滑点、汇兑损耗，单独看很小，长期却是指数级的。例：年费 1% 在 30 年里约吃掉总收益的 <b>25%</b>。</p>
+  <p>结论：在收益相近时，永远选费率更低的那只。别为「明星基金经理」多付 1.5%。</p>
+  <h3>⑤ 行为金融学防坑</h3>
+  <ul>
+    <li><b>FOMO</b>：怕错过而追高——对策：只买计划内，不买涨上来的。</li>
+    <li><b>损失厌恶</b>：亏 10% 的痛苦大于赚 10% 的快乐，导致扛单——对策：预设卖出理由。</li>
+    <li><b>锚定效应</b>：死守「买入价」——对策：决策只看未来现金流，不看成本。</li>
+  </ul>
+  <h3>⑥ 税务与再平衡</h3>
+  <p>再平衡本身产生税与费，别过度交易。一年 1–2 次、阈值 5% 足够。善用免税 / 递延账户（如个人养老金额度）降低摩擦。</p>
+  <div class="callout">脚注：以上比例为示例，非建议。具体比例取决于年龄、收入稳定性与风险承受力。</div>
+</template>
+
+<template id="tpl-yearbook">
+  <h2>群内大事记年刊 · 2025</h2>
+  <p class="drawer__toc"><span class="chip">68 场复盘</span><span class="chip">12 条纪律</span><span class="chip">快照 2025.12</span></p>
+  <h3>年度三问</h3>
+  <ul>
+    <li><b>吵得最久的</b>：单一市场 vs 全球配置。结论——普通人用宽基指数做全球分散，性价比最高。</li>
+    <li><b>错得最贵的</b>：两次在情绪高点加仓。代价不是亏钱，而是被锁住后错过低点补仓。</li>
+    <li><b>第二年要改的</b>：把「卖出理由」和「买入理由」写在一起，避免锚定。</li>
+  </ul>
+  <h3>12 条纪律（节选）</h3>
+  <ul>
+    <li>1. 先写下你的卖出理由，再买入。</li>
+    <li>2. 单笔最大回撤 = 你能睡着的数。</li>
+    <li>3. 不预测市场，只控制仓位与频率。</li>
+    <li>4. 费率是敌人，选最低的。</li>
+    <li>5. 现金流优先于收益。（全文见共读会与手册）</li>
+  </ul>
+  <div class="callout">数据快照参考日期：2025-12-31。所有数字来自群内匿名复盘，非市场权威数据。</div>
+</template>
+
+<template id="tpl-bookclub">
+  <h2>每周共读会 · 书单</h2>
+  <p class="drawer__toc"><span class="chip">周三 21:00</span><span class="chip">第 92 期</span><span class="chip">笔记公开</span></p>
+  <h3>核心六本</h3>
+  <ul>
+    <li>《聪明的投资者》— 格雷厄姆：安全边际、市场先生。</li>
+    <li>《漫步华尔街》— 马尔基尔：为何长期战胜指数很难。</li>
+    <li>《指数基金投资指南》— 定投实操与心理建设。</li>
+    <li>《穷查理宝典》— 芒格：多元思维模型、能力圈。</li>
+    <li>《彼得·林奇的成功投资》— 在日常生活中找机会。</li>
+    <li>《富爸爸穷爸爸》— 资产与负债的底层认知。</li>
+  </ul>
+  <h3>第 92 期精读笔记（摘要）</h3>
+  <p>本期读《聪明的投资者》第 8 章「市场先生」。共识：市场先生是情绪化的报价机，不是裁判。他的报价只在该为你所用时才有意义——你想买时他恐慌压价，你想卖时他狂热抬价。正确的做法是把他当成<strong>服务生，不是老板</strong>。</p>
+  <div class="callout">共读会笔记含群友提问与分歧记录——分歧比共识更有价值。</div>
+</template>
+
+<template id="tpl-dataset">
+  <h2>匿名脱敏数据集</h2>
+  <p class="drawer__toc"><span class="chip">1,200+ 份</span><span class="chip">脱敏</span><span class="chip">教学用</span></p>
+  <h3>字段说明</h3>
+  <ul>
+    <li><b>age_band</b>：年龄区间（如 22–25）。</li>
+    <li><b>risk</b>：风险偏好（保守 / 平衡 / 进取）。</li>
+    <li><b>structure</b>：持仓结构比例（进攻 / 防守 / 现金流）。</li>
+    <li><b>cagr_self</b>：本人申报的年化。</li>
+    <li><b>sleep_at_night</b>：最大回撤承受度。</li>
+  </ul>
+  <h3>脱敏样本（6 条）</h3>
+  <div class="data-sample"><table><thead><tr><th>年龄</th><th>风险</th><th>进攻/防守/现金</th><th>申报年化</th><th>能睡回撤</th></tr></thead><tbody>
+    <tr><td>22–25</td><td>进取</td><td>70/20/10</td><td>11%</td><td>−25%</td></tr>
+    <tr><td>26–30</td><td>平衡</td><td>55/35/10</td><td>8%</td><td>−18%</td></tr>
+    <tr><td>31–35</td><td>平衡</td><td>50/40/10</td><td>7%</td><td>−15%</td></tr>
+    <tr><td>22–25</td><td>平衡</td><td>60/30/10</td><td>9%</td><td>−20%</td></tr>
+    <tr><td>36–40</td><td>保守</td><td>35/55/10</td><td>5%</td><td>−10%</td></tr>
+    <tr><td>41–45</td><td>保守</td><td>30/60/10</td><td>4%</td><td>−8%</td></tr>
+  </tbody></table></div>
+  <p>用于回测教学：可观察「风险偏好—配置—回撤承受度」是否自洽。完整集受群友授权脱敏后开放。</p>
+  <div class="callout">注：样本为演示数据，不含任何身份信息。索取完整集见页面底部联系。</div>
+</template>
+
+<template id="tpl-tl1"><h2>2023.03 · 建群</h2><p>区域赛出线后，群里聊起「奖金要不要买显卡」。三小时后话题变成资产配置，于是有了这个群。初始成员 7 人，全是在校 ACMer。</p><p>当时的共识雏形已经出现：用 debug 的态度看每一笔支出，用回测的思路看每一种策略。</p></template>
+<template id="tpl-tl2"><h2>2023.07 · 第一次分享</h2><p>《复利不是魔法，是指数函数》到场 43 人。核心结论只有一句：复利最大的敌人不是低收益，而是<strong>中断</strong>——一次被迫卖出，前面的曲线全部归零重来。</p></template>
+<template id="tpl-tl3"><h2>2023.11 · 手册 v1.0</h2><p>群友协作 5 个月，把零散讨论整理成 28 页系统文档。发布当周被 12 所高校 ACM 队转发。这是「把讨论变成可复用知识」的开始。</p></template>
+<template id="tpl-tl4"><h2>2024.04 · 反诈图鉴</h2><p>起因是两位群友差点踩坑。我们把骗局拆成「承诺收益率」这一个可验证指标——凡是拍胸脯保证固定高收益的，直接判定为骗局。一页图鉴被 30+ 高校队伍转发。</p></template>
+<template id="tpl-tl5"><h2>2024.09 · 开源回测器</h2><p>「别信感觉，跑一下数据。」acmer-compound 上线半年破 1.2k star，收到 47 个 PR（11 个来自群友）。它教会我们：结论要先能被数据反驳，才算结论。现已成为网页版复利计算器。</p></template>
+<template id="tpl-tl6"><h2>2025.03 · 两周年面基</h2><p>杭州线下，到场 68 人，从下午两点聊到晚上十点。最大的共识是：理财的难点从来不在知识，而在<strong>执行</strong>——知道该怎么做，和真的做到，中间差着一整个行为金融学。</p></template>
+<template id="tpl-tl7"><h2>2025.11 · 12 条纪律</h2><p>年度复盘把三年里反复出现的错误归并为 12 条可执行纪律，第 1 条是「先写下你的卖出理由」。写下来，才谈得上复盘；能复盘，才算真的学会。</p></template>
+<template id="tpl-tl8"><h2>2026.06 · 手册 v3.0</h2><p>新增跨境资产、费率对照与税务章节；同步开放 1,200+ 份脱敏持仓快照供回测教学。并把全部内容搬上本网站——不用加群，点开就学。</p></template>
 
 <script>
 (function () {
   'use strict';
-
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var RMB = function (n) { return '¥' + (isFinite(n) ? Math.round(n).toLocaleString('zh-CN') : 0); };
 
-  /* ---------- 年份 ---------- */
-  var yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  /* 年份 */
+  var yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* ---------- 滚动进度 + 回到顶部 + 导航状态 ---------- */
+  /* 滚动进度 + 回顶 */
   var progress = document.getElementById('navProgress');
   var toTop = document.getElementById('toTop');
   var ticking = false;
-
   function onScroll() {
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
-    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    var doc = document.documentElement, max = doc.scrollHeight - window.innerHeight, pct = max > 0 ? (window.scrollY / max) * 100 : 0;
     if (progress) progress.style.width = pct + '%';
     if (toTop) toTop.classList.toggle('is-on', window.scrollY > 700);
     ticking = false;
   }
-  window.addEventListener('scroll', function () {
-    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
-  }, { passive: true });
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
+  if (toTop) toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
 
-  if (toTop) {
-    toTop.addEventListener('click', function () {
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-    });
-  }
-
-  /* ---------- 移动端导航 ---------- */
-  var toggle = document.getElementById('navToggle');
-  var menu = document.getElementById('navMenu');
-
-  function closeMenu() {
-    if (!menu || !toggle) return;
-    menu.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', '打开导航菜单');
-  }
+  /* 移动端导航 */
+  var toggle = document.getElementById('navToggle'), menu = document.getElementById('navMenu');
+  function closeMenu() { if (!menu || !toggle) return; menu.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', '打开导航菜单'); }
   if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = menu.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
-    });
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeMenu();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
-    });
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 960) closeMenu();
-    });
+    toggle.addEventListener('click', function () { var o = menu.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', o ? 'true' : 'false'); toggle.setAttribute('aria-label', o ? '关闭导航菜单' : '打开导航菜单'); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 960) closeMenu(); });
   }
 
-  /* ---------- 滚动揭示 ---------- */
+  /* 滚动揭示 */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  revealEls.forEach(function (el, i) {
-    el.style.transitionDelay = Math.min(i % 6, 5) * 60 + 'ms';
+  revealEls.forEach(function (el, i) { el.style.transitionDelay = Math.min(i % 6, 5) * 60 + 'ms'; });
+  if ('IntersectionObserver' in window && !reduce) {
+    var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); ro.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { ro.observe(el); });
+  } else { revealEls.forEach(function (el) { el.classList.add('is-in'); }); }
+
+  /* 进度条 */
+  var bars = Array.prototype.slice.call(document.querySelectorAll('.bar__fill'));
+  function fillBar(b) { b.style.width = (b.getAttribute('data-w') || '0') + '%'; }
+  if ('IntersectionObserver' in window && !reduce) {
+    var bo = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { fillBar(e.target); bo.unobserve(e.target); } }); }, { threshold: 0.4 });
+    bars.forEach(function (b) { bo.observe(b); });
+  } else { bars.forEach(fillBar); }
+
+  /* 导航高亮 */
+  var ids = ['learn', 'calc', 'tree', 'scams', 'timeline', 'about'];
+  var secs = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
+  if ('IntersectionObserver' in window && secs.length) {
+    var so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; var id = '#' + e.target.id; navLinks.forEach(function (a) { if (a.classList.contains('nav__cta')) return; a.classList.toggle('is-active', a.getAttribute('href') === id); }); }); }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (s) { so.observe(s); });
+  }
+
+  /* 复制邮箱 */
+  var copyBtn = document.getElementById('copyMail'), copyText = document.getElementById('copyMailText'), copyTimer = null;
+  if (copyBtn) copyBtn.addEventListener('click', function () {
+    var m = copyBtn.getAttribute('data-mail') || '';
+    var done = function () { copyBtn.setAttribute('data-copied', 'true'); if (copyText) copyText.textContent = '已复制 ✓'; clearTimeout(copyTimer); copyTimer = setTimeout(function () { copyBtn.removeAttribute('data-copied'); if (copyText) copyText.textContent = m; }, 1800); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(m).then(done, function () { location.href = 'mailto:' + m; }); }
+    else { var t = document.createElement('textarea'); t.value = m; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.top = '-1000px'; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); done(); } catch (err) { location.href = 'mailto:' + m; } document.body.removeChild(t); }
   });
 
-  if ('IntersectionObserver' in window && !reduce) {
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(function (el) { revealObserver.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+  /* 抽屉课程 */
+  var drawer = document.getElementById('drawer'), drawerBody = document.getElementById('drawerBody'), drawerTitle = document.getElementById('drawerTitle'), lastFocus = null;
+  function openLesson(id) {
+    var tpl = document.getElementById('tpl-' + id); if (!tpl) return;
+    lastFocus = document.activeElement;
+    drawerBody.innerHTML = tpl.innerHTML;
+    var h = drawerBody.querySelector('h2'); if (drawerTitle && h) drawerTitle.textContent = h.textContent;
+    drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
+    var c = document.getElementById('drawerClose'); if (c) c.focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var lesson = e.target.closest('[data-lesson]');
+    if (lesson) { e.preventDefault(); openLesson(lesson.getAttribute('data-lesson')); return; }
+    var tool = e.target.closest('[data-tool]');
+    if (tool) { e.preventDefault(); var el = document.getElementById(tool.getAttribute('data-tool')); if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }
+  });
+  if (drawer) {
+    var back = drawer.querySelector('[data-close]'); if (back) back.addEventListener('click', closeDrawer);
+    var dc = document.getElementById('drawerClose'); if (dc) dc.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer(); });
   }
 
-  /* ---------- 进度条动画 ---------- */
-  var bars = Array.prototype.slice.call(document.querySelectorAll('.bar__fill'));
-
-  function fillBar(bar) {
-    var w = bar.getAttribute('data-w') || '0';
-    bar.style.width = w + '%';
+  /* SVG 折线图（复利曲线） */
+  function drawLine(svg, series) {
+    var W = 600, H = 260, L = 58, R = 16, T = 16, B = 34, IW = W - L - R, IH = H - T - B;
+    var maxV = 1, maxY = 1;
+    series.forEach(function (p) { if (p.v > maxV) maxV = p.v; if (p.y > maxY) maxY = p.y; });
+    var X = function (y) { return L + (y / maxY) * IW; };
+    var Y = function (v) { return T + IH - (v / maxV) * IH; };
+    var s = '<rect width="' + W + '" height="' + H + '" fill="#fff"/>';
+    for (var g = 0; g <= 4; g++) { var gy = T + IH * g / 4; s += '<path d="M' + L + ' ' + gy + 'H' + (W - R) + '" stroke="#000" stroke-width="1" opacity="0.12"/>'; }
+    var area = '', line = '', dots = '';
+    series.forEach(function (p, i) { var x = X(p.y), y = Y(p.v); area += (i ? 'L' : 'M') + x + ' ' + y + ' '; line += (i ? 'L' : 'M') + x + ' ' + y + ' '; if (i === 0 || i === series.length - 1 || i % Math.max(1, Math.round(series.length / 8)) === 0) dots += '<circle cx="' + x + '" cy="' + y + '" r="3.5" fill="#00BFFF" stroke="#000" stroke-width="2"/>'; });
+    area += 'L' + X(maxY) + ' ' + (T + IH) + ' L' + L + ' ' + (T + IH) + ' Z';
+    for (var g2 = 0; g2 <= 4; g2++) { var val = maxV * (1 - g2 / 4); s += '<text x="' + (L - 8) + '" y="' + (T + IH * g2 / 4 + 4) + '" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" fill="#555">' + RMB(val) + '</text>'; }
+    s += '<path d="' + area + '" fill="#C6EDFF" opacity="0.75"/>' + '<path d="' + line + '" fill="none" stroke="#00BFFF" stroke-width="4" stroke-linejoin="round"/>' + dots;
+    s += '<text x="' + (W - R) + '" y="' + (H - 8) + '" text-anchor="end" font-family="JetBrains Mono,monospace" font-size="10" fill="#555">' + maxY + ' 年</text>';
+    svg.innerHTML = s;
   }
 
-  if ('IntersectionObserver' in window && !reduce) {
-    var barObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          fillBar(entry.target);
-          barObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    bars.forEach(function (b) { barObserver.observe(b); });
-  } else {
-    bars.forEach(fillBar);
-  }
-
-  /* ---------- 导航高亮 ---------- */
-  var sections = ['timeline', 'files', 'skills', 'about']
-    .map(function (id) { return document.getElementById(id); })
-    .filter(Boolean);
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
-
-  if ('IntersectionObserver' in window && sections.length) {
-    var sectObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var id = '#' + entry.target.id;
-        navLinks.forEach(function (a) {
-          if (a.classList.contains('nav__cta')) return;
-          a.classList.toggle('is-active', a.getAttribute('href') === id);
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { sectObserver.observe(s); });
-  }
-
-  /* ---------- 复制邮箱 ---------- */
-  var copyBtn = document.getElementById('copyMail');
-  var copyText = document.getElementById('copyMailText');
-  var copyTimer = null;
-
-  if (copyBtn) {
-    copyBtn.addEventListener('click', function () {
-      var mail = copyBtn.getAttribute('data-mail') || '';
-      var done = function () {
-        copyBtn.setAttribute('data-copied', 'true');
-        if (copyText) copyText.textContent = '已复制 ✓';
-        window.clearTimeout(copyTimer);
-        copyTimer = window.setTimeout(function () {
-          copyBtn.removeAttribute('data-copied');
-          if (copyText) copyText.textContent = mail;
-        }, 1800);
-      };
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(mail).then(done, function () { window.location.href = 'mailto:' + mail; });
-      } else {
-        var ta = document.createElement('textarea');
-        ta.value = mail;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.top = '-1000px';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); done(); } catch (err) { window.location.href = 'mailto:' + mail; }
-        document.body.removeChild(ta);
+  /* 复利计算器 */
+  function computeCompound() {
+    var P = +document.getElementById('c-init').value || 0;
+    var m = +document.getElementById('c-month').value || 0;
+    var r = +document.getElementById('c-rate').value || 0;
+    var yrs = Math.max(1, +document.getElementById('c-years').value || 1);
+    var fee = +document.getElementById('c-fee').value || 0;
+    if (yrs > 60) yrs = 60;
+    var months = yrs * 12;
+    var mRate = Math.pow(1 + r / 100, 1 / 12) - 1;
+    var mFee = fee / 100 / 12;
+    var bal = P, contributed = P;
+    var series = [{ y: 0, v: P }], rows = '';
+    for (var i = 1; i <= months; i++) {
+      bal = bal * (1 + mRate);
+      if (mFee > 0) bal = bal * (1 - mFee);
+      bal += m; contributed += m;
+      if (i % 12 === 0) {
+        var yr = i / 12;
+        series.push({ y: yr, v: bal });
+        rows += '<tr><td>第 ' + yr + ' 年</td><td>' + RMB(bal) + '</td><td>' + RMB(contributed) + '</td><td>' + RMB(bal - contributed) + '</td></tr>';
       }
-    });
+    }
+    document.getElementById('c-final').textContent = RMB(bal);
+    document.getElementById('c-in').textContent = RMB(contributed);
+    var gain = bal - contributed;
+    document.getElementById('c-gain').textContent = RMB(gain);
+    document.getElementById('c-pct').textContent = (contributed > 0 ? (gain / contributed) * 100 : 0).toFixed(1) + '%';
+    document.getElementById('c-mult').textContent = (contributed > 0 ? (bal / contributed) : 0).toFixed(2) + '×';
+    document.getElementById('c-rows').innerHTML = rows;
+    drawLine(document.getElementById('c-chart'), series);
   }
+  ['c-init', 'c-month', 'c-rate', 'c-years', 'c-fee'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('input', computeCompound); });
+  computeCompound();
+
+  /* 预算计算器 */
+  function computeBudget() {
+    function v(id) { return +document.getElementById(id).value || 0; }
+    var inc = v('b-inc'), rent = v('b-rent'), food = v('b-food'), trans = v('b-trans'), fun = v('b-fun'), other = v('b-other'), latte = v('b-latte');
+    var nec = rent + food + trans, varf = fun + other, lat = latte * 30, expense = nec + varf + lat;
+    var save = inc - expense, rate = inc > 0 ? (save / inc) * 100 : 0;
+    document.getElementById('b-save').textContent = RMB(save);
+    document.getElementById('b-lattey').textContent = RMB(latte * 365);
+    document.getElementById('b-rate').textContent = rate.toFixed(1) + '%';
+    document.getElementById('b-grade').textContent = rate >= 30 ? '优秀' : rate >= 20 ? '良好' : rate >= 10 ? '一般' : '危险';
+    var parts = [['必要支出', Math.max(0, nec), '#FF6B35'], ['可变支出', Math.max(0, varf), '#A855F7'], ['拿铁因子', Math.max(0, lat), '#FF1493'], ['月储蓄', Math.max(0, save), '#32CD32']];
+    var total = 1; parts.forEach(function (p) { total += p[1]; });
+    var W = 600, H = 168, x = 30, chart = '<rect width="' + W + '" height="' + H + '" fill="#fff"/>';
+    parts.forEach(function (p) {
+      var w = Math.max(4, (p[1] / total) * (W - 90));
+      if (w > 4) { chart += '<rect x="' + x + '" y="26" width="' + w + '" height="64" fill="' + p[2] + '" stroke="#000" stroke-width="3" rx="5"/>'; }
+      chart += '<text x="' + (x + w / 2) + '" y="' + (26 + 64 + 16) + '" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#0A0A0A">' + p[0] + '</text>';
+      chart += '<text x="' + (x + w / 2) + '" y="' + (26 + 64 + 32) + '" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" fill="#0A0A0A">' + RMB(p[1]).replace('¥', '') + '</text>';
+      x += w + 6;
+    });
+    document.getElementById('b-chart').innerHTML = chart;
+  }
+  ['b-inc', 'b-rent', 'b-food', 'b-trans', 'b-fun', 'b-other', 'b-latte'].forEach(function (id) { var el = document.getElementById(id); if (el) el.addEventListener('input', computeBudget); });
+  computeBudget();
+
+  /* 奖金决策树 */
+  var tree = {
+    start: { q: '收到一笔钱（奖金 / 奖学金 / 签字费）。先问：应急金够 6 个月生活费吗？', yes: 'debt', no: 'emergency' },
+    emergency: { q: '先存满 6 个月应急金（放货基 / 短债，本金不波动）。存满后，有高息负债吗（信用卡 / 网贷利率 &gt; 5%）？', yes: 'debt', no: 'horizon' },
+    debt: { result: '结论：优先还清所有 &gt; 5% 的高息负债。这是确定性 5%+ 的收益，胜过任何投资——先卸掉负收益。' },
+    horizon: { q: '这笔钱 3 年内要用吗（买房首付 / 读书 / 大额计划）？', yes: 'short', no: 'invest' },
+    short: { result: '结论：放货币基金 / 短债，保证流动性与本金安全。期限匹配，不碰权益市场。' },
+    invest: { result: '结论：按「分治」配置——进攻端指数定投 + 防守端债券 / 货基。单笔回撤上限设你能睡着的数，分 3 年分批建仓，避免一次性买在高点。' }
+  };
+  function renderTree(id) {
+    var n = tree[id], box = document.getElementById('dtree'), html = '';
+    if (!n) return;
+    if (n.result) {
+      html = '<div class="dnode dresult"><b>结论</b><p>' + n.result + '</p><div class="dreset"><button class="dbtn" data-node="start">↺ 重新算一笔</button></div></div>';
+    } else {
+      html = '<div class="dnode q"><b>' + n.q + '</b><div class="opts"><button class="dbtn" data-node="' + n.yes + '">是 →</button><button class="dbtn" data-node="' + n.no + '">否 →</button></div></div>';
+    }
+    box.innerHTML = html;
+    Array.prototype.slice.call(box.querySelectorAll('[data-node]')).forEach(function (b) { b.addEventListener('click', function () { renderTree(b.getAttribute('data-node')); }); });
+  }
+  renderTree('start');
+
+  /* 反诈图鉴 12 例 */
+  var scams = [
+    { n: '保本高息', t: '承诺固定收益', c: '息', d: '承诺「保本 + 年化 8%–15% 固定付息」，包装成理财 / 债权 / 项目。', s: '凡是拍胸脯保证固定高收益的，一律按骗局处理；真有这收益，机构早自己做了。', f: '只投受监管、能查到备案的渠道；承诺收益过高即视为危险信号。' },
+    { n: '内幕消息', t: '荐股收费', c: '股', d: '「我有内幕，跟着买稳赚」，先免费试荐，后收费 / 分成。', s: '真有内幕交易违法；对方靠会员费赚钱，不靠内幕。', f: '不买任何「内幕票」；荐股群先假设为收割。' },
+    { n: '代客操盘', t: '代运营账户', c: '盘', d: '「把账户交给我，亏了包赔」，索要账号密码或保证金。', s: '正规机构不会要你的交易密码；「包赔」合同大多违约不赔。', f: '账户自己管；任何代客操盘先查持牌资质。' },
+    { n: '杀猪盘', t: '情感 + 投资', c: '猪', d: '先建立信任（交友 / 网恋），再诱导到假投资平台充值。', s: '提现永远是「再充一笔才能出」；平台是后台可改的假盘。', f: '不向陌生人转账；投资只走本人实名受监管账户。' },
+    { n: '虚拟货币理财', t: '币圈资金盘', c: '币', d: '「币价只涨不跌」「锁仓高息」，实为资金盘。', s: '承诺固定高息的币理财 = 庞氏；提现设卡。', f: '只碰主流交易所实名账户；不碰「理财型」币项目。' },
+    { n: 'NFT / 藏品', t: '数字藏品', c: '藏', d: '「买藏品每天分红」「二级保证升值」。', s: '流动性差、估值无锚；分红来自后来者。', f: '当消费品看待，不为「升值」买入。' },
+    { n: '养老理财', t: '适老骗局', c: '老', d: '针对长辈的「高息养老产品」「以房养老代理」。', s: '利用信息差与孤独感；合同里藏坑。', f: '帮家人设「大额支出必须子女确认」机制。' },
+    { n: '校园贷', t: '学生贷', c: '贷', d: '「零门槛、秒到账」，实际年化极高 + 暴力催收。', s: '费率包装成「日息」，换算年化惊人。', f: '任何借贷先算真实年化；优先求助学校资助渠道。' },
+    { n: '刷单返利', t: '兼职骗局', c: '单', d: '「关注点赞就能返现」，先小赚后大额冻结。', s: '前几单真返，引你加大投入后卷款。', f: '凡「垫付再返利」都是刷单骗局。' },
+    { n: '假冒客服', t: '退款理赔', c: '客', d: '「您的订单 / 快递异常，点链接退款」，套验证码。', s: '陌生链接 + 要短信验证码 = 盗刷。', f: '只走官方 App；验证码绝不给他人。' },
+    { n: '虚假平台', t: '假 App', c: '台', d: '仿冒知名券商 / 基金的 App，后台可改数据。', s: '应用商店搜不到、只能扫码下载；收益曲线太完美。', f: '只从官方应用商店下载；入金前查券商牌照。' },
+    { n: '解债优化', t: '债务重组', c: '债', d: '「帮你还债、债务打折」，先收高额服务费。', s: '真债务重组走银行 / 持牌机构，不收前置费。', f: '债务问题先找债权方协商，不找「解债公司」。' }
+  ];
+  var c6 = ['#FF1493', '#FFE135', '#00BFFF', '#32CD32', '#FF6B35', '#A855F7'];
+  var grid = document.getElementById('scamGrid');
+  scams.forEach(function (sc, i) {
+    var col = c6[i % 6];
+    var el = document.createElement('article');
+    el.className = 'scam';
+    el.style.setProperty('--c-soft', col + '26');
+    el.innerHTML = '<div class="scam__top"><span class="scam__ic">' + sc.c + '</span><h3>' + sc.n + '</h3><span class="scam__tag">' + sc.t + '</span></div>' +
+      '<div class="scam__body"><dl><dt>手法</dt><dd>' + sc.d + '</dd><dt>识别信号</dt><dd>' + sc.s + '</dd><dt>正确做法</dt><dd class="fix">' + sc.f + '</dd></dl></div>';
+    grid.appendChild(el);
+  });
 })();
 </script>
 
