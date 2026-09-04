@@ -4,8 +4,8 @@
 
 一个由 ACM-ICPC / CCPC 选手自发组成的理财认知交流记录群的作品集单页。收录群内大事记、共享文件库与理财认知图谱。
 
-**仓库**：https://github.com/zhangliwanguiz/acmer-finance-log
-**在线预览**：https://zhangliwanguiz.github.io/acmer-finance-log/
+**仓库**：https://github.com/zhangliwanguiz/acmer-finance-log （源文件托管）
+**在线预览**：https://acmer-finance-log.vercel.app/ （生产部署，地址不含 GitHub 用户名）
 
 ## 技术栈
 
