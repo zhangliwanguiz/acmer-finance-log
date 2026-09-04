@@ -301,6 +301,38 @@ tbody tr:nth-child(even){background:var(--paper)}
 .totop:hover{background:var(--yellow);color:var(--ink)}
 .totop:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
 
+/* MARKET NEWS */
+.news-toolbar{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.news-status{font-family:var(--f-mono);font-size:.76rem;font-weight:700;color:#555;display:inline-flex;gap:.5rem;align-items:center}
+.news-status .dotp{width:9px;height:9px;border-radius:99px;background:var(--lime);border:2px solid var(--line);animation:blink 2s infinite}
+.news-status.is-busy .dotp{background:var(--yellow);animation:blink .6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.news-grid{display:grid;grid-template-columns:.92fr 1.45fr;gap:1.4rem;align-items:start}
+.pinzone{display:grid;gap:1rem;position:sticky;top:110px}
+.pin-title{font-family:var(--f-mono);font-size:.74rem;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--pink);border:var(--b3);box-shadow:var(--s3);padding:.45rem .8rem;display:inline-flex;align-items:center;gap:.5rem;border-radius:8px;justify-self:start}
+.pin{background:var(--white);border:var(--b3);border-left:10px solid var(--pink);border-radius:var(--r);box-shadow:var(--s5);padding:1rem 1.1rem;transition:transform .16s ease,box-shadow .16s ease}
+.pin:hover{transform:translate(-3px,-3px);box-shadow:var(--s7)}
+.pin__meta{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;font-family:var(--f-mono);font-size:.66rem;font-weight:700;color:#555;margin-bottom:.4rem}
+.pin__meta .hot{color:var(--pink);border:2px solid var(--pink);padding:.05rem .45rem;border-radius:4px}
+.pin h3{font-family:var(--f-display);font-weight:800;font-size:1.12rem;line-height:1.3;margin-bottom:.45rem}
+.pin p{font-size:.88rem;color:#333;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pin a{color:var(--blue);font-family:var(--f-mono);font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:.3rem;margin-top:.55rem;border:2px solid var(--line);padding:.25rem .6rem;border-radius:6px;background:var(--yellow-soft)}
+.pin a:hover{background:var(--yellow)}
+.news-feed{display:grid;gap:.7rem}
+.nitem{background:var(--white);border:var(--b3);border-radius:10px;box-shadow:var(--s3);padding:.8rem 1rem;display:grid;grid-template-columns:auto 1fr auto;gap:.9rem;align-items:center;transition:transform .16s ease,box-shadow .16s ease}
+.nitem:hover{transform:translate(-3px,-3px);box-shadow:var(--s5)}
+.nitem__thumb{width:74px;height:52px;object-fit:cover;border:var(--b2);border-radius:6px;background:var(--paper)}
+.nitem__body{min-width:0}
+.nitem h3{font-family:var(--f-body);font-weight:600;font-size:.95rem;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.nitem p{font-size:.8rem;color:#666;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin-top:.15rem}
+.nitem__side{text-align:right;flex:none}
+.nitem__side .t{font-family:var(--f-mono);font-size:.66rem;color:#777;display:block;white-space:nowrap}
+.nitem__side .s{font-family:var(--f-mono);font-size:.66rem;font-weight:700;color:#0090C0;display:block;margin-top:.2rem;white-space:nowrap}
+.nitem__side a{display:inline-block;margin-top:.35rem;font-family:var(--f-mono);font-size:.7rem;font-weight:700;color:var(--ink);border:2px solid var(--line);padding:.15rem .5rem;border-radius:5px;background:var(--white)}
+.nitem__side a:hover{background:var(--yellow)}
+.news-empty{border:var(--b3);border-radius:var(--r);background:var(--white);padding:2.4rem;text-align:center;font-family:var(--f-mono);font-size:.84rem;color:#666}
+@media (max-width:960px){.news-grid{grid-template-columns:1fr}.pinzone{position:static}.nitem{grid-template-columns:1fr auto}.nitem__thumb{display:none}}
+
 @media (max-width:1080px){.footer__grid{grid-template-columns:1fr 1fr}.tool__grid{grid-template-columns:1fr}}
 @media (max-width:960px){
   .hero__grid{grid-template-columns:1fr}.hero__visual{order:2}
@@ -352,6 +384,7 @@ tbody tr:nth-child(even){background:var(--paper)}
     </a>
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
     <nav class="nav__links" id="navMenu" aria-label="主导航">
+      <a class="nav__link" href="#news">市场快讯</a>
       <a class="nav__link" href="#learn">学习中心</a>
       <a class="nav__link" href="#archive">研究档案</a>
       <a class="nav__link" href="#calc">复利计算器</a>
@@ -406,6 +439,32 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
       <li class="fact fact--lime reveal"><b>3 个</b><span>交互工具</span></li>
       <li class="fact fact--orange reveal"><b>0 元</b><span>全部免费</span></li>
     </ul>
+  </div>
+</section>
+
+<!-- ============ 市场快讯 ============ -->
+<section class="section section--paper" id="news" aria-labelledby="news-title" style="padding-top:clamp(3rem,7vw,5rem)">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Live · 市场快讯</p>
+      <h2 id="news-title">投资相关<span class="mark mark--pink">热门新闻</span></h2>
+      <p>每 10 分钟自动从免费公开财经资讯接口刷新（东方财富 · 财联社 / 证券时报等权威源）。对市场影响大的新闻会<span class="mark mark--pink">重点提示</span>并固定 24 小时（同时最多 3 条）。点击「详情」查看原文链接。</p>
+    </header>
+    <div class="news-toolbar">
+      <span class="news-status" id="newsStatus"><span class="dotp"></span><span id="newsStatusTxt">正在获取最新市场快讯…</span></span>
+      <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+        <button class="btn btn--sm btn--pink" id="newsRefresh" type="button">立即刷新</button>
+        <span class="tag tag--pink" id="newsTimer">自动刷新：每 10 分钟</span>
+      </div>
+    </div>
+    <div class="news-grid" id="newsGrid">
+      <div class="pinzone" aria-label="重点提示新闻（24 小时固定）">
+        <span class="pin-title">⚑ 重点提示 · 24h 固定（最多 3 条）</span>
+        <div id="pinList" style="display:grid;gap:1rem"></div>
+      </div>
+      <div class="news-feed" id="feedList"></div>
+    </div>
+    <p class="note" style="margin-top:1rem"><b>!</b> 快讯来自公开接口、每 10 分钟自动更新（接口受限时自动拉长间隔）。内容版权归原作者，仅供学习参考，不构成投资建议；重大新闻由关键词模型自动识别，可能有误判，请以原文与官方公告为准。</p>
   </div>
 </section>
 
@@ -1580,6 +1639,162 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
       '<div class="scam__body"><dl><dt>手法</dt><dd>' + sc.d + '</dd><dt>识别信号</dt><dd>' + sc.s + '</dd><dt>正确做法</dt><dd class="fix">' + sc.f + '</dd></dl></div>';
     grid.appendChild(el);
   });
+
+  /* ============ 市场快讯：JSONP 轮询 + 重点固定 24h ============ */
+  var NEWS = {
+    storageKey: 'acmer_news_pins_v1',
+    baseMs: 10 * 60 * 1000,   // 基础刷新间隔：10 分钟
+    maxMs: 60 * 60 * 1000,
+    intervalMs: 10 * 60 * 1000,
+    fails: 0,
+    timer: null,
+    nowPins: [],
+    lastFeed: []
+  };
+  var NEWS_STRONG = ['降准', '降息', '加息', '议息', '美联储', '央行', '国务院', '国常会', '证监会', '暂停交易', '熔断', '停牌', 'IPO', '新规', '管理办法', '实施细则', '关税', '制裁', '战争', '汇率', '万亿', '重大资产重组', '破净'];
+  var NEWS_MED = ['政策', '回购', '增持', '减持', '业绩预告', '财报', '分红', '涨停', '跌停', '破发', '逆回购', 'LPR', 'MLF', '准备', '黄金', '原油', 'OPEC', '国债', '北向资金', '外资'];
+
+  function newsScore(t, s) {
+    var text = (t + ' ' + (s || '')).toLowerCase();
+    var sc = 0;
+    NEWS_STRONG.forEach(function (k) { if (text.indexOf(k.toLowerCase()) >= 0) sc += 8; });
+    NEWS_MED.forEach(function (k) { if (text.indexOf(k.toLowerCase()) >= 0) sc += 3; });
+    if (/【/.test(t) && sc > 0) sc += 1;
+    return sc;
+  }
+  function escTxt(str) { return String(str == null ? '' : str).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function ago(t) {
+    var d = (Date.now() - t) / 1000;
+    if (d < 60) return '刚刚';
+    if (d < 3600) return Math.floor(d / 60) + ' 分钟前';
+    if (d < 86400) return Math.floor(d / 3600) + ' 小时前';
+    return Math.floor(d / 86400) + ' 天前';
+  }
+  function readPins() { try { var d = JSON.parse(localStorage.getItem(NEWS.storageKey) || '{"pins":[]}'); return Array.isArray(d.pins) ? d.pins : []; } catch (e) { return []; } }
+  function writePins(pins) { try { localStorage.setItem(NEWS.storageKey, JSON.stringify({ pins: pins, savedAt: Date.now() })); } catch (e) {} }
+  function jsonp(url, timeout) {
+    return new Promise(function (resolve, reject) {
+      var fn = '__ncb' + Date.now() + Math.floor(Math.random() * 1e5);
+      var sc = document.createElement('script');
+      var to = setTimeout(function () { cleanup(); reject(new Error('timeout')); }, timeout || 15000);
+      function cleanup() { clearTimeout(to); delete window[fn]; if (sc.parentNode) sc.parentNode.removeChild(sc); }
+      window[fn] = function (data) { clearTimeout(to); cleanup(); resolve(data); };
+      sc.onerror = function () { clearTimeout(to); cleanup(); reject(new Error('net')); };
+      sc.src = url.replace('%CB%', encodeURIComponent(fn));
+      document.head.appendChild(sc);
+    });
+  }
+  function fmtNewsUrl() {
+    var trace = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    return 'https://np-listapi.eastmoney.com/comm/web/getNewsByColumns?client=web&biz=web_news_col&column=345&order=1&needInteractData=0&page_index=1&page_size=60&req_trace=' + trace + '&fields=code,showTime,title,mediaName,summary,url,image&callback=%CB%';
+  }
+
+  function renderNews(pins, feed) {
+    var pinEl = document.getElementById('pinList');
+    var feedEl = document.getElementById('feedList');
+    if (!pinEl || !feedEl) return;
+    NEWS.nowPins = pins;
+    NEWS.lastFeed = feed;
+    if (pinEl) {
+      if (!pins.length) { pinEl.innerHTML = '<div class="news-empty" style="padding:1.4rem">暂无重点提示。<br>出现影响市场较大的新闻会自动固定到此处，最多 3 条、保留 24 小时。</div>'; }
+      else {
+        pinEl.innerHTML = pins.map(function (p) {
+          return '<article class="pin" data-exp="' + p.exp + '">' +
+            '<div class="pin__meta"><span class="hot">★ 重点</span><span>' + escTxt(p.src || '财经资讯') + '</span><span>固定至 ' + ago(p.exp) + '</span></div>' +
+            '<h3>' + escTxt(p.t) + '</h3>' +
+            '<p>' + escTxt(p.s || '') + '</p>' +
+            '<a href="' + escTxt(p.u) + '" target="_blank" rel="noopener">查看原文细节 ↗</a></article>';
+        }).join('');
+      }
+    }
+    if (feedEl) {
+      if (!feed.length) { feedEl.innerHTML = '<div class="news-empty">正在获取最新资讯…<br>若持续空白，可能是网络无法访问公开接口，请点击「立即刷新」重试。</div>'; }
+      else {
+        feedEl.innerHTML = feed.slice(0, 36).map(function (n) {
+          var thumb = n.i ? '<img class="nitem__thumb" loading="lazy" src="' + escTxt(n.i) + '" alt="" onerror="this.style.display=\'none\'">' : '';
+          return '<article class="nitem">' + thumb +
+            '<div class="nitem__body"><h3>' + escTxt(n.t) + '</h3>' + (n.s ? '<p>' + escTxt(n.s).slice(0, 90) + (n.s.length > 90 ? '…' : '') + '</p>' : '') + '</div>' +
+            '<div class="nitem__side"><span class="t">' + ago(n.ts) + '</span><span class="s">' + escTxt(n.src || '') + '</span>' +
+            '<a href="' + escTxt(n.u) + '" target="_blank" rel="noopener">详情 ↗</a></div></article>';
+        }).join('');
+      }
+    }
+  }
+
+  function tickTimes() {
+    var pins = NEWS.nowPins;
+    var pinEl = document.getElementById('pinList');
+    if (pins.length && pinEl) {
+      var cards = pinEl.querySelectorAll('.pin');
+      cards.forEach(function (c) { var m = c.querySelector('.pin__meta span:last-child'); var ex = +c.getAttribute('data-exp'); if (m) m.textContent = '保留约 ' + Math.max(1, Math.ceil((ex - Date.now()) / 3600000)) + ' 小时'; });
+    }
+    var feed = NEWS.lastFeed;
+    var feedEl = document.getElementById('feedList');
+    if (feed.length && feedEl) {
+      var items = feedEl.querySelectorAll('.nitem__side .t');
+      items.forEach(function (el, i) { if (feed[i]) el.textContent = ago(feed[i].ts); });
+    }
+  }
+  setInterval(tickTimes, 60000);
+
+  function mergePins(rawItems) {
+    var now = Date.now();
+    var old = readPins().filter(function (p) { return p.exp > now; });
+    var byUrl = {};
+    old.forEach(function (p) { byUrl[p.u] = p; });
+    rawItems.forEach(function (n) {
+      if (n.sc < 8) return;
+      if (byUrl[n.u]) { if (n.sc > byUrl[n.u].sc) byUrl[n.u].sc = n.sc; return; }
+      byUrl[n.u] = { u: n.u, t: n.t, s: n.s, src: n.src, ts: n.ts, sc: n.sc, exp: now + 24 * 3600 * 1000 };
+    });
+    var merged = Object.keys(byUrl).map(function (k) { return byUrl[k]; });
+    merged.sort(function (a, b) { return (b.sc - a.sc) || (b.ts - a.ts); });
+    merged = merged.slice(0, 3);
+    writePins(merged);
+    return merged;
+  }
+
+  function loadNews() {
+    var st = document.getElementById('newsStatus'); var txt = document.getElementById('newsStatusTxt');
+    if (st) st.classList.add('is-busy'); if (txt) txt.textContent = '正在获取最新市场快讯…';
+    jsonp(fmtNewsUrl()).then(function (res) {
+      var list = (res && res.data && res.data.list) || [];
+      var items = list.map(function (it) {
+        var ts = Date.now();
+        if (it.showTime) { var dm = /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/.exec(it.showTime); if (dm) { var d = new Date(+dm[1], +dm[2] - 1, +dm[3], +dm[4], +dm[5], +dm[6]); if (!isNaN(d.getTime())) ts = d.getTime(); } }
+        return { t: it.title || '', s: it.summary || '', u: it.url || '#', i: it.image || '', src: it.mediaName || '财经资讯', ts: ts, sc: newsScore(it.title || '', it.summary || '') };
+      }).filter(function (n) { return n.t && n.u !== '#'; });
+      items.sort(function (a, b) { return b.ts - a.ts; });
+      NEWS.fails = 0;
+      NEWS.intervalMs = NEWS.baseMs;
+      var pins = mergePins(items);
+      var feed = items.filter(function (n) { return !pins.some(function (p) { return p.u === n.u; }); });
+      renderNews(pins, feed);
+      var d = new Date();
+      if (txt) txt.textContent = '更新于 ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds()) + ' · ' + feed.length + ' 条快讯 · ' + pins.length + ' 条重点';
+      if (st) st.classList.remove('is-busy');
+      scheduleNews();
+    }).catch(function () {
+      NEWS.fails++;
+      NEWS.intervalMs = Math.min(NEWS.maxMs, NEWS.baseMs * NEWS.fails);
+      if (st) st.classList.remove('is-busy');
+      if (txt) txt.textContent = '接口暂时不可达（第 ' + NEWS.fails + ' 次失败），将于约 ' + Math.round(NEWS.intervalMs / 60000) + ' 分钟后自动重试';
+      scheduleNews();
+    });
+  }
+  function scheduleNews() {
+    clearTimeout(NEWS.timer);
+    NEWS.timer = setTimeout(loadNews, NEWS.intervalMs);
+    var tm = document.getElementById('newsTimer');
+    if (tm) tm.textContent = '自动刷新：每 ' + Math.round(NEWS.intervalMs / 60000) + ' 分钟';
+  }
+  var rb = document.getElementById('newsRefresh');
+  if (rb) rb.addEventListener('click', function () { NEWS.fails = 0; loadNews(); });
+  // 首屏：先渲染本地 24h 重点缓存，再异步拉取
+  var cachedPins = readPins().filter(function (p) { return p.exp > Date.now(); });
+  if (cachedPins.length) { writePins(cachedPins); renderNews(cachedPins, []); }
+  setTimeout(loadNews, 600);
 })();
 </script>
 
