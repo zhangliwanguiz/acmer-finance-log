@@ -118,7 +118,7 @@ ul,ol{list-style:none}
 .section--alt{background:var(--white);border-top:var(--b3);border-bottom:var(--b3)}
 .section--paper{background:var(--paper)}
 .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.skill{background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.4rem;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
+.skill{cursor:pointer;background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);padding:1.4rem;position:relative;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease}
 .skill:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
 .skill__top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.9rem}
 .skill__icon{width:46px;height:46px;flex:none;display:grid;place-items:center;border:var(--b3);border-radius:10px;box-shadow:var(--s3);background:var(--c-soft)}
@@ -132,6 +132,11 @@ ul,ol{list-style:none}
 .bar{height:24px;background:var(--white);border:var(--b3);border-radius:8px;overflow:hidden;position:relative}
 .bar__fill{position:relative;height:100%;width:0;background:var(--c);border-right:3px solid var(--line);transition:width 1.15s cubic-bezier(.22,.85,.25,1)}
 .bar__fill::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0,8 L8,0' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E");opacity:.22}
+
+.skill__hint{font-family:var(--f-mono);font-size:.72rem;font-weight:700;color:#444;margin-top:1rem;padding-top:.6rem;border-top:2px dashed #888;display:flex;justify-content:space-between;align-items:center}
+.skill__hint b{color:var(--c);font-family:var(--f-display);font-weight:800}
+.skill__hint span{font-size:1rem;transition:transform .2s}
+.skill:hover .skill__hint span{transform:translateX(4px)}
 
 /* LEARNING CENTER */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1.4rem}
@@ -410,12 +415,12 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
       <p>每项都是可量化、可练习、可复盘的——像刷题一样，先看清题型，再上强度。</p>
     </header>
     <ul class="skillgrid">
-      <li class="skill reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><div><h3>资产配置与再平衡</h3><p class="skill__mono">SPLIT / CONQUER</p></div></div><p>用「分治」拆账户：进攻、防守、现金流各司其职，偏离阈值 5% 触发再平衡。</p><div class="skill__meta"><span>熟练度</span><b>88%</b></div><div class="bar"><div class="bar__fill" data-w="88"></div></div></li>
-      <li class="skill reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2"/></svg></span><div><h3>指数基金定投</h3><p class="skill__mono">FOR-LOOP INVESTING</p></div></div><p>把定投写成一个 <code>for</code> 循环：固定时间、固定金额、不看盘。靠纪律跑赢情绪。</p><div class="skill__meta"><span>熟练度</span><b>92%</b></div><div class="bar"><div class="bar__fill" data-w="92"></div></div></li>
-      <li class="skill reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M12 3l9 16H3l9-16z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg></span><div><h3>风险识别与仓位</h3><p class="skill__mono">DRAWDOWN LIMIT</p></div></div><p>单笔最大回撤上限 = 那个你还能睡着的数。先定义可承受损失，再决定下注规模。</p><div class="skill__meta"><span>熟练度</span><b>80%</b></div><div class="bar"><div class="bar__fill" data-w="80"></div></div></li>
-      <li class="skill reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></span><div><h3>复利与时间成本</h3><p class="skill__mono">O(log n) PATIENCE</p></div></div><p>复利的本质不是暴富公式，而是「不中断」。理解它，就理解了为什么早开始比多投入重要。</p><div class="skill__meta"><span>熟练度</span><b>95%</b></div><div class="bar"><div class="bar__fill" data-w="95"></div></div></li>
-      <li class="skill reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M9 3h6v5l5 13H4L9 8V3z"/></svg></span><div><h3>行为金融学防坑</h3><p class="skill__mono">DEBUG YOUR BRAIN</p></div></div><p>识别三个经典 bug：FOMO 追高、损失厌恶扛单、锚定效应。看见它们，就修好一半。</p><div class="skill__meta"><span>熟练度</span><b>76%</b></div><div class="bar"><div class="bar__fill" data-w="76"></div></div></li>
-      <li class="skill reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h18v12H3z"/><path d="M3 11h18"/><path d="M7 15h4"/></svg></span><div><h3>费率税务与摩擦</h3><p class="skill__mono">HIDDEN CONSTANT</p></div></div><p>申赎费、管理费、汇兑损耗、滑点——这些隐藏常数，长期看是收益主要杀手。</p><div class="skill__meta"><span>熟练度</span><b>68%</b></div><div class="bar"><div class="bar__fill" data-w="68"></div></div></li>
+      <li class="skill reveal" data-lesson="skill-asset" style="--c:var(--pink);--c-soft:var(--pink-soft)" aria-label="打开资产配置与再平衡课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><div><h3>资产配置与再平衡</h3><p class="skill__mono">SPLIT / CONQUER</p></div></div><p>攻/守/现/险四宫格 + 5% 阈值再平衡。点开看 A 股 510300、美股 VOO/VTI、综合债 BND 的实操组合与回测。</p><div class="skill__meta"><span>熟练度</span><b>88%</b></div><div class="bar"><div class="bar__fill" data-w="88"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
+      <li class="skill reveal" data-lesson="skill-dca" style="--c:var(--lime);--c-soft:var(--lime-soft)" aria-label="打开指数基金定投课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2"/></svg></span><div><h3>指数基金定投</h3><p class="skill__mono">FOR-LOOP INVESTING</p></div></div><p>A 股 510300/510500 + 美股 VOO/VTI。点开看具体 ETF、2014-2024 回测 CAGR 与止盈规则。</p><div class="skill__meta"><span>熟练度</span><b>92%</b></div><div class="bar"><div class="bar__fill" data-w="92"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
+      <li class="skill reveal" data-lesson="skill-risk" style="--c:var(--orange);--c-soft:var(--orange-soft)" aria-label="打开风险识别与仓位课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M12 3l9 16H3l9-16z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg></span><div><h3>风险识别与仓位</h3><p class="skill__mono">DRAWDOWN LIMIT</p></div></div><p>S&amp;P 2008 -56.8%、2020 -33.7%；沪深 300 2008 -65%。点开看仓位控制三规则与加仓方法对比。</p><div class="skill__meta"><span>熟练度</span><b>80%</b></div><div class="bar"><div class="bar__fill" data-w="80"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
+      <li class="skill reveal" data-lesson="skill-compound" style="--c:var(--purple);--c-soft:var(--purple-soft)" aria-label="打开复利与时间成本课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></span><div><h3>复利与时间成本</h3><p class="skill__mono">O(log n) PATIENCE</p></div></div><p>72 法则 + 月投 ¥3,000 跑 15/25/35 年。点开看真实数字差距 + 早开始 vs 晚开始相差 60% 的计算。</p><div class="skill__meta"><span>熟练度</span><b>95%</b></div><div class="bar"><div class="bar__fill" data-w="95"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
+      <li class="skill reveal" data-lesson="skill-behavior" style="--c:var(--blue);--c-soft:var(--blue-soft)" aria-label="打开行为金融学防坑课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M9 3h6v5l5 13H4L9 8V3z"/></svg></span><div><h3>行为金融学防坑</h3><p class="skill__mono">DEBUG YOUR BRAIN</p></div></div><p>GameStop 4→483→40、A 股白酒 2021 -45%、群友亲历案例。点开看反向情绪指标 + 买入前强制清单。</p><div class="skill__meta"><span>熟练度</span><b>76%</b></div><div class="bar"><div class="bar__fill" data-w="76"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
+      <li class="skill reveal" data-lesson="skill-fee" style="--c:var(--yellow);--c-soft:var(--yellow-soft)" aria-label="打开费率税务与摩擦课程"><div class="skill__top"><span class="skill__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square"><path d="M3 7h18v12H3z"/><path d="M3 11h18"/><path d="M7 15h4"/></svg></span><div><h3>费率税务与摩擦</h3><p class="skill__mono">HIDDEN CONSTANT</p></div></div><p>VOO 0.03% vs SPY 0.0945%、A 股红利税 5-20% 分档、汇兑损耗。点开看完整费率摩擦表与操作原则。</p><div class="skill__meta"><span>熟练度</span><b>68%</b></div><div class="bar"><div class="bar__fill" data-w="68"></div></div><div class="skill__hint"><b>点击学习具体方案</b><span>→</span></div></li>
     </ul>
   </div>
 </section>
@@ -797,6 +802,242 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
 <template id="tpl-tl6"><h2>2025.03 · 两周年面基</h2><p>杭州线下，到场 68 人，从下午两点聊到晚上十点。最大的共识是：理财的难点从来不在知识，而在<strong>执行</strong>——知道该怎么做，和真的做到，中间差着一整个行为金融学。</p></template>
 <template id="tpl-tl7"><h2>2025.11 · 12 条纪律</h2><p>年度复盘把三年里反复出现的错误归并为 12 条可执行纪律，第 1 条是「先写下你的卖出理由」。写下来，才谈得上复盘；能复盘，才算真的学会。</p></template>
 <template id="tpl-tl8"><h2>2026.06 · 手册 v3.0</h2><p>新增跨境资产、费率对照与税务章节；同步开放 1,200+ 份脱敏持仓快照供回测教学。并把全部内容搬上本网站——不用加群，点开就学。</p></template>
+
+<template id="tpl-skill-asset">
+  <h2>资产配置与再平衡</h2>
+  <p class="drawer__toc"><span class="chip">四宫格框架</span><span class="chip">A 股 / 美股 / 债</span><span class="chip">阈值再平衡</span><span class="chip">实操示例</span></p>
+  <div class="callout">核心思想：用「分治」把账户拆成几块各司其职，再让规则代替情绪去决定何时调仓。<b>配置本身比择时更影响长期收益</b>（Brinson 归因结论：资产配置解释了约 90% 的组合收益波动）。</div>
+  <h3>四宫格框架</h3>
+  <ul>
+    <li><b>进攻端 60%</b>：权益类宽基——A 股沪深 300、美股 S&amp;P 500 / Total Market，长期承担波动换增长。</li>
+    <li><b>防守端 30%</b>：债券 + 货基——美股 BND、A 股国债 ETF，平滑回撤、提供再平衡弹药。</li>
+    <li><b>现金流端 10%</b>：货基 / 短债——随时可取，1–2 年内要用的钱不进权益。</li>
+    <li><b>保险</b>：重疾 + 意外，小额保费转移极端事件。</li>
+  </ul>
+  <p>以上比例是「年轻 / 可承受波动」的示例，不构成建议。年龄越大，权益端占比应越低。常见经验法则：权益占比 ≈ 100 − 年龄（参考，非教条）。</p>
+  <h3>实际工具（数据参考 2024-12-31）</h3>
+  <table><thead><tr><th>类型</th><th>产品</th><th>说明</th></tr></thead><tbody>
+    <tr><td>A 股宽基</td><td>510300 沪深 300 / 510500 中证 500 / 515080 中证红利</td><td>场内 ETF，实时报价</td></tr>
+    <tr><td>A 股红利低波</td><td>100032 红利低波 100 / 515080 中证红利</td><td>风格: 高股息 + 低波动</td></tr>
+    <tr><td>美股宽基</td><td>VOO / VTI / IVV（S&amp;P 500 / Total Market）</td><td>费率均 0.03%</td></tr>
+    <tr><td>美股国际</td><td>VEA（已开发 ex-US）/ VWO（新兴市场）</td><td>全球分散</td></tr>
+    <tr><td>美股债</td><td>BND（综合债）/ GOVT（国债）</td><td>防守端核心</td></tr>
+  </tbody></table>
+  <h3>再平衡机制</h3>
+  <ul>
+    <li><b>阈值法</b>：偏离目标比例 5% 触发（如 60/30/10 漂移到 65/25/10）。</li>
+    <li><b>时间法</b>：每年 / 半年检查一次。</li>
+    <li><b>实操推荐</b>：阈值 + 时间两者结合最常见。</li>
+  </ul>
+  <div class="code2">function rebalance(target_alloc):
+  current = measure_each_buckets()
+  for asset in target_alloc:
+      drift = abs(current[asset] - target_alloc[asset])
+      if drift &gt; 0.05:
+          sell_overweight(target_alloc[asset])
+          buy_underweight(target_alloc[asset])
+  # 不预测，只按公式</div>
+  <h3>为什么再平衡有效</h3>
+  <p>经典 60/30/10 配置 2010–2024 区间混合年化约 7.5–8.5%（沪深 300 + SPY + 综合债加权估算），同期最大回撤约 -28%。同期纯 S&amp;P 500 年化约 12.5%，最大回撤 -55%（含 2008）。配置牺牲约 30% 收益，换来约 50% 跌幅的下降。<b>这就是「风险调整后」复利的价值。</b></p>
+  <p class="callout">数据参考日期：2024-12-31。历史来源：Wind / S&amp;P Global / 中证指数。历史业绩不代表未来收益，仅作参考。</p>
+</template>
+
+<template id="tpl-skill-dca">
+  <h2>指数基金定投</h2>
+  <p class="drawer__toc"><span class="chip">A 股宽基</span><span class="chip">美股宽基</span><span class="chip">回测数据</span><span class="chip">止盈规则</span></p>
+  <h3>A 股宽基（场内 ETF，实时报价）</h3>
+  <table><thead><tr><th>代码</th><th>名称</th><th>跟踪指数</th><th>管理+托管</th></tr></thead><tbody>
+    <tr><td>510300</td><td>华泰柏瑞 沪深300</td><td>沪深300</td><td>0.60%</td></tr>
+    <tr><td>510310</td><td>易方达 沪深300</td><td>沪深300</td><td>0.60%</td></tr>
+    <tr><td>510500</td><td>南方 中证500</td><td>中证500</td><td>0.60%</td></tr>
+    <tr><td>510510</td><td>广发 中证500</td><td>中证500</td><td>0.60%</td></tr>
+    <tr><td>512100</td><td>南方 中证1000</td><td>中证1000</td><td>0.60%</td></tr>
+    <tr><td>515080</td><td>易方达 中证红利</td><td>中证红利</td><td>0.20%</td></tr>
+    <tr><td>510880</td><td>华泰柏瑞 上证红利</td><td>上证红利</td><td>0.60%</td></tr>
+  </tbody></table>
+  <h3>美股宽基（通过 IBKR / 富途 / 长桥 / 复星等美股券商买入）</h3>
+  <table><thead><tr><th>Ticker</th><th>名称</th><th>费率</th><th>备注</th></tr></thead><tbody>
+    <tr><td>VOO</td><td>Vanguard S&amp;P 500</td><td>0.03%</td><td>核心首选</td></tr>
+    <tr><td>VTI</td><td>Vanguard Total Stock Market</td><td>0.03%</td><td>含中小盘</td></tr>
+    <tr><td>IVV</td><td>iShares Core S&amp;P 500</td><td>0.03%</td><td>替代 VOO</td></tr>
+    <tr><td>SPY</td><td>State Street S&amp;P 500</td><td>0.0945%</td><td>老牌流动性</td></tr>
+    <tr><td>QQQ</td><td>Invesco Nasdaq-100</td><td>0.20%</td><td>科技集中, 不作核心</td></tr>
+    <tr><td>VEA</td><td>FTSE Developed ex-US</td><td>0.05%</td><td>国际分散</td></tr>
+    <tr><td>VWO</td><td>FTSE Emerging Markets</td><td>0.08%</td><td>新兴市场</td></tr>
+  </tbody></table>
+  <h3>回测数据（参考日期 2024-12-31）</h3>
+  <ul>
+    <li><b>S&amp;P 500 2014–2024 年化</b>：约 +12.5%（名义，含分红）。来源 S&amp;P Global。</li>
+    <li><b>沪深 300 2014–2024 年化</b>：约 +5%–7%（含分红）。来源 Wind / 中证指数。</li>
+    <li><b>10 年美债 (IEF) 2014–2024 年化</b>：约 +1.5%–2%。</li>
+    <li><b>月投 vs 周投 vs 日投</b>：学术结论差异 &lt; 0.1%，扣款日随便选，<b>纪律比频率重要</b>。</li>
+    <li><b>100 年实证</b>（A 股成立不足 30 年）：美股权益长期年化约 7% 实际（扣通胀），A 股波动更大但累计跑赢现金和短债。</li>
+  </ul>
+  <p class="callout">10 年数据是单段样本，包含 2018 中美摩擦、2020 疫情、2022 加息等事件。短期数据不等于长期收益预期。</p>
+  <h3>止盈规则（可选但推荐）</h3>
+  <ul>
+    <li><b>阈值法</b>：组合当年涨幅 &gt; 30% 时减仓 30% 锁利。</li>
+    <li><b>PE 分位法</b>：沪深 300 PE 中位数 12 倍附近，破 13 倍开始减仓。</li>
+    <li><b>再平衡驱动</b>：任何单标的偏离目标 5% 即调仓。</li>
+  </ul>
+  <p>不预测市场，只按规则。规则定了就别改。</p>
+</template>
+
+<template id="tpl-skill-risk">
+  <h2>风险识别与仓位</h2>
+  <p class="drawer__toc"><span class="chip">历史回撤</span><span class="chip">仓位控制三规则</span><span class="chip">加仓方法对比</span><span class="chip">实操示例</span></p>
+  <h3>主要指数历史最大回撤（参考 2024-12-31）</h3>
+  <table><thead><tr><th>指数</th><th>最大回撤</th><th>时段</th><th>事件</th></tr></thead><tbody>
+    <tr><td>S&amp;P 500</td><td>-56.8%</td><td>2007-10 → 2009-03</td><td>次贷危机</td></tr>
+    <tr><td>S&amp;P 500</td><td>-33.7%</td><td>2020-02 → 2020-03</td><td>新冠</td></tr>
+    <tr><td>S&amp;P 500</td><td>-25.4%</td><td>2022</td><td>加息周期</td></tr>
+    <tr><td>沪深 300</td><td>-65% 左右</td><td>2008</td><td>次贷危机</td></tr>
+    <tr><td>沪深 300</td><td>-43% 左右</td><td>2015</td><td>股灾 + 熔断</td></tr>
+    <tr><td>沪深 300</td><td>-31%</td><td>2018</td><td>贸易摩擦</td></tr>
+    <tr><td>中概互联 ETF</td><td>-70% 以上</td><td>2021-02 → 2022-10</td><td>反垄断 + 中概退市担忧</td></tr>
+    <tr><td>创业板指</td><td>-69%</td><td>2015-06 → 2018-10</td><td>估值消化</td></tr>
+  </tbody></table>
+  <p class="callout">这些是<b>已发生</b>的回撤。下一个 30%-50% 回撤会来的，问题是「你准备好了吗」。风险预算在买入前定，不在暴跌后定。</p>
+  <h3>仓位控制三规则</h3>
+  <ul>
+    <li><b>单笔最大回撤 ≤ 总组合 5%</b>：单标的最大跌幅不能把账户伤筋动骨。</li>
+    <li><b>总组合目标回撤 ≤ 心理承受上限</b>：通常 15–30%。超了就降仓位。</li>
+    <li><b>永不满仓</b>：留 10% 现金做再平衡弹药，避免被动卖出。</li>
+  </ul>
+  <h3>加仓方法对比</h3>
+  <ul>
+    <li><b>漏斗加仓</b>：跌 10% 加 20% 仓位。优点：保留现金等跌更狠再上。缺点：常加在「半山腰」。</li>
+    <li><b>均笔定投</b>：按月固定金额加，跌不加。<b>最适合绝大多数人</b>。</li>
+    <li><b>倒金字塔</b>：越涨越加，越跌越卖。<b>最危险</b>——绝大多数散户亏钱就是这种方式（「摊低成本」是伪概念）。</li>
+  </ul>
+  <h3>实操示例（总资金 100 万，目标 80% 权益 + 20% 债）</h3>
+  <ul>
+    <li>第一笔：满仓 80 万（按 6 个月逐步建仓：每月 13.3 万）。单笔最大回撤 -25% 时心理承受 = 总组合 -20%，可控。</li>
+    <li>保留 20 万现金 = 20% 弹药。</li>
+    <li>权益内部 60% A 股宽基 + 40% 美股宽基（按个人偏好），用阈值法再平衡。</li>
+    <li>补仓规则：组合跌 15% 加仓 10%（从现金弹药），跌 25% 再加 10%，最多用完弹药。绝不满仓。</li>
+  </ul>
+</template>
+
+<template id="tpl-skill-compound">
+  <h2>复利与时间成本</h2>
+  <p class="drawer__toc"><span class="chip">72 法则</span><span class="chip">15/25/35 年对比</span><span class="chip">延迟代价</span><span class="chip">四个开关</span></p>
+  <h3>72 法则</h3>
+  <p>「资产翻倍需要的年数 ≈ 72 / 年化收益率 %」。</p>
+  <ul>
+    <li>年化 8% → <b>9 年</b>翻倍</li>
+    <li>年化 6% → <b>12 年</b>翻倍</li>
+    <li>年化 4% → <b>18 年</b>翻倍</li>
+  </ul>
+  <p>收益 2% 的差（6% vs 8%），短期看不出来，30 年后差距是 <b>1.5 倍</b>（6.0 倍 vs 4.0 倍）。这就是为什么费率、回撤、行为偏差每一个百分点都重要。</p>
+  <h3>同一笔钱，不同时间长度（计算器实算）</h3>
+  <table><thead><tr><th>年限</th><th>期末资产</th><th>累计投入</th><th>「来自时间」的金额</th></tr></thead><tbody>
+    <tr><td>15 年</td><td>¥88.5 万</td><td>¥54 万</td><td>¥34.5 万</td></tr>
+    <tr><td>25 年</td><td>¥181 万</td><td>¥90 万</td><td>¥91 万</td></tr>
+    <tr><td>35 年</td><td>¥384 万</td><td>¥126 万</td><td>¥258 万</td></tr>
+  </tbody></table>
+  <p>默认月投 ¥3,000、年化 8%（计算器内置值）。注意 35 年时「来自时间」的金额占总资产的 67%——也就是说 <b>只有 33% 是你自己投的</b>。</p>
+  <h3>延迟的代价（早开始 vs 晚开始）</h3>
+  <p>两个人同样月投 ¥5,000 到 60 岁退休：</p>
+  <ul>
+    <li>A 25 岁开始，投 35 年 → 累计 ¥210 万，期末资产 ≈ ¥1,250 万（按 8% 名义）</li>
+    <li>B 35 岁开始，投 25 年 → 累计 ¥150 万，期末资产 ≈ ¥600 万</li>
+  </ul>
+  <p>A 仅多投 60 万，最终多出约 ¥650 万。差距<strong>不是</strong>收益率，而是「翻倍次数」。<b>这 10 年延迟是免费钱的损失。</b></p>
+  <h3>最大化复利的四个开关</h3>
+  <ul>
+    <li><b>早开始</b>：最重要，比收益率更影响终值。</li>
+    <li><b>不中断</b>：现金应急金防线保证熊市不用卖出。</li>
+    <li><b>低费率</b>：1% 费率在 30 年里吃掉 25% 收益。</li>
+    <li><b>不预测</b>：减少交易摩擦，不抄底不逃顶。</li>
+  </ul>
+</template>
+
+<template id="tpl-skill-behavior">
+  <h2>行为金融学防坑</h2>
+  <p class="drawer__toc"><span class="chip">三个最贵 bug</span><span class="chip">反向情绪指标</span><span class="chip">买入前清单</span><span class="chip">群友案例</span></p>
+  <h3>三个最贵的行为 bug</h3>
+  <ul>
+    <li><b>FOMO 追高</b>：怕错过 → 顶部入场。GameStop 2021（USD 4 → 483 → 40，三个月），Bitcoin 2021（64k → 17k，一年），A 股白酒基金 2021（招商中证白酒 LOF 161725 从高点 -45% 至今）。</li>
+    <li><b>损失厌恶扛单</b>：亏 10% 的痛苦 &gt; 赚 10% 的快乐。2008 抄底，扛到 2013 才解套——浪费 5 年机会成本。</li>
+    <li><b>锚定买入价</b>：死等回本。Tesla 2022 跌 65%，很多人等回本 → 错过 2023 反弹 100%+。</li>
+  </ul>
+  <h3>两个反向情绪指标（学术观察，非预测工具）</h3>
+  <ul>
+    <li><b>CNBC All-America Economic Survey 反面情绪指数</b> vs <b>SPX 1 年后回报</b>：显著负相关——情绪越乐观，1 年后回报越低（多年学术结论）。</li>
+    <li><b>A 股新开户数同比</b> vs <b>沪深 300 1 年后回报</b>：散户涌入常对应顶部附近（2007、2015、2021 都符合）。</li>
+  </ul>
+  <p class="callout">这是「反向信号」不是「择时指标」。情绪极端时不一定是立刻反转，但概率上有利。配合再平衡规则用。</p>
+  <h3>买入前强制流程</h3>
+  <ul>
+    <li>写下<b>卖出理由</b>（不是「涨多了卖」，而是具体的：PE 多少、相对仓位超多少、时间到了多少）。</li>
+    <li>写下<b>最大回撤承受度</b>（能让你睡着的数，超了就减仓到能睡着）。</li>
+    <li>写下<b>加仓规则</b>（跌 20% 加多少，还是跌 30% 才加）。</li>
+    <li><b>不写不买入</b>：写不下来的买入冲动，多半是错的。</li>
+  </ul>
+  <h3>群友真实踩坑案例（脱敏）</h3>
+  <ul>
+    <li>群友 C：2021-09 抄底白酒主题基金（161725），仓位 30%，至今 -45%。卖出理由：从未写过。</li>
+    <li>群友 D：2022-04 抄底中概互联 ETF（513050），至今 -70%。加仓了 3 次，越抄越低。</li>
+    <li>群友 E：2023 看到 AI 主题追高买入，4 个月后回吐全部涨幅并亏损。</li>
+    <li>共同点：买入前从未写下卖出理由，亏损时用「会回来的」自我安慰。</li>
+  </ul>
+  <p>行为偏差比市场偏差更贵。<b>改的不是市场，是自己。</b></p>
+</template>
+
+<template id="tpl-skill-fee">
+  <h2>费率、税务与摩擦</h2>
+  <p class="drawer__toc"><span class="chip">A 股费率表</span><span class="chip">美股费率表</span><span class="chip">场内 vs 场外</span><span class="chip">隐藏摩擦</span><span class="chip">红利税</span></p>
+  <h3>A 股场内 ETF 费率（参考 2024-12-31 招募说明书）</h3>
+  <table><thead><tr><th>代码</th><th>名称</th><th>管理+托管</th><th>一买一卖成本</th></tr></thead><tbody>
+    <tr><td>510300</td><td>华泰柏瑞 沪深300</td><td>0.60%</td><td>约 0.13%（卖方含 0.1% 印花）</td></tr>
+    <tr><td>510310</td><td>易方达 沪深300</td><td>0.60%</td><td>约 0.13%</td></tr>
+    <tr><td>510500</td><td>南方 中证500</td><td>0.60%</td><td>约 0.13%</td></tr>
+    <tr><td>512100</td><td>南方 中证1000</td><td>0.60%</td><td>约 0.13%</td></tr>
+    <tr><td>515080</td><td>易方达 中证红利</td><td>0.20%</td><td>约 0.13%</td></tr>
+    <tr><td>511010</td><td>国泰 上证5年国债</td><td>0.40%</td><td>约 0.13%</td></tr>
+    <tr><td>510880</td><td>华泰柏瑞 上证红利</td><td>0.60%</td><td>约 0.13%</td></tr>
+  </tbody></table>
+  <h3>A 股场内 vs 场外</h3>
+  <ul>
+    <li><b>场内 ETF</b>：实时报价、费率低、印花税仅卖出 0.1%。需要手动操作。</li>
+    <li><b>场外联接</b>：T+1 申赎、可设自动定投、费率通常 0.6–1.2%（含销售服务费）。适合自动化。</li>
+    <li><b>建议</b>：能坚持手动就用场内（同标的低费率），想省事用场外。成本差距约 0.5%/年，长期影响约 10% 总收益。</li>
+  </ul>
+  <h3>美股 ETF 费率</h3>
+  <table><thead><tr><th>Ticker</th><th>名称</th><th>费率</th><th>备注</th></tr></thead><tbody>
+    <tr><td>VOO / VTI / IVV</td><td>S&amp;P 500 / Total Market</td><td>0.03%</td><td>核心最低费</td></tr>
+    <tr><td>VEA / VWO</td><td>国际 / 新兴</td><td>0.05–0.08%</td><td>全球分散</td></tr>
+    <tr><td>SPY</td><td>S&amp;P 500（老牌）</td><td>0.0945%</td><td>流动性最佳</td></tr>
+    <tr><td>QQQ</td><td>Nasdaq-100</td><td>0.20%</td><td>科技集中</td></tr>
+    <tr><td>BND</td><td>Total Bond Market</td><td>0.035%</td><td>防守端核心</td></tr>
+  </tbody></table>
+  <p>VOO vs SPY：费率差 0.06%/年，10 年差距约 0.6% 总收益。同标的永远选费率最低。</p>
+  <h3>隐藏摩擦成本</h3>
+  <ul>
+    <li><b>货币汇兑</b>：CNY → USD。IBKR 约 0.002%/次（年化通常 &lt; 0.05%）。境内卡换汇通常 0.3–1%/笔。</li>
+    <li><b>申赎费</b>（场外基金）：A 类前端 1.2–1.5%，C 类 0 申赎但每年收 0.4–0.8% 销售服务费。</li>
+    <li><b>滑点</b>：市价单在大盘宽基几乎无影响（1–3 bps）。小盘 / 主题基金可能 0.1%+。</li>
+    <li><b>美股分红预扣税</b>：10% withholding（中美税协），账户自动扣。</li>
+    <li><b>美股账户费</b>：IBKR $0（不活跃也无费），其他券商可能有账户维护费。</li>
+  </ul>
+  <h3>A 股红利税（关键避税点）</h3>
+  <table><thead><tr><th>持有时长</th><th>税率</th></tr></thead><tbody>
+    <tr><td>≤ 1 个月</td><td>20%</td></tr>
+    <tr><td>1 月 – 1 年</td><td>10%</td></tr>
+    <tr><td>&gt; 1 年</td><td>5%（减半政策）</td></tr>
+  </tbody></table>
+  <p>ETF 分红按股数计，<b>长期持有 &gt; 1 年</b> 是避税核心。频繁做 T 是普通散户最贵的税——一次分红可能吃掉一周涨幅。</p>
+  <h3>选择原则</h3>
+  <ol>
+    <li>同标的选费率最低（VOO &gt; SPY、510300 vs 510310 看实际费率）。</li>
+    <li>长期持有 &gt; 1 年避红利税。</li>
+    <li>跨市场选低汇兑损耗券商（IBKR / 长桥 / 富途）。</li>
+    <li>自动定投选场外，手动择时选场内。</li>
+    <li>先算全成本（费率 + 税 + 滑点 + 汇兑），再决策。</li>
+  </ol>
+  <p class="callout">数据参考日期：2024-12-31。费率以招募说明书 / 券商官网为准；隐性费随时需以券商最新公告页为准。</p>
+</template>
 
 <script>
 (function () {
