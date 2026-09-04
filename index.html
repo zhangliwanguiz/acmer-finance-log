@@ -1640,7 +1640,7 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
     grid.appendChild(el);
   });
 
-  /* ============ 市场快讯：JSONP 轮询 + 重点固定 24h ============ */
+  /* ============ 市场快讯：服务端代理 fetch + 重点固定 24h ============ */
   var NEWS = {
     storageKey: 'acmer_news_pins_v1',
     baseMs: 10 * 60 * 1000,   // 基础刷新间隔：10 分钟
@@ -1673,22 +1673,7 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
   }
   function readPins() { try { var d = JSON.parse(localStorage.getItem(NEWS.storageKey) || '{"pins":[]}'); return Array.isArray(d.pins) ? d.pins : []; } catch (e) { return []; } }
   function writePins(pins) { try { localStorage.setItem(NEWS.storageKey, JSON.stringify({ pins: pins, savedAt: Date.now() })); } catch (e) {} }
-  function jsonp(url, timeout) {
-    return new Promise(function (resolve, reject) {
-      var fn = '__ncb' + Date.now() + Math.floor(Math.random() * 1e5);
-      var sc = document.createElement('script');
-      var to = setTimeout(function () { cleanup(); reject(new Error('timeout')); }, timeout || 15000);
-      function cleanup() { clearTimeout(to); delete window[fn]; if (sc.parentNode) sc.parentNode.removeChild(sc); }
-      window[fn] = function (data) { clearTimeout(to); cleanup(); resolve(data); };
-      sc.onerror = function () { clearTimeout(to); cleanup(); reject(new Error('net')); };
-      sc.src = url.replace('%CB%', encodeURIComponent(fn));
-      document.head.appendChild(sc);
-    });
-  }
-  function fmtNewsUrl() {
-    var trace = Math.random().toString(36).slice(2) + Date.now().toString(36);
-    return 'https://np-listapi.eastmoney.com/comm/web/getNewsByColumns?client=web&biz=web_news_col&column=345&order=1&needInteractData=0&page_index=1&page_size=60&req_trace=' + trace + '&fields=code,showTime,title,mediaName,summary,url,image&callback=%CB%';
-  }
+  /* JSONP 已切换到 fetch('/api/news') 服务端代理 */
 
   function renderNews(pins, feed) {
     var pinEl = document.getElementById('pinList');
@@ -1755,10 +1740,13 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
     return merged;
   }
 
-  function loadNews() {
+  function fetchNews() {
     var st = document.getElementById('newsStatus'); var txt = document.getElementById('newsStatusTxt');
     if (st) st.classList.add('is-busy'); if (txt) txt.textContent = '正在获取最新市场快讯…';
-    jsonp(fmtNewsUrl()).then(function (res) {
+    fetch('/api/news', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.text(); })
+      .then(function (raw) {
+      var res; try { res = JSON.parse(raw); } catch (e) { throw new Error('parse'); }
       var list = (res && res.data && res.data.list) || [];
       var items = list.map(function (it) {
         var ts = Date.now();
@@ -1775,26 +1763,26 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
       if (txt) txt.textContent = '更新于 ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds()) + ' · ' + feed.length + ' 条快讯 · ' + pins.length + ' 条重点';
       if (st) st.classList.remove('is-busy');
       scheduleNews();
-    }).catch(function () {
+    }).catch(function (err) {
       NEWS.fails++;
       NEWS.intervalMs = Math.min(NEWS.maxMs, NEWS.baseMs * NEWS.fails);
       if (st) st.classList.remove('is-busy');
-      if (txt) txt.textContent = '接口暂时不可达（第 ' + NEWS.fails + ' 次失败），将于约 ' + Math.round(NEWS.intervalMs / 60000) + ' 分钟后自动重试';
+      if (txt) txt.textContent = '接口暂时不可达（第 ' + NEWS.fails + ' 次失败，' + (err && err.message || err) + '），将于约 ' + Math.round(NEWS.intervalMs / 60000) + ' 分钟后自动重试';
       scheduleNews();
     });
   }
   function scheduleNews() {
     clearTimeout(NEWS.timer);
-    NEWS.timer = setTimeout(loadNews, NEWS.intervalMs);
+    NEWS.timer = setTimeout(fetchNews, NEWS.intervalMs);
     var tm = document.getElementById('newsTimer');
     if (tm) tm.textContent = '自动刷新：每 ' + Math.round(NEWS.intervalMs / 60000) + ' 分钟';
   }
   var rb = document.getElementById('newsRefresh');
-  if (rb) rb.addEventListener('click', function () { NEWS.fails = 0; loadNews(); });
+  if (rb) rb.addEventListener('click', function () { NEWS.fails = 0; fetchNews(); });
   // 首屏：先渲染本地 24h 重点缓存，再异步拉取
   var cachedPins = readPins().filter(function (p) { return p.exp > Date.now(); });
   if (cachedPins.length) { writePins(cachedPins); renderNews(cachedPins, []); }
-  setTimeout(loadNews, 600);
+  setTimeout(fetchNews, 600);
 })();
 </script>
 
