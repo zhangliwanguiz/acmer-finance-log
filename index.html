@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="QqQv8wMKSbaBAOxyVwKWQb">
+<head data-page-node-id="9oX4Z3x9UxlL9wafAJk2lB">
+<meta charset="UTF-8" data-page-node-id="7NRnHAAa2MbvvaG0vyHKqP">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="hBJAKZfLhjsKd5qsztJN6l">
+<title>acmer理财普及录 · 把算法的严谨写进你的钱包</title>
+<meta name="description" content="acmer理财普及录 —— 由算法竞赛选手自发组成的理财交流记录群。大事记、共享文件库、理财认知图谱，不荐股、不代客理财，只做认知普及。" data-page-node-id="ZFUzKfXPhqe8sNZzq3roJh">
+<meta name="theme-color" content="#F5F5F0" data-page-node-id="IFNywpVuflIBCm9ZRIXqGf">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="iy7Wp4PXl6lmBD9vZ3oEvO">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="ENCVnrPjCmHrvjXuGtFOw3">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" data-page-node-id="2MYzPrZPdx4GUSHgs6AC1I">
+
+<style>
+/* ==========================================================================
+   acmer理财普及录 — Neo-Brutalism Design System
+   规则：纯黑实线边框 2-4px / 零模糊纯黑硬阴影 / 无渐变 / 无毛玻璃
+   ========================================================================== */
+:root{
+  /* 基底 */
+  --ink:      #0A0A0A;   /* 近黑文字 */
+  --line:     #000000;   /* 边框纯黑 */
+  --paper:    #F5F5F0;   /* 页面底 */
+  --white:    #FFFFFF;
+
+  /* 饱和糖果色 + 各自淡色底 */
+  --pink:      #FF1493;  --pink-soft:   #FFD3E9;
+  --yellow:    #FFE135;  --yellow-soft: #FFF7C4;
+  --blue:      #00BFFF;  --blue-soft:   #C6EDFF;
+  --lime:      #32CD32;  --lime-soft:   #C6F6C3;
+  --orange:    #FF6B35;  --orange-soft: #FFD8C6;
+  --purple:    #A855F7;  --purple-soft: #E7D6FF;
+
+  /* 边框 */
+  --b2: 2px solid var(--line);
+  --b3: 3px solid var(--line);
+  --b4: 4px solid var(--line);
+
+  /* 硬阴影（零模糊） */
+  --s3: 3px 3px 0 var(--line);
+  --s5: 5px 5px 0 var(--line);
+  --s7: 7px 7px 0 var(--line);
+  --s9: 9px 9px 0 var(--line);
+
+  /* 字体 */
+  --f-display:'Plus Jakarta Sans','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --f-body:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --f-mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+
+  --r: 14px;
+  --container: 1180px;
+  --sect: clamp(4.5rem, 9vw, 8rem);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:96px}
+body{
+  font-family:var(--f-body);
+  font-size:1rem;
+  line-height:1.7;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+ul,ol{list-style:none}
+
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
+.footer :focus-visible{outline-color:#FFFFFF}
+
+.container{width:min(var(--container),100% - 2rem);margin-inline:auto}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.skip-link{
+  position:absolute;left:50%;top:-200px;transform:translateX(-50%);z-index:200;
+  background:var(--yellow);color:var(--ink);border:var(--b3);box-shadow:var(--s5);
+  padding:.7rem 1.2rem;font-weight:800;font-family:var(--f-display);transition:top .15s;
+}
+.skip-link:focus{top:12px}
+
+/* SVG 装饰资源库（隐藏但可被引用） */
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- 通用组件 ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--f-mono);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--white);border:var(--b2);box-shadow:var(--s3);
+  padding:.4rem .8rem;border-radius:99px;
+}
+.eyebrow .dot{width:8px;height:8px;background:var(--pink);border:2px solid var(--line);border-radius:99px}
+
+.sect-head{margin-bottom:2.8rem}
+.sect-head h2{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.08;letter-spacing:-.02em;
+  margin:1rem 0 .9rem;
+}
+.sect-head p{font-size:1.03rem;max-width:62ch;color:#2A2A2A}
+.mark{position:relative;display:inline-block;padding:0 .18em;background:var(--yellow);border:var(--b3);box-shadow:var(--s3);border-radius:6px}
+.mark--pink{background:var(--pink-soft)}
+.mark--blue{background:var(--blue-soft)}
+.mark--lime{background:var(--lime-soft)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.9rem 1.6rem;border:var(--b3);border-radius:10px;
+  background:var(--white);color:var(--ink);
+  font-family:var(--f-display);font-weight:800;font-size:.98rem;letter-spacing:-.01em;
+  box-shadow:var(--s5);
+  transition:transform .13s ease, box-shadow .13s ease, background-color .15s ease;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:var(--s7)}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
+.btn svg{flex:none}
+.btn--pink{background:var(--pink);color:var(--white)}
+.btn--yellow{background:var(--yellow)}
+.btn--blue{background:var(--blue)}
+.btn--lime{background:var(--lime)}
+.btn--black{background:var(--ink);color:var(--white)}
+.btn--sm{padding:.6rem 1.1rem;font-size:.88rem;border-width:2px;box-shadow:var(--s3)}
+.btn--sm:active{transform:translate(3px,3px)}
+
+.tag{
+  display:inline-block;font-family:var(--f-mono);font-size:.72rem;font-weight:700;
+  padding:.25rem .6rem;border:var(--b2);border-radius:6px;background:var(--white);
+  letter-spacing:.02em;
+}
+.tag--pink{background:var(--pink-soft)}
+.tag--yellow{background:var(--yellow-soft)}
+.tag--blue{background:var(--blue-soft)}
+.tag--lime{background:var(--lime-soft)}
+.tag--orange{background:var(--orange-soft)}
+.tag--purple{background:var(--purple-soft)}
+
+/* ==========================================================================
+   1. STICKY NAV
+   ========================================================================== */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--paper);border-bottom:var(--b3);
+}
+.nav__inner{
+  display:flex;align-items:center;gap:1.2rem;
+  padding:.85rem 0;
+}
+.nav__brand{display:flex;align-items:center;gap:.7rem;flex:none}
+.nav__mark{
+  width:42px;height:42px;flex:none;display:grid;place-items:center;
+  background:var(--pink);border:var(--b3);box-shadow:var(--s3);border-radius:9px;
+  font-family:var(--f-display);font-weight:800;font-size:1.15rem;color:var(--white);
+  letter-spacing:-.04em;
+}
+.nav__name{font-family:var(--f-display);font-weight:800;font-size:1.03rem;line-height:1.15;letter-spacing:-.02em}
+.nav__name span{display:block;font-family:var(--f-mono);font-size:.66rem;font-weight:700;letter-spacing:.12em;color:#444}
+
+.nav__links{display:flex;align-items:center;gap:.3rem;margin-left:auto}
+.nav__link{
+  font-weight:600;font-size:.94rem;padding:.5rem .8rem;border-radius:8px;
+  border:2px solid transparent;transition:background-color .15s, border-color .15s, transform .13s;
+}
+.nav__link:hover{background:var(--yellow-soft);border-color:var(--line)}
+.nav__link.is-active{background:var(--white);border-color:var(--line);box-shadow:var(--s3)}
+.nav__cta{margin-left:.6rem;flex:none}
+
+.nav__toggle{
+  display:none;margin-left:auto;width:44px;height:44px;flex:none;
+  border:var(--b3);background:var(--white);box-shadow:var(--s3);border-radius:9px;
+  place-items:center;
+}
+.nav__toggle:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+.nav__toggle span{display:block;width:20px;height:3px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav__toggle span+span{margin-top:4px}
+.nav__toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav__toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav__toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.nav__progress{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--pink);border-right:2px solid var(--line);transition:width .1s linear}
+
+/* ==========================================================================
+   2. HERO
+   ========================================================================== */
+.hero{position:relative;padding:clamp(3rem,6vw,5rem) 0 clamp(3.5rem,7vw,6rem);overflow:hidden}
+.hero__grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2rem,4vw,3.5rem);align-items:center;position:relative;z-index:2}
+
+.hero h1{
+  font-family:var(--f-display);font-weight:800;
+  font-size:clamp(2.4rem,6.4vw,4.5rem);line-height:1.02;letter-spacing:-.035em;
+  margin:1.4rem 0 1.3rem;
+}
+.hero h1 em{font-style:normal}
+.hero__lead{font-size:1.08rem;max-width:52ch;color:#262626;margin-bottom:1.6rem}
+.hero__lead code{font-family:var(--f-mono);font-size:.9em;background:var(--white);border:2px solid var(--line);padding:.05em .35em;border-radius:4px}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.8rem}
+
+.hero__facts{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.fact{
+  background:var(--white);border:var(--b3);box-shadow:var(--s5);border-radius:12px;padding:.85rem .8rem;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.fact:hover{transform:translate(-3px,-3px);box-shadow:var(--s7)}
+.fact b{display:block;font-family:var(--f-display);font-weight:800;font-size:1.45rem;line-height:1.1;letter-spacing:-.03em}
+.fact span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;color:#555}
+.fact--pink b{color:var(--pink)}
+.fact--blue b{color:#0090C0}
+.fact--lime b{color:#1E9E1E}
+.fact--orange b{color:var(--orange)}
+
+/* Hero 视觉面板 */
+.hero__visual{position:relative}
+.panel{
+  background:var(--white);border:var(--b4);box-shadow:9px 9px 0 var(--line);border-radius:var(--r);
+  overflow:hidden;position:relative;z-index:2;
+}
+.panel__bar{
+  display:flex;align-items:center;gap:.45rem;padding:.65rem .9rem;
+  background:var(--yellow);border-bottom:var(--b3);
+}
+.panel__bar i{width:12px;height:12px;border:2px solid var(--line);border-radius:99px;background:var(--white)}
+.panel__bar i:nth-child(2){background:var(--pink)}
+.panel__bar i:nth-child(3){background:var(--lime)}
+.panel__bar span{margin-left:auto;font-family:var(--f-mono);font-size:.72rem;font-weight:700}
+.panel__body{padding:1.1rem}
+
+.chart-tip{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;justify-content:space-between;
+  font-family:var(--f-mono);font-size:.72rem;font-weight:700;margin-bottom:.6rem;
+}
+.legend{display:flex;gap:.7rem;align-items:center}
+.legend i{display:inline-block;width:11px;height:11px;border:2px solid var(--line);margin-right:.25rem;vertical-align:-1px}
+.legend .up{background:var(--pink)}
+.legend .dn{background:var(--lime)}
+
+.code{
+  background:var(--ink);color:#F5F5F0;border:var(--b3);border-radius:10px;
+  padding:.9rem 1rem;font-family:var(--f-mono);font-size:.78rem;line-height:1.85;
+  overflow-x:auto;
+}
+.code .c-comment{color:#8E8E8E}
+.code .c-key{color:var(--yellow)}
+.code .c-str{color:var(--blue)}
+.code .c-out{color:var(--lime)}
+
+.badge-float{
+  position:absolute;z-index:3;
+  background:var(--pink);color:var(--white);
+  border:var(--b3);box-shadow:var(--s5);border-radius:99px;
+  padding:.55rem 1rem;font-family:var(--f-display);font-weight:800;font-size:.85rem;
+  transform:rotate(-6deg);
+}
+.badge-float--1{top:-20px;right:6px}
+.badge-float--2{bottom:-22px;left:-6px;background:var(--blue);color:var(--ink);transform:rotate(5deg)}
+
+/* 装饰层 */
+.deco{position:absolute;pointer-events:none;z-index:0}
+.deco--hero-dots{top:4%;right:-40px;width:190px;height:230px;opacity:.55}
+.deco--hero-stripe{bottom:2%;left:-60px;width:280px;height:120px;opacity:.5}
+
+/* ==========================================================================
+   3. 技能卡 / 进度条
+   ========================================================================== */
+.section{padding:var(--sect) 0;position:relative;overflow:hidden}
+.section--alt{background:var(--white);border-top:var(--b3);border-bottom:var(--b3)}
+.section--paper{background:var(--paper)}
+
+.skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.skill{
+  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
+  padding:1.4rem 1.4rem 1.2rem;position:relative;overflow:hidden;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.skill:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.skill__top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.9rem}
+.skill__icon{
+  width:46px;height:46px;flex:none;display:grid;place-items:center;
+  border:var(--b3);border-radius:10px;box-shadow:var(--s3);background:var(--c-soft);
+}
+.skill h3{font-family:var(--f-display);font-weight:800;font-size:1.12rem;line-height:1.25;letter-spacing:-.02em}
+.skill__mono{font-family:var(--f-mono);font-size:.68rem;font-weight:700;color:#666;letter-spacing:.05em}
+.skill p{font-size:.92rem;color:#333;margin-bottom:1.1rem}
+.skill__meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.4rem}
+.skill__meta span{font-family:var(--f-mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;color:#555}
+.skill__meta b{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.03em}
+.bar{
+  height:24px;background:var(--white);border:var(--b3);border-radius:8px;overflow:hidden;position:relative;
+}
+.skill p code{font-family:var(--f-mono);font-size:.85em;background:var(--white);border:2px solid var(--line);padding:0 .3em;border-radius:4px}
+.bar__fill{
+  position:relative;
+  height:100%;width:0;background:var(--c);border-right:3px solid var(--line);
+  transition:width 1.15s cubic-bezier(.22,.85,.25,1);
+}
+.bar__fill::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M0,8 L8,0' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E");
+  opacity:.22;
+}
+
+/* ==========================================================================
+   4. BENTO 项目网格
+   ========================================================================== */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1.4rem}
+.tile{
+  grid-column:span 2;
+  display:flex;flex-direction:column;
+  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
+  padding:1.4rem;position:relative;overflow:hidden;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.tile:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.tile:focus-within{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.tile--hero{grid-column:span 3;grid-row:span 2;background:var(--c-soft)}
+.tile--wide{grid-column:span 3}
+.tile--half{grid-column:span 3}
+.tile__head{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:.9rem}
+.tile__no{font-family:var(--f-mono);font-size:.72rem;font-weight:700;color:#555;letter-spacing:.08em}
+.tile h3{font-family:var(--f-display);font-weight:800;font-size:1.35rem;line-height:1.2;letter-spacing:-.025em;margin-bottom:.6rem}
+.tile--hero h3{font-size:clamp(1.6rem,2.6vw,2.1rem)}
+.tile p{font-size:.94rem;color:#2E2E2E;margin-bottom:1rem}
+.tile--hero p{font-size:1rem}
+.tile__foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding-top:.9rem;border-top:var(--b2)}
+.tile__tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tile__go{
+  display:inline-flex;align-items:center;gap:.4rem;flex:none;
+  font-family:var(--f-mono);font-size:.76rem;font-weight:700;
+  padding:.4rem .7rem;border:var(--b2);border-radius:8px;background:var(--white);
+  transition:transform .13s, box-shadow .13s, background-color .15s;
+}
+.tile__go:hover{background:var(--yellow);transform:translate(-2px,-2px);box-shadow:var(--s3)}
+.tile__go:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+
+.tile__list{margin:.2rem 0 1rem;display:grid;gap:.5rem}
+.tile__list li{display:flex;gap:.6rem;align-items:flex-start;font-size:.92rem}
+.tile__list svg{flex:none;margin-top:.3rem}
+
+.tile__art{
+  border:var(--b3);border-radius:10px;background:var(--white);box-shadow:var(--s3);
+  padding:.9rem;margin-bottom:1rem;overflow:hidden;
+}
+.mini-code{font-family:var(--f-mono);font-size:.74rem;line-height:1.9;white-space:pre;color:var(--ink)}
+.mini-code .k{color:#B3006B;font-weight:700}
+.mini-code .s{color:#0077A8}
+.mini-code .cm{color:#777}
+
+/* ==========================================================================
+   5. 时间线
+   ========================================================================== */
+.timeline{position:relative;padding-left:0}
+.timeline::before{
+  content:'';position:absolute;left:11px;top:10px;bottom:10px;width:4px;background:var(--line);
+}
+.tl-item{position:relative;padding-left:3rem;padding-bottom:2.2rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:'';position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:99px;
+  background:var(--c,var(--pink));border:var(--b3);box-shadow:var(--s3);
+}
+.tl-card{
+  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
+  padding:1.2rem 1.3rem;transition:transform .16s ease, box-shadow .16s ease;
+}
+.tl-card:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.tl-card__top{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-bottom:.55rem}
+.tl-date{font-family:var(--f-mono);font-size:.76rem;font-weight:700;padding:.25rem .6rem;border:var(--b2);border-radius:6px;background:var(--c-soft,var(--pink-soft))}
+.tl-card h3{font-family:var(--f-display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:.35rem}
+.tl-card p{font-size:.93rem;color:#2E2E2E}
+
+/* ==========================================================================
+   6. 关于
+   ========================================================================== */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:1.6rem;align-items:start}
+.about-card{
+  background:var(--blue-soft);border:var(--b4);border-radius:var(--r);box-shadow:var(--s7);
+  padding:1.6rem;position:relative;overflow:hidden;
+}
+.about-card__top{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.avatar{
+  width:78px;height:78px;flex:none;display:grid;place-items:center;border-radius:14px;
+  background:var(--ink);border:var(--b3);box-shadow:var(--s3);
+  font-family:var(--f-display);font-weight:800;font-size:1.7rem;color:var(--yellow);letter-spacing:-.05em;
+}
+.about-card h3{font-family:var(--f-display);font-weight:800;font-size:1.4rem;letter-spacing:-.02em;line-height:1.2}
+.about-card__role{font-family:var(--f-mono);font-size:.74rem;font-weight:700;color:#333;letter-spacing:.05em}
+.about-card p{font-size:.95rem;margin-bottom:.9rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.1rem}
+.about-stats div{background:var(--white);border:var(--b2);border-radius:9px;padding:.6rem;text-align:center}
+.about-stats b{display:block;font-family:var(--f-display);font-weight:800;font-size:1.25rem;letter-spacing:-.03em}
+.about-stats span{font-family:var(--f-mono);font-size:.64rem;color:#555;letter-spacing:.05em}
+
+.principles{display:grid;gap:1rem}
+.principle{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--white);border:var(--b3);border-radius:var(--r);box-shadow:var(--s5);
+  padding:1.15rem 1.25rem;
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.principle:hover{transform:translate(-4px,-4px);box-shadow:var(--s9)}
+.principle__no{
+  width:42px;height:42px;flex:none;display:grid;place-items:center;border-radius:10px;
+  border:var(--b3);box-shadow:var(--s3);background:var(--c);
+  font-family:var(--f-display);font-weight:800;font-size:1.1rem;
+}
+.principle h3{font-family:var(--f-display);font-weight:800;font-size:1.08rem;letter-spacing:-.02em;margin-bottom:.2rem}
+.principle p{font-size:.92rem;color:#2E2E2E}
+
+/* ==========================================================================
+   7. CTA（黄底）
+   ========================================================================== */
+.cta{
+  background:var(--yellow);border-top:var(--b4);border-bottom:var(--b4);
+  position:relative;overflow:hidden;
+}
+.cta__inner{padding:clamp(3.2rem,7vw,5.5rem) 0;text-align:center;position:relative;z-index:2}
+.cta h2{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.06;letter-spacing:-.035em;margin-bottom:1rem}
+.cta p{font-size:1.05rem;max-width:56ch;margin:0 auto 1.9rem;color:#1F1F1F}
+.cta__actions{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-bottom:1.6rem}
+.cta__note{
+  display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center;
+  font-family:var(--f-mono);font-size:.76rem;font-weight:700;
+  background:var(--white);border:var(--b2);box-shadow:var(--s3);border-radius:99px;padding:.45rem 1rem;
+}
+.copy-pill{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-mono);font-size:.85rem;font-weight:700;
+  background:var(--ink);color:#fff;border:var(--b3);box-shadow:var(--s5);border-radius:99px;padding:.6rem 1.1rem;
+  transition:transform .13s, box-shadow .13s;
+}
+.copy-pill:hover{transform:translate(-2px,-2px);box-shadow:var(--s7)}
+.copy-pill:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
+.copy-pill[data-copied="true"]{background:var(--lime);color:var(--ink)}
+
+/* ==========================================================================
+   8. FOOTER（黑底）
+   ========================================================================== */
+.footer{background:var(--ink);color:#F2F2EE;border-top:var(--b4);position:relative;overflow:hidden}
+.footer__inner{padding:clamp(3rem,6vw,4.5rem) 0 1.6rem;position:relative;z-index:2}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.6rem}
+.footer h4{font-family:var(--f-mono);font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);margin-bottom:1rem}
+.footer__brand{display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.footer__brand .nav__mark{background:var(--yellow);color:var(--ink)}
+.footer p{font-size:.92rem;color:#C9C9C4;max-width:38ch}
+.footer__list li+li{margin-top:.55rem}
+.footer__list a{font-size:.93rem;color:#E4E4DF;transition:color .15s, background-color .15s;padding:.1rem .2rem;border-radius:4px}
+.footer__list a:hover{color:var(--yellow);background:#1C1C1C;text-decoration:underline;text-underline-offset:3px}
+.footer__bar{
+  display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;
+  border-top:2px solid #333;padding-top:1.3rem;
+  font-family:var(--f-mono);font-size:.74rem;color:#9A9A95;
+}
+.footer__bar a{color:#C9C9C4}
+.footer__bar a:hover{color:var(--yellow)}
+
+/* 回到顶部 */
+.totop{
+  position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;
+  width:52px;height:52px;display:grid;place-items:center;border-radius:12px;
+  background:var(--pink);color:var(--white);border:var(--b3);box-shadow:var(--s5);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .2s, transform .2s, visibility .2s, box-shadow .13s;
+}
+.totop.is-on{opacity:1;visibility:visible;transform:none}
+.totop:hover{background:var(--yellow);color:var(--ink)}
+.totop:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--line)}
+
+/* ---------- 滚动揭示 ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.22,.85,.25,1),transform .55s cubic-bezier(.22,.85,.25,1)}
+.reveal.is-in{opacity:1;transform:none}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1080px){
+  .footer__grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:960px){
+  .hero__grid{grid-template-columns:1fr}
+  .hero__visual{order:2}
+  .about-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:repeat(4,1fr)}
+  .tile{grid-column:span 4}
+  .tile--hero,.tile--wide,.tile--half{grid-column:span 4;grid-row:auto}
+  .nav__links{
+    position:absolute;left:0;right:0;top:100%;
+    display:grid;gap:.2rem;padding:1rem;margin:0;
+    background:var(--paper);border-bottom:var(--b3);box-shadow:0 6px 0 rgba(0,0,0,.06);
+    max-height:0;overflow:hidden;padding-block:0;transition:max-height .25s ease, padding .25s ease;
+  }
+  .nav__links.is-open{max-height:420px;padding-block:1rem}
+  .nav__links .nav__cta{margin:0;justify-content:center}
+  .nav__toggle{display:grid}
+  .nav__cta--desktop{display:none}
+}
+@media (max-width:720px){
+  .hero__facts{grid-template-columns:repeat(2,1fr)}
+  .skillgrid{grid-template-columns:1fr}
+  .footer__grid{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr}
+  .deco--hero-dots,.deco--hero-stripe{display:none}
+}
+
+/* ---------- 减少动效 ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .bar__fill{transition:none!important}
+}
+/* ---------- 打印 ---------- */
+@media print{
+  .nav,.totop,.deco{display:none!important}
+  body{background:#fff}
+  .card,.tile,.skill,.tl-card,.panel{box-shadow:none}
+}
+</style>
+</head>
+<body data-page-node-id="DqgZeKFflDYuFYgmkO6ABx">
+
+<a class="skip-link" href="#main" data-page-node-id="Kn87gdZ19wyqESI7CmncoG">跳到主要内容</a>
+
+<!-- ==========================================================
+     SVG 装饰资源（噪点 / 斜条纹 / 圆点矩阵 / 网格）
+     ========================================================== -->
+<svg class="svg-defs" aria-hidden="true" focusable="false" data-page-node-id="pjkxpnQLXTIVm21cySx2So">
+  <defs data-page-node-id="zurd6lfFWCpo6dcEQyedbV">
+    <filter id="fx-noise" data-page-node-id="dqd0sILtB4OzwjTXKvHAV4">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" data-page-node-id="UV0H3CEuLqV5BKuGxrMOEA"/>
+      <feColorMatrix type="saturate" values="0" data-page-node-id="Z0dl2saFszCzteZ9PWqGuT"/>
+    </filter>
+    <pattern id="p-noise" width="180" height="180" patternUnits="userSpaceOnUse" data-page-node-id="QJTliHGzyLVZXHyEn1bS6D">
+      <rect width="180" height="180" filter="url(#fx-noise)" opacity="0.16" data-page-node-id="whljoaBWmezOjA48eXlOuP"/>
+    </pattern>
+    <pattern id="p-dots" width="16" height="16" patternUnits="userSpaceOnUse" data-page-node-id="GZtD1LQYm5PabiZqDGLWQ1">
+      <circle cx="4" cy="4" r="1.9" fill="#000" data-page-node-id="YThv1EDZiFj6Y8bx80hnBf"/>
+      <circle cx="12" cy="12" r="1.9" fill="#000" data-page-node-id="qhblfcUHPFWUrOlZkji3gO"/>
+    </pattern>
+    <pattern id="p-stripe" width="8" height="8" patternUnits="userSpaceOnUse" data-page-node-id="aWbPEGsBouGhIhXCiHdhfS">
+      <path d="M0,8 L8,0" stroke="#000" stroke-width="2" data-page-node-id="CotzzLOzxd6trpSZDqIqk3"/>
+    </pattern>
+    <pattern id="p-grid" width="30" height="30" patternUnits="userSpaceOnUse" data-page-node-id="ZT6tn1SbqgMkzz3mVJXI6N">
+      <path d="M30,0 L0,0 L0,30" fill="none" stroke="#000" stroke-width="1.4" data-page-node-id="sCBEodRkl1NyMVmpgeCmtJ"/>
+    </pattern>
+  </defs>
+</svg>
+
+<!-- ==========================================================
+     1. STICKY 导航
+     ========================================================== -->
+<header class="nav" id="top" data-page-node-id="Ndzx4DcEueIPwiHnr31s2S">
+  <div class="container nav__inner" data-page-node-id="JkoHR4jU9Jzew8SKQ3zASC">
+    <a class="nav__brand" href="#top" aria-label="acmer理财普及录 首页" data-page-node-id="bjTFy5uCTrSVmHEEN9oQUj">
+      <span class="nav__mark" aria-hidden="true" data-page-node-id="rHfd7YsikQcA3pW9dB4B5w">A</span>
+      <span class="nav__name" data-page-node-id="8vBX4g8sT8724ijlOBQkPb">acmer理财普及录<span data-page-node-id="hZ8nsCEfFY5kIDp2BoTkEq">ACM × FINANCE LOG</span></span>
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单" data-page-node-id="NaELPRG4EUuaiTAU6EEoXD">
+      <span data-page-node-id="uDp2kuDopGc1tm60EPwV17"></span><span data-page-node-id="0dLjkWC8SIjFSTwCA2YBDl"></span><span data-page-node-id="VxykDOM6AopW3FHokACk9y"></span>
+    </button>
+
+    <nav class="nav__links" id="navMenu" aria-label="主导航" data-page-node-id="J335giTYMOUADrHqBTjEj5">
+      <a class="nav__link" href="#timeline" data-page-node-id="7cjmYPHRAzuyIcDwRbNEeT">大事记</a>
+      <a class="nav__link" href="#files" data-page-node-id="B9TmlWC2BQQAQhqck99Z7L">文件库</a>
+      <a class="nav__link" href="#skills" data-page-node-id="Xj15RpkJnTXJ98597a56Bk">认知图谱</a>
+      <a class="nav__link" href="#about" data-page-node-id="vI8u5siz0QMQAKj7CnePEJ">关于我们</a>
+      <a class="nav__link nav__cta btn btn--sm btn--pink" href="#contact" data-page-node-id="WsoQlOd5Dw1ycUUc23CQqG">申请入群</a>
+    </nav>
+
+    <div class="nav__progress" id="navProgress" aria-hidden="true" data-page-node-id="zwHmyW5yUCADAyhmk8Bx0s"></div>
+  </div>
+</header>
+
+<main id="main" data-page-node-id="gLxCjwWNwBFlhY2aEPU3pa">
+
+<!-- ==========================================================
+     2. HERO
+     ========================================================== -->
+<section class="hero" aria-labelledby="hero-title" data-page-node-id="SjLZvX7BJ8MNdgNc230ofl">
+  <svg class="deco deco--hero-dots" aria-hidden="true" viewBox="0 0 190 230" data-page-node-id="VJtAY7sYetFxKmmSoQskU9">
+    <rect width="190" height="230" fill="url(#p-dots)" data-page-node-id="3qmOIOmivKbbTG3EEsonlM"/>
+  </svg>
+  <svg class="deco deco--hero-stripe" aria-hidden="true" viewBox="0 0 280 120" data-page-node-id="VCsHi57SvOcS53f9FasNDs">
+    <rect width="280" height="120" fill="url(#p-stripe)" opacity="0.35" data-page-node-id="TnCggwbtQJPErS6C2ZeH4Y"/>
+  </svg>
+
+  <div class="container hero__grid" data-page-node-id="d4go56QYxNJvgFIFhKPhBN">
+    <div class="hero__text" data-page-node-id="Ddbb7qDP46gnLwKWSM6lrJ">
+      <p class="eyebrow" data-page-node-id="OL70PCQmq3uMuGjYCBnUhu"><span class="dot" data-page-node-id="P4K5E4iWeR7GqCsKXqXUiT"></span>自 2023 · 算法选手的理财记录群</p>
+
+      <h1 id="hero-title" data-page-node-id="uhmOSP1yJsF4OOiY5L9hxH">
+        把算法竞赛的<em class="mark mark--pink" data-page-node-id="9U6ni6JlTUoH9PQeF8c8SD">严谨</em><br data-page-node-id="ny5pevjXomQYfZMdssfh1Q">
+        写进你的<em class="mark" data-page-node-id="Re5ghBqyDL95JYH9nDVaaP">钱包</em>
+      </h1>
+
+      <p class="hero__lead" data-page-node-id="yNhpvwniR5hUAx5OGuHeBH">
+        <code data-page-node-id="kFnPeI9ihjTYqd9wXp6yeV">acmer理财普及录</code> 是一群 ACM-ICPC / CCPC 选手自发组成的理财交流记录群。
+        我们用 <strong data-page-node-id="wkfg8ehwPVjBTQfO7h8aBD">AC 一道题的耐心</strong> 去回测策略，用 <strong data-page-node-id="loC0fZlQ2PDucnbmWD8ziU">Debug 的态度</strong> 审视每一笔支出——
+        把复杂的金融术语，翻译成一段可以照着跑的伪代码。
+      </p>
+
+      <div class="hero__actions" data-page-node-id="aZwpBwBXxWn3WXJ5ouSEGt">
+        <a class="btn btn--pink" href="#files" data-page-node-id="JvBnhIVPxAJ7kKdxZpdRsa">
+          翻阅共享文件库
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="jVb2L6XT1AAMlZrPfHCrnP"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="DcyAMxuDQnDI34xZg9aeTo"/></svg>
+        </a>
+        <a class="btn btn--yellow" href="#timeline" data-page-node-id="wIGD5irIwY20Hg1p0m099w">
+          看看大事记
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="VAfmvvCm4GpVbcAiFc2T1I"><path d="M12 5v14M5 12h14" data-page-node-id="W1BZ2d2BBKR6PGuC6AmiSq"/></svg>
+        </a>
+      </div>
+
+      <p class="cta__note" style="background:#fff" data-page-node-id="qPXjmIIZFfOgJAGsg7DjD0">
+        <span aria-hidden="true" data-page-node-id="nsU22zChnJ1mqiVQG8myEa">#</span> 不荐股 · 不代客理财 · 所有结论附数据源与时间戳
+      </p>
+    </div>
+
+    <div class="hero__visual" data-page-node-id="5H7cg69Va8jBWPWb68cmC9">
+      <span class="badge-float badge-float--1" data-page-node-id="i1dmry4EybGlzuSdsaCK72">复利 = 耐心 × 时间</span>
+
+      <div class="panel" data-page-node-id="y2Xt5kq0xClZcYn6YPhcA4">
+        <div class="panel__bar" data-page-node-id="cfU1ELXyeQdG1KIE8ZZH9W">
+          <i data-page-node-id="N8Xd7KcJ9rFBmlYAo2mDtU"></i><i data-page-node-id="J8FcrR5A1FZJ7tWRdYhGp0"></i><i data-page-node-id="cbL1Dam5ddMQrHMjhDTH74"></i>
+          <span data-page-node-id="092W5Q2udHb7spIhWwrLBt">portfolio_backtest.py</span>
+        </div>
+        <div class="panel__body" data-page-node-id="9ZAAQGJFK0jpqEJ7huJIuE">
+          <div class="chart-tip" data-page-node-id="mMpPgHZ1qZO1A3FmrlxRVv">
+            <span class="legend" aria-hidden="true" data-page-node-id="7F1WLW1x2DpRCfzvWbdLe4">
+              <span data-page-node-id="skM0lgx4l8qtaMzvMMvPdr"><i class="up" data-page-node-id="BMDXuoLbbzsDW7AHe4FCfB"></i>红涨</span>
+              <span data-page-node-id="kPn6H2Gww4KzxjJdYImbwT"><i class="dn" data-page-node-id="stFxdEQNVlXBuEGiLUGKLs"></i>绿跌</span>
+            </span>
+            <span data-page-node-id="wLiC1wBjgOjYHxtrS6xJhw">定投 20 年 · 月度再平衡</span>
+          </div>
+
+          <!-- 蜡烛图：红涨绿跌（A 股配色习惯） -->
+          <svg viewBox="0 0 400 220" role="img" aria-label="群组示范组合净值蜡烛示意图，整体呈上升趋势，红涨绿跌" style="border:2px solid #000;border-radius:8px;background:#fff" data-page-node-id="RZpxGSij1cDB7UziPqWrJY">
+            <rect width="400" height="220" fill="url(#p-grid)" opacity="0.07" data-page-node-id="pIfroAHRDoJvAYYYgjw1vL"/>
+            <!-- 网格横线 -->
+            <g stroke="#000" stroke-width="1" opacity="0.18" data-page-node-id="lyORrzajWJvi0SZMHhpoHq">
+              <path d="M24 40H392" data-page-node-id="Zz0efIV1c93Kv0M1nKbk7R"/><path d="M24 78H392" data-page-node-id="wehO0ye50tp9v5yJiNK5fN"/><path d="M24 116H392" data-page-node-id="XL2ktSZGDK3VajYILQjCAw"/><path d="M24 154H392" data-page-node-id="scDJwY7uip1nbqd1s6rwJb"/>
+            </g>
+            <path d="M24 192H392" stroke="#000" stroke-width="2.5" data-page-node-id="M8BAVOhqEtN0ukpA5grCxz"/>
+            <path d="M24 16V192" stroke="#000" stroke-width="2.5" data-page-node-id="Ya7w1AugQusMdwUjliEWiG"/>
+            <!-- 趋势线 -->
+            <path d="M24 182 L392 60" stroke="#0A0A0A" stroke-width="3" stroke-dasharray="10 8" opacity="0.75" fill="none" data-page-node-id="w1CcxnNwpzZYrC7kjjGfdz"/>
+
+            <g stroke="#000" stroke-width="2.4" data-page-node-id="UU4lNy5kgyiYMpmzpJKXFk">
+              <!-- 1 up -->
+              <path d="M62 148V176" data-page-node-id="gePTcgMElHOqWxf0ucCwab"/>
+              <rect x="54" y="155" width="16" height="15" fill="#FF1493" data-page-node-id="9VqkC67onFhixudYn6cwpN"/>
+              <!-- 2 down -->
+              <path d="M102 150V173" data-page-node-id="gKZQLEmBNaKlkOcqFtIglN"/>
+              <rect x="94" y="155" width="16" height="10" fill="#32CD32" data-page-node-id="56KrKxcTOzwp507wBQi8aO"/>
+              <!-- 3 up -->
+              <path d="M142 134V170" data-page-node-id="Ru3ZfW0rfFskUrQmrUptNl"/>
+              <rect x="134" y="140" width="16" height="25" fill="#FF1493" data-page-node-id="FpqlbBIDKF8R9LcNmq16Dn"/>
+              <!-- 4 down -->
+              <path d="M182 136V156" data-page-node-id="kp5E0LrypyH1YZiI7RLdVj"/>
+              <rect x="174" y="140" width="16" height="10" fill="#32CD32" data-page-node-id="sLFtKDs59gNh5T6m8KgUMI"/>
+              <!-- 5 up -->
+              <path d="M222 120V154" data-page-node-id="IJpcOvCMtTzed0IMXYHKdm"/>
+              <rect x="214" y="125" width="16" height="25" fill="#FF1493" data-page-node-id="aorikE1QIF0S5TO3Ceopxs"/>
+              <!-- 6 up -->
+              <path d="M262 112V130" data-page-node-id="7HiuUZ4z4l6Y4FnORAO4gm"/>
+              <rect x="254" y="118" width="16" height="7" fill="#FF1493" data-page-node-id="KBUk2VFYAW69xVnTnPkzAL"/>
+              <!-- 7 down -->
+              <path d="M302 114V136" data-page-node-id="vJxumAcubk26ZmVxiGPans"/>
+              <rect x="294" y="118" width="16" height="12" fill="#32CD32" data-page-node-id="NCZYcv5XuCPhNqLQGTS3l4"/>
+              <!-- 8 up -->
+              <path d="M342 88V134" data-page-node-id="l2fhNGGp01r9AKuXEqFYOU"/>
+              <rect x="334" y="95" width="16" height="35" fill="#FF1493" data-page-node-id="xZkqQRD20YWHepHTcUMshH"/>
+              <!-- 9 up -->
+              <path d="M382 66V100" data-page-node-id="5DRbrPJPBHqsDFeZ9R9Eof"/>
+              <rect x="374" y="72" width="16" height="23" fill="#FF1493" data-page-node-id="04V6tPbKeyVLdA60tSMIwO"/>
+            </g>
+          </svg>
+
+          <div class="code" style="margin-top:1rem" data-page-node-id="FphGgJnvTn2r086Uo9eVSW">
+<span class="c-comment" data-page-node-id="mtgPcewa3B8O92FG5zCPOg"># 纪律比预测更值钱</span>
+$ acmer-compound <span class="c-key" data-page-node-id="bGBDkvnK90Cueox1XQ0FB5">--monthly</span> <span class="c-str" data-page-node-id="HLBc10m6TCpvfdR5hEQXm8">3000</span> <span class="c-key" data-page-node-id="SQnHyoLnlXTello0V1HI5d">--years</span> <span class="c-str" data-page-node-id="35qaSq1GLhlYFUgJSnHpXF">20</span> <span class="c-key" data-page-node-id="OAoI91NFgmwIrDbtWHI6TG">--rate</span> <span class="c-str" data-page-node-id="B2TDblgJsihVB44WwroPDg">0.08</span>
+<span class="c-out" data-page-node-id="frkG3RBKPM6UBIQYedafyU">→ 累计投入 ¥720,000</span>
+<span class="c-out" data-page-node-id="pDlUXDFIRXYbUE724pYwqf">→ 期末资产 ¥1,768,387</span>
+<span class="c-out" data-page-node-id="OZE1QMxBSzMQ0hNVq84KiE">→ 其中 ¥1,048,387 来自时间</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="badge-float badge-float--2" data-page-node-id="k1mQoy0oxGy6FEtMfFx6E6">No Financial Advice</span>
+    </div>
+  </div>
+
+  <div class="container" style="position:relative;z-index:2;margin-top:clamp(2.4rem,5vw,3.6rem)" data-page-node-id="ae47vNOm0DuaghdDwxZ3Ez">
+    <ul class="hero__facts" data-page-node-id="MVgJaFMXgB9gl7KbTErO0K">
+      <li class="fact fact--pink reveal" data-page-node-id="RGrq5LIj2EW1OWIqc6ibjS"><b data-page-node-id="fafXQotsKc8ZaKfGjhHz40">3 年</b><span data-page-node-id="h1HRqhFky37DOSJCo58fRQ">持续记录</span></li>
+      <li class="fact fact--blue reveal" data-page-node-id="4HHYn6DPscsGNJKBwMJDny"><b data-page-node-id="EjHo2UgF9Kr0hzpnaAS7hY">1,250</b><span data-page-node-id="sFwcIXJGFsJQoviJFmqJ3X">群友人数</span></li>
+      <li class="fact fact--lime reveal" data-page-node-id="zDF76QglVvGlCH4GGjISiT"><b data-page-node-id="5ycDxw1nKa2XVG0E5LBiHC">47 份</b><span data-page-node-id="93VrgmpFwwUCLufBjpZYaq">共享文件</span></li>
+      <li class="fact fact--orange reveal" data-page-node-id="M2FoAwWSIZlFHIhDer3HBU"><b data-page-node-id="QVg1xM94dbW3AZEPJQQmq2">210 场</b><span data-page-node-id="FMPuQRGjqv9HWgN8wvVw8k">线上复盘</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==========================================================
+     3. 认知图谱 / 技能进度条
+     ========================================================== -->
+<section class="section section--alt" id="skills" aria-labelledby="skills-title" data-page-node-id="89EYtDuN2LLzpYqKaLoWsa">
+  <svg class="deco" aria-hidden="true" viewBox="0 0 200 400" style="right:-60px;top:8%;width:180px;height:340px;opacity:.4" data-page-node-id="1vPBecWY62RLl7uD6yqSBH">
+    <rect width="200" height="400" fill="url(#p-stripe)" opacity="0.5" data-page-node-id="RKCzPLNHTm22cAvkyU3rGV"/>
+  </svg>
+
+  <div class="container" data-page-node-id="cdGiPMK3KdQZNI9DEk8HRN">
+    <header class="sect-head reveal" data-page-node-id="bWYKBTWxC1b5b0W5lSlxxm">
+      <p class="eyebrow" data-page-node-id="Q9T0eAFMCGQKWLDOYWHkbD"><span class="dot" data-page-node-id="PSXXFnSAX7QLD3oXgR1eoZ"></span>Chapter 01 — 认知图谱</p>
+      <h2 id="skills-title" data-page-node-id="rN9pvo5maI7S95FLWStmiC">先补齐<span class="mark mark--blue" data-page-node-id="7NuKejJIUnSO3oyJYaUFIG">心智模型</span>，<br data-page-node-id="7G2mJ443mTtJPlr3dm2Iqd">再谈收益率</h2>
+      <p data-page-node-id="Jt4ZdbAqQFqZYtHOTA1U91">我们把群友三年里踩过的坑抽象成六项能力。每项都是可以量化、可以练习、可以复盘的——就像刷题一样，先看清题型，再上强度。</p>
+    </header>
+
+    <ul class="skillgrid" data-page-node-id="BGOnAzMsDM9vcKv4Oca0HP">
+      <li class="skill reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="3D1W2acEfAjm4uQUEcy1xF">
+        <div class="skill__top" data-page-node-id="qxDiBM9fOqArxrLHzm2Yml">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="5hEwisqidUDKuo6TzZVajt">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="zYvM3lfb17waCvBNRq9jNG"><rect x="3" y="3" width="7" height="7" data-page-node-id="jMTJWfSErdWr18flGcVyrt"/><rect x="14" y="3" width="7" height="7" data-page-node-id="pySYms14YzN32ntjPfzH19"/><rect x="3" y="14" width="7" height="7" data-page-node-id="opF7JMPdeNh8yEgsXqMSBd"/><rect x="14" y="14" width="7" height="7" data-page-node-id="41qabUTXoH4gCurfCGhDAX"/></svg>
+          </span>
+          <div data-page-node-id="gcJtn1bTvG1EG9BW5xhGNO">
+            <h3 data-page-node-id="34CzEN1bAQqfnOT3XPkYBt">资产配置与再平衡</h3>
+            <p class="skill__mono" data-page-node-id="3Px2VOO5nJDiBQpOF9tEdG">SPLIT / CONQUER</p>
+          </div>
+        </div>
+        <p data-page-node-id="VrDaACGivLBUnmZOTuAvVf">用「分治」思想拆账户：进攻端、防守端、现金流端各司其职，偏离阈值 5% 触发再平衡。</p>
+        <div class="skill__meta" data-page-node-id="YOaLsCIhlEu8G4tdYaFSqw"><span data-page-node-id="JEr8F3SqSRRtz5aSoPC8G3">熟练度</span><b data-page-node-id="7ss1z4FTGkTeCJqpQ6Zblr">88%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 88%" data-page-node-id="5hP8mWyXC0tbINOCgrDngt"><div class="bar__fill" data-w="88" data-page-node-id="p8tgmihRcPYR0Azx8ezG1q"></div></div>
+      </li>
+
+      <li class="skill reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)" data-page-node-id="nb6FPaqDKovlexyGGXKcPt">
+        <div class="skill__top" data-page-node-id="0O352wEuddngWReFDYa1xi">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="wFR9oxzQJGoC0vJ68QAV2Q">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="VRP4KxoLFjgYxHgoptt4ov"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2" data-page-node-id="PSoOvVl1HuKoLEfz03MDJ3"/></svg>
+          </span>
+          <div data-page-node-id="hE94u5mt57ZFUYVxFq8MlG">
+            <h3 data-page-node-id="EDgnfCCjwdFUNVq53wQz7h">指数基金定投</h3>
+            <p class="skill__mono" data-page-node-id="EFShhGobs2JDOLHF7xHvB9">FOR-LOOP INVESTING</p>
+          </div>
+        </div>
+        <p data-page-node-id="7aNC1RpqzfSVFwt9Dj1dDG">把定投写成一个 <code data-page-node-id="EMD6B9VrMnBqQwqPe5e6YF">for</code> 循环：固定时间、固定金额、不看盘。靠纪律跑赢情绪波动。</p>
+        <div class="skill__meta" data-page-node-id="P7ePGL65Rne6bqGdPe8JXq"><span data-page-node-id="oQqqWKuqQ5Dluul4hpeSEq">熟练度</span><b data-page-node-id="AFYjAL1nMK7UEcE2ZwS1wz">92%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 92%" data-page-node-id="msP6G4S6yFdB9vDdbXoGgW"><div class="bar__fill" data-w="92" data-page-node-id="YhHUyKaiXFgb85ugHKrce1"></div></div>
+      </li>
+
+      <li class="skill reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)" data-page-node-id="Dzufaro0uI4eWRHiW03j9c">
+        <div class="skill__top" data-page-node-id="ziecuKbHFy4sf5aAJJglhA">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="kigCV2ZZFAxctkDJ76v7rB">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="1wYLNP5zsIzh6T2Egttxr6"><path d="M12 3l9 16H3l9-16z" data-page-node-id="lYSSFFYy3rovJLiW4loJ6g"/><path d="M12 9v5" data-page-node-id="QcQxqCkpWJ79gRsF7DgM8N"/><path d="M12 17h.01" data-page-node-id="LzCdYLAthxWIJxtbESEVPQ"/></svg>
+          </span>
+          <div data-page-node-id="zTstHzdZOnYQ90X4BteSnO">
+            <h3 data-page-node-id="MtQuZSpt3zLVBNKU8OQCIN">风险识别与仓位管理</h3>
+            <p class="skill__mono" data-page-node-id="N8lrQEkXdApEcEI5mvprlr">DRAWDOWN LIMIT</p>
+          </div>
+        </div>
+        <p data-page-node-id="3CTUQ5MrFsx2576Ok5A1di">单笔最大回撤上限 = 那个你还能睡着的数。先定义可承受损失，再决定下注规模。</p>
+        <div class="skill__meta" data-page-node-id="2wUeal1Gek4jTRpd4fPzQa"><span data-page-node-id="8M2wze2hBvXjjWd8HDlZlv">熟练度</span><b data-page-node-id="eGkXEywZ2AsFewL84jpC3B">80%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 80%" data-page-node-id="xeMCI6uyA8awIGNLpW4NXg"><div class="bar__fill" data-w="80" data-page-node-id="rzwlOXPAEh2ITedIE5yQYJ"></div></div>
+      </li>
+
+      <li class="skill reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)" data-page-node-id="nLA1uClBUfNOQr99I8OwHn">
+        <div class="skill__top" data-page-node-id="UDgN03FLeyCqHZPX2rIiIi">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="oCYkCgpLjM5dL0VWfK0HxD">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="bKFueyPUrwQhrPBsXYOpOr"><circle cx="12" cy="12" r="9" data-page-node-id="g2UKPxC0FP9RFInVuopHi0"/><path d="M12 7v5l4 2" data-page-node-id="uUBfGn6BuGZuvoh8CUTAsr"/></svg>
+          </span>
+          <div data-page-node-id="EKms5idu65sHIzs2LYh4FE">
+            <h3 data-page-node-id="OecqtRgknN1TEMpYr5zKys">复利与时间成本</h3>
+            <p class="skill__mono" data-page-node-id="T5Ik06jbetN7qPe9hKENpU">O(log n) PATIENCE</p>
+          </div>
+        </div>
+        <p data-page-node-id="ZGKcGU61mbh37cHZEfCt94">复利的本质不是暴富公式，而是「不中断」。理解它，就理解了为什么早开始比多投入更重要。</p>
+        <div class="skill__meta" data-page-node-id="xM1PoSmTEFNXOcOb8uSTTq"><span data-page-node-id="aMNEde2Ha1shE56MeFZeJZ">熟练度</span><b data-page-node-id="b0DXbBu6oonS7CsrpSaRZm">95%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 95%" data-page-node-id="5CDDlXnCakUgajm4DBBzg3"><div class="bar__fill" data-w="95" data-page-node-id="mb4c2PgHMnYnWBfe2nQ6Ze"></div></div>
+      </li>
+
+      <li class="skill reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="UjtSr1YASXGAChexzW4fFT">
+        <div class="skill__top" data-page-node-id="oVzWu5c4s3W7zR6sxqJtUY">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="11ECwhJThwTdMCE7AhDrHl">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="osESazD69NKnE6V5weo2EF"><path d="M9 3h6v5l5 13H4L9 8V3z" data-page-node-id="K3dFexWjx8NWE9BKxFcH86"/></svg>
+          </span>
+          <div data-page-node-id="fxtAUavWxH401CrCMknem0">
+            <h3 data-page-node-id="8BeKEPRIySU1t6I3NFETBK">行为金融学防坑</h3>
+            <p class="skill__mono" data-page-node-id="lurRWcWES3szN6SlEnxCSZ">DEBUG YOUR BRAIN</p>
+          </div>
+        </div>
+        <p data-page-node-id="xxHICX2StsbeFFVYX6RZw6">识别三个经典 bug：FOMO 追高、损失厌恶扛单、锚定效应。看见它们，就已经修好一半。</p>
+        <div class="skill__meta" data-page-node-id="ucCuB4aL7fubNXvGKcbIdE"><span data-page-node-id="bbR6WtExU9AGblyYlYrpkX">熟练度</span><b data-page-node-id="XoiIIQQErY0TmzWPJE2fCj">76%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 76%" data-page-node-id="HE5v0LKFGAkHaAkCn6AhHy"><div class="bar__fill" data-w="76" data-page-node-id="tChfZjcYhjU7oWA28I3S83"></div></div>
+      </li>
+
+      <li class="skill reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)" data-page-node-id="VKO70ItylxCfflfNVWvpeg">
+        <div class="skill__top" data-page-node-id="b5WFZNRTeipDbk8uU3QjS4">
+          <span class="skill__icon" aria-hidden="true" data-page-node-id="fnB0zSyvDBeVLXRHCMXrZA">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.4" stroke-linecap="square" data-page-node-id="tPQkuSjOnMt8QoPAhHpRyc"><path d="M3 7h18v12H3z" data-page-node-id="nAF7ZeBuUTckVDRXsjbfOk"/><path d="M3 11h18" data-page-node-id="xgZsXgXntEQBRGJeme4otE"/><path d="M7 15h4" data-page-node-id="bOoPWq59wL3cPDxbHslM3z"/></svg>
+          </span>
+          <div data-page-node-id="lcvIeZO9HiiBHnBnq9IDc8">
+            <h3 data-page-node-id="IZPIqEDFXTtEDkKk3SeZt4">费率、税务与摩擦成本</h3>
+            <p class="skill__mono" data-page-node-id="b9tLXPzLGYKSyYHIrDjeB1">HIDDEN CONSTANT</p>
+          </div>
+        </div>
+        <p data-page-node-id="Z4F1SAiTafBeznYAaDvGBy">申赎费、管理费、汇兑损耗、滑点——这些隐藏常数，长期看是收益的主要杀手。</p>
+        <div class="skill__meta" data-page-node-id="tuN5HPXLZuJtLz7OhoFORZ"><span data-page-node-id="Q4p0rWQ75T2STAl0MbRbEA">熟练度</span><b data-page-node-id="Im4CbWUpQByKbUXiXva072">68%</b></div>
+        <div class="bar" role="img" aria-label="熟练度 68%" data-page-node-id="B6hjaenDgau6BLKT21gIOI"><div class="bar__fill" data-w="68" data-page-node-id="14Gg6FKqKhNQ53nrie6s2x"></div></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==========================================================
+     4. 文件库 / BENTO 网格
+     ========================================================== -->
+<section class="section section--paper" id="files" aria-labelledby="files-title" data-page-node-id="VzzqrJcuiREnkNi7uxcVRY">
+  <div class="container" data-page-node-id="Yy6cajr3ozq6ghGcILHSY9">
+    <header class="sect-head reveal" data-page-node-id="DoPzKQVEHqal82ohegJMLx">
+      <p class="eyebrow" data-page-node-id="08bkvsKmAX73sXfXINpbnw"><span class="dot" data-page-node-id="AHvtZ5khFDE1rmxgZuV3IZ"></span>Chapter 02 — 共享文件库</p>
+      <h2 id="files-title" data-page-node-id="HTrgtAZwpw8sOj7Fgi04hB">群友共建的 <span class="mark mark--lime" data-page-node-id="KxjzW4BKZfx4vDXjFH7P48">47 份</span> 公开资料</h2>
+      <p data-page-node-id="FPYBmaXwBGMWUFfTSCt4Qm">从入门手册到回测工具，从反诈图鉴到脱敏数据集。全部可自由取用，唯一的请求是：看完请回来分享你的复盘。</p>
+    </header>
+
+    <div class="bento" data-page-node-id="AooXeR2B1w99aSRGR3stCn">
+
+      <!-- 01 大卡 -->
+      <article class="tile tile--hero reveal" style="--c-soft:var(--pink-soft)" data-page-node-id="3p6FWi63fCtVOj1Ua299BG">
+        <div class="tile__head" data-page-node-id="rlHOSjPwk1gJizlunnfIR3">
+          <span class="tag tag--pink" data-page-node-id="hF81OHQOmxWRMvHLUrJSga">PDF · 68 页</span>
+          <span class="tile__no" data-page-node-id="aizQVelHGeMBARhVZEP0pQ">FILE / 001</span>
+        </div>
+        <h3 data-page-node-id="LIOeCYUyeBgNgscNBr9Il2">《ACMer 理财入门手册 v3.0》</h3>
+        <p data-page-node-id="JIrE0ZED1s8O5rU02K7Z1d">把资产配置写成算法流程：从「先备 6 个月应急金」这条 base case 开始，一路推导到跨市场再平衡。全篇无术语黑箱，每个结论都给出可复现的计算过程。</p>
+
+        <div class="tile__art" data-page-node-id="gq6RaoZWbbn3ojoAXcf1gG">
+          <svg viewBox="0 0 360 130" role="img" aria-label="手册目录结构示意：四章递进" style="background:#fff" data-page-node-id="QfG61YG2mkxmI55qEEN7r9">
+            <rect width="360" height="130" fill="url(#p-dots)" opacity="0.12" data-page-node-id="cp5akPGCHwc6PCBymvcDEA"/>
+            <g stroke="#000" stroke-width="2.5" fill="#FFD3E9" data-page-node-id="I8bYu6L10jbShDk6ku5WTQ">
+              <rect x="16" y="20" width="72" height="34" rx="4" data-page-node-id="XJhBGljCpCRP10giDxrXsC"/>
+              <rect x="16" y="76" width="72" height="34" rx="4" data-page-node-id="dNtgrEjNFSSESSfpNPneJU"/>
+            </g>
+            <g stroke="#000" stroke-width="2.5" fill="#FFF7C4" data-page-node-id="D6BjC3cLixiu8QdFh0Fsaj">
+              <rect x="112" y="20" width="72" height="34" rx="4" data-page-node-id="diliNJdKp0W1tOySw3J531"/>
+              <rect x="112" y="76" width="72" height="34" rx="4" data-page-node-id="LDeP40J9vaAjrnzRYd2ZZj"/>
+            </g>
+            <g stroke="#000" stroke-width="2.5" fill="#C6EDFF" data-page-node-id="PHcIHfYF4vJmw0dViRQRrc">
+              <rect x="208" y="20" width="72" height="34" rx="4" data-page-node-id="g69eoMmsjGLDuNRBvJZxP5"/>
+              <rect x="208" y="76" width="72" height="34" rx="4" data-page-node-id="X0mhFLVK4EwMQh4UfXFpFn"/>
+            </g>
+            <g stroke="#000" stroke-width="2.5" fill="#C6F6C3" data-page-node-id="XeVr3P70QP3Q3e8dvH0199">
+              <rect x="304" y="48" width="44" height="34" rx="4" data-page-node-id="B4sv6dUmcvkdkuhWgHLCH6"/>
+            </g>
+            <g stroke="#000" stroke-width="2.5" fill="none" data-page-node-id="DdB3eHwy8IMboAnzlimfm9">
+              <path d="M88 37h24M184 37h24M280 37h24M184 93h24M280 93h24M280 65h24" data-page-node-id="uLzee7FsWYQzRDvFXRKC5F"/>
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="10" font-weight="700" fill="#0A0A0A" data-page-node-id="GUHl4M3Cf7MaaUZ27yQ6p1">
+              <text x="52" y="41" text-anchor="middle" data-page-node-id="XLjZ1C34BvqVhmaWTtPn4z">CH.1</text>
+              <text x="52" y="97" text-anchor="middle" data-page-node-id="atpKzS6kfkeRGWquqfysjw">CH.2</text>
+              <text x="148" y="41" text-anchor="middle" data-page-node-id="Q0mGEN5OC4UeMXmozkH5zB">CH.3</text>
+              <text x="148" y="97" text-anchor="middle" data-page-node-id="hMI3OIeS5Dhif2YaECYEI2">CH.4</text>
+              <text x="244" y="41" text-anchor="middle" data-page-node-id="mvel4TSRMCImCJ0oOh1fzj">CH.5</text>
+              <text x="244" y="97" text-anchor="middle" data-page-node-id="u56sCCDRP4TN9ql36hi1d8">CH.6</text>
+              <text x="326" y="69" text-anchor="middle" data-page-node-id="Xmcee9KNfLZ5FgLjDO8UdD">Q&amp;A</text>
+            </g>
+          </svg>
+        </div>
+
+        <ul class="tile__list" data-page-node-id="RFNLhlrRVQfVxwwsWFW4LQ">
+          <li data-page-node-id="3xvJlxgmGMlQTRtRdpPFpv">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="yNFiONGSD9wfbpE7Ci5H9P"><path d="M4 12l5 5L20 6" data-page-node-id="RY8pnAa3rEOHKUqaV9wKYQ"/></svg>
+            <span data-page-node-id="JUmkYerrrmiC5qgqojLdV9">6 章主线 + 21 个「伪代码决策流」</span>
+          </li>
+          <li data-page-node-id="U1rNS1415AIGYSifa946oo">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="jrlkaCtoyjNphypjSmoRgS"><path d="M4 12l5 5L20 6" data-page-node-id="oauUinBpouKTUpdpeJfsX9"/></svg>
+            <span data-page-node-id="sI80N8XfqjVE07r3WXvDAu">含 2026 版费率对照表与税务提示</span>
+          </li>
+          <li data-page-node-id="dyHuZR7202PcsIjrXScAco">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3.4" stroke-linecap="square" data-page-node-id="rRX2GcM4ImKe4VKb1fVwXQ"><path d="M4 12l5 5L20 6" data-page-node-id="X4PD3vM7AJmkbUMEF2FnJX"/></svg>
+            <span data-page-node-id="sMf5TDXnH7RZDcJOL7L9g1">累计下载 12,400+ 次，勘误 3 版</span>
+          </li>
+        </ul>
+
+        <div class="tile__foot" data-page-node-id="3IGPOB3m33PvhVtljRKA6Z">
+          <span class="tile__tags" data-page-node-id="jGMnXci0roioZ5CrGFMSLZ"><span class="tag" data-page-node-id="BD39pwyyl4OQITZf5dfX9u">入门</span><span class="tag tag--pink" data-page-node-id="kF2Q41vUuLK7tIAHfiGzks">手册</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="mquQekkShIoKjUC6F8RuTn">索取 PDF
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="RuRo7BboGMCe5fD8cBpkoe"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="D0XLNZeTjF6XrnlVsnUgND"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="tile tile--wide reveal" style="background:var(--blue-soft)" data-page-node-id="hvgCZos445RMDb87Xr6p1U">
+        <div class="tile__head" data-page-node-id="K7lRYBluSE99U2phoC0oAz">
+          <span class="tag tag--blue" data-page-node-id="AzNFVrwCK7ypFi7k8H18O7">CLI · 开源</span>
+          <span class="tile__no" data-page-node-id="WjRdetGWGtEg6BQyTuezz5">FILE / 002</span>
+        </div>
+        <h3 data-page-node-id="07IR7rA1Tqpn1ilJpPFJpU">acmer-compound 复利回测器</h3>
+        <p data-page-node-id="lGvxmcneg8EeUNm3cECwSb">命令行小工具，支持定投、再平衡、费率扣除与多组合对比，内置 2015–2025 主流指数数据。</p>
+        <div class="tile__art" style="margin-bottom:.9rem" data-page-node-id="tatMj57SRTvsGdCBjl2wZl">
+          <pre class="mini-code" aria-label="使用示例" data-page-node-id="qTBjvkIUy36fnP16vIV76C"><span class="cm" data-page-node-id="o8vzMwme82amRVwJJR71eS"># 安装 & 运行</span>
+$ pipx install acmer-compound
+$ acmer backtest <span class="k" data-page-node-id="3JaT90ydaA8TMGOZusqP1B">--plan</span> <span class="s" data-page-node-id="9FCW0tDkIvEYa4cKE8baph">spx70_ndx30</span> \
+              <span class="k" data-page-node-id="6BNKlGSeT3DAfKGjAlH5AC">--rebalance</span> <span class="s" data-page-node-id="nCGR4poyuoTmUBo0yO7GeC">quarterly</span> \
+              <span class="k" data-page-node-id="cBoTgQy4WM6a3ispTvvHP3">--fee</span> <span class="s" data-page-node-id="HrsShrFAae1nPIjUMTd1Qr">0.0015</span>
+<span class="cm" data-page-node-id="HbtubdwPji5yJ5P4ukDeue">→ CAGR 9.42% | MaxDD -24.7%</span></pre>
+        </div>
+        <div class="tile__foot" data-page-node-id="5kKADiJxIierk0piaLZ2VZ">
+          <span class="tile__tags" data-page-node-id="FTz1IrM0c60GH6eijaesN6"><span class="tag tag--blue" data-page-node-id="DPLE0i5CCqLMZRAmWtC6C1">Python</span><span class="tag" data-page-node-id="KZblMwEmXiynUU4yJHM8hA">MIT</span><span class="tag" data-page-node-id="r8K3DkIjmx1zs6D6Yn5XZq">1.2k ★</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="9RgEvZ9xu0vO1Qf2KnDGB6">查看仓库
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="ktEYLNyh9nXryrqFt5kppg"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="XBZaX7j1UoBjBmlDh4BKzJ"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="tile tile--wide reveal" style="background:var(--yellow-soft)" data-page-node-id="7ck1RsPX1n6zHeDjA3G7iD">
+        <div class="tile__head" data-page-node-id="w6WEIQPF56e8eocQSu4Zf8">
+          <span class="tag tag--yellow" data-page-node-id="I61hvkPF1FE1897kIbEUCl">年度合集</span>
+          <span class="tile__no" data-page-node-id="wuLSHtqlO0yG5aRizYG8Rd">FILE / 003</span>
+        </div>
+        <h3 data-page-node-id="1rQhab135RsbHGAFBMYXZA">群内大事记年刊 2025</h3>
+        <p data-page-node-id="7lgqztEotId4DfB5CkeEFe">把一年 68 场讨论压缩成一份 32 页的复盘：我们吵过什么、错在哪里、第二年打算怎么改。含全部数据快照与时间戳。</p>
+        <div class="tile__foot" data-page-node-id="e7OCG478f65eZ8neyaa49U">
+          <span class="tile__tags" data-page-node-id="tJgQQOSrFgHF5C0EhCmT7u"><span class="tag tag--yellow" data-page-node-id="4WdLOd0otYgfwSMEAdeGIB">复盘</span><span class="tag" data-page-node-id="4dcKqCgFeA3P46NF2kT7yJ">32 页</span></span>
+          <a class="tile__go" href="#timeline" data-page-node-id="QMgsVQOdCfx1cwJJhGXk0m">跳转大事记
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="DklO9ANYCZDEmXuwcosxUF"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="03HRH0PQJG3Ex4vEtGPTdO"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="tile reveal" style="background:var(--lime-soft)" data-page-node-id="BFIdJiGhJyqwwUtVnu9jS1">
+        <div class="tile__head" data-page-node-id="IELsPYInokbYw4EGAHXRwv">
+          <span class="tag tag--lime" data-page-node-id="i59UncawhiesY0E17HlnTE">模板</span>
+          <span class="tile__no" data-page-node-id="pFYasz8cIouMkV2i5VUoIe">004</span>
+        </div>
+        <h3 data-page-node-id="ORDl6mdr6GJbdWJrIw56BV">现金流记账模板</h3>
+        <p data-page-node-id="JVsQ7hCz1BpgBpclrpp8N0">Notion / 飞书双版本，自动算储蓄率与「拿铁因子」——先看见，才谈得上优化。</p>
+        <div class="tile__foot" data-page-node-id="KhjIqFeYrYgh2rV8bchIK1">
+          <span class="tile__tags" data-page-node-id="oiIGXJKaUsPGHB9M53g6Ce"><span class="tag tag--lime" data-page-node-id="9UGyg64wb2WowRc0DEJQxD">Notion</span><span class="tag" data-page-node-id="ipTATxA9McdmZWwr7oRtvP">飞书</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="XfWNHfFY18UJ4VKb1AxCfq">领取
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="LCohT0PAARRjwNtpPEC50F"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="8LYuFslx0Jco8j0rZfmBOT"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="tile reveal" style="background:var(--orange-soft)" data-page-node-id="FO8JDK6ogCjQW7hKSrfS5E">
+        <div class="tile__head" data-page-node-id="MJt23vbUBO9rw2EAhWlqKU">
+          <span class="tag tag--orange" data-page-node-id="bWVHJUSBqfCgej4UAH8rTB">决策树</span>
+          <span class="tile__no" data-page-node-id="bBlnaAFIL2Vur8gNx0Ss4k">005</span>
+        </div>
+        <h3 data-page-node-id="ipky5oN3CjgVRbA8J6SQsu">竞赛奖金怎么投</h3>
+        <p data-page-node-id="PtDG1psjwdck6b02bKrP2R">一次性大额收入（奖金 / 奖学金 / offer 签字费）的分配决策树：先补应急金，再清高息负债，最后才谈投资。</p>
+        <div class="tile__art" style="padding:.7rem;margin-bottom:.9rem" data-page-node-id="dOhzv4d83CxZgwAmxDJED0">
+          <svg viewBox="0 0 300 96" role="img" aria-label="奖金分配决策树：先应急金、再还高息负债、最后投资" data-page-node-id="HLSLzC2RnQ8B3CyU4O0LgI">
+            <g stroke="#000" stroke-width="2.4" fill="#FFD8C6" data-page-node-id="LD2WJYxcOsDOsaD6PrTCbl">
+              <rect x="6" y="34" width="76" height="30" rx="4" data-page-node-id="0jbTlJji01pk1ujQaibxk6"/>
+              <rect x="112" y="6" width="76" height="28" rx="4" data-page-node-id="yEDkDMaRMWvCJjrYtXcCpQ"/>
+              <rect x="112" y="62" width="76" height="28" rx="4" data-page-node-id="6CPRQbT26Cc45lzwZ7R8o9"/>
+              <rect x="218" y="34" width="76" height="30" rx="4" fill="#C6F6C3" data-page-node-id="bZ0Bl3OuILEEO4NiScTqtm"/>
+            </g>
+            <g stroke="#000" stroke-width="2.4" fill="none" data-page-node-id="486adj1BHW4lJpDXv9BGmb">
+              <path d="M82 49h30M188 20c18 0 12 29 30 29M188 76c18 0 12 -27 30 -27" data-page-node-id="TlXBAIm3e9KZt1MpSsAW6X"/>
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#0A0A0A" data-page-node-id="ojzrdmNEPjH0ErUDzJCzlr">
+              <text x="44" y="53" text-anchor="middle" data-page-node-id="0TkNEagvcZhOXoP0ZPg1ZI">BONUS</text>
+              <text x="150" y="24" text-anchor="middle" data-page-node-id="kleuLDWzLgoBtyBMGis1ka">应急金?</text>
+              <text x="150" y="80" text-anchor="middle" data-page-node-id="KtLObmXNK5XWYDq9ewXl59">高息债?</text>
+              <text x="256" y="53" text-anchor="middle" data-page-node-id="FJBc0Mj9VFCQHuD6iqBW0r">再投资</text>
+            </g>
+          </svg>
+        </div>
+        <div class="tile__foot" data-page-node-id="LcFz3WKxz6KSJ8WjqUHDvr">
+          <span class="tile__tags" data-page-node-id="4HJ1dAp6SjYecvjthnv8UJ"><span class="tag tag--orange" data-page-node-id="dnJpkcUp9TBYByONbKSwD9">1 页</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="9Efspk6jY4qcAtBGcqLOXI">查看
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="V2wvmCEkdenWQmWN2ceA6r"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="eVW9VZM8u0urqmSuIjjyRW"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="tile reveal" style="background:var(--purple-soft)" data-page-node-id="B22IMVOokzLJhTqey84FXU">
+        <div class="tile__head" data-page-node-id="RJF4Bk3rMHwcsfWs2INcsz">
+          <span class="tag tag--purple" data-page-node-id="VNyaOxlmSnRcu6GdrTEvkC">图鉴</span>
+          <span class="tile__no" data-page-node-id="3OcPbPkSpVxa4FcMeEq1LL">006</span>
+        </div>
+        <h3 data-page-node-id="S1g9R2qdila4MNRbpK4fXZ">反诈防坑图鉴</h3>
+        <p data-page-node-id="IXE9OitgMXHd4d1aqZqEGY">12 种高频骗局的「时间复杂度」分析：保本高息、内幕消息、代客操盘……每一种都给出可验证的识别信号。</p>
+        <div class="tile__foot" data-page-node-id="zoIFn53UvKsBFFO49RzqxP">
+          <span class="tile__tags" data-page-node-id="6CmM5Y8Q0eQQX4eJ6x1VKZ"><span class="tag tag--purple" data-page-node-id="4sl5rV6cVYV3sq3MzvbepZ">12 例</span><span class="tag" data-page-node-id="LjVpJ4lrVVINTNCmiMWsdK">必读</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="0YBVPR06r0T18AiQ1G1k54">查看
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="cxXiAEWQhGVYYJzzN6J7zw"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="gqWJCtnV1UgQtCCaWVeaSH"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article class="tile tile--half reveal" data-page-node-id="3zblmpLDRs4F7lXvFlyVld">
+        <div class="tile__head" data-page-node-id="TvFPz1u9EJu0VjE7rbkzfX">
+          <span class="tag tag--pink" data-page-node-id="hAAECltAqiGQeRxs73OErO">共读会</span>
+          <span class="tile__no" data-page-node-id="mR8HWwhS9uKI1TNLHuQdDL">007</span>
+        </div>
+        <h3 data-page-node-id="vZQlDZ5VC5GzGnopjEzKE1">每周共读会 · 第 92 期《聪明的投资者》</h3>
+        <p data-page-node-id="vNKgJoPuS5Qfm9Ewr3RkgW">每周三晚 21:00，一章精读 + 一次当周市场复盘。笔记全部归档公开，含群友提问与分歧记录——分歧比共识更有价值。</p>
+        <div class="tile__foot" data-page-node-id="gCF2F85zW4WSCQ5Vt8wVb7">
+          <span class="tile__tags" data-page-node-id="oagSr8M4NQpwP0AaNiBZH5"><span class="tag tag--pink" data-page-node-id="C9CiJ4ssS6IDwnPrgBC4Bf">92 期</span><span class="tag" data-page-node-id="NluGbLNJz5aqBlWVORifOj">笔记</span><span class="tag" data-page-node-id="HdHSups7VCATEouEZCTZv2">录音</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="15Evy0jSMXFAwb4yvViDIV">进入归档
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="NXpWCZvpzUfpEzzQfttW7C"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="AI1f3RjX4VCvIeRGLr76LY"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article class="tile tile--half reveal" style="background:var(--blue-soft)" data-page-node-id="2SH9S9n5APKLBpoPoPCeJR">
+        <div class="tile__head" data-page-node-id="fHHFoB01kIBRFirhtGs7vu">
+          <span class="tag tag--blue" data-page-node-id="LGZl68WdkgzPhZoKK6EFNJ">数据集</span>
+          <span class="tile__no" data-page-node-id="qU3ByZnGhzaN0bAqTpnjTD">008</span>
+        </div>
+        <h3 data-page-node-id="PEskw26DxQ6Lpp8DMKXxA6">群友持仓匿名脱敏数据集</h3>
+        <p data-page-node-id="JCLYhzEerdhZPLKxIQHgkY">1,200+ 份经脱敏处理的持仓快照，字段含年龄区间、风险偏好、持仓结构。仅用于回测教学，不含任何身份信息。</p>
+        <div class="tile__foot" data-page-node-id="gGgT4niQTezcZusyXznEyD">
+          <span class="tile__tags" data-page-node-id="F2FQDCfu3Zz5ah7bOpvcol"><span class="tag tag--blue" data-page-node-id="znscQo4jj0WgMUCvQXkfnD">CSV</span><span class="tag" data-page-node-id="yqaPO2BOKvxwT1BxIJPBv1">脱敏</span><span class="tag" data-page-node-id="yPrM5KlhaANTJgm2tHXI7S">教学用</span></span>
+          <a class="tile__go" href="#contact" data-page-node-id="jbv9RSvgzRts1JusqL4wcM">申请下载
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" data-page-node-id="Ed5XRo5kWiBQKUNmdfFbjA"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="v3X72GaWbQEXSRirlOeDv3"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     5. 大事记时间线
+     ========================================================== -->
+<section class="section section--alt" id="timeline" aria-labelledby="tl-title" data-page-node-id="NiOWT1xul3zizES2UCLzdo">
+  <svg class="deco" aria-hidden="true" viewBox="0 0 160 500" style="left:-70px;bottom:4%;width:150px;height:420px;opacity:.35" data-page-node-id="Xw3u33de719Oh0xVMHaFc3">
+    <rect width="160" height="500" fill="url(#p-noise)" opacity="0.5" data-page-node-id="FEe4kJoGTpQvccqODpeSIC"/>
+  </svg>
+
+  <div class="container" data-page-node-id="gKqOtQnUmJs78wJ0O8iqrB">
+    <header class="sect-head reveal" data-page-node-id="VDpDKHonqYGuLOPD73yXDQ">
+      <p class="eyebrow" data-page-node-id="rrFRv53YUomj2Y1fXuXOF6"><span class="dot" data-page-node-id="2ksKcBhPDAMxPy8pBeAHgf"></span>Chapter 03 — 群内大事记</p>
+      <h2 id="tl-title" data-page-node-id="NQkVlKgW5nbEii8533rAyS">三年，<span class="mark mark--pink" data-page-node-id="054zbjxxBQcABUkvOtoDD1">八个</span>值得记下的瞬间</h2>
+      <p data-page-node-id="MxKNjhTN7FUSnLDja3G6LC">从一场深夜的 Codeforces 讨论开始。没有宏大叙事，只有一群习惯较真的人，把每一笔决策都记下来。</p>
+    </header>
+
+    <ol class="timeline" data-page-node-id="sQyCzhcOxlv4B2dlkpEhet">
+      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="EFAYQdHA4G2pFcjJeveoK4">
+        <div class="tl-card" data-page-node-id="WtsspaEhsa55Yd9jHWRXE3">
+          <div class="tl-card__top" data-page-node-id="ppFXQssP0eesvmaKXMxdi3">
+            <span class="tl-date" data-page-node-id="90PhGXuvGuRJQvIBs8j6FX">2023.03</span>
+            <span class="tag tag--pink" data-page-node-id="Ii1j1RamR39QBdHNLiPxw3">起点</span>
+          </div>
+          <h3 data-page-node-id="9dP0CoH3GEnJBqkOgXTlqW">建群：从一场深夜讨论开始</h3>
+          <p data-page-node-id="MhRXrqgEWzC3MJwROqDxwk">区域赛出线后，群里聊起「奖金要不要买显卡」。三小时后话题变成资产配置，于是有了这个群。初始成员 7 人。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="omnSpYVDzCyrrKCavTMPPH">
+        <div class="tl-card" data-page-node-id="ZpZ7Kma4CtmY5QMEKJrhn1">
+          <div class="tl-card__top" data-page-node-id="C7C2CyBQD6MuTY0Ld6KZjb">
+            <span class="tl-date" data-page-node-id="UKsSMhEl77pR0xKX06e4eK">2023.07</span>
+            <span class="tag tag--blue" data-page-node-id="V57N9kjycb8RVUaJtJY8P1">第一次分享</span>
+          </div>
+          <h3 data-page-node-id="xYzwuK3qZrA2OTZAqNXT6n">《复利不是魔法，是指数函数》</h3>
+          <p data-page-node-id="jK8egBsidz6u0ecIGDMelm">第一次线上分享，到场 43 人。核心结论只有一句：复利最大的敌人不是低收益，而是中断。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--yellow);--c-soft:var(--yellow-soft)" data-page-node-id="21B7Cn7HNxJ9h7tF0GHMv2">
+        <div class="tl-card" data-page-node-id="ATJoL0KW7BZuy6D4UZKQbM">
+          <div class="tl-card__top" data-page-node-id="J1wdwhRE4FeCHmI2TILEGP">
+            <span class="tl-date" data-page-node-id="QIybzBcgxEQfg8sPNUyMEQ">2023.11</span>
+            <span class="tag tag--yellow" data-page-node-id="2UqQNStOJVLqTziOPYCA24">发布</span>
+          </div>
+          <h3 data-page-node-id="Nwk8YSgwDy7spafVCfNqyH">《ACMer 理财入门手册》v1.0 发布</h3>
+          <p data-page-node-id="8sOk6zVKNKRgkQ2SZofUOC">群友协作 5 个月，把零散讨论整理成 28 页系统文档。发布当周被 12 所高校 ACM 队转发。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--purple);--c-soft:var(--purple-soft)" data-page-node-id="BRPV9gbxcpV1ppjtaHC41l">
+        <div class="tl-card" data-page-node-id="DZto2dueT4N4sOQTRvklbj">
+          <div class="tl-card__top" data-page-node-id="02L6ihNwjglN6viUjTvjiw">
+            <span class="tl-date" data-page-node-id="qi0dQV7Xy3NGCwXuzoDTFg">2024.04</span>
+            <span class="tag tag--purple" data-page-node-id="lLbTX3mdsPPsWfHYWiPzQX">出圈</span>
+          </div>
+          <h3 data-page-node-id="HcFzECOCVaJTovnJEpbEk9">反诈图鉴上线，30+ 高校队伍转发</h3>
+          <p data-page-node-id="glvsH329omqipGO03E0Sa4">起因是两位群友差点踩坑。我们把骗局拆成「承诺收益率」这一个可验证指标，做成一页图鉴。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--lime);--c-soft:var(--lime-soft)" data-page-node-id="HyC6mM6HQregpjviAia1KO">
+        <div class="tl-card" data-page-node-id="JoU8J0xxXTwZwrT5fYXo2n">
+          <div class="tl-card__top" data-page-node-id="WrSfTtS6ohw995SGHlyYXk">
+            <span class="tl-date" data-page-node-id="Oy5w1RfsdHDuY4sn1Qiv5f">2024.09</span>
+            <span class="tag tag--lime" data-page-node-id="eMpaAiRmzeWqdsieBnoxor">开源</span>
+          </div>
+          <h3 data-page-node-id="GKGTCPlumef7Z3tWAdcbvb">acmer-compound 回测器开源</h3>
+          <p data-page-node-id="3d22peoSxjN2FaTZY3kOTD">「别信感觉，跑一下数据。」工具上线半年 GitHub 破 1.2k star，收到 47 个 PR，其中 11 个来自群友。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--orange);--c-soft:var(--orange-soft)" data-page-node-id="oeQ8Snn45pvoHWBPY7e2Eu">
+        <div class="tl-card" data-page-node-id="v52MIxdalORUiobDUyL8s7">
+          <div class="tl-card__top" data-page-node-id="23yUvpB8jyDCFNEgzPIHxC">
+            <span class="tl-date" data-page-node-id="CJQk93AtkWPagnbm0HOYWA">2025.03</span>
+            <span class="tag tag--orange" data-page-node-id="HeeqwtwsIipg5E3XcTKpXi">线下</span>
+          </div>
+          <h3 data-page-node-id="wDZNTZRPYDWTLst0H6gIFm">两周年：第一次线下面基（杭州）</h3>
+          <p data-page-node-id="lq9UDS1LuQAP7CWuGEcScE">到场 68 人，从下午两点聊到晚上十点。最大的共识是：理财的难点从来不在知识，而在执行。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--pink);--c-soft:var(--pink-soft)" data-page-node-id="sFsBlIOp0lQZyLUsQEtcHm">
+        <div class="tl-card" data-page-node-id="UitVtQt7IPC1kaLCSZRceM">
+          <div class="tl-card__top" data-page-node-id="Rv5MPAHOrXpsE0MamMZApF">
+            <span class="tl-date" data-page-node-id="M32u8HocJIUcbzBEhc0otC">2025.11</span>
+            <span class="tag tag--pink" data-page-node-id="9W47KngLsWEuELKcgXTNbQ">沉淀</span>
+          </div>
+          <h3 data-page-node-id="vF01InkR9dN28Am77c0vVB">《210 场讨论提炼出的 12 条纪律》</h3>
+          <p data-page-node-id="V3RGGiJ3s5e12eZxfwOHtu">年度复盘：把三年里反复出现的错误归并为 12 条可执行纪律，其中第 1 条是「先写下你的卖出理由」。</p>
+        </div>
+      </li>
+
+      <li class="tl-item reveal" style="--c:var(--blue);--c-soft:var(--blue-soft)" data-page-node-id="BJSRqlxHuEpH3HRuTmxsVb">
+        <div class="tl-card" data-page-node-id="JUvy42fcH5Ssj9bBvxIyRl">
+          <div class="tl-card__top" data-page-node-id="o3t3pbiEYyeRFZ2M2YTBbc">
+            <span class="tl-date" data-page-node-id="Z63xWnBin8hHlD6n8mOFPp">2026.06</span>
+            <span class="tag tag--blue" data-page-node-id="GWZwUTD9OVgoWDc8ApT1qZ">当下</span>
+          </div>
+          <h3 data-page-node-id="zVm4aCyAjTIF3qqQnn3LCB">手册 v3.0 + 匿名脱敏数据集发布</h3>
+          <p data-page-node-id="HbeyPKqVLtgMGBLto4JrgB">新增跨境资产、费率对照与税务章节；同步开放 1,200+ 份脱敏持仓快照供回测教学使用。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ==========================================================
+     6. 关于
+     ========================================================== -->
+<section class="section section--paper" id="about" aria-labelledby="about-title" data-page-node-id="6qdfrt8WxjLam46ZMtVEQs">
+  <div class="container" data-page-node-id="IA3cm51haQk8MhtNZqbefX">
+    <header class="sect-head reveal" data-page-node-id="IQBWslnl4wSYcr3F7YmcsB">
+      <p class="eyebrow" data-page-node-id="THx8Wfe2RqQI7PwCuWXykC"><span class="dot" data-page-node-id="ZaNNaX2s6eQlE0CqRndJ7U"></span>Chapter 04 — 关于我们</p>
+      <h2 id="about-title" data-page-node-id="1b4koB4W2UCQ7kjh0NKKqK">一群<span class="mark mark--blue" data-page-node-id="mYAqMVevmxygzqN0TSsHbe">不信运气</span>的人</h2>
+    </header>
+
+    <div class="about-grid" data-page-node-id="6Ah1XK1YHvcBJ2SY3ddgO3">
+      <aside class="about-card reveal" aria-labelledby="about-card-title" data-page-node-id="60PrvsFmnMtOxHSc4lQArA">
+        <svg class="deco" aria-hidden="true" viewBox="0 0 200 200" style="right:-50px;bottom:-50px;width:180px;height:180px;opacity:.35" data-page-node-id="9VDoWG6ZZA8VLy8Lg1dgC8">
+          <rect width="200" height="200" fill="url(#p-dots)" data-page-node-id="IAgJ8yBILgqpKJWLUD07bp"/>
+        </svg>
+
+        <div class="about-card__top" data-page-node-id="w4WnOiN5qA6sSfNCHH2n6B">
+          <span class="avatar" aria-hidden="true" data-page-node-id="OyX0j3Qj3gVyvaU7HuCcMH">AC</span>
+          <div data-page-node-id="KOwm2lWFajzJ3xRaZW7VuQ">
+            <h3 id="about-card-title" data-page-node-id="5CVRdbEWtXwkV65E0Po43N">acmer理财普及录</h3>
+            <p class="about-card__role" data-page-node-id="Q3knPwkLh7cR0Xe3doTRMj">EST. 2023 · 非营利交流社群</p>
+          </div>
+        </div>
+
+        <p data-page-node-id="ExfIEn5EeMkv57umpGfYGP">我们不是机构，也不打算成为机构。群里没有「老师」，只有一群愿意把自己的持仓、判断和错误都摊开给人看的人。</p>
+        <p data-page-node-id="ceZMcoyWgud7qZW8XPHJkJ">所有内容免费、开源、可质疑。如果发现我们算错了，请直接拍过来——勘误记录本身就是最好的教材。</p>
+
+        <ul class="about-stats" data-page-node-id="tmDYPNzSbs6X9dCsiqN6Ip">
+          <li data-page-node-id="ZJvGUm0aBQk8mnEFxKuDmE"><b data-page-node-id="kE1qBT1KOCmxjDwAiJm6a1">1,250</b><span data-page-node-id="OJ2QtI7v458KvAxI84fWxo">群友</span></li>
+          <li data-page-node-id="fDwqyJLv1GNMNndFl9wq1z"><b data-page-node-id="zfL2dCqWmgDOzmkjcmzFVl">47</b><span data-page-node-id="Ww5n2LQ3Riu89jwpmWlVff">文件</span></li>
+          <li data-page-node-id="EqFbLHho7G4lOukw1tkU3E"><b data-page-node-id="EInF9mRjJjhlcXoowy03WT">210</b><span data-page-node-id="BppyjzH04gYf9uJQIhfeeU">复盘</span></li>
+        </ul>
+      </aside>
+
+      <div class="principles" data-page-node-id="8tEaqfFCCm9mqCYOO6hD7M">
+        <article class="principle reveal" style="--c:var(--pink)" data-page-node-id="45N2oCfy5LkVmymlC4FpPF">
+          <span class="principle__no" aria-hidden="true" data-page-node-id="AXXA6TiSleuVRMFvpLvsH2">01</span>
+          <div data-page-node-id="XgpFPUvJbEqabm6nbHjSjW">
+            <h3 data-page-node-id="YBFXU0I4jLiAFhEilo9bzF">不荐股、不代客理财、不收费</h3>
+            <p data-page-node-id="NqsHEA5R0iSBkIGM4oSSMQ">任何以本群名义推荐具体标的或收取费用的行为，都是假的。我们只输出方法、数据与思维框架。</p>
+          </div>
+        </article>
+
+        <article class="principle reveal" style="--c:var(--yellow)" data-page-node-id="WrpZ8JavWVf924HYb5miRr">
+          <span class="principle__no" aria-hidden="true" data-page-node-id="9MkwQ4xDlMfcRHQOr6Lzlg">02</span>
+          <div data-page-node-id="dSeI1SimjXsznQZE8ttt5B">
+            <h3 data-page-node-id="P95gy2WHpKkLAuBcnkoFuc">所有结论必须带数据源与时间戳</h3>
+            <p data-page-node-id="mYdmeAC7gkduaKMlS7m47L">没有时间戳的收益率等于没有收益。群里每条数据都要标注取数口径（整体法 / 加权平均）与参考日期。</p>
+          </div>
+        </article>
+
+        <article class="principle reveal" style="--c:var(--lime)" data-page-node-id="YUx2TJJ10YkRHcCUPtaBZD">
+          <span class="principle__no" aria-hidden="true" data-page-node-id="ZVgPE3L4bfWRkSyOPCqg1s">03</span>
+          <div data-page-node-id="sdPUOcHPxIfCZqdLvJdAwH">
+            <h3 data-page-node-id="tonERVPuSP5Mcz697w52s1">承认无知，错了就发勘误</h3>
+            <p data-page-node-id="U5GIpKRXolIQxn0YBGtSpc">我们公开过 3 版手册勘误，其中最严重的一次是把加权平均口径当成了整体法。承认它，比掩盖它更重要。</p>
+          </div>
+        </article>
+
+        <article class="principle reveal" style="--c:var(--blue)" data-page-node-id="ZXow9E7LgBsIByzQhd38Xa">
+          <span class="principle__no" aria-hidden="true" data-page-node-id="96EPg3uJeVkQK4v4oBrbza">04</span>
+          <div data-page-node-id="lsYIUZ4HnN09WlSh2NuiCi">
+            <h3 data-page-node-id="rQt9cgKpg43KELcPPRwpir">把「不知道」当成合法答案</h3>
+            <p data-page-node-id="YFKFmhuH9CUycpZRBpvOxh">宏观预测、短期择时、个股 alpha——这些我们都承认做不好，所以干脆不做。能力圈之外，不下注。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================
+     7. 联系 CTA（黄底）
+     ========================================================== -->
+<section class="cta" id="contact" aria-labelledby="cta-title" data-page-node-id="lET3eu9MqptZQuwgW9DRHR">
+  <svg class="deco" aria-hidden="true" viewBox="0 0 400 200" style="left:-40px;top:6%;width:300px;height:150px;opacity:.28" data-page-node-id="lbSEK0D4DJhEWn5iDwQFpV">
+    <rect width="400" height="200" fill="url(#p-stripe)" data-page-node-id="pcw86ldTrlGyLSc44UecJq"/>
+  </svg>
+  <svg class="deco" aria-hidden="true" viewBox="0 0 300 300" style="right:-60px;bottom:-40px;width:260px;height:260px;opacity:.3" data-page-node-id="cyX3C0ysi8UB1iACvhPQqs">
+    <rect width="300" height="300" fill="url(#p-dots)" data-page-node-id="mWqR0OMzpvrwaDh8VGr5xd"/>
+  </svg>
+
+  <div class="container cta__inner" data-page-node-id="QBetNAP2TnGC3BjXtP9hEV">
+    <p class="eyebrow reveal" style="background:#fff" data-page-node-id="WFvAzPE3YzNGB7g8NfC5SR"><span class="dot" data-page-node-id="odedN8SMiCPz871Fd6AA3J"></span>Chapter 05 — 加入我们</p>
+    <h2 id="cta-title" class="reveal" data-page-node-id="3WUTKgSFbtzqAcsTz9mmKM">准备好写你的<br data-page-node-id="ZEToPi8tfaLTBaCKzqamsO">第一行<span class="mark mark--pink" style="background:#fff" data-page-node-id="pja4Jkds2a5jAoEk8tzDBx">财务代码</span>了吗？</h2>
+    <p class="reveal" data-page-node-id="SdhCq3VEzNL8mIWxYFSGzr">入群没有门槛，只有一个要求：愿意把自己的思考过程写下来。写下来，才谈得上复盘；能复盘，才算真的学会。</p>
+
+    <div class="cta__actions reveal" data-page-node-id="HNpoUIelyV9Lfh6MQ1FmUw">
+      <a class="btn btn--black" href="mailto:hello@acmer-finance.dev?subject=申请加入%20acmer理财普及录" data-page-node-id="eWKIWMQtGjuB2xfkxGoXgd">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" data-page-node-id="5a0M09MHfdsXiWCNRZzPKH"><path d="M3 6h18v12H3z" data-page-node-id="6tz032StOOPnZg4grzGNHu"/><path d="M3 7l9 6 9-6" data-page-node-id="1P90FCNMWD0EtmthVEPXds"/></svg>
+        申请入群
+      </a>
+      <a class="btn btn--pink" href="#files" data-page-node-id="7sio3xUQhKWj0T0OXYneT3">
+        先翻文件库
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="EvzcYHeLNQZACm8jQVPj8f"><path d="M5 12h13M12 5l7 7-7 7" data-page-node-id="KVbE3dYGrY9aLBC75Li96b"/></svg>
+      </a>
+    </div>
+
+    <div class="reveal" style="display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;align-items:center" data-page-node-id="VU0yC99eVlEQOJPK6QhIyh">
+      <button class="copy-pill" id="copyMail" type="button" data-mail="hello@acmer-finance.dev" data-page-node-id="d4dDc8eOaoUk6MbyFZWHaQ">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" data-page-node-id="V88JHLUxLEmKMCUPrjQBRv"><rect x="9" y="9" width="11" height="11" rx="1" data-page-node-id="aE4SIK7N9nOgjiJN3yXEGU"/><path d="M5 15V4h11" data-page-node-id="rvA4DZQ9i0ljbvRmXr37e5"/></svg>
+        <span id="copyMailText" data-page-node-id="J5d84rrBEujGGZbyHSW5Bk">hello@acmer-finance.dev</span>
+      </button>
+      <p class="cta__note" data-page-node-id="GEZkQk1HkkULCWCCTxLAXr"><span aria-hidden="true" data-page-node-id="ByipGPWDUJlNlhofBIoqcv">!</span> 本群不提供任何投资建议，入群即视为已知悉风险</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ==========================================================
+     8. FOOTER（黑底）
+     ========================================================== -->
+<footer class="footer" data-page-node-id="1nPYlQp4f8dwxtHoSPBnLE">
+  <div class="container footer__inner" data-page-node-id="lyKOUUhZ8v12LWR7yjDGGM">
+    <div class="footer__grid" data-page-node-id="QBFjBhvG910HDCqtZGRlox">
+      <div data-page-node-id="Ahhv02Ak0huN6cmfQtNEmp">
+        <div class="footer__brand" data-page-node-id="Rb2cHICGM8wXrH0ihPondS">
+          <span class="nav__mark" aria-hidden="true" data-page-node-id="FfluvP7FtOzC8wAd0rZD9q">A</span>
+          <span class="nav__name" style="color:#fff" data-page-node-id="WFYGvsaDD0sdEi2NwIr0h5">acmer理财普及录<span style="color:#8E8E88" data-page-node-id="XiuoDMxra9x5MOdyKhLnjg">ACM × FINANCE LOG</span></span>
+        </div>
+        <p data-page-node-id="pPmVw0WoPhNPzqYpzPTZTl">把算法竞赛的严谨写进你的钱包。一个由选手自发组成、坚持了三年的理财认知记录群。</p>
+      </div>
+
+      <div data-page-node-id="DkAsK7eBz8g7abDPlQES4e">
+        <h4 data-page-node-id="AqJonjNM4gENyBdUn6Qk0r">站内导航</h4>
+        <ul class="footer__list" data-page-node-id="rMqOGG24Hu8hRY3XJViAiw">
+          <li data-page-node-id="agL4GEOwwRsO5OQoaoRGvJ"><a href="#skills" data-page-node-id="Yt2eRcRqAXg4UHri9INenn">认知图谱</a></li>
+          <li data-page-node-id="EGi4ArKWrkm9w7EEo1fhio"><a href="#files" data-page-node-id="mHSFEhv9N4p4fhCEEa7ZBx">共享文件库</a></li>
+          <li data-page-node-id="MAq94J0nN9HGIAAUsVNRQ7"><a href="#timeline" data-page-node-id="GlCzHZj2CIpZaUVsmTRMjq">群内大事记</a></li>
+          <li data-page-node-id="QhDfT3KBC2i6LDovogQXDq"><a href="#about" data-page-node-id="tziEnbR8EgIw6o5zI4rkJW">关于我们</a></li>
+        </ul>
+      </div>
+
+      <div data-page-node-id="FEBrKDOKq3Sd74OEX4rAf6">
+        <h4 data-page-node-id="9pOTLOBx8APT4lwPApgZhQ">热门文件</h4>
+        <ul class="footer__list" data-page-node-id="U5TKKM6cQGd1YdB6xk1zm1">
+          <li data-page-node-id="cKjU0wogeZio9fDGs7QLoF"><a href="#files" data-page-node-id="1GnWcLEAqtFdDipmVAeOvj">入门手册 v3.0</a></li>
+          <li data-page-node-id="C91sruQppJmQTxFDFc07rk"><a href="#files" data-page-node-id="Py2EVKkKa0CMRRDMmFqJ26">acmer-compound</a></li>
+          <li data-page-node-id="5ViEcB6Ak4idc40MqhcHzx"><a href="#files" data-page-node-id="WrjT8d9fvjKkhfVfxD0EGQ">反诈防坑图鉴</a></li>
+          <li data-page-node-id="2zNyf93K13BjSWvrs8nrkC"><a href="#files" data-page-node-id="ZOi278JDOMtsqv65dTP83M">脱敏数据集</a></li>
+        </ul>
+      </div>
+
+      <div data-page-node-id="hkzo2QvrYhHNoADGtO0C89">
+        <h4 data-page-node-id="OTBOSMfSqQCEBsxHfvPyLY">联系</h4>
+        <ul class="footer__list" data-page-node-id="gFiaT2qwNmjt4sCcMjxePo">
+          <li data-page-node-id="C8WXmamaHbuW7t68cpJqlg"><a href="mailto:hello@acmer-finance.dev" data-page-node-id="ezA18NhgZ21V8BSRJmU0Ib">hello@acmer-finance.dev</a></li>
+          <li data-page-node-id="dhAUPDRLxF0PfrRwHwzm4v"><a href="#contact" data-page-node-id="6jpX3HnlDUMLyCFY7Abe24">申请入群</a></li>
+          <li data-page-node-id="dqLAQGgtdlReRdtF6lOh9H"><a href="#files" data-page-node-id="iOalZq8dkbv4ZXb0kU881Q">投稿 / 分享复盘</a></li>
+          <li data-page-node-id="m2mhMEopTweRQaHq4YsInA"><a href="#about" data-page-node-id="qF2Ruf7rXJltqYcIoK1ekK">勘误反馈</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar" data-page-node-id="9T1JyLVFLa4sFxRGNcNgHc">
+      <p data-page-node-id="8CxhWHCAIPQy4DKWJsyiGN">© <span id="year" data-page-node-id="YaxHK4IFBys7rS2dF8xyne">2026</span> acmer理财普及录 · 内容采用 CC BY-NC-SA 4.0 协议共享</p>
+      <p data-page-node-id="MZEHnTpBaoCr1IHq4CXjh2">本站所有内容不构成投资建议 · 数据仅供学习交流</p>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" type="button" aria-label="回到页面顶部" data-page-node-id="kM7jzDnEH69hyJnxtfvEZO">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" data-page-node-id="4p7XGF0fc4EKixtCSMNnI5"><path d="M12 19V6M5 12l7-7 7 7" data-page-node-id="CH5MzJaI0rHGTpSQb5D4GU"/></svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 年份 ---------- */
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  /* ---------- 滚动进度 + 回到顶部 + 导航状态 ---------- */
+  var progress = document.getElementById('navProgress');
+  var toTop = document.getElementById('toTop');
+  var ticking = false;
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+    if (toTop) toTop.classList.toggle('is-on', window.scrollY > 700);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  if (toTop) {
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ---------- 移动端导航 ---------- */
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('navMenu');
+
+  function closeMenu() {
+    if (!menu || !toggle) return;
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '打开导航菜单');
+  }
+  if (toggle && menu) {
+    toggle.addEventListener('click', function () {
+      var open = menu.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 960) closeMenu();
+    });
+  }
+
+  /* ---------- 滚动揭示 ---------- */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  revealEls.forEach(function (el, i) {
+    el.style.transitionDelay = Math.min(i % 6, 5) * 60 + 'ms';
+  });
+
+  if ('IntersectionObserver' in window && !reduce) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  /* ---------- 进度条动画 ---------- */
+  var bars = Array.prototype.slice.call(document.querySelectorAll('.bar__fill'));
+
+  function fillBar(bar) {
+    var w = bar.getAttribute('data-w') || '0';
+    bar.style.width = w + '%';
+  }
+
+  if ('IntersectionObserver' in window && !reduce) {
+    var barObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          fillBar(entry.target);
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    bars.forEach(function (b) { barObserver.observe(b); });
+  } else {
+    bars.forEach(fillBar);
+  }
+
+  /* ---------- 导航高亮 ---------- */
+  var sections = ['timeline', 'files', 'skills', 'about']
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var sectObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = '#' + entry.target.id;
+        navLinks.forEach(function (a) {
+          if (a.classList.contains('nav__cta')) return;
+          a.classList.toggle('is-active', a.getAttribute('href') === id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { sectObserver.observe(s); });
+  }
+
+  /* ---------- 复制邮箱 ---------- */
+  var copyBtn = document.getElementById('copyMail');
+  var copyText = document.getElementById('copyMailText');
+  var copyTimer = null;
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var mail = copyBtn.getAttribute('data-mail') || '';
+      var done = function () {
+        copyBtn.setAttribute('data-copied', 'true');
+        if (copyText) copyText.textContent = '已复制 ✓';
+        window.clearTimeout(copyTimer);
+        copyTimer = window.setTimeout(function () {
+          copyBtn.removeAttribute('data-copied');
+          if (copyText) copyText.textContent = mail;
+        }, 1800);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail).then(done, function () { window.location.href = 'mailto:' + mail; });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = mail;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) { window.location.href = 'mailto:' + mail; }
+        document.body.removeChild(ta);
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
