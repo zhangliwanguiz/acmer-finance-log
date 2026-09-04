@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WB-30 约束加权指数（2026-08-28）</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{--bg:#f5f7fa;--card:#fff;--ink:#1f2733;--sub:#5b6b7e;--line:#e6ebf1;--red:#d23b3b;--green:#1f9d55;--blue:#2f6fd0;--amber:#d98a00;--purple:#6a4fb0;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:28px 16px 60px}
+  .wrap{max-width:1220px;margin:0 auto}
+  header{margin-bottom:16px}
+  h1{font-size:25px;font-weight:800}
+  .sub{color:var(--sub);font-size:14px;margin-top:6px}
+  .tldr{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0 14px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 12px}
+  .kpi .v{font-size:20px;font-weight:800}
+  .kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:18px;box-shadow:0 1px 3px rgba(20,40,80,.04)}
+  .card h2{font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card h2:before{content:"";width:5px;height:18px;background:var(--blue);border-radius:3px;display:inline-block}
+  .card h3{font-size:15px;margin:14px 0 8px;color:#2f4a66}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .chart{width:100%;height:360px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f7f9fc;color:var(--sub);font-weight:600;white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.tot td{background:#eef4ff;font-weight:700;border-top:2px solid #c9d8f0}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:#eef2f7;color:var(--sub);margin-left:4px}
+  .tag.a{background:#fdeaea;color:var(--red)}
+  .tag.h{background:#e8f1ff;color:var(--blue)}
+  .cu{font-size:10px;color:var(--sub)}
+  .pin{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;background:#fff0f0;color:var(--red);margin-left:4px}
+  .r-med{color:var(--amber);font-weight:600}
+  .r-high{color:var(--red);font-weight:700}
+  .rk{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;color:#fff}
+  .rk.med{background:var(--amber)} .rk.high{background:var(--red)} .rk.watch{background:var(--blue)}
+  .disc{background:#fff8f0;border:1px solid #f3dcb0;border-radius:12px;padding:14px 16px;font-size:12.5px;color:#7a5a16;margin-top:6px}
+  .note{font-size:13px;color:var(--sub);background:#f0f5ff;border-left:3px solid var(--blue);padding:10px 12px;border-radius:6px;margin:10px 0}
+  .note.amber{background:#fff8f0;border-left-color:var(--amber)}
+  .rules{background:#f7fbf6;border:1px solid #d4e8cf;border-radius:12px;padding:12px 16px;font-size:13.5px}
+  .fin{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 4px}
+  .fkpi{background:linear-gradient(135deg,#f0f5ff,#e8f0ff);border:1px solid #d6e2f7;border-radius:14px;padding:12px 10px;text-align:center}
+  .fkpi.hl{background:linear-gradient(135deg,#eafaf0,#d8f5e4);border-color:#bfe6cd}
+  .fkpi .v{font-size:21px;font-weight:800;color:var(--blue)}
+  .fkpi.hl .v{color:var(--green)}
+  .fkpi .l{font-size:11.5px;color:var(--sub);margin-top:3px}
+  .fkpi .sub2{font-size:10px;color:#7a9}
+  .inddist{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;margin-top:8px}
+  .formula{background:#0f1b2d;color:#d6e2f7;border-radius:12px;padding:14px 18px;font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:13px;line-height:1.9;margin:10px 0}
+  .formula .fl{white-space:nowrap;overflow-x:auto}
+  .formula .hl{color:#7ee0a6;font-weight:700;margin-top:4px}
+  .ana{margin:6px 0 2px 18px;font-size:13.5px}
+  .ana li{margin:7px 0}
+  .scroll{overflow-x:auto}
+  .foot{font-size:12px;color:var(--sub);margin-top:8px}
+  .alloc-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f0f5ff;border:1px solid #d6e2f7;border-radius:12px;padding:12px 14px;margin:12px 0 8px}
+  .alloc-bar label{font-weight:700;font-size:13.5px;color:#274b7a}
+  .alloc-bar input{width:200px;padding:7px 10px;font-size:14px;border:1px solid #b9cbe6;border-radius:8px;outline:none;font-variant-numeric:tabular-nums;background:#fff}
+  .alloc-bar input:focus{border-color:#2f6fd0;box-shadow:0 0 0 3px rgba(47,111,208,.15)}
+  .alloc-hint{font-size:12px;color:var(--sub)}
+  .alloc-sum{font-size:13px;color:#274b7a;background:#eef6ee;border:1px solid #cfe7d4;border-radius:10px;padding:8px 12px;margin-bottom:10px}
+  .alloc-sum b{color:#1f7a44}
+  #mainTable th{cursor:default;user-select:none;position:relative}
+  #mainTable th[data-key]{cursor:pointer}
+  #mainTable th[data-key]:hover{background:#eaf1fb;color:#274b7a}
+  #mainTable th.sort-asc::after{content:" ▲";color:var(--blue);font-size:10px;margin-left:2px}
+  #mainTable th.sort-desc::after{content:" ▼";color:var(--blue);font-size:10px;margin-left:2px}
+  #mainTable td.alloc-col,#mainTable th.alloc-col{background:#f3f8ff}
+  @media(max-width:900px){.charts{grid-template-columns:1fr} .tldr{grid-template-columns:1fr 1fr} .fin{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>WB-30 约束加权指数</h1>
+    <div class="sub">30 只成分股 · 约束加权（自由流通市值 + 单股上限 + 单行业上限） · 基期 2026-08-28 · 基点 1000</div>
+  </header>
+
+  <div class="tldr">
+    <div class="kpi"><div class="v">15.64 万亿</div><div class="l">指数总市值(RMB)</div></div>
+    <div class="kpi"><div class="v">13.77%</div><div class="l">第一大权重 腾讯控股</div></div>
+    <div class="kpi"><div class="v">33.51%</div><div class="l">前三大合计</div></div>
+    <div class="kpi"><div class="v">66.42%</div><div class="l">前十大合计</div></div>
+    <div class="kpi"><div class="v">72.56% / 27.44%</div><div class="l">A股 / 港股</div></div>
+  </div>
+
+  <div class="card">
+    <h2>组合加权财务指标 & 实际回报增长率</h2>
+    <div class="note" style="border-left-color:#10b981;background:#ecfdf5;color:#065f46"><b>口径：固定股数买入持有</b>（源自 wb-const-shares-backtest 方法论）。假设本金 <b>X = 1,000,000 元</b>，按<b>约束后权重 w*</b> 买入固定股数、此后<b>不再调仓</b>。组合市值 P = X·Σw* = X；组合盈利 E = X·Σ(w*/PE) = 90,932 元；组合净资产 B = E/ROE = 665,956 元。<b>恒等式 P = E × PE 在此口径下精确成立</b>（PE = 1/Σ(w*/PE) = 11.00，回代 P/E = 10.9973，残差 0.00e+00）。以下所有加权指标均反映"固定股数买入持有"的真实持仓结构，而非原始市值聚合。</div>
+    <div class="note">本表全部财务类加权指标，均基于各成分股<b>最新已披露的财报 TTM 口径</b>：共 30 只成分股，其中 <b>2026年中报 TTM（19只）、2026年一季报 TTM（11只）</b>。具体每家所用报告期见下方主表「财报口径」列。数据快照截至 <b>2026-08-28</b> 收盘，EPS 已统一折算为人民币（港股按 1 HKD = 0.8654 RMB）。<br><b>权重口径说明</b>：本指数采用「行业截断 + 溢出现金注水回填 + 集群约束(纳指100规则) + 单股15%上限 + 迭代收敛」法，约束后权重合计 = <b>100.00%</b>，即<b>满仓配置、无现金残留</b>；所有加权财务指标均按 100% 配置口径计算。</div>
+    <h3>① 指标计算口径与公式</h3>
+    
+    <div class="formula">
+      <div class="fl" style="color:#1e40af;font-weight:700">▎口径：100 万本金按「约束后权重 w*」买入固定股数、此后不再调仓。组合市值 P = X·Σw* = X（本金），组合盈利 E = X·Σ(w*/PE)，加权指标反映「固定股数买入持有」的真实持仓结构。</div>
+      <div class="fl">加权 PE = P ÷ E = 1 ÷ Σ( w*ᵢ / PEᵢ ) = <b>11.00×</b>（固定股数聚合，非 Σwᵢ×PEᵢ、亦非原始市值聚合）</div>
+      <div class="fl">加权 ROE = E ÷ B = Σ( w*ᵢ/PEᵢ ) ÷ Σ( w*ᵢ/(PEᵢ×ROEᵢ) ) = <b>13.65%</b>（B = X·Σ(w*/(PE×ROE))，固定股数净资产）</div>
+      <div class="fl">加权 EPS（固定股数聚合，主）= Σ( w*ᵢ/PEᵢ ) ÷ Σ( w*ᵢ/价格ᵢ,RMB ) = <b>2.31 元</b>（对标标普500，消除股价扭曲；市值加权参考 = 14.35 元）</div>
+      <div class="fl">加权股息率 = Σ( w*ᵢ × 股息率ᵢ ) = <b>3.59%</b>（= 分红收益 ÷ 本金，可直接加权）</div>
+      <div class="fl">加权派息率 = Σ( w*ᵢ × 派息率ᵢ ) = <b>46.45%</b>，派息率ᵢ = 股息率ᵢ × PEᵢ</div>
+      <div class="fl">内增长 g_comp（个股加权）= Σ( w*ᵢ × ROEᵢ × (1−派息率ᵢ) ) = <b>8.91%</b></div>
+      <div class="fl">内增长 g_idx（指数整体）= 固定股数聚合 ROE × (1 − 加权派息率) = <b>7.31%</b></div>
+      <div class="fl hl">实际回报增长率 = 加权股息率 + g_idx = <b>10.91%</b>（固定股数持有口径）</div>
+      <div class="fl">近5年系列：固定当前约束权重结构（=固定股数买入后按各年财务重估）；比率类(PE/ROE/EPS)聚合分子/分母、直接类(股息率/派息率/g)Σw*ᵢ×metricᵢ；当年缺失者剔除、权重重归一化</div>
+    </div>
+    <h3>② 加权指标汇总</h3>
+    
+    <div class="fin">
+      <div class="fkpi"><div class="v">11.00×</div><div class="l">加权 PE (TTM)<br><span class='sub2'>固定股数 1/Σ(w*/PE)</span></div></div>
+      <div class="fkpi"><div class="v">13.65%</div><div class="l">加权 ROE<br><span class='sub2'>固定股数 E÷B</span></div></div>
+      <div class="fkpi"><div class="v">2.31</div><div class="l">加权 EPS (元/RMB)<br><span class='sub2'>固定股数聚合 Σ净利÷Σ股本</span></div></div>
+      <div class="fkpi"><div class="v">3.59%</div><div class="l">加权股息率<br><span class='sub2'>分红÷本金</span></div></div>
+      <div class="fkpi"><div class="v">46.45%</div><div class="l">加权派息率</div></div>
+      <div class="fkpi"><div class="v">8.91%</div><div class="l">内增长 g_comp<br><span class='sub2'>个股加权</span></div></div>
+      <div class="fkpi"><div class="v">7.31%</div><div class="l">内增长 g_idx<br><span class='sub2'>指数整体</span></div></div>
+      <div class="fkpi hl"><div class="v">10.91%</div><div class="l">实际回报增长率<br><span class='sub2'>股息率+g_idx·固定股数</span></div></div>
+    </div>
+    <div class="inddist"><b>行业占比分布</b>：银行 <b>18.53%</b> · 通信服务 <b>17.95%</b> · 食品饮料 <b>17.75%</b> · 非银金融 <b>17.02%</b> · 公用事业 <b>14.72%</b> · 家电 <b>11.12%</b> · 汽车 <b>1.62%</b> · 医药 <b>1.28%</b></div>
+    <h3>③ 恒定股数回测（100万 · 固定股数买入持有）</h3>
+    
+    <div class="note"><b>假设</b>：2021-01-04 按<b>约束后权重 w*</b>（单股≤15%、行业≤20%）买入本金 <b>1,000,000 元</b>，
+    固定股数持有至 <b>2026-08-29</b>（2,063 天 ≈ 5.65 年），全程不调仓（口径②除外）。<br>
+    <b>数据源</b>：东方财富 EPS/BPS（TTM 防前视：仅用公告日 ≤ 快照日财报）+ GTIMG 不复权价 + 成分档案分红；
+    汇率 HKD→RMB 按指数规则。<b>口径①②为价格回报（不含分红），③在②基础上叠加分红复投</b>。</div>
+    <div class="fin">
+      <div class="fkpi"><div class="v">95.8 万</div><div class="l">① 买入持有·期末资产<br><span class='sub2'>总收益 -4.17% · 年化 -0.75%</span></div></div>
+      <div class="fkpi"><div class="v">98.3 万</div><div class="l">② 季度再平衡·期末资产<br><span class='sub2'>总收益 -1.71% · 年化 -0.30%</span></div></div>
+      <div class="fkpi hl"><div class="v">114.7 万</div><div class="l">③ 总回报·含分红复投<br><span class='sub2'>总收益 +14.66% · 年化 +2.45%</span></div></div>
+      <div class="fkpi"><div class="v">×1.5183</div><div class="l">TTM 盈利增长 g_E<br><span class='sub2'>+51.8% · 年化 7.67%</span></div></div>
+      <div class="fkpi"><div class="v">×0.6312</div><div class="l">估值变化 g_PE<br><span class='sub2'>-36.9%</span></div></div>
+      <div class="fkpi"><div class="v">×0.9583</div><div class="l">价格回报 g_P<br><span class='sub2'>-4.2%</span></div></div>
+      <div class="fkpi"><div class="v">16.60 → 10.48</div><div class="l">加权 PE（期初→期末）<br><span class='sub2'>固定股数口径</span></div></div>
+      <div class="fkpi hl"><div class="v">1.1e-16</div><div class="l">恒等式残差<br><span class='sub2'>g_E×g_PE = g_P 精确成立</span></div></div>
+    </div>
+    <div class="formula">
+      <div class="fl">恒等式分解（固定股数买入持有）：<span class="hl">g_P = g_E × g_PE = 1.5183 × 0.6312 = 0.9583</span>，与价格指数 0.9583 完全一致（残差 1.1e-16，浮点级精确）。</div>
+      <div class="fl">加权 PE：16.60 → 10.48（×0.6312）——5 年盈利 <b class="hl">+51.8%</b> 被估值压缩 <b class="hl">−36.9%</b> 部分抵消 → 价格仅 <b class="hl">-4.2%</b>。</div>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>口径</th><th class='num'>期末资产(元)</th><th class='num'>总收益</th><th class='num'>年化</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>① 买入持有 · 价格回报</td><td class='num'>958,310</td><td class='num'>-4.17%</td><td class='num'>-0.75%</td><td>固定股数、不含分红</td></tr>
+        <tr><td>② 季度再平衡 · 价格回报</td><td class='num'>982,910</td><td class='num'>-1.71%</td><td class='num'>-0.30%</td><td>每季末按当季 w* 调仓（卖高买低）</td></tr>
+        <tr class='tot'><td>③ 总回报 · 含分红复投</td><td class='num'>1,146,600</td><td class='num'>+14.66%</td><td class='num'>+2.45%</td><td>分红于次年 5 月后按当时价买入增持</td></tr>
+      </tbody>
+    </table></div>
+    
+    <h3>逐年首日指标（2021 → 2026 每年第一个交易日 · 固定股数口径）</h3>
+    <div class="scroll" style="margin-top:6px"><table>
+      <thead><tr><th class='num'>指标</th><th class='num'>2021-01-04</th><th class='num'>2022-01-03</th><th class='num'>2023-01-03</th><th class='num'>2024-01-02</th><th class='num'>2025-01-02</th><th class='num'>2026-01-02</th></tr></thead>
+      <tbody><tr><td>组合市值 P(t)（元）</td><td class='num'>1,000,000</td><td class='num'>894,713</td><td class='num'>764,734</td><td class='num'>753,962</td><td class='num'>925,820</td><td class='num'>1,035,525</td></tr><tr><td>组合盈利 E(t)（元）</td><td class='num'>60,245</td><td class='num'>68,769</td><td class='num'>73,553</td><td class='num'>75,753</td><td class='num'>81,763</td><td class='num'>89,091</td></tr><tr><td>TTM 盈利增长（2021=100）</td><td class='num'>100.0</td><td class='num'>114.1</td><td class='num'>122.1</td><td class='num'>125.7</td><td class='num'>135.7</td><td class='num'>147.9</td></tr><tr><td>加权 PE（P/E）</td><td class='num'>16.60×</td><td class='num'>13.01×</td><td class='num'>10.40×</td><td class='num'>9.95×</td><td class='num'>11.32×</td><td class='num'>11.62×</td></tr><tr><td>加权 ROE（E/B）</td><td class='num'>12.77%</td><td class='num'>13.36%</td><td class='num'>13.29%</td><td class='num'>12.76%</td><td class='num'>12.71%</td><td class='num'>12.89%</td></tr><tr><td>聚合 EPS（E/Σ股数，元）</td><td class='num'>1.25</td><td class='num'>1.43</td><td class='num'>1.53</td><td class='num'>1.57</td><td class='num'>1.70</td><td class='num'>1.85</td></tr><tr><td>股息率（当年分红/首日市值）</td><td class='num'>2.32%</td><td class='num'>2.95%</td><td class='num'>3.84%</td><td class='num'>4.08%</td><td class='num'>3.71%</td><td class='num'>—</td></tr><tr><td>派息率</td><td class='num'>32.65%</td><td class='num'>35.45%</td><td class='num'>39.70%</td><td class='num'>36.35%</td><td class='num'>38.69%</td><td class='num'>—</td></tr><tr><td>内增长 g_idx（指数整体）</td><td class='num'>8.60%</td><td class='num'>8.63%</td><td class='num'>8.02%</td><td class='num'>8.12%</td><td class='num'>7.79%</td><td class='num'>—</td></tr><tr><td>实际回报增长率（股息率+g_idx）</td><td class='num'>10.93%</td><td class='num'>11.57%</td><td class='num'>11.86%</td><td class='num'>12.20%</td><td class='num'>11.51%</td><td class='num'>—</td></tr></tbody>
+    </table></div>
+    <div class="note">每年时点 = <b>该年第一个交易日</b>（GTIMG 不复权收盘价）。市值 P(t)=Σ股数×价×汇率；盈利 E(t)=Σ股数×TTM_EPS×汇率
+    （A股 TTM=累计公式、港股 EPS_TTM，均取<b>公告日 ≤ 时点</b>财报防前视）；净资产 B(t)=Σ股数×BPS×汇率；
+    加权PE=P/E、加权ROE=E/B、聚合EPS=E/Σ股数；股息率=当年分红÷首日市值；派息率=当年分红÷年度EPS；
+    g_idx=ROE×(1−派息率)；实际回报增长率=股息率+g_idx。当前年份（2026）年度分红/EPS 尚未披露，股息率/派息率/g_idx/回报列显示「—」。</div>
+    <div class="note">完整计算书见 assets 下 <code>identity_calc_book.html</code>（恒等式逐股验证）/ <code>gordon_calc_book.html</code>（戈登模型 g、r）/ <code>pe_contribution_book.html</code>（加权PE贡献）。
+    本板块数据由 <code>wb-const-shares-backtest</code> 技能统一回测引擎生成于 <code>assets/final_backtest.json</code>，
+    与本报告其余部分<b>解耦</b>（删除该文件后本报告仍可完整生成，仅此板块显示提示）。</div>
+    <h3>④ 可持续性分析（基于恒定股数回测结果）</h3>
+    
+    <ul class="ana">
+      <li><b>分红可持续性（回测期 2021-01-04 → 2026-08-29）</b>：平均派息率 <b>36.57%</b>、平均股息率 <b>3.38%</b>。回测期平均派息率偏低，留存收益厚，分红与内增长双安全垫充足，盈利质量稳健。；含分红复投口径③回测总回报 <b>+14.66%</b>、年化 <b>+2.45%</b>，分红持续兑现并具备复利效应（显著高于不含分红口径）。</li>
+      <li><b>ROE 长期支撑（回测期）</b>：回测期加权 ROE 均值 <b>12.97%</b>、最新 <b>12.89%</b>（差 -0.08pp），长期盈利能力支撑稳固。</li>
+      <li><b>内增长 g 的可持续性（回测期）</b>：回测期内生增长 g_idx 均值 ≈ <b>8.23%</b>（最新 —），由聚合 ROE（12.9%）+ 适度派息（36.6%）共同支撑；回测期 TTM 盈利增长 g_E = ×1.5183（年化 7.67%），盈利内生复利持续兑现。</li>
+      <li><b>估值变化与回报质量（回测期）</b>：回测期加权 PE 由 <b>16.60×</b> → <b>10.48×</b>（×0.6312）；恒等式 g_P = g_E × g_PE = 1.5183 × 0.6312 = 0.9583（残差 1.1e-16），盈利增长被估值压缩部分抵消，买入持有价格回报 -4.17%。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>组合风险分析（集中度 / 估值 / 股息覆盖 / 盈利质量）</h2>
+    <div class="note amber">以下结论均由本指数实际权重与个股数据计算得出，非主观判断。</div>
+    
+    <ul class="ana">
+      <li><b>① 集中度风险</b>：有效持股数（1/HHI）≈ <b>15.7</b> 只（HHI=0.0635）；前三大 <b>33.51%</b>、前十大 <b>66.42%</b>；
+          最大单股 <b>13.77%</b>（触顶 15% 上限）、最大行业 <b>18.53%</b>（触顶 20% 上限）、
+          权重&gt;5% 的标的合计 <b>50.96%</b>（触顶集群上限 55%）。
+          三约束（单股15% / 行业20% / 集群55%）已把集中度压到接近真实宽基指数水平，单一个股/行业黑天鹅对组合的冲击可控。</li>
+      <li><b>② 估值风险</b>：加权 PE <b>11.00×</b>、加权近5年均值 PE <b>16.66×</b>（加权当前 PE <b>11.00×</b> 低于加权近5年均值 PE <b>16.66×</b> 约 <b>34.0%</b>）。
+          整体估值不贵，但个股分化明显：白酒/消费（茅台、伊利）与部分医药当前 PE 高于自身5年中枢，需动态跟踪。</li>
+      <li><b>③ 股息覆盖风险</b>：加权派息率 <b>46.45%</b>，派息率适中，分红有留存收益覆盖，可持续性良好。组合层面分红对当期盈利的依赖度适中，尚未出现「分光吃老本」迹象；
+          但若后续经济下行导致盈利普遍下滑，高股息个股（双汇、格力、工行等股息率>5%）仍需逐只核验现金流覆盖。</li>
+      <li><b>④ 盈利质量风险</b>：30只中风险等级 高 <b>9</b> / 中 <b>12</b> / 低 <b>9</b> 只（含主动扫描「关注」<b>9</b> 只）。
+          高风险多为基本面短期承压（如面板/分众周期下行、部分医药集采、券商经纪承压）但非系统性恶化；盈利质量整体靠高 ROE 消费/公用事业/银行支撑，结构稳健但有行业相关性（银行+公用+红利占比较高）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>权重分布</h2>
+    <div class="charts">
+      <div id="pieChart" class="chart"></div>
+      <div id="marketChart" class="chart"></div>
+    </div>
+    <div class="charts" style="margin-top:14px">
+      <div id="indChart" class="chart"></div>
+      <div id="cmpChart" class="chart"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>指数规则</h2>
+    <div class="rules"><ul>
+      <li><b>加权基准</b>：自由流通市值（已剔除限售/战略持股）</li>
+      <li><b>单只个股硬上限</b>：15.00</li>
+      <li><b>单一行业上限</b>：20.00</li>
+      <li><b>集群约束（纳指100规则，适配30只样本）</b>：所有权重&gt;5% 的标的合计权重 ≤ 55.00（压缩筛选阈值权重&gt;5.0%；压缩释放权重回填给权重&lt;4.0% 的成分股）</li>
+      <li><b>港币折算</b>：计算时点实时汇率（1 HKD = 0.8654 RMB，跨市场统一币种后再计算自由流通市值，后续权重运算全部基于统一币种市值）</li>
+      <li><b>再平衡频率</b>：每年3月/6月/9月/12月（仅调整权重，股票池固定30只不变）</li>
+      <li><b>约束算法（迭代收敛）</b>：① 币种统一 → ② 行业截断（超限行业强制压至 20.00，溢出 ΔCash 按未触顶行业原始目标权重比例迭代注水回填，触顶行业不再参与）→ ③ 集群约束（权重&gt;5.0% 的标的合计若&gt;55.00 同比例压缩至 55.00，释放权重按市值分配给权重&lt;4.0% 的成分股）→ ④ 单股 15.00 上限（超额优先本行业内按市值分配，否则给 &lt;4.0% 标的）→ ⑤ 校验「行业≤上限 / 权重&gt;5%合计≤55.00 / 个股≤上限」，破坏则回到②循环，直至三项约束全部同时成立 → ⑥ 归一为满仓 100%。所有上限由规则固定，算法内部<b>绝不主动放大</b>任何未超限行业/个股。</li>
+    </ul></div>
+  </div>
+
+  <div class="card">
+    <h2>全部 30 只成分股 · 约束后权重与财务 / 行情</h2>
+    <div class="note">港股市值已按规则折算为人民币；「原始权重」为无约束自由流通市值加权，「约束后」为施加单股/行业上限后的最终权重。行情与近5年指标见右半部分新列，<b>财报口径</b>列注明每只所用报告期。<b>表头可点击排序</b>（再次点击切换升/降序）；下方输入总资金后，按约束后权重实时测算每只<b>买入金额</b>与<b>约略股数</b>（港股股价已折算为 RMB）。</div>
+
+    <div class="alloc-bar">
+      <label for="capInput">总资金金额（RMB）</label>
+      <input type="number" id="capInput" value="1000000" min="0" step="10000" />
+      <span class="alloc-hint">按约束后权重自动分配 · 实时计算每只买入金额与约略股数</span>
+    </div>
+    <div class="alloc-sum">合计已分配：<b id="allocSum">—</b> ｜ 约略总股本：<b id="allocShares">—</b> 股</div>
+
+    <div class="scroll">
+    <table id="mainTable">
+      <thead><tr>
+        <th>排名</th>
+        <th data-key="name" data-type="text">名称</th>
+        <th data-key="code" data-type="text">代码</th>
+        <th data-key="industry" data-type="text">行业</th>
+        <th class='num' data-key="ff_native" data-type="num">原始市值</th>
+        <th class='num' data-key="ff_rmb" data-type="num">RMB市值(亿元)</th>
+        <th class='num' data-key="raw_w" data-type="num">原始权重</th>
+        <th class='num' data-key="wt_w" data-type="num">约束后权重</th>
+        <th class='num' data-key="pe" data-type="num">PE</th>
+        <th class='num' data-key="roe" data-type="num">ROE</th>
+        <th class='num' data-key="div" data-type="num">股息率</th>
+        <th class='num' data-key="risk" data-type="risk">风险</th>
+        <th class='num' data-key="cur_price" data-type="num">当前股价</th>
+        <th class='num' data-key="r1y" data-type="num">近1年涨跌</th>
+        <th class='num' data-key="r5y_t" data-type="num">近5年累计</th>
+        <th class='num' data-key="r5y_cagr" data-type="num">近5年年化</th>
+        <th class='num' data-key="avg_roe5" data-type="num">5年平均ROE</th>
+        <th class='num' data-key="avg_pe5" data-type="num">5年平均PE</th>
+        <th class='num' data-key="avg_div5" data-type="num">5年平均股息</th>
+        <th class='num' data-key="fin_basis" data-type="text">财报口径</th>
+        <th class='num alloc-col'>买入金额</th>
+        <th class='num alloc-col'>约略股数</th>
+      </tr></thead>
+      <tbody id="mainTbody"></tbody>
+    </table>
+    </div>
+    <div class="foot">行情/财务/分红/年K线数据来源：腾讯自选股 westock-data（结构化接口）；数据快照 2026-08-28 收盘。近5年指标（累计涨幅/年化/平均ROE/平均PE/平均股息率）由年度收盘价与年度EPS/每股分红推算，属估算口径，仅供参考。指数计算由 WorkBuddy 本地完成。</div>
+  </div>
+
+  <div class="card">
+    <h2>前15大权重（约束后）</h2>
+    <div id="barChart" class="chart" style="height:420px"></div>
+  </div>
+
+  <div class="card">
+    <h2>高风险 / 基本面恶化成分股提示（30 只）</h2>
+    <div class="note">主动扫描结果：<b>高</b>＝已评估为高风险/基本面明显恶化；<b>中</b>＝存在结构性或温和风险；<b>关注</b>＝风险等级为「低」但备注中出现净利润/营收下滑、现金流恶化、股价回撤、利润承压等恶化信号，需重点跟踪。低风险且无恶化信号的标的未列出。</div>
+    <table>
+      <thead><tr><th>名称</th><th>代码</th><th>行业</th><th class='num'>权重</th><th>风险等级</th><th>风险提示</th></tr></thead>
+      <tbody>
+        <tr>
+      <td>中国人保 <span class='tag a'>A</span></td>
+      <td>601319</td>
+      <td>非银金融</td>
+      <td class='num'>3.72%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收-5.14%、归母净利-31.40% YoY(新准则下投资收益波动+高基数)、ROE(TTM)16.10%(2025全年)、每股经营现金流+0.35元;股价回撤-28.9%(52周高点10.04)、PE-TTM 7.12x。2025全年净利+8.8%但2026Q1转双位数下滑，高风险。</td>
+    </tr>
+<tr>
+      <td>网易 <span class='tag h'>HK</span></td>
+      <td>9999.HK</td>
+      <td>通信服务</td>
+      <td class='num'>3.58%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 净收入+7.0%(607亿)、归母净利-6.3%(Q2单季-18.6%，投资浮亏29.5亿+汇兑损失4.4亿+税率升至25.5%)、游戏收入+9.7%毛利率升至75.4%、ROE(TTM)20.4%；股价回撤-21.3%、PE-TTM 16.48x(中低分位)。主业利润大幅扩张但账面净利转负，游戏产品周期进入验证期，高风险。</td>
+    </tr>
+<tr>
+      <td>格力电器 <span class='tag a'>A</span></td>
+      <td>000651</td>
+      <td>家电</td>
+      <td class='num'>3.07%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收896.73亿(-8.1%)、归母净利132.78亿(-7.9%) YoY(双降，Q2单季继续走弱)、ROE(TTM)19.19%；股价回撤-3.7%、PE-TTM 7.89x(历史低分位)、股息率7.63%。空调单一依赖+现金流恶化，高风险。</td>
+    </tr>
+<tr>
+      <td>华能水电 <span class='tag a'>A</span></td>
+      <td>600025</td>
+      <td>公用事业</td>
+      <td class='num'>2.54%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+1.45%、归母净利-5.05% YoY(电价结构性下降+折旧增加，发电量+3.98%)、ROE(TTM)9.60%、经营现金流+5.5%；股价回撤-8.6%、PE-TTM 21.71x(水电板块最贵)、股息率仅2.13%。业绩降+估值与盈利背离(最贵水电)，高风险。</td>
+    </tr>
+<tr>
+      <td>伊利股份 <span class='tag a'>A</span></td>
+      <td>600887</td>
+      <td>食品饮料</td>
+      <td class='num'>1.92%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+4.13%、归母净利-20.02% YoY(一次性计提澳优商誉减值15.47亿+存货跌价9.07亿+补税6.3亿，剔除后核心经营利润83.8亿+10%)、经营现金流+229%、ROE(加权)10.09%；股价回撤-6.1%、PE-TTM 16.53x。减值出清后轻装上阵，但账面利润大降为30只中降幅最大之一，高风险。</td>
+    </tr>
+<tr>
+      <td>海尔智家 <span class='tag a'>A</span></td>
+      <td>600690</td>
+      <td>家电</td>
+      <td class='num'>1.89%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1(中报8/28未出) 营收-6.86%、归母净利-15.22% YoY(北美暴风雪/关税/新产能折旧，剔除北美后经营利润+10%以上)、ROE(TTM)14.95%；股价回撤-23.0%、PE-TTM 10.58x。海外营收占比过半对贸易环境敏感，Q1业绩双降，高风险(待中报确认拐点)。</td>
+    </tr>
+<tr>
+      <td>福耀玻璃 <span class='tag a'>A</span></td>
+      <td>600660</td>
+      <td>汽车</td>
+      <td class='num'>1.62%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+2.44%、归母净利-17.37% YoY(汇兑损失8.03亿拖累，扣除汇兑利润总额+4.78%)、ROE(TTM)22.21%、中期分红26.1亿(65.73%)；股价回撤-20.9%、PE-TTM 17.48x。净利双位数下滑、短期盈利受汇率扰动明显，高风险。</td>
+    </tr>
+<tr>
+      <td>川投能源 <span class='tag a'>A</span></td>
+      <td>600674</td>
+      <td>公用事业</td>
+      <td class='num'>1.08%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收-4.53%、归母净利-5.34% YoY(雅砻江来水偏枯电量-20%但电价上行对冲，Q3来水显著修复)、大渡河投资收益+53.2%、ROE(TTM)10.35%；股价回撤仅-3.8%(贴近52周高点)、PE-TTM 16.4x。业绩双降+估值与股价背离，高风险(关注Q3来水兑现)。</td>
+    </tr>
+<tr>
+      <td>中国移动 <span class='tag a'>A</span></td>
+      <td>600941</td>
+      <td>通信服务</td>
+      <td class='num'>0.60%</td>
+      <td><span class='rk high'>高</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收-1.05%、归母净利-6.29% YoY(双降，同口径正增长，增值税政策调整影响)、ROE(TTM)9.27%、经营现金流+37%、算力服务收入+14%；股价回撤-8.9%、PE-TTM 16.13x(A股中低分位，A/H溢价明显)。盈利动能转弱，但低波动高股息(4.79%)防御，高风险(盈利负增长)。</td>
+    </tr>
+<tr>
+      <td>长江电力 <span class='tag a'>A</span></td>
+      <td>600900</td>
+      <td>公用事业</td>
+      <td class='num'>7.01%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+6.44%、归母净利+30.50% YoY(售电收入+金融资产浮盈，中报8/31披露)、ROE(TTM)15.83%；股价回撤-5.1%、PE-TTM 19.05x(历史中高分位约55%)、股息率3.56%。来水偏丰驱动高增、分红承诺≥70%，防御性强，低风险。</td>
+    </tr>
+<tr>
+      <td>工商银行 <span class='tag a'>A</span></td>
+      <td>601398</td>
+      <td>银行</td>
+      <td class='num'>5.23%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+8.27%、归母净利+3.31%、ROE(TTM)8.58%、不良率1.31%、拨备214.38%；股价回撤-3.7%(贴近52周高8.16)、PE-TTM 7.51x(历史高估值分位约90%)、股息率3.97%。利润稳健、防御性强，主要风险为息差收窄与估值缺乏扩张空间，低风险。</td>
+    </tr>
+<tr>
+      <td>中信证券 <span class='tag a'>A</span></td>
+      <td>600030</td>
+      <td>非银金融</td>
+      <td class='num'>4.11%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+50.00%、归母净利+69.60% YoY(创中期历史新高，五大业务线全面增长)、ROE(TTM)11.30%、经营现金流+248%；股价回撤-11.0%、PE-TTM 11.0x(历史低分位)。基本面爆发式改善，主要风险为利润对行情高度敏感(β属性)，低风险。</td>
+    </tr>
+<tr>
+      <td>中国银行 <span class='tag a'>A</span></td>
+      <td>601988</td>
+      <td>银行</td>
+      <td class='num'>3.92%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+8.44%、归母净利+4.17% YoY、ROE(TTM)8.37%、不良率1.33%(2025末)、拨备214%;股价回撤-0.6%(52周高点6.39)、PE-TTM 8.07x(历史偏高分位)。大行稳健、盈利稳增且低波动，低风险。</td>
+    </tr>
+<tr>
+      <td>招商银行 <span class='tag a'>A</span></td>
+      <td>600036</td>
+      <td>银行</td>
+      <td class='num'>3.71%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+3.81%、归母净利+1.52%(中报8/29披露)、ROE(TTM)11.76%、不良0.93%、拨备447.63%；股价回撤-6.2%、PE-TTM 6.62x(历史低分位约20%)、股息率5.09%。业绩企稳、估值处历史底部，低风险。</td>
+    </tr>
+<tr>
+      <td>国投电力 <span class='tag a'>A</span></td>
+      <td>600886</td>
+      <td>公用事业</td>
+      <td class='num'>1.46%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收-4.63%、归母净利+1.91%、ROE(TTM)9.95%、上半年电价+3.68%；股价回撤-8.9%、PE-TTM 14.98x(近3年低分位)。水电韧性、电价上行对冲电量下滑，估值偏低，低风险。</td>
+    </tr>
+<tr>
+      <td>江苏银行 <span class='tag a'>A</span></td>
+      <td>600919</td>
+      <td>银行</td>
+      <td class='num'>1.04%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+9.11%、归母净利+8.09% YoY、加权ROE 7.86%、不良率0.81%(上市以来最优)、拨备304.83%;股价回撤-1.4%(52周高点12.21)、PE-TTM 6.10x。资产规模破5.6万亿、盈利双增且质量优，低风险。</td>
+    </tr>
+<tr>
+      <td>交通银行 <span class='tag a'>A</span></td>
+      <td>601328</td>
+      <td>银行</td>
+      <td class='num'>0.89%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 净经营收入+0.72%、归母净利+1.61% YoY、ROE(TTM)8.38%、不良率1.28%、拨备209.56%;股价回撤-4.7%(52周高点7.41)、PE-TTM 6.36x。大行稳健、分红率连续14年>30%，低风险。</td>
+    </tr>
+<tr>
+      <td>成都银行 <span class='tag a'>A</span></td>
+      <td>601838</td>
+      <td>银行</td>
+      <td class='num'>0.38%</td>
+      <td><span class='rk watch'>关注</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+4.13%、归母净利+4.35% YoY、加权ROE 7.49%、不良率0.68%、拨备426.06%;股价回撤-2.7%(52周高点19.22)、PE-TTM 5.85x(历史低分位)。区域经济韧性强、资产质量行业领先，低风险。</td>
+    </tr>
+<tr>
+      <td>腾讯控股 <span class='tag h'>HK</span></td>
+      <td>0700.HK</td>
+      <td>通信服务</td>
+      <td class='num'>13.77%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+15.57%(4012亿)、归母净利+15.82%(IFRS)、Non-IFRS净利+10%、毛利率升至58%、ROE(TTM)19.9%；资本开支847亿(+82%)致Q2自由现金流转负、股价回撤-32.8%(自52周高677.7)、PE-TTM 15.04x(近5年4%分位极低)。AI投入短期挤压现金流，中长期看商业化拐点，风险中等。</td>
+    </tr>
+<tr>
+      <td>贵州茅台 <span class='tag a'>A</span></td>
+      <td>600519</td>
+      <td>食品饮料</td>
+      <td class='num'>12.73%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+1.47%、归母净利-1.95% YoY(上市首现增收不增利，成本+21.81%)、ROE(加权)16.75%、直销占比57.3%、i茅台收入+274%；股价回撤-15.8%、PE-TTM 19.84x(历史低分位)、股息率4.03%。白酒深度调整致净利转负，但估值低位+品牌护城河最强，风险中等。</td>
+    </tr>
+<tr>
+      <td>美的集团 <span class='tag a'>A</span></td>
+      <td>000333</td>
+      <td>家电</td>
+      <td class='num'>6.16%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+2.45%、归母净利+2.03% YoY、ROE(TTM)19.03%、经营现金流+1.45%；股价回撤-3.7%、PE-TTM 14.88x(历史中低分位)。白电需求放缓、Q1增速降至低个位数，但现金流充沛、分红率73.6%高位，风险中等。</td>
+    </tr>
+<tr>
+      <td>中国平安 <span class='tag a'>A</span></td>
+      <td>601318</td>
+      <td>非银金融</td>
+      <td class='num'>6.07%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+15.01%、归母净利+36.06% YoY、NBV+11.2%(连续三年双位数)、ROE(TTM)15.50%、中期股息+3.2%；股价回撤-23.6%(30只中回撤最深之一)、PE-TTM 6.35x(历史低分位)。基本面改善+估值低位，但回撤深反映市场对负债端/投资端担忧，风险中等。</td>
+    </tr>
+<tr>
+      <td>中国太保 <span class='tag a'>A</span></td>
+      <td>601601</td>
+      <td>非银金融</td>
+      <td class='num'>3.13%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收2121.36亿+5.8%、归母净利307.75亿+10.4% YoY、ROE(最新)9.64%(2025全年17.71%)、COR 97.5%优化;股价回撤-32.7%(52周高点47.24)、PE-TTM 5.54x(历史低分位)。寿险NBV+40%、产险承保利润大增，但回撤深，风险中等。</td>
+    </tr>
+<tr>
+      <td>国电南瑞 <span class='tag a'>A</span></td>
+      <td>600406</td>
+      <td>公用事业</td>
+      <td class='num'>2.63%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收277.67亿+14.54%、归母净利30.73亿+4.08% YoY、ROE(TTM)16.13%、新签合同+28.79%、海外收入+196.61%;股价回撤-27.2%(52周高点31.59)、PE-TTM 21.91x。订单与出海高增但回撤深、增速温和，风险中等。</td>
+    </tr>
+<tr>
+      <td>农夫山泉 <span class='tag h'>HK</span></td>
+      <td>9633</td>
+      <td>食品饮料</td>
+      <td class='num'>2.14%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收297.18亿(+16.0%)、归母净利88.87亿(+16.6%) YoY，茶饮料+30.1%(东方树叶为核心引擎)、毛利率60.9%、ROE(TTM)44.72%；股价回撤-21.1%(52周高点55.12)、PE-TTM 24.79x、PB 11.43x、股息率2.6%。增长强劲但估值偏高(PE/PB历史中高分位)、回撤深，风险中等。</td>
+    </tr>
+<tr>
+      <td>兴业银行 <span class='tag a'>A</span></td>
+      <td>601166</td>
+      <td>银行</td>
+      <td class='num'>1.74%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收1101.77亿-0.25%、归母净利411.31亿-4.66% YoY(净息差1.60%降幅收窄、零售信用卡不良率3.79%较年初+45bp主动前置暴露风险);ROE(TTM)7.95%、经营现金流净额-73.09亿(银行H1季节性、同比收窄);不良率1.08%、拨备覆盖率225.67%;股价回撤-19.69%(52周高点21.78)、PE-TTM 4.89x(历史约52.8%分位,PB 0.44x近历史1.4%分位)、股息率6.12%。息差收窄+零售风险释放致盈利阶段性承压、年内监管罚单反映信贷合规短板，风险中等。</td>
+    </tr>
+<tr>
+      <td>云南白药 <span class='tag a'>A</span></td>
+      <td>000538</td>
+      <td>医药</td>
+      <td class='num'>1.28%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+7.02%、归母净利+5.31% YoY(中报8/29披露)、ROE(TTM)12.49%、经营现金流+16.17%；股价回撤-13.9%、PE-TTM 16.97x。Q1稳健但ROE处中低位、中报待验证，风险中等。</td>
+    </tr>
+<tr>
+      <td>宁波银行 <span class='tag a'>A</span></td>
+      <td>002142</td>
+      <td>银行</td>
+      <td class='num'>1.06%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+11.54%、归母净利+12.12% YoY、中收+53.90%、不良率0.76%、拨备373.35%、净息差1.70%(仅收窄6bp)；股价回撤-1.3%(贴近52周高点)、PE-TTM 7.16x。业绩高增但股价处历史高位，风险中等。</td>
+    </tr>
+<tr>
+      <td>双汇发展 <span class='tag a'>A</span></td>
+      <td>000895</td>
+      <td>食品饮料</td>
+      <td class='num'>0.96%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026Q1 营收+1.96%、归母净利+13.59% YoY(中报8/29披露，肉制品销量+15.1%)、ROE(TTM)23.21%；股价回撤-13.7%、PE-TTM 16.43x。改革显效+高分红(股息率5.5%)，生猪周期与肉制品需求平淡，风险中低。</td>
+    </tr>
+<tr>
+      <td>杭州银行 <span class='tag a'>A</span></td>
+      <td>600926</td>
+      <td>银行</td>
+      <td class='num'>0.57%</td>
+      <td><span class='rk med'>中</span></td>
+      <td style='font-size:12.5px'>【数据】2026H1 营收+4.75%、归母净利+9.87% YoY、净息差1.39%(+4bp)、不良率0.76%、拨备471.96%(近5年首破500%)；股价回撤仅-4.2%(贴近52周高点)、PE-TTM 6.03x。盈利高增但拨备覆盖率跌破500%、资本充足率连续4季下行，风险中等。</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="disc">
+    <b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+const pieData = [{"name": "腾讯控股 0700.HK", "value": 13.77}, {"name": "贵州茅台 600519", "value": 12.73}, {"name": "长江电力 600900", "value": 7.01}, {"name": "美的集团 000333", "value": 6.16}, {"name": "中国平安 601318", "value": 6.07}, {"name": "工商银行 601398", "value": 5.23}, {"name": "中信证券 600030", "value": 4.11}, {"name": "中国银行 601988", "value": 3.92}, {"name": "中国人保 601319", "value": 3.72}, {"name": "招商银行 600036", "value": 3.71}, {"name": "其他20只", "value": 33.58}];
+const marketData = [{"name": "A股", "value": 72.56}, {"name": "港股", "value": 27.44}];
+const indData = [{"name": "银行", "value": 18.53}, {"name": "通信服务", "value": 17.95}, {"name": "食品饮料", "value": 17.75}, {"name": "非银金融", "value": 17.02}, {"name": "公用事业", "value": 14.72}, {"name": "家电", "value": 11.12}, {"name": "汽车", "value": 1.62}, {"name": "医药", "value": 1.28}];
+const barLabels = ["腾讯控股 0700.HK", "贵州茅台 600519", "长江电力 600900", "美的集团 000333", "中国平安 601318", "工商银行 601398", "中信证券 600030", "中国银行 601988", "中国人保 601319", "招商银行 600036", "网易 9999.HK", "中国太保 601601", "格力电器 000651", "国电南瑞 600406", "华能水电 600025"];
+const barWeights = [13.77, 12.73, 7.01, 6.16, 6.07, 5.23, 4.11, 3.92, 3.72, 3.71, 3.58, 3.13, 3.07, 2.63, 2.54];
+const barMc = [35733.98, 16245.06, 6873.12, 6040.08, 5950.45, 21757.71, 3385.08, 13720.84, 2644.58, 8276.33, 5304.23, 2190.41, 2147.27, 1839.48, 1779.27];
+const cmpLabels = ["腾讯控股", "贵州茅台", "长江电力", "美的集团", "中国平安", "工商银行", "中信证券", "中国银行", "中国人保", "招商银行", "网易", "中国太保"];
+const cmpBefore = [22.85, 10.39, 4.4, 3.86, 3.81, 13.91, 2.16, 8.77, 1.69, 5.29, 3.39, 1.4];
+const cmpAfter = [13.77, 12.73, 7.01, 6.16, 6.07, 5.23, 4.11, 3.92, 3.72, 3.71, 3.58, 3.13];
+
+const STOCKS = [{"name": "腾讯控股", "code": "0700.HK", "market": "HK", "industry": "通信服务", "ff_native": 41291.87, "ccy": "HKD", "ff_rmb": 35733.984298, "raw_w": 0.22851278910834483, "wt_w": 0.13770061247583404, "pe": 16.59, "roe": 21.38, "div": 1.17, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 453.6, "cur_ccy": "HKD", "r1y": 45.8, "r5y_t": 45.49, "r5y_cagr": 7.79, "avg_roe5": 22.32, "avg_pe5": 18.43, "avg_div5": 2.7}, {"name": "贵州茅台", "code": "600519", "market": "A", "industry": "食品饮料", "ff_native": 16245.06, "ccy": "RMB", "ff_rmb": 16245.06, "raw_w": 0.10388441263293935, "wt_w": 0.12734583434565674, "pe": 19.95, "roe": 32.41, "div": 4.0, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 1299.52, "cur_ccy": "RMB", "r1y": -6.6, "r5y_t": -26.16, "r5y_cagr": -5.88, "avg_roe5": 32.94, "avg_pe5": 32.11, "avg_div5": 2.68}, {"name": "长江电力", "code": "600900", "market": "A", "industry": "公用事业", "ff_native": 6873.12, "ccy": "RMB", "ff_rmb": 6873.12, "raw_w": 0.04395244056689899, "wt_w": 0.07005853548943636, "pe": 18.99, "roe": 15.83, "div": 3.56, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 28.09, "cur_ccy": "RMB", "r1y": -5.14, "r5y_t": 43.11, "r5y_cagr": 7.43, "avg_roe5": 14.36, "avg_pe5": 21.27, "avg_div5": 3.34}, {"name": "美的集团", "code": "000333", "market": "A", "industry": "家电", "ff_native": 6040.08, "ccy": "RMB", "ff_rmb": 6040.08, "raw_w": 0.038625290584089214, "wt_w": 0.0615672589792638, "pe": 15.08, "roe": 19.03, "div": 4.81, "fin_basis": "2026年一季报 TTM", "risk": "medium", "cur_price": 87.73, "cur_ccy": "RMB", "r1y": 10.22, "r5y_t": 26.11, "r5y_cagr": 4.75, "avg_roe5": 20.35, "avg_pe5": 11.44, "avg_div5": 5.3}, {"name": "中国平安", "code": "601318", "market": "A", "industry": "非银金融", "ff_native": 5950.45, "ccy": "RMB", "ff_rmb": 5950.45, "raw_w": 0.0380521218851561, "wt_w": 0.06065364965322273, "pe": 6.34, "roe": 15.5, "div": 4.84, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 55.82, "cur_ccy": "RMB", "r1y": 37.85, "r5y_t": 71.29, "r5y_cagr": 11.36, "avg_roe5": 12.12, "avg_pe5": 8.57, "avg_div5": 4.79}, {"name": "工商银行", "code": "601398", "market": "A", "industry": "银行", "ff_native": 21757.71, "ccy": "RMB", "ff_rmb": 21757.71, "raw_w": 0.13913687752386453, "wt_w": 0.052289837728054255, "pe": 7.69, "roe": 8.58, "div": 3.85, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 8.07, "cur_ccy": "RMB", "r1y": 23.17, "r5y_t": 61.33, "r5y_cagr": 10.04, "avg_roe5": 10.71, "avg_pe5": 5.78, "avg_div5": 5.43}, {"name": "中信证券", "code": "600030", "market": "A", "industry": "非银金融", "ff_native": 3385.08, "ccy": "RMB", "ff_rmb": 3385.08, "raw_w": 0.021647014385635408, "wt_w": 0.04105213608384151, "pe": 10.95, "roe": 11.3, "div": 2.39, "fin_basis": "2026年中报 TTM", "risk": "low", "cur_price": 27.8, "cur_ccy": "RMB", "r1y": -0.64, "r5y_t": 26.4, "r5y_cagr": 4.8, "avg_roe5": 8.72, "avg_pe5": 16.3, "avg_div5": 2.01}, {"name": "中国银行", "code": "601988", "market": "A", "industry": "银行", "ff_native": 13720.84, "ccy": "RMB", "ff_rmb": 13720.84, "raw_w": 0.0877424524274173, "wt_w": 0.03923325106630339, "pe": 8.42, "roe": 8.37, "div": 3.48, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 6.51, "cur_ccy": "RMB", "r1y": 3.99, "r5y_t": 87.87, "r5y_cagr": 13.44, "avg_roe5": 9.2, "avg_pe5": 5.85, "avg_div5": 5.94}, {"name": "中国人保", "code": "601319", "market": "A", "industry": "非银金融", "ff_native": 2644.58, "ccy": "RMB", "ff_rmb": 2644.58, "raw_w": 0.016911642059851965, "wt_w": 0.037190176265761675, "pe": 5.79, "roe": 16.1, "div": 2.95, "fin_basis": "2026年一季报 TTM", "risk": "high", "cur_price": 7.45, "cur_ccy": "RMB", "r1y": 22.02, "r5y_t": 130.03, "r5y_cagr": 18.13, "avg_roe5": 12.89, "avg_pe5": 7.99, "avg_div5": 3.16}, {"name": "招商银行", "code": "600036", "market": "A", "industry": "银行", "ff_native": 8276.33, "ccy": "RMB", "ff_rmb": 8276.33, "raw_w": 0.05292573131809762, "wt_w": 0.03706418596023851, "pe": 6.67, "roe": 11.76, "div": 5.02, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 40.12, "cur_ccy": "RMB", "r1y": 13.61, "r5y_t": 1.57, "r5y_cagr": 0.31, "avg_roe5": 13.22, "avg_pe5": 7.31, "avg_div5": 4.53}, {"name": "网易", "code": "9999.HK", "market": "HK", "industry": "通信服务", "ff_native": 6129.22, "ccy": "HKD", "ff_rmb": 5304.226988, "raw_w": 0.033919634961038315, "wt_w": 0.03579335586588255, "pe": 16.4, "roe": 22.84, "div": 2.01, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 192.1, "cur_ccy": "HKD", "r1y": 61.91, "r5y_t": 50.24, "r5y_cagr": 8.48, "avg_roe5": 21.89, "avg_pe5": 19.77, "avg_div5": 1.96}, {"name": "中国太保", "code": "601601", "market": "A", "industry": "非银金融", "ff_native": 2190.41, "ccy": "RMB", "ff_rmb": 2190.41, "raw_w": 0.014007301682807984, "wt_w": 0.03130254283238852, "pe": 5.46, "roe": 17.71, "div": 3.59, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 32.0, "cur_ccy": "RMB", "r1y": 27.97, "r5y_t": 86.54, "r5y_cagr": 13.28, "avg_roe5": 15.36, "avg_pe5": 6.89, "avg_div5": 4.25}, {"name": "格力电器", "code": "000651", "market": "A", "industry": "家电", "ff_native": 2147.27, "ccy": "RMB", "ff_rmb": 2147.27, "raw_w": 0.013731428675199211, "wt_w": 0.030686041036573738, "pe": 7.83, "roe": 19.19, "div": 7.69, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 38.95, "cur_ccy": "RMB", "r1y": -5.68, "r5y_t": 56.32, "r5y_cagr": 9.35, "avg_roe5": 23.14, "avg_pe5": 5.9, "avg_div5": 6.68}, {"name": "国电南瑞", "code": "600406", "market": "A", "industry": "公用事业", "ff_native": 1839.48, "ccy": "RMB", "ff_rmb": 1839.48, "raw_w": 0.011763163654060944, "wt_w": 0.026287499367298246, "pe": 21.96, "roe": 16.13, "div": 2.69, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 22.97, "cur_ccy": "RMB", "r1y": -8.94, "r5y_t": -13.55, "r5y_cagr": -2.87, "avg_roe5": 17.0, "avg_pe5": 24.4, "avg_div5": 2.24}, {"name": "华能水电", "code": "600025", "market": "A", "industry": "公用事业", "ff_native": 1779.27, "ccy": "RMB", "ff_rmb": 1779.27, "raw_w": 0.011378130881967196, "wt_w": 0.025427054928160542, "pe": 21.51, "roe": 9.6, "div": 2.15, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 9.55, "cur_ccy": "RMB", "r1y": -2.52, "r5y_t": 56.89, "r5y_cagr": 9.43, "avg_roe5": 10.45, "avg_pe5": 20.34, "avg_div5": 2.21}, {"name": "农夫山泉", "code": "9633", "market": "HK", "industry": "食品饮料", "ff_native": 2156.85, "ccy": "HKD", "ff_rmb": 1866.5379899999998, "raw_w": 0.011936194926224785, "wt_w": 0.021446414505396992, "pe": 27.42, "roe": 44.72, "div": 2.66, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 42.84, "cur_ccy": "HKD", "r1y": 37.76, "r5y_t": -8.96, "r5y_cagr": -1.86, "avg_roe5": 40.85, "avg_pe5": 42.46, "avg_div5": 1.95}, {"name": "伊利股份", "code": "600887", "market": "A", "industry": "食品饮料", "ff_native": 1667.89, "ccy": "RMB", "ff_rmb": 1667.89, "raw_w": 0.01066587460965692, "wt_w": 0.019163960487836956, "pe": 16.56, "roe": 20.28, "div": 5.21, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 26.5, "cur_ccy": "RMB", "r1y": 0.44, "r5y_t": -22.32, "r5y_cagr": -4.93, "avg_roe5": 18.71, "avg_pe5": 21.3, "avg_div5": 3.76}, {"name": "海尔智家", "code": "600690", "market": "A", "industry": "家电", "ff_native": 1324.39, "ccy": "RMB", "ff_rmb": 1324.39, "raw_w": 0.00846925017494171, "wt_w": 0.01892649079455677, "pe": 11.14, "roe": 14.95, "div": 5.41, "fin_basis": "2026年一季报 TTM", "risk": "high", "cur_price": 21.18, "cur_ccy": "RMB", "r1y": -4.36, "r5y_t": -2.96, "r5y_cagr": -0.6, "avg_roe5": 16.29, "avg_pe5": 15.27, "avg_div5": 2.57}, {"name": "兴业银行", "code": "601166", "market": "A", "industry": "银行", "ff_native": 3711.97, "ccy": "RMB", "ff_rmb": 3711.97, "raw_w": 0.023737420678107184, "wt_w": 0.01741682121511191, "pe": 4.92, "roe": 7.95, "div": 6.08, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 17.54, "cur_ccy": "RMB", "r1y": 17.38, "r5y_t": 46.47, "r5y_cagr": 7.94, "avg_roe5": 10.83, "avg_pe5": 4.22, "avg_div5": 7.22}, {"name": "福耀玻璃", "code": "600660", "market": "A", "industry": "汽车", "ff_native": 1133.49, "ccy": "RMB", "ff_rmb": 1133.49, "raw_w": 0.0072484769447026, "wt_w": 0.016198391747508784, "pe": 17.42, "roe": 22.21, "div": 3.71, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 56.59, "cur_ccy": "RMB", "r1y": 8.67, "r5y_t": 60.17, "r5y_cagr": 9.88, "avg_roe5": 18.42, "avg_pe5": 23.5, "avg_div5": 2.81}, {"name": "国投电力", "code": "600886", "market": "A", "industry": "公用事业", "ff_native": 1021.22, "ccy": "RMB", "ff_rmb": 1021.22, "raw_w": 0.00653052927283804, "wt_w": 0.01459397226600579, "pe": 15.37, "roe": 9.95, "div": 3.71, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 13.7, "cur_ccy": "RMB", "r1y": -19.48, "r5y_t": 31.77, "r5y_cagr": 5.67, "avg_roe5": 8.89, "avg_pe5": 19.66, "avg_div5": 2.47}, {"name": "云南白药", "code": "000538", "market": "A", "industry": "医药", "ff_native": 899.02, "ccy": "RMB", "ff_rmb": 899.02, "raw_w": 0.005749080929541974, "wt_w": 0.012847645897156226, "pe": 17.22, "roe": 12.49, "div": 5.16, "fin_basis": "2026年一季报 TTM", "risk": "medium", "cur_price": 50.39, "cur_ccy": "RMB", "r1y": -1.75, "r5y_t": -15.13, "r5y_cagr": -3.23, "avg_roe5": 10.1, "avg_pe5": 22.42, "avg_div5": 3.14}, {"name": "川投能源", "code": "600674", "market": "A", "industry": "公用事业", "ff_native": 758.0, "ccy": "RMB", "ff_rmb": 758.0, "raw_w": 0.004847281867581162, "wt_w": 0.01083236812599869, "pe": 16.4, "roe": 10.35, "div": 3.22, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 15.55, "cur_ccy": "RMB", "r1y": -18.04, "r5y_t": 28.85, "r5y_cagr": 5.2, "avg_roe5": 10.69, "avg_pe5": 16.34, "avg_div5": 2.83}, {"name": "宁波银行", "code": "002142", "market": "A", "industry": "银行", "ff_native": 2251.71, "ccy": "RMB", "ff_rmb": 2251.71, "raw_w": 0.014399304820647992, "wt_w": 0.010565179809718191, "pe": 7.24, "roe": 10.97, "div": 3.52, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 34.12, "cur_ccy": "RMB", "r1y": 22.42, "r5y_t": -21.37, "r5y_cagr": -4.69, "avg_roe5": 13.57, "avg_pe5": 8.24, "avg_div5": 2.39}, {"name": "江苏银行", "code": "600919", "market": "A", "industry": "银行", "ff_native": 2218.68, "ccy": "RMB", "ff_rmb": 2218.68, "raw_w": 0.014188083554043497, "wt_w": 0.010410200754193724, "pe": 6.14, "roe": 7.86, "div": 4.67, "fin_basis": "2026年中报 TTM", "risk": "low", "cur_price": 12.09, "cur_ccy": "RMB", "r1y": 5.91, "r5y_t": 78.39, "r5y_cagr": 12.27, "avg_roe5": 11.62, "avg_pe5": 5.04, "avg_div5": 5.61}, {"name": "双汇发展", "code": "000895", "market": "A", "industry": "食品饮料", "ff_native": 833.49, "ccy": "RMB", "ff_rmb": 833.49, "raw_w": 0.0053300276567417185, "wt_w": 0.009576752320001452, "pe": 16.39, "roe": 23.21, "div": 3.33, "fin_basis": "2026年一季报 TTM", "risk": "medium", "cur_price": 24.06, "cur_ccy": "RMB", "r1y": 8.04, "r5y_t": 5.46, "r5y_cagr": 1.07, "avg_roe5": 23.76, "avg_pe5": 15.96, "avg_div5": 3.9}, {"name": "交通银行", "code": "601328", "market": "A", "industry": "银行", "ff_native": 1887.64, "ccy": "RMB", "ff_rmb": 1887.64, "raw_w": 0.012071138713088266, "wt_w": 0.00885693806752044, "pe": 6.56, "roe": 8.38, "div": 4.48, "fin_basis": "2026年一季报 TTM", "risk": "low", "cur_price": 7.24, "cur_ccy": "RMB", "r1y": 0.14, "r5y_t": 152.86, "r5y_cagr": 20.39, "avg_roe5": 8.75, "avg_pe5": 4.43, "avg_div5": 8.59}, {"name": "中国移动", "code": "600941", "market": "A", "industry": "通信服务", "ff_native": 894.19, "ccy": "RMB", "ff_rmb": 894.19, "raw_w": 0.005718193896005804, "wt_w": 0.0060340669722699115, "pe": 16.3, "roe": 9.27, "div": 4.74, "fin_basis": "2026年中报 TTM", "risk": "high", "cur_price": 99.05, "cur_ccy": "RMB", "r1y": -14.48, "r5y_t": 149.51, "r5y_cagr": 20.06, "avg_roe5": 10.14, "avg_pe5": 13.81, "avg_div5": 4.78}, {"name": "杭州银行", "code": "600926", "market": "A", "industry": "银行", "ff_native": 1212.76, "ccy": "RMB", "ff_rmb": 1212.76, "raw_w": 0.007755395194891464, "wt_w": 0.005690354204597321, "pe": 6.01, "roe": 11.55, "div": 3.95, "fin_basis": "2026年中报 TTM", "risk": "medium", "cur_price": 16.73, "cur_ccy": "RMB", "r1y": 9.73, "r5y_t": 46.48, "r5y_cagr": 7.93, "avg_roe5": 14.53, "avg_pe5": 6.19, "avg_div5": 3.96}, {"name": "成都银行", "code": "601838", "market": "A", "industry": "银行", "ff_native": 807.42, "ccy": "RMB", "ff_rmb": 807.42, "raw_w": 0.005163314413617917, "wt_w": 0.0037884707542102055, "pe": 5.95, "roe": 7.49, "div": 4.83, "fin_basis": "2026年中报 TTM", "risk": "low", "cur_price": 19.05, "cur_ccy": "RMB", "r1y": -5.79, "r5y_t": 34.33, "r5y_cagr": 6.08, "avg_roe5": 16.42, "avg_pe5": 5.13, "avg_div5": 5.11}];
+const HKD_TO_RMB = 0.8654;
+const STOCK_CAP = 0.15;
+
+const colors = ['#2f6fd0','#d23b3b','#1f9d55','#d98a00','#6a4fb0','#e85d75','#3ba3d0','#6c757d','#20c997','#fd7e14','#6610f2','#0dcaf0'];
+
+echarts.init(document.getElementById('pieChart')).setOption({
+  title:{text:'Top10 权重 + 其他',left:'center',textStyle:{fontSize:14}},
+  tooltip:{trigger:'item',formatter:'{b}: {c}%'},
+  color:colors,
+  series:[{type:'pie',radius:['40%','70%'],data:pieData,label:{formatter:'{b} {c}%',fontSize:11}}]
+});
+
+echarts.init(document.getElementById('marketChart')).setOption({
+  title:{text:'A股 / 港股 市值占比',left:'center',textStyle:{fontSize:14}},
+  tooltip:{trigger:'item',formatter:'{b}: {c}%'},
+  color:['#d23b3b','#2f6fd0'],
+  series:[{type:'pie',radius:'60%',data:marketData,label:{formatter:'{b} {c}%'}}]
+});
+
+echarts.init(document.getElementById('indChart')).setOption({
+  title:{text:'行业分布（约束后）',left:'center',textStyle:{fontSize:14}},
+  tooltip:{trigger:'item',formatter:'{b}: {c}%'},
+  color:colors,
+  series:[{type:'pie',radius:['40%','70%'],data:indData,label:{formatter:'{b} {c}%',fontSize:11}}]
+});
+
+echarts.init(document.getElementById('cmpChart')).setOption({
+  title:{text:'个股权重：原始 vs 约束后（Top12）',left:'center',textStyle:{fontSize:14}},
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{bottom:0},
+  grid:{left:'3%',right:'4%',bottom:'18%',top:'12%',containLabel:true},
+  xAxis:{type:'category',data:cmpLabels,axisLabel:{rotate:35,fontSize:10}},
+  yAxis:{type:'value',name:'权重(%)',axisLabel:{formatter:'{value}%'}},
+  series:[
+    {name:'原始权重',type:'bar',data:cmpBefore,itemStyle:{color:'#c9d4e3'}},
+    {name:'约束后',type:'bar',data:cmpAfter,itemStyle:{color:'#2f6fd0'}}
+  ]
+});
+
+echarts.init(document.getElementById('barChart')).setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:p=>p[0].name+'<br/>权重: '+p[0].value+'%<br/>RMB市值: '+p[1].value+' 亿元'},
+  grid:{left:'3%',right:'4%',bottom:'15%',top:'10%',containLabel:true},
+  xAxis:{type:'category',data:barLabels.slice(0,15),axisLabel:{rotate:35,fontSize:10}},
+  yAxis:[{type:'value',name:'权重(%)',axisLabel:{formatter:'{value}%'}},{type:'value',name:'市值(亿元)'}],
+  series:[
+    {name:'权重',type:'bar',data:barWeights.slice(0,15),itemStyle:{color:'#2f6fd0'}},
+    {name:'RMB市值',type:'line',yAxisIndex:1,data:barMc.slice(0,15),itemStyle:{color:'#d23b3b'},smooth:true}
+  ]
+});
+
+/* ===== 主表：表头排序 + 资金分配实时测算 ===== */
+(function(){
+  const RISK_ORD = {low:0, medium:1, high:2, watch:1.3};
+  let sortKey = null, sortDir = -1, totalCapital = 1000000;
+  const capInput = document.getElementById('capInput');
+  const tbody = document.getElementById('mainTbody');
+  function priceRMB(s){ if(s.cur_price==null) return null; return s.cur_price * (s.cur_ccy==='HKD'?HKD_TO_RMB:1); }
+  function money(v){ return v==null?'—':'¥'+v.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function shares(v){ return v==null?'—':Math.floor(v).toLocaleString('zh-CN'); }
+  function val(s,k){ if(k==='risk') return (RISK_ORD[s.risk]!=null?RISK_ORD[s.risk]:0); return s[k]; }
+  function sorted(){
+    const arr = STOCKS.slice();
+    if(sortKey){
+      arr.sort(function(a,b){
+        let va=val(a,sortKey), vb=val(b,sortKey);
+        const na=(va==null||(typeof va==='number'&&isNaN(va)));
+        const nb=(vb==null||(typeof vb==='number'&&isNaN(vb)));
+        if(na&&nb) return 0; if(na) return 1; if(nb) return -1;
+        if(typeof va==='string') return va.localeCompare(vb,'zh')*sortDir;
+        return (va-vb)*sortDir;
+      });
+    } else { arr.sort(function(a,b){ return b.wt_w-a.wt_w; }); }
+    return arr;
+  }
+  function render(){
+    const arr = sorted();
+    let html='';
+    arr.forEach(function(s,idx){
+      const tag = s.market==='HK'?'h':'a';
+      const ccy_unit = s.ccy==='HKD'?'亿港元':'亿元';
+      const flag = s.wt_w>=STOCK_CAP-1e-9?' <span class="pin">触顶</span>':'';
+      const rcls = s.risk==='low'?'':(s.risk==='high'?'r-high':'r-med');
+      const rk = s.risk==='high'?'高':(s.risk==='medium'?'中':'低');
+      const cprice = s.cur_price==null?'—':s.cur_price.toFixed(2)+' <span class="cu">'+(s.cur_ccy==='HKD'?'HKD':'RMB')+'</span>';
+      const pf = function(v){ return v==null?'—':(v>=0?'+':'')+v.toFixed(2)+'%'; };
+      const nf = function(v){ return v==null?'—':v.toFixed(2); };
+      let amt=null, sh=null;
+      if(totalCapital>0 && s.wt_w!=null && s.cur_price!=null){
+        amt = totalCapital * s.wt_w;
+        const pr = priceRMB(s);
+        if(pr>0) sh = amt/pr;
+      }
+      html += '<tr>'
+        + '<td>'+ (idx+1) +'</td>'
+        + '<td>'+ s.name +' <span class="tag '+ tag +'">'+ s.market +'</span></td>'
+        + '<td>'+ s.code +'</td>'
+        + '<td>'+ s.industry +'</td>'
+        + '<td class="num">'+ nf(s.ff_native) +' '+ ccy_unit +'</td>'
+        + '<td class="num">'+ nf(s.ff_rmb) +'</td>'
+        + '<td class="num">'+ (s.raw_w*100).toFixed(2) +'%</td>'
+        + '<td class="num"><b>'+ (s.wt_w*100).toFixed(2) +'%</b>'+ flag +'</td>'
+        + '<td class="num">'+ nf(s.pe) +'</td>'
+        + '<td class="num">'+ nf(s.roe) +'</td>'
+        + '<td class="num">'+ nf(s.div) +'</td>'
+        + '<td class="num '+ rcls +'">'+ rk +'</td>'
+        + '<td class="num">'+ cprice +'</td>'
+        + '<td class="num">'+ pf(s.r1y) +'</td>'
+        + '<td class="num">'+ pf(s.r5y_t) +'</td>'
+        + '<td class="num">'+ pf(s.r5y_cagr) +'</td>'
+        + '<td class="num">'+ nf(s.avg_roe5) +'</td>'
+        + '<td class="num">'+ nf(s.avg_pe5) +'</td>'
+        + '<td class="num">'+ nf(s.avg_div5) +'</td>'
+        + '<td class="num" style="font-size:11.5px">'+ s.fin_basis +'</td>'
+        + '<td class="num"><b>'+ money(amt) +'</b></td>'
+        + '<td class="num">'+ shares(sh) +'</td>'
+      + '</tr>';
+    });
+    tbody.innerHTML = html;
+    document.querySelectorAll('#mainTable th[data-key]').forEach(function(th){
+      th.classList.remove('sort-asc','sort-desc');
+      if(th.getAttribute('data-key')===sortKey){ th.classList.add(sortDir<0?'sort-desc':'sort-asc'); }
+    });
+    document.getElementById('allocSum').textContent = money(totalCapital>0?totalCapital:0);
+    let totSh=0; arr.forEach(function(s){ const pr=priceRMB(s); if(totalCapital>0 && pr>0) totSh += totalCapital*s.wt_w/pr; });
+    document.getElementById('allocShares').textContent = Math.floor(totSh).toLocaleString('zh-CN');
+  }
+  document.querySelectorAll('#mainTable th[data-key]').forEach(function(th){
+    th.addEventListener('click', function(){
+      const k = th.getAttribute('data-key');
+      if(sortKey===k){ sortDir*=-1; } else { sortKey=k; sortDir=(th.getAttribute('data-type')==='text')?1:-1; }
+      render();
+    });
+  });
+  capInput.addEventListener('input', function(){
+    const v = parseFloat(capInput.value);
+    totalCapital = (isFinite(v)&&v>0)?v:0;
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

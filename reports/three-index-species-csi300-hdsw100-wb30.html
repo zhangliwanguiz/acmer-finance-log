@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三指数对比：估值·盈利·股息·回购·内生增长与真实长期回报</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1c2733; --sub:#5b6b7b; --line:#e6e9ee;
+    --blue:#1f4e79; --red:#c0392b; --orange:#e67e22; --green:#1e8e5a; --gold:#b8860b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; line-height:1.65; padding:24px;}
+  .wrap{max-width:1080px; margin:0 auto;}
+  h1{font-size:22px; font-weight:700; margin-bottom:4px;}
+  .sub{color:var(--sub); font-size:13px; margin-bottom:18px;}
+  .tldr{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:18px;}
+  .tldr h2{font-size:15px; color:var(--blue); margin-bottom:10px;}
+  .tldr ul{margin-left:18px;}
+  .tldr li{margin-bottom:6px; font-size:14px;}
+  .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:18px;}
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; position:relative;}
+  .kpi .name{font-size:13px; color:var(--sub); margin-bottom:2px;}
+  .kpi .name b{color:var(--ink);}
+  .kpi .big{font-size:26px; font-weight:700; letter-spacing:-0.5px;}
+  .kpi .tag{font-size:12px; color:var(--sub); margin-top:2px;}
+  .w30 .big{color:var(--blue);} .hs .big{color:var(--red);} .hl .big{color:var(--orange);}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:18px;}
+  .card h2{font-size:16px; margin-bottom:12px; border-left:4px solid var(--blue); padding-left:10px;}
+  table{width:100%; border-collapse:collapse; font-size:13px;}
+  th,td{padding:9px 10px; text-align:center; border-bottom:1px solid var(--line);}
+  th{background:#f0f3f7; font-weight:600; color:#33475b; white-space:nowrap;}
+  td:first-child,th:first-child{text-align:left; font-weight:600; color:#33475b;}
+  tr:last-child td{border-bottom:none;}
+  .hl-row td{background:#fff7ec;}
+  .w30-row td{background:#eef4fb;}
+  .note{font-size:12px; color:var(--sub); margin-top:8px;}
+  .chart{width:100%; height:380px;}
+  .chart-sm{width:100%; height:300px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media(max-width:760px){.kpis{grid-template-columns:1fr;}.grid2{grid-template-columns:1fr;}}
+  .src{font-size:11px; color:#8a97a5; margin-top:10px; line-height:1.5;}
+  .disc{font-size:12px; color:var(--sub); background:#fbf5ec; border:1px solid #efe2c8; border-radius:8px; padding:12px 14px; margin-top:6px;}
+  .pill{display:inline-block; font-size:11px; padding:1px 8px; border-radius:10px; margin-left:4px; vertical-align:middle;}
+  .p-blue{background:#e3edf8; color:var(--blue);} .p-red{background:#fbe9e7; color:var(--red);} .p-orange{background:#fdeee0; color:var(--orange);}
+  .good{color:var(--green); font-weight:600;} .bad{color:var(--red); font-weight:600;} .mid{color:var(--gold); font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>沪深300 · 红利低波100 · WB-30 自定义组合：估值、盈利、股息、回购、内生增长与真实长期回报对比</h1>
+  <div class="sub">数据时点：WB-30 为本地确定性计算（2026-08-28）；沪深300 / 红利低波100 估值取自中证指数公司口径（2026-08-27 收盘）；回购为 2025 全年 + 2026 年 1–8 月公开统计。</div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <h2>核心结论（TL;DR）</h2>
+    <ul>
+      <li><b>三者的"真实长期回报"非常接近（9%–10%），但结构完全不同</b>：WB-30 靠"内生增长 + 回购"驱动，沪深300 靠"盈利增长"，红利低波100 靠"高股息"——红利低波100 的高股息是用更弱的增长换来的。</li>
+      <li><b>估值</b>：红利低波100 最便宜（PE 9.06×、PB 0.887 破净），沪深300 最贵（PE 14.17×），WB-30 居中（PE 10.50×）。</li>
+      <li><b>盈利质量</b>：WB-30 加权 ROE 11.65% 最高，沪深300 约 10.08%，红利低波100 仅 8.70%，且一致预期未来两年归母净利同比 <span class="bad">-35.5% / -4.0%</span>，股息可持续性存疑。</li>
+      <li><b>回购</b>：WB-30 最积极（腾讯 2025 回购占自身净利约 1/3、美的 100 亿、茅台 60 亿等），近 12 个月回购约占盈利 <span class="good">≈4%</span>；沪深300 约 2.2%；红利低波100 基本"只分红不回购"（&lt;1%）。</li>
+    </ul>
+  </div>
+
+  <!-- 三大 KPI -->
+  <div class="kpis">
+    <div class="kpi w30">
+      <div class="name"><b>WB-30 自定义组合</b> <span class="pill p-blue">30 只</span></div>
+      <div class="big">10.1%</div>
+      <div class="tag">真实长期回报（股息3.73% + 增长6.05% + 回购0.35%）</div>
+    </div>
+    <div class="kpi hs">
+      <div class="name"><b>沪深300</b> <span class="pill p-red">300 只</span></div>
+      <div class="big">9.1%</div>
+      <div class="tag">真实长期回报（股息2.55% + 增长6.4% + 回购0.15%）</div>
+    </div>
+    <div class="kpi hl">
+      <div class="name"><b>红利低波100</b> <span class="pill p-orange">100 只</span></div>
+      <div class="big">9.7%</div>
+      <div class="tag">真实长期回报（股息4.37% + 增长5.3% + 回购0.05%）</div>
+    </div>
+  </div>
+
+  <!-- 核心对比总表 -->
+  <div class="card">
+    <h2>一、三指数核心指标全景对比</h2>
+    <table>
+      <thead>
+        <tr><th>指标</th><th>WB-30 自定义</th><th>沪深300</th><th>红利低波100</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>成分股数 / 亏损家数</td>
+          <td>30 只（27 A + 3 港）</td>
+          <td>300 只 / 18 亏损</td>
+          <td>100 只 / 0 亏损</td>
+        </tr>
+        <tr>
+          <td>总市值</td>
+          <td>19.72 万亿 RMB</td>
+          <td>68.46 万亿 RMB</td>
+          <td>21.21 万亿 RMB</td>
+        </tr>
+        <tr>
+          <td><b>估值 PE(TTM)</b></td>
+          <td><b>10.50×</b></td>
+          <td>14.17×（剔除负值 13.50×）</td>
+          <td><b>9.06×</b></td>
+        </tr>
+        <tr>
+          <td>估值 PB</td>
+          <td>≈1.22×（PE×ROE 反推）</td>
+          <td>1.46×</td>
+          <td><b>0.887×（破净）</b></td>
+        </tr>
+        <tr>
+          <td><b>盈利 ROE</b></td>
+          <td><b>11.65%</b></td>
+          <td>10.08%（2025）</td>
+          <td>8.70%（TTM）</td>
+        </tr>
+        <tr>
+          <td>盈利趋势（一致预期）</td>
+          <td class="mid">结构分化，11 只成分股 2026H1 净利下滑</td>
+          <td class="mid">2026 净利 +16.9% 预测</td>
+          <td class="bad">2026 -35.5% / 2027 -4.0%</td>
+        </tr>
+        <tr>
+          <td><b>股息率</b></td>
+          <td>3.73%</td>
+          <td>2.55%</td>
+          <td><b>4.37%</b></td>
+        </tr>
+        <tr>
+          <td>派息率</td>
+          <td><b>48.06%</b></td>
+          <td>≈36%（A股平均 37.7%）</td>
+          <td>≈40%（静态 46.2%）</td>
+        </tr>
+        <tr>
+          <td><b>内生增长 g</b></td>
+          <td>6.05%（g_idx）</td>
+          <td>≈6.4%</td>
+          <td>≈5.3%</td>
+        </tr>
+        <tr>
+          <td><b>回购收益率</b></td>
+          <td><b>≈0.35%</b></td>
+          <td>≈0.15%</td>
+          <td>≈0.05%</td>
+        </tr>
+        <tr>
+          <td><b>回购 / 净利（近12M）</b></td>
+          <td><b>≈4%</b></td>
+          <td>≈2.2%</td>
+          <td>&lt;1%</td>
+        </tr>
+        <tr class="hl-row">
+          <td><b>真实长期回报</b></td>
+          <td><b>≈10.1%</b></td>
+          <td>≈9.1%</td>
+          <td>≈9.7%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">注：真实长期回报 = 股息率 + 内生增长（ROE × 留存率）+ 回购收益率（回购额 ÷ 市值），为"估值不变"假设下的长期股东总回报（Total Shareholder Return），不含估值波动。WB-30 内生增长取"指数整体口径 g_idx=6.05%"以与另两者可比（个股加权 g_comp=8.30% 更高）。</div>
+  </div>
+
+  <!-- 回报分解图 -->
+  <div class="card">
+    <h2>二、真实长期回报的三种"结构"（堆叠分解）</h2>
+    <div id="chartReturn" class="chart"></div>
+    <div class="note">同一回报水平背后是三种截然不同的驱动力：红利低波100 的回报一半靠股息、增长最弱；WB-30 增长与回购贡献突出；沪深300 居中但股息偏薄。</div>
+  </div>
+
+  <!-- 估值 + 股息 + 回购对比 -->
+  <div class="card">
+    <h2>三、估值 · 股息率 · 回购强度对照</h2>
+    <div class="grid2">
+      <div>
+        <div id="chartVal" class="chart-sm"></div>
+      </div>
+      <div>
+        <div id="chartBuyback" class="chart-sm"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 回购专题 -->
+  <div class="card">
+    <h2>四、回购占盈利的比例（最近 12 个月）</h2>
+    <table>
+      <thead>
+        <tr><th>范围</th><th>近 12 个月回购额（估）</th><th>对应净利润</th><th>回购 / 净利润</th></tr>
+      </thead>
+      <tbody>
+        <tr class="w30-row">
+          <td>WB-30 组合（30 只）</td>
+          <td>≈700 亿元</td>
+          <td>≈1.88 万亿元</td>
+          <td><b>≈3.5%–4%</b></td>
+        </tr>
+        <tr>
+          <td>沪深300</td>
+          <td>≈1000 亿元</td>
+          <td>≈4.63 万亿元（2025）</td>
+          <td>≈2.2%</td>
+        </tr>
+        <tr>
+          <td>红利低波100</td>
+          <td>&lt;100 亿元</td>
+          <td>≈2342 亿元（TTM）</td>
+          <td>&lt;1%</td>
+        </tr>
+        <tr>
+          <td>A 股全市场</td>
+          <td>≈1440 亿元</td>
+          <td>≈5.40 万亿元（2025）</td>
+          <td>≈2.6%–2.7%</td>
+        </tr>
+        <tr>
+          <td>港股全市场</td>
+          <td>≈1500–1700 亿港元</td>
+          <td>≈5.46 万亿港元（2025）</td>
+          <td>≈3.0%–3.3%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>回购主力结构（2026 年内，Wind 口径）</b>：A 股截至 2026-08-27 已回购约 1856 亿元，其中"10 亿+"回购 28 起约 720 亿元，超 60% 为"集中竞价 + 注销"模式。回购居前的几乎全是沪深300 / WB-30 权重股——美的（年内 49–61 亿，拟最高 130 亿注销）、顺丰（42–60 亿全注销）、京东方（38–47 亿）、宁德时代（58 亿注销）、比亚迪（46 亿）、贵州茅台（30 亿注销）、海尔（14.88 亿）。<br>
+      <b>港股</b>：2025 全年回购 1787–1797 亿港元，其中<b>腾讯一家 800.36 亿港元、占港股总回购 25%</b>；2026 年 1–7 月腾讯又回购 261 亿港元居首。腾讯 2025 年回购约占其当年归母净利润的 <b>32%–33%</b>，是 A/H 股中回购回报率最高的龙头之一——这也是 WB-30 回购强度显著高于另两个指数的核心原因（腾讯为其第二大权重、11.51%）。
+    </div>
+  </div>
+
+  <!-- 结论 -->
+  <div class="card">
+    <h2>五、结论：三个指数各是什么"物种"</h2>
+    <table>
+      <thead><tr><th>指数</th><th>一句话画像</th><th>适合的角色</th></tr></thead>
+      <tbody>
+        <tr class="w30-row">
+          <td>WB-30 自定义</td>
+          <td>盈利质量最高（ROE 11.65%）+ 回购最积极 + 增长居前，综合长期回报最优；代价是估值中位、且 2026H1 有 11 只成分股净利下滑需盯紧</td>
+          <td>进攻 + 质量的"核心底仓"</td>
+        </tr>
+        <tr>
+          <td>沪深300</td>
+          <td>宽基代表，盈利稳健（ROE 10%），但估值最贵（PE 14.17、PEG 4.78）、股息偏薄，龙头回购被 300 只摊薄后贡献有限</td>
+          <td>β 基准、跟大盘</td>
+        </tr>
+        <tr>
+          <td>红利低波100</td>
+          <td>估值最低（PE 9.06、PB 0.887 破净）+ 股息最高（4.37%），但盈利最弱且一致预期未来两年净利下行，高股息本质是"低增长补偿"</td>
+          <td>防守型"压舱石"（股息可持续性需跟踪）</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">反向声音：红利低波100 的 4.37% 股息率虽然诱人，但其一致预期显示 2026 归母净利同比 <span class="bad">-35.5%</span>、2027 再 <span class="bad">-4.0%</span>——若盈利兑现下行，"高股息"的分子（分红）和分母（股价）都可能被侵蚀，属于典型的"高股息陷阱"风险区；反之 WB-30 的高 ROE + 高回购才是能"滚雪球"的复利来源。</div>
+  </div>
+
+  <div class="disc">
+    <b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+
+  <div class="src">
+    <b>数据来源与时点</b>：<br>
+    ① WB-30 自定义组合：本地约束加权算法（compute_index.py），成分股财务取自 2026 年中报/一季报 TTM，as of 2026-08-28。<br>
+    ② 沪深300：中证指数公司指数估值（neodata），PE 14.17×/PB 1.46×/股息率 2.55%，交易日 2026-08-27；实时 PE 13.79×（westock 2026-08-28）；ROE/净利为 2025 年度一致口径。<br>
+    ③ 红利低波100（930955）：中证指数公司指数估值，PE 9.06×/PB 0.887×/股息率 4.37%，交易日 2026-08-27；财务（ROE 8.70%、归母净利 2342 亿）为 2026-06-30 TTM 口径；盈利预测为卖方一致预期。<br>
+    ④ 回购：Wind / 证券时报 / 中证指数 / iFinD 公开统计（2025 全年 + 2026 年 1–8 月）。"近 12 个月"按 2025 年 9 月–2026 年 8 月估算，跨年度、且回购与净利润披露存在时滞，比例为近似值。WB-30 / 沪深300 / 红利低波100 的回购额为按权重成分股及公开公告的估算，非指数官方披露。
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // 图1：真实长期回报堆叠分解
+  var c1 = echarts.init(document.getElementById('chartReturn'));
+  c1.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+      formatter: function(p){
+        var s = p[0].name + '<br>';
+        var total = 0;
+        p.forEach(function(it){ total += it.value; });
+        p.forEach(function(it){ s += it.marker + it.seriesName + '：' + it.value.toFixed(2) + '%<br>'; });
+        s += '<b>合计：' + total.toFixed(1) + '%</b>';
+        return s;
+      }
+    },
+    legend: { data: ['股息率', '内生增长', '回购收益率'], bottom: 0 },
+    grid: { left: 50, right: 30, top: 30, bottom: 50 },
+    xAxis: { type: 'category', data: ['WB-30 自定义', '沪深300', '红利低波100'] },
+    yAxis: { type: 'value', name: '回报贡献(%)', max: 12 },
+    series: [
+      { name: '股息率', type: 'bar', stack: 'r', barWidth: 90, itemStyle: { color: '#1f4e79' }, data: [3.73, 2.55, 4.37] },
+      { name: '内生增长', type: 'bar', stack: 'r', itemStyle: { color: '#5b9bd5' }, data: [6.05, 6.4, 5.3] },
+      { name: '回购收益率', type: 'bar', stack: 'r', itemStyle: { color: '#e67e22' }, data: [0.35, 0.15, 0.05] }
+    ]
+  });
+
+  // 图2：估值（PE/PB）对比
+  var c2 = echarts.init(document.getElementById('chartVal'));
+  c2.setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['PE(TTM)', 'PB'], bottom: 0 },
+    grid: { left: 50, right: 30, top: 30, bottom: 50 },
+    xAxis: { type: 'category', data: ['WB-30', '沪深300', '红利低波100'] },
+    yAxis: [
+      { type: 'value', name: 'PE', min: 0, max: 16 },
+      { type: 'value', name: 'PB', min: 0, max: 1.6 }
+    ],
+    series: [
+      { name: 'PE(TTM)', type: 'bar', barWidth: 36, itemStyle: { color: '#c0392b' }, data: [10.50, 14.17, 9.06],
+        label: { show: true, position: 'top' } },
+      { name: 'PB', type: 'line', yAxisIndex: 1, itemStyle: { color: '#1e8e5a' }, symbolSize: 8,
+        data: [1.22, 1.46, 0.887], label: { show: true, position: 'top' } }
+    ]
+  });
+
+  // 图3：回购占盈利比例（近12个月，估算）
+  var c3 = echarts.init(document.getElementById('chartBuyback'));
+  c3.setOption({
+    tooltip: { trigger: 'axis', valueFormatter: function(v){ return v + '%'; } },
+    grid: { left: 50, right: 30, top: 30, bottom: 50 },
+    xAxis: { type: 'category', data: ['WB-30', '沪深300', '红利低波100', 'A股整体', '港股整体'] },
+    yAxis: { type: 'value', name: '回购/净利(%)', max: 5 },
+    series: [{
+      type: 'bar', barWidth: 40,
+      itemStyle: { color: function(p){ return p.dataIndex === 0 ? '#1f4e79' : '#e67e22'; } },
+      label: { show: true, position: 'top', formatter: '{c}%' },
+      data: [3.8, 2.2, 0.5, 2.65, 3.15]
+    }]
+  });
+
+  window.addEventListener('resize', function(){ c1.resize(); c2.resize(); c3.resize(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>标普500 vs 自定义组合指数 · 同口径长期对比（回购调整版）</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1a1d24; --sub:#5b6472; --line:#e7eaf0;
+    --blue:#2f6bff; --orange:#ff7a3c; --green:#0aa06e; --red:#e5484d;
+    --blue-bg:#eef3ff; --orange-bg:#fff1e8; --green-bg:#e8f7f0; --red-bg:#fdecec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;padding:0 0 60px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header{background:linear-gradient(135deg,#1a2740 0%,#2b3a5c 60%,#3a4d75 100%);color:#fff;padding:40px 0 34px;margin-bottom:26px}
+  header .wrap{display:flex;flex-direction:column;gap:6px}
+  .tag{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#dfe6f5;font-size:12px;padding:3px 12px;border-radius:20px;width:fit-content;letter-spacing:.5px}
+  h1{font-size:24px;font-weight:700;line-height:1.4;margin-top:10px}
+  .subtitle{color:#c3cde2;font-size:14px;margin-top:4px}
+  .meta{color:#9fb0d0;font-size:12px;margin-top:10px}
+  section{margin:26px 0}
+  h2{font-size:19px;font-weight:700;margin-bottom:14px;padding-left:11px;border-left:4px solid var(--blue);line-height:1.4}
+  h3{font-size:15px;font-weight:700;margin:16px 0 10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:0 1px 2px rgba(20,30,60,.04)}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:760px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:#f4f6fa;font-weight:600;color:#3a4454;font-size:13px}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr:hover td{background:#fafbfd}
+  .c-blue{color:var(--blue)} .c-orange{color:var(--orange)} .c-green{color:var(--green)} .c-red{color:var(--red)}
+  .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:12px;font-weight:600}
+  .pill-blue{background:var(--blue-bg);color:#2454d6}
+  .pill-orange{background:var(--orange-bg);color:#d95f1f}
+  .callout{border-radius:10px;padding:14px 16px;font-size:14px;margin:14px 0}
+  .callout.warn{background:#fff8ec;border:1px solid #f5dfb8;color:#7a5420}
+  .callout.info{background:var(--blue-bg);border:1px solid #d5e0fb;color:#274b9e}
+  .callout.good{background:var(--green-bg);border:1px solid #c4ead9;color:#1e6a4d}
+  .callout.err{background:var(--red-bg);border:1px solid #f3c6c8;color:#8c2629}
+  .chart{width:100%;height:380px}
+  .chart.tall{height:430px}
+  .small{font-size:12px;color:var(--sub)}
+  .src{font-size:12px;color:#8a93a3;margin-top:6px}
+  ul,ol{padding-left:20px;margin:8px 0}
+  li{margin:5px 0}
+  .verdict{border-left:4px solid var(--green);background:#f5fbf8;padding:14px 18px;border-radius:0 10px 10px 0;font-size:14px}
+  .foot-note{font-size:12px;color:#8a93a3;background:#f0f2f6;border-radius:10px;padding:14px 18px;margin-top:18px}
+  .legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .strike{text-decoration:line-through;color:#b0b6c0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="tag">长期持有 · 10 年以上 · 同口径比率聚合 · 回购调整版</span>
+    <h1>标普 500 vs 自定义组合指数：估值、盈利、股息、回购、内生增长与真实长期回报</h1>
+    <div class="subtitle">采用「比率聚合」口径，并引入<b>回购调整</b>修正内生增长 g 的失真（标普500 回购率高达 46%）</div>
+    <div class="meta">数据来源：S&amp;P Dow Jones Indices（回购/分红）、History of Market（Shiller/S&amp;P Global）、Multpl、Goldman Sachs、First Trust/Bloomberg｜数据截止 2026-08 ｜生成 2026-08-28</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 数据修正 + 回购调整说明 -->
+  <section>
+    <div class="callout err">
+      <b>⚠️ 两项关键修正：</b>①初版 ROE 误算 13.76%，经权威源复核为 <b>约 20%</b>（高盛 22% / Shiller-S&amp;P 20.8% / FactSet 19.4%）。②本次进一步引入<b>回购调整</b>——账面公式 g = ROE×(1-派息率) 隐含「留存收益全部再投资」的假设，但标普500 大量回购，回购本质是「缩股返还股东」而非「再投资」，导致账面 g 严重失真。
+    </div>
+  </section>
+
+  <!-- 结论先行 -->
+  <section>
+    <div class="verdict">
+      <b>核心结论（回购调整后）：</b>标普500 的账面内生增长 g = 14.4% 是<b>失真</b>的。真相是：标普500 过去 12 个月回购 <b>1.02 万亿美元</b>（回购率 46%），加上分红（派息率 30.5%），合计把 <b>约 77% 的净利润返还给股东</b>，真实留存率仅 <b>23%</b>（而非账面公式隐含的 69%）。据此，标普500 的<b>净利润总量真实增速仅约 4.8%</b>（与历史复合增速 4.45% 高度吻合），即便计入回购缩股增厚，每股 EPS 增速约 6.3%，股东长期总回报（估值不变）约 <b>7.4%</b>——<b>低于自定义组合的 9.78%</b>。此前「标普500 静态回报 15.5% 明显占优」的结论，因忽略回购而高估，需作废。
+    </div>
+  </section>
+
+  <!-- 回购调整核心逻辑 -->
+  <section>
+    <h2>一、为什么必须做「回购调整」</h2>
+    <div class="card">
+      <p>账面可持续增长公式 <b>g = ROE × (1 - 派息率)</b> 的隐含前提是：<b>留存下来的利润全部再投资于生产经营</b>。但标普500 的实际资本配置是「分红 + 回购」双通道返还股东：</p>
+      <div class="grid g2" style="margin-top:12px">
+        <div class="card" style="background:#fafbfd">
+          <h3 class="c-orange">标普500（S&P DJI 官方，12 个月）</h3>
+          <table>
+            <tbody>
+              <tr><td>净利润（TTM，operating）</td><td class="num">约 2.2 万亿美元</td></tr>
+              <tr><td>分红（TTM）</td><td class="num">约 0.67 万亿（派息率 30.5%）</td></tr>
+              <tr><td><b>回购（TTM）</b></td><td class="num"><b>1.02 万亿（回购率 46.4%）</b></td></tr>
+              <tr><td><b>分红 + 回购合计</b></td><td class="num"><b>1.69 万亿（占净利 76.8%）</b></td></tr>
+              <tr><td><b>真实留存率</b></td><td class="num"><b>23.2%</b>（账面口径为 69.5%）</td></tr>
+            </tbody>
+          </table>
+          <div class="src">来源：S&amp;P Dow Jones Indices（2025-12-18 发布，12-month Sep 2025 回购 1.02 万亿创纪录）；First Trust/Bloomberg 派息率 30.6%。</div>
+        </div>
+        <div class="card">
+          <h3>回购为何让 g 失真</h3>
+          <ul>
+            <li><b>回购 ≠ 再投资</b>：回购用留存收益买回自家股票、注销股本，是「把钱还给股东」，不增加未来产能/利润。</li>
+            <li><b>回购抬高 ROE</b>：缩股减少净资产（分母），使 ROE 20% 里含「回购做出来的水分」。</li>
+            <li><b>回购增厚每股 EPS</b>：总利润不变但股本减少，每股盈利被动抬升——这是「每股」增速高于「总量」增速的唯一原因。</li>
+          </ul>
+          <p style="margin-top:8px">所以必须区分三个增速口径（见下节），混为一谈就会把「总量增速」误当「每股增速」。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三种增速口径 -->
+  <section>
+    <h2>二、标普500 的「真实增速」三种口径</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>口径</th><th>含义</th><th class="num">数值</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fff6f6">
+            <td>口径 0（账面，失真）</td>
+            <td>g = ROE×(1-派息率)</td>
+            <td class="num"><b class="c-red">14.4%</b></td>
+            <td>忽略回购，隐含留存 69.5% 全部再投资，严重高估</td>
+          </tr>
+          <tr>
+            <td><b>口径 1：净利润总量增速</b></td>
+            <td>g = ROE×真实留存率</td>
+            <td class="num"><b>4.8%</b></td>
+            <td>真实留存率 23.2%；<b>与历史净利润复合增速 4.45% 高度吻合</b></td>
+          </tr>
+          <tr>
+            <td><b>口径 2：每股 EPS 增速</b></td>
+            <td>总量增速 + 回购缩股增厚</td>
+            <td class="num"><b>约 6.3%</b></td>
+            <td>净缩股约 1.5%/年（S&P DJI：17.1% 公司缩股≥4%）</td>
+          </tr>
+          <tr>
+            <td><b>口径 3：股东长期总回报</b></td>
+            <td>股息 + 每股 EPS 增速（估值不变）</td>
+            <td class="num"><b>约 7.4%</b></td>
+            <td>1.04% 股息 + 6.3% 每股增长</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout good" style="margin-top:12px">
+        <b>交叉验证：</b>口径 1 的「净利润总量真实增速 4.8%」与标普500 近 4 年净利润复合增速 <b>4.45%</b>（2021→2025）几乎重合——这证明「把回购从留存中剔除」的调整是正确且必要的，而账面公式的 14.4% 从未在历史数据中实现过。
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心指标对照 -->
+  <section>
+    <h2>三、同口径核心指标对照（回购调整后）</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th class="num"><span class="legend-dot" style="background:var(--blue)"></span>自定义组合</th>
+            <th class="num"><span class="legend-dot" style="background:var(--orange)"></span>标普500（回购调整）</th>
+            <th>关键差异</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>整体法 PE</td>
+            <td class="num">10.50 倍</td>
+            <td class="num">约 25 倍</td>
+            <td>标普高约 2.4 倍</td>
+          </tr>
+          <tr>
+            <td>整体法 ROE</td>
+            <td class="num">11.65%</td>
+            <td class="num">19.4%~22%（主 20.8%）</td>
+            <td>标普高约 9 pp</td>
+          </tr>
+          <tr>
+            <td>市值加权股息率</td>
+            <td class="num"><b>3.73%</b></td>
+            <td class="num">1.04%</td>
+            <td>组合高 2.69 pp</td>
+          </tr>
+          <tr>
+            <td>派息率</td>
+            <td class="num">48.06%</td>
+            <td class="num">30.5%</td>
+            <td>组合高 17.6 pp</td>
+          </tr>
+          <tr>
+            <td>回购率</td>
+            <td class="num">≈ 0%（红利股回购少）</td>
+            <td class="num"><b>46.4%</b></td>
+            <td>标普独有的大额回购</td>
+          </tr>
+          <tr>
+            <td>完整股东回报率（分红+回购）/净利</td>
+            <td class="num">约 48%</td>
+            <td class="num"><b>76.8%</b></td>
+            <td>标普返还比例高 29 pp</td>
+          </tr>
+          <tr>
+            <td>真实留存率</td>
+            <td class="num">52%</td>
+            <td class="num"><b>23.2%</b></td>
+            <td>标普留存更少</td>
+          </tr>
+          <tr style="background:#f7f9ff">
+            <td><b>内生增长 g（真实留存口径）</b></td>
+            <td class="num"><b class="c-blue">6.05%</b></td>
+            <td class="num"><b class="c-orange">4.8%</b>（净利润总量）</td>
+            <td>组合高 1.2 pp</td>
+          </tr>
+          <tr style="background:#f7f9ff">
+            <td><b>股东长期总回报（估值不变）</b></td>
+            <td class="num"><b class="c-blue">9.78%</b></td>
+            <td class="num"><b class="c-orange">约 7.4%</b></td>
+            <td>组合高约 2.4 pp</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="src">
+        注：自定义组合为红利低波防守端，回购规模极小，留存率口径基本成立（48.06% 派息率 → 留存 51.9%）；标普500 因回购 46.4%，真实留存率仅 23.2%。标普500 的「每股」回报高于「总量」，但整体股东回报仍需综合股息、回购、增长三者，结果约 7.4%。
+      </div>
+    </div>
+  </section>
+
+  <!-- 图1 真实回报对比 -->
+  <section>
+    <h2>四、真实长期回报对比（回购调整后）</h2>
+    <div class="card">
+      <p class="small" style="margin-bottom:10px">回购调整后，标普500 的股东长期总回报（约 7.4%）低于自定义组合（9.78%）。标普500 的「账面 15.5%」是忽略回购的失真值。组合的 9.78% 中股息贡献 3.73%（占比 38%），更「落袋为安」。</p>
+      <div id="chartReturn" class="chart"></div>
+    </div>
+  </section>
+
+  <!-- 图2 五维对比 -->
+  <section>
+    <h2>五、五维指标对比</h2>
+    <div class="card">
+      <p class="small" style="margin-bottom:10px">标普500 仅在「ROE」一项大幅领先；组合在「股息率」「派息率」「真实内生增长」「真实股东回报」四项占优。标普500 的高 ROE 有相当部分是回购缩股与杠杆「做」出来的。</p>
+      <div id="chartFive" class="chart tall"></div>
+    </div>
+  </section>
+
+  <!-- 分维度分析 -->
+  <section>
+    <h2>六、五维分项拆解</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="c-blue">1. 估值水平</h3>
+        <p>整体法 PE：<b>10.50 倍 vs 约 25 倍</b>。标普500 forward PE 处于 1980 年以来 87% 分位（高盛），as-reported PE 29.79（multpl，长期均值 16.2），股息率 1.04% 处于 1871 年以来最低区间。</p>
+        <p style="margin-top:8px">组合 10.5 倍低估值，股息率 3.73% 提供保护垫。</p>
+      </div>
+      <div class="card">
+        <h3 class="c-orange">2. 盈利能力（ROE）</h3>
+        <p>整体法 ROE：<b>11.65% vs 约 20%</b>。标普500 高 9 pp，但需拆解：其 ROE 由「利润率扩张 + 降税 + 杠杆抬升 + <b>回购缩股</b>」共同驱动（平安证券杜邦：净利率 12.1%、杠杆 2.69）。</p>
+        <p style="margin-top:8px"><b>回购对 ROE 的贡献不可忽视</b>——缩股减少净资产分母，使 20% 的 ROE 含「水分」。高盛预警：科技巨头 ROE 预计未来一年回落 7pp。</p>
+      </div>
+      <div class="card">
+        <h3 class="c-green">3. 股息与回购回报</h3>
+        <p>股息率：<b>3.73% vs 1.04%</b>（组合 3.6 倍）。但标普500 另有 <b>2% 回购收益率</b>，若算「分红+回购」综合现金回报，标普约 3%、组合 3.73%，两者接近。</p>
+        <p style="margin-top:8px">区别在于：组合的回报以「确定的分红」兑现；标普的回购是「灵活、可随时停」的，且回购时点常在高位（回购质量存疑）。</p>
+      </div>
+      <div class="card">
+        <h3>4. 内生增长 g（回购调整后）</h3>
+        <p>真实留存口径：<b>6.05% vs 4.8%</b>，组合反而高 1.2 pp。</p>
+        <p style="margin-top:8px">标普500 账面 g 14.4% 是忽略回购的失真值；真实净利润增速仅 4.8%，与历史 4.45% 复合增速吻合。组合留存率 52%（无大额回购），g=6.05% 更实在。</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3>5. 真实长期回报</h3>
+      <p>自定义组合 <b class="c-blue">9.78%</b> vs 标普500 <b class="c-orange">约 7.4%</b>（估值不变）。回购调整后，<b>组合的真实长期回报反而更高</b>。</p>
+      <p style="margin-top:8px">叠加估值回归后差距进一步拉大：标普500 若 PE 从 25x 回归 18x，10 年年化拖累 -3.3%，真实回报降至约 4%；组合若 PE 从 10.5x 修复 13x，增厚 +2.2%，回报升至约 12%。<b>回购调整 + 估值回归双重修正后，组合的风险收益比全面占优。</b></p>
+    </div>
+  </section>
+
+  <!-- 护城河差异 -->
+  <section>
+    <h2>七、护城河差异拆解</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>维度</th><th><span class="legend-dot" style="background:var(--blue)"></span>自定义组合（红利低波防守端）</th><th><span class="legend-dot" style="background:var(--orange)"></span>标普500</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>护城河类型</b></td>
+            <td>成熟行业现金流型：牌照、特许经营、稳定刚需、区域垄断</td>
+            <td>科技巨头无形资产型：网络效应、平台生态、品牌、专利、数据</td>
+          </tr>
+          <tr>
+            <td><b>盈利质量</b></td>
+            <td>ROE 中等（11.65%）但稳定、现金流强、可预测</td>
+            <td>ROE 高（20%）但集中度高、含回购/杠杆水分，波动大</td>
+          </tr>
+          <tr>
+            <td><b>护城河强度</b></td>
+            <td>中强：宽但不深，靠现金流+高分红，难颠覆但增长有限</td>
+            <td>强：深护城河已被充分定价（87% 分位），红利已反映在估值中</td>
+          </tr>
+          <tr>
+            <td><b>削弱风险</b></td>
+            <td>利率上行；行业周期；低估值陷阱</td>
+            <td>AI capex 回报不及预期→ROE 回落；反垄断；盈利集中；估值收缩</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 核心风险点 -->
+  <section>
+    <h2>八、核心风险点对照</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="c-blue">自定义组合的风险</h3>
+        <ul>
+          <li><b>低估值陷阱：</b>低 PE 可能反映成长天花板而非「便宜」。</li>
+          <li><b>ROE 偏低（11.65%）：</b>复利引擎偏弱。</li>
+          <li><b>派息率 48% 可持续性：</b>盈利下滑时高分红难以为继。</li>
+          <li><b>行业集中：</b>红利低波重仓金融/能源/公用事业。</li>
+          <li><b>利率敏感：</b>与债券替代，加息期吸引力下降。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="c-orange">标普500 的风险</h3>
+        <ul>
+          <li><b>估值历史高位：</b>forward PE 87% 分位、股息率 1871 年以来最低。</li>
+          <li><b>ROE 高位不可持续：</b>20% 显著高于长期中枢 13.8%，且含回购/杠杆水分。</li>
+          <li><b>回购依赖风险：</b>46% 回购率若因盈利下滑/监管收紧而缩减，每股增厚消失，真实增速进一步下探。</li>
+          <li><b>盈利集中度：</b>前十大权重股主导，AI 叙事逆转即整体承压。</li>
+          <li><b>汇率与跨境：</b>境内投资者存在汇率敞口。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 资金属性 -->
+  <section>
+    <h2>九、适合的资金属性</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3 class="c-blue">自定义组合（红利低波）</h3>
+        <ul>
+          <li>追求<b>稳定现金流</b>、需要股息收入的资金（退休金、保险、稳健理财）。</li>
+          <li>风险偏好低、回撤容忍度低、看重「落袋为安」。</li>
+          <li>作为组合的<b>防守压舱石</b>。</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="c-orange">标普500</h3>
+        <ul>
+          <li>追求<b>资本增值</b>、能承受高波动与估值回撤的成长型资金。</li>
+          <li>现金流需求低、久期极长、认可全球科技龙头长期竞争力。</li>
+          <li>但需清醒：其真实内生增速约 4.8%，高静态 ROE 依赖回购与杠杆维持。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三情景推演 -->
+  <section>
+    <h2>十、乐观 / 中性 / 悲观三情景推演（10 年年化，回购调整后）</h2>
+    <div class="card">
+      <p class="small" style="margin-bottom:12px">标普500 情景基于「真实留存率 23%」口径：g = ROE×23.2%，每股增速再加净缩股 1.5%。估值变动按 10 年几何平均：年化 = (P₁₀/P₀)^(1/10)−1。</p>
+      <table>
+        <thead>
+          <tr><th>标的</th><th>情景</th><th class="num">股息率</th><th class="num">每股增速</th><th class="num">估值变动</th><th class="num">合计年化</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3"><b>标普500</b><br><span class="small">(PE 25x)</span></td>
+            <td><span class="pill pill-orange">乐观</span></td>
+            <td class="num">1.0%</td><td class="num">6.3%（ROE维持20.8%）</td><td class="num">0%</td><td class="num"><b>7.4%</b></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-blue">中性</span></td>
+            <td class="num">1.0%</td><td class="num">4.7%（ROE→13.8%）</td><td class="num">-3.3%（→18x）</td><td class="num"><b>2.4%</b></td>
+          </tr>
+          <tr>
+            <td><span class="pill" style="background:#eee;color:#555">悲观</span></td>
+            <td class="num">1.0%</td><td class="num">4.3%（ROE→12%）</td><td class="num">-5.1%（→15x）</td><td class="num"><b>0.2%</b></td>
+          </tr>
+          <tr style="border-top:2px solid #eee">
+            <td rowspan="3"><b>自定义组合</b><br><span class="small">(PE 10.5x)</span></td>
+            <td><span class="pill pill-orange">乐观</span></td>
+            <td class="num">3.7%</td><td class="num">6.9%</td><td class="num">+2.2%（→13x）</td><td class="num"><b>12.8%</b></td>
+          </tr>
+          <tr>
+            <td><span class="pill pill-blue">中性</span></td>
+            <td class="num">3.7%</td><td class="num">6.1%</td><td class="num">0%</td><td class="num"><b>9.8%</b></td>
+          </tr>
+          <tr>
+            <td><span class="pill" style="background:#eee;color:#555">悲观</span></td>
+            <td class="num">3.2%</td><td class="num">4.5%</td><td class="num">-2.1%（→8.5x）</td><td class="num"><b>5.6%</b></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout info" style="margin-top:14px">
+        <b>关键读数（回购调整后）：</b>标普500 的回报区间（0.2% ~ 7.4%）显著下移、且中性/悲观情景的下沿极低——因为 ROE 向 13.8% 中枢回归是「均值回归」的自然方向，叠加估值回归，中性情景仅 2.4%、悲观接近 0。自定义组合区间（5.6% ~ 12.8%）全面占优，股息率 3.73% 提供「收益地板」。<b>回购调整彻底扭转了此前「标普静态回报占优」的结论。</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- 性价比与风险 -->
+  <section>
+    <h2>十一、性价比与风险的综合判断（数据与逻辑推演，非投资建议）</h2>
+    <div class="card">
+      <h3>性价比（回购调整后）</h3>
+      <p>以「单位估值对应的真实股东回报」衡量：自定义组合每 1 倍 PE 对应 <b>0.93 pp</b> 真实回报（9.78%/10.5），标普500 仅 <b>0.30 pp</b>（7.4%/25），组合的「回报/估值」效率约为标普500 的 <b>3.1 倍</b>。标普500 用 2.4 倍估值 + 46% 的回购依赖 + 87% 分位的估值，换来的真实股东回报反而更低。</p>
+      <h3 style="margin-top:16px">风险</h3>
+      <p>标普500 的风险是「估值收缩 × ROE 均值回归 × 回购缩减」的三重叠加，属「快且深」；自定义组合的风险是「低估值陷阱 × 低增长」，属「慢而磨」。回购调整后，标普500 的「高静态回报」被证伪，其相对组合的劣势从「估值偏贵」扩大为「真实回报更低 + 风险更高」。</p>
+      <h3 style="margin-top:16px">一句话推演</h3>
+      <p><b>回购调整是标普500 分析的「照妖镜」：账面 20% 的 ROE 和 15.5% 的理论回报，扣除回购「水分」后，真实净利润增速只有约 4.8%、真实股东回报约 7.4%，均不及红利低波组合。追求确定现金流、低估值保护、抗均值回归的资金，自定义组合的性价比显著更优；标普500 仅在「认可科技龙头长期竞争力 + 能扛住估值大幅回撤」的进攻场景下有配置意义。</b></p>
+    </div>
+  </section>
+
+  <!-- 分析局限 -->
+  <section>
+    <h2>十二、分析局限说明</h2>
+    <div class="card">
+      <ul>
+        <li><b>回购数据为 12 个月滚动：</b>回购 1.02 万亿是 12-month Sep 2025（创纪录），回购率随盈利波动，未来可能缩减。</li>
+        <li><b>真实留存率简化假设：</b>假设「分红+回购」合计占净利比例稳定，实际回购有强周期性。</li>
+        <li><b>净缩股率估算：</b>每股增厚的 1.5% 为近似（S&P DJI 仅披露 17.1% 公司缩股≥4%，整体净缩股需考虑新股发行/SBC 稀释）。</li>
+        <li><b>ROE 口径区间：</b>19.4%~22% 各源差异，主口径 20.8%，已给敏感性。</li>
+        <li><b>PE 口径分歧：</b>multpl 29.79 vs 高盛 forward 21x vs Wind 整体法 25x。</li>
+        <li><b>情景为主观假设：</b>ROE、估值中枢参数主观，仅展示风险收益非对称性。</li>
+        <li><b>未含税费汇率：</b>股息税、资本利得税、跨境汇率及交易成本未计。</li>
+        <li><b>组合数据为用户提供：</b>未经第三方交叉验证。</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot-note">
+    <b>免责声明：</b>以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+
+</div>
+
+<script>
+  // ============ 图1：真实股东回报对比（堆叠柱） ============
+  (function(){
+    var ch = echarts.init(document.getElementById('chartReturn'));
+    // 组合：股息3.73 + 内生g6.05 = 9.78
+    // 标普：股息1.04 + 每股增长6.3 = 7.4
+    var div = [3.73, 1.04];
+    var g = [6.05, 6.30];
+    ch.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' },
+        formatter: function(p){
+          var idx = p[0].dataIndex;
+          var total = (div[idx] + g[idx]).toFixed(2);
+          return '<b>' + p[0].name + '</b><br/>股息率：' + div[idx].toFixed(2) + '%<br/>增长：' + g[idx].toFixed(2) + '%<br/><b>股东长期回报：' + total + '%</b>';
+        }
+      },
+      legend: { data: ['股息率', '增长'], top: 0 },
+      grid: { left: 50, right: 30, top: 45, bottom: 35 },
+      xAxis: { type: 'category', data: ['自定义组合指数', '标普500(回购调整)'],
+        axisLabel: { fontSize: 12.5, fontWeight: 'bold' } },
+      yAxis: { type: 'value', name: '%', axisLabel: { formatter: '{value}%' } },
+      series: [
+        { name: '股息率', type: 'bar', stack: 't', barWidth: 90,
+          data: [
+            { value: 3.73, itemStyle: { color: '#0aa06e' } },
+            { value: 1.04, itemStyle: { color: '#0aa06e' } }
+          ],
+          label: { show: true, position: 'inside', formatter: '{c}%', color: '#fff', fontWeight: 'bold' } },
+        { name: '增长', type: 'bar', stack: 't', barWidth: 90,
+          data: [
+            { value: 6.05, itemStyle: { color: '#2f6bff' } },
+            { value: 6.30, itemStyle: { color: '#ff7a3c' } }
+          ],
+          label: { show: true, position: 'inside', formatter: '{c}%', color: '#fff', fontWeight: 'bold' } }
+      ]
+    });
+    window.addEventListener('resize', function(){ ch.resize(); });
+  })();
+
+  // ============ 图2：五维对比（双轴柱状） ============
+  (function(){
+    var ch2 = echarts.init(document.getElementById('chartFive'));
+    var cats = ['整体法PE\n(倍，越低越好)', 'ROE', '股息率', '真实内生g', '真实股东回报'];
+    var us = [10.50, 11.65, 3.73, 6.05, 9.78];       // 组合（蓝）
+    var sp = [25.00, 20.80, 1.04, 4.80, 7.40];       // 标普（橙）
+    ch2.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      legend: { data: ['自定义组合', '标普500'], top: 0 },
+      grid: { left: 50, right: 55, top: 45, bottom: 45 },
+      xAxis: { type: 'category', data: cats, axisLabel: { fontSize: 11.5, interval: 0, lineHeight: 15 } },
+      yAxis: [
+        { type: 'value', name: '倍', position: 'left' },
+        { type: 'value', name: '%', position: 'right', axisLabel: { formatter: '{value}%' } }
+      ],
+      series: [
+        { name: '自定义组合', type: 'bar', barWidth: 26, yAxisIndex: 1,
+          data: [ { value: 10.50, yAxisIndex: 0 }, 11.65, 3.73, 6.05, 9.78 ],
+          itemStyle: { color: '#2f6bff' },
+          label: { show: true, position: 'top', fontSize: 10.5, formatter: function(p){ return p.value; } } },
+        { name: '标普500', type: 'bar', barWidth: 26, yAxisIndex: 1,
+          data: [ { value: 25.00, yAxisIndex: 0 }, 20.80, 1.04, 4.80, 7.40 ],
+          itemStyle: { color: '#ff7a3c' },
+          label: { show: true, position: 'top', fontSize: 10.5, formatter: function(p){ return p.value; } } }
+      ]
+    });
+    window.addEventListener('resize', function(){ ch2.resize(); });
+  })();
+</script>
+</body>
+</html>

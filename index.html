@@ -290,6 +290,8 @@ tbody tr:nth-child(even){background:var(--paper)}
 .drawer__body .data-sample table{font-size:.82rem}
 .drawer__toc{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .4rem}
 .chip{display:inline-block;font-family:var(--f-mono);font-size:.7rem;font-weight:700;border:var(--b2);border-radius:5px;padding:.15rem .5rem;margin:.1rem .1rem;background:var(--white)}
+.report-links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.1rem;padding-top:1rem;border-top:2px dashed var(--line)}
+.arch-date{display:block;font-family:var(--f-mono);font-size:.72rem;font-weight:700;color:#666;letter-spacing:.04em;margin-bottom:.3rem}
 
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .55s cubic-bezier(.22,.85,.25,1),transform .55s cubic-bezier(.22,.85,.25,1)}
 .reveal.is-in{opacity:1;transform:none}
@@ -351,6 +353,7 @@ tbody tr:nth-child(even){background:var(--paper)}
     <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
     <nav class="nav__links" id="navMenu" aria-label="主导航">
       <a class="nav__link" href="#learn">学习中心</a>
+      <a class="nav__link" href="#archive">研究档案</a>
       <a class="nav__link" href="#calc">复利计算器</a>
       <a class="nav__link" href="#tree">奖金决策</a>
       <a class="nav__link" href="#scams">反诈图鉴</a>
@@ -641,6 +644,82 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
   </div>
 </section>
 
+<!-- ============ 深度研究档案 ============ -->
+<section class="section section--alt" id="archive" aria-labelledby="archive-title">
+  <div class="container">
+    <header class="sect-head reveal">
+      <p class="eyebrow"><span class="dot"></span>Chapter 03 — 研究档案</p>
+      <h2 id="archive-title">每一份<span class="mark mark--purple">真实问答研报</span>都在这</h2>
+      <p>下面每一项都是我们此前真实做过的问答与研究（含回测与原文全文归档）。点开「读摘要」了解核心结论与方法；想看全量表格、逐年数据与完整推导，点抽屉底部的「打开完整研报」。</p>
+    </header>
+
+    <div class="bento">
+      <article class="tile reveal" style="background:var(--pink-soft)">
+        <div class="tile__head"><span class="tag tag--pink">个股深度</span><span class="tile__no">ARCH / 01</span></div>
+        <h3>腾讯控股 00700 深度研究</h3>
+        <p>PE-TTM 14.77×（近 5 年约 5% 分位）买入逻辑 + AI 资本开支 +176%、自由现金流转负的代价与三条现金牛。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--pink">2026-08-13</span><span class="tag">个股</span></span><button class="tile__go" data-lesson="arch-tencent">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--yellow-soft)">
+        <div class="tile__head"><span class="tag tag--yellow">资产配置</span><span class="tile__no">ARCH / 02</span></div>
+        <h3>黄金 30 年深度复盘（XAU）</h3>
+        <p>1994–2025 名义年化 8.5%、最大回撤 -39.7%；10 年滚动窗口 100% 正收益——黄金是对冲资产而非成长资产。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--yellow">2026-08-24</span><span class="tag">黄金</span></span><button class="tile__go" data-lesson="arch-gold">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--blue-soft)">
+        <div class="tile__head"><span class="tag tag--blue">ETF 选品</span><span class="tile__no">ARCH / 03</span></div>
+        <h3>美国 50：513850 vs 159577</h3>
+        <p>同跟踪 MSCI USA 50，前十大重仓完全一致；费率差 0.05%/年 → 20 年差约 1.0%。同指数永远选低费。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--blue">2026-08-19</span><span class="tag">QDII</span></span><button class="tile__go" data-lesson="arch-us50">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--purple-soft)">
+        <div class="tile__head"><span class="tag tag--purple">口径纠错</span><span class="tile__no">ARCH / 04</span></div>
+        <h3>标普 500「回购调整」方法论</h3>
+        <p>标普回购率 46.4%、分红+回购吃掉净利 76.8%——账面 g=14.4% 失真，真实净利润总量增速仅约 4.8%。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--purple">2026-08-28</span><span class="tag">美股</span></span><button class="tile__go" data-lesson="arch-buyback">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--lime-soft)">
+        <div class="tile__head"><span class="tag tag--lime">指数对比</span><span class="tile__no">ARCH / 05</span></div>
+        <h3>三指数「物种」对比</h3>
+        <p>沪深 300、红利低波 100、WB-30 真实长期回报 9.1%~10.1% 却结构迥异：增长型 / 股息型 / 质量回购型。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--lime">2026-08-28</span><span class="tag">指数</span></span><button class="tile__go" data-lesson="arch-species">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--orange-soft)">
+        <div class="tile__head"><span class="tag tag--orange">选股方法</span><span class="tile__no">ARCH / 06</span></div>
+        <h3>价值投资候选筛选</h3>
+        <p>662 只 &gt;500 亿中国宇宙 → 59 只短名单：护城河 + 看得懂 + 可持 10 年 + 不怕永久亏损四条标准如何落地。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--orange">2026-08-28</span><span class="tag">价值</span></span><button class="tile__go" data-lesson="arch-screening">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--blue-soft)">
+        <div class="tile__head"><span class="tag tag--blue">情景推演</span><span class="tile__no">ARCH / 07</span></div>
+        <h3>长江电力 vs 标普 500 · 10 年推演</h3>
+        <p>三情景分解：长江基准 6.8% vs 标普到手 4.7%（扣 2% 磨损）；真正免费午餐是 50/50，夏普 0.32 最高。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--blue">2026-09-03</span><span class="tag">蒙特卡洛</span></span><button class="tile__go" data-lesson="arch-cjdl">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--pink-soft)">
+        <div class="tile__head"><span class="tag tag--pink">组合回测</span><span class="tile__no">ARCH / 08</span></div>
+        <h3>腾讯 50% + 长江 30% + 标普 20%</h3>
+        <p>2016–2026 十年 CNY 年化 14.2%、最大回撤 -44.6%；腾讯 5 年走平拖累组合，攻守失衡该不该调权重？</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--pink">2026-09-03</span><span class="tag">回测</span></span><button class="tile__go" data-lesson="arch-portfolio">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+
+      <article class="tile reveal" style="background:var(--lime-soft)">
+        <div class="tile__head"><span class="tag tag--lime">指数实盘</span><span class="tile__no">ARCH / 09</span></div>
+        <h3>WB-30 中国价值投资 30 强指数</h3>
+        <p>27 A 股 + 3 港股、单股 ≤15% / 行业 ≤20%；PE 10.50×、ROE 11.65%、股息 3.73%。规则与快照全公开。</p>
+        <div class="tile__foot"><span class="tile__tags"><span class="tag tag--lime">2026-08-31</span><span class="tag">指数</span></span><button class="tile__go" data-lesson="arch-wb30">读摘要 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta" id="contact" aria-labelledby="cta-title">
   <div class="container cta__inner">
@@ -669,7 +748,7 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
         <p>由算法竞赛选手搭建的理财认知学习站。把算法的严谨写进钱包——免费、开源、可质疑。</p>
       </div>
       <div><h4>在线工具</h4><ul class="footer__list"><li><a href="#calc">复利计算器</a></li><li><a href="#tree">奖金决策树</a></li><li><a href="#budget">现金流预算</a></li><li><a href="#scams">反诈图鉴</a></li></ul></div>
-      <div><h4>学习内容</h4><ul class="footer__list"><li><a href="#learn">学习中心</a></li><li><a href="#" data-lesson="manual">入门手册</a></li><li><a href="#" data-lesson="yearbook">年度年刊</a></li><li><a href="#" data-lesson="bookclub">共读会书单</a></li><li><a href="#" data-lesson="dataset">脱敏数据集</a></li></ul></div>
+      <div><h4>学习内容</h4><ul class="footer__list"><li><a href="#learn">学习中心</a></li><li><a href="#archive">研究档案</a></li><li><a href="#" data-lesson="manual">入门手册</a></li><li><a href="#" data-lesson="yearbook">年度年刊</a></li><li><a href="#" data-lesson="bookclub">共读会书单</a></li><li><a href="#" data-lesson="dataset">脱敏数据集</a></li></ul></div>
       <div><h4>联系</h4><ul class="footer__list"><li><a href="mailto:hello@acmer-finance.dev">hello@acmer-finance.dev</a></li><li><a href="#contact">邮件交流</a></li><li><a href="#about">勘误反馈</a></li></ul></div>
     </div>
     <div class="footer__bar"><p>© <span id="year">2026</span> acmer理财普及录 · 内容采用 CC BY-NC-SA 4.0 共享</p><p>本站所有内容不构成投资建议 · 数据仅供学习交流</p></div>
@@ -1039,6 +1118,249 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
   <p class="callout">数据参考日期：2024-12-31。费率以招募说明书 / 券商官网为准；隐性费随时需以券商最新公告页为准。</p>
 </template>
 
+<template id="tpl-arch-tencent">
+  <h2>腾讯控股（00700.HK）深度研究</h2>
+  <p class="drawer__toc"><span class="chip">2026-08-13</span><span class="chip">数据：业绩公告 / Wind / neodata</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>腾讯当前估值是否便宜？「买腾讯」到底在买什么？AI 大额资本开支值不值得等？</p>
+  <h3>一句话本质</h3>
+  <p>买腾讯 = 买「微信生态 + 游戏基本盘」两条现金牛产生的稳定现金流，外加一份 AI 重资本开支的长期看涨期权——441 港元（2026-08-13）已给这份期权打了极低的价格。</p>
+  <h3>核心数据速览（2026-08-13）</h3>
+  <ul>
+    <li>股价 441 港元（当日 -4.46%）；总市值 4.01 万亿港元，52 周 411.0~677.7。</li>
+    <li><b>PE-TTM 14.77×</b>（近 5 年约 5% 分位）、PB 3.07×、股息率 1.21% + 持续回购。</li>
+    <li>2025 全年营收 7,517.7 亿元（+16.7%）、归母净利 2,248.4 亿（+16%）；总现金 5,111 亿（净现金 582 亿）。</li>
+    <li>2026Q2 营收 +11%、毛利率升至 58%；但<b>资本开支 +176%、自由现金流转负 -138 亿</b>——分歧所在。</li>
+  </ul>
+  <h3>业务结构与增长质量</h3>
+  <ul>
+    <li>十年营收 CAGR 约 17%；毛利率「2022 触底 43% → 2025 回升 56%」，属结构性改善。</li>
+    <li>经营现金流常年大于净利（2025：3,031 亿 vs 净利 2,248 亿），利润含金量高；ROE 稳定 21%。</li>
+    <li>2026Q2：游戏 659 亿 +11%、营销（广告）436 亿 +22%（AI 推荐 + 微信闭环）、云加速至低 20% 几个百分点。</li>
+  </ul>
+  <h3>结论（分视角 + 条件化）</h3>
+  <ul>
+    <li>长期（3 年以上）：估值极低分位 + 现金流优异 → 有吸引力，但需<b>接受 1~2 年盈利平台期</b>与 AI 兑现风险。</li>
+    <li>建议方式：<b>分批而非一次性重仓</b>；把 AI 视为「期权」，用仓位而非信仰去押注。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--pink" href="reports/tencent-00700-deep-research-2026-08.html" target="_blank" rel="noopener">打开完整研报 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-gold">
+  <h2>黄金 30 年深度复盘（XAU）</h2>
+  <p class="drawer__toc"><span class="chip">1994–2025</span><span class="chip">数据：Wind</span><span class="chip">对冲资产</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>黄金「死拿不卖」到底行不行？它年化多少、回撤多大、该配多少？</p>
+  <h3>核心统计（1994→2025，30 个完整年度）</h3>
+  <ul>
+    <li>名义年化 <b>8.5%</b>——介于标普 500（9.1%）与纳斯达克 100（14.3%）之间，但波动回撤温和得多。</li>
+    <li>历史最大回撤 <b>-39.7%</b>（2011-09 → 2015-12），实际日内极值接近 -45%。</li>
+    <li>滚动窗口：3 年负收益概率 31%、5 年 22%、<b>10 年 0%（22 个样本全部正收益）</b>。</li>
+    <li>2025 年 +75% 是极端值，显著拉高长周期均值，分析时要剔除看待；2026 年内自高点约 $5,020 回撤至 $4,344（约 -13%）。</li>
+    <li>50% 黄金 + 50% 标普的组合最大回撤仅 <b>-18.4%</b>。</li>
+  </ul>
+  <h3>结论与方法</h3>
+  <ul>
+    <li>黄金是<b>对冲资产而非成长资产</b>：不产生现金流，长期收益来自货币贬值与避险溢价。</li>
+    <li>理性预期年化应放在 <b>5%–9%</b>；死拿可行，但必须接受「长期磨底、数年不涨」的常态。</li>
+    <li>它真正的价值是降低组合波动与回撤，不是跑赢股票。</li>
+  </ul>
+  <h3>配套：国内场内黄金 ETF 怎么选（2026-08-18）</h3>
+  <ul>
+    <li>费率最低（综合 0.20%）：华夏 518850 / 工银 518660 / 富国 518680；多数主流为 0.60%。</li>
+    <li>跟踪误差最小：易方达 159934、富国 518680 约 0.03%；华安 518880（千亿规模）约 0.23% 偏大。</li>
+    <li>「又便宜又准」的平衡之选：华夏 518850；追求极致精度可看富国 518680（基准为上海金 SHAU）。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--yellow" href="reports/xau-gold-30y-review-2026-08.html" target="_blank" rel="noopener">打开黄金 30 年复盘 ↗</a>
+    <a class="btn btn--sm btn--blue" href="reports/cn-gold-etf-fee-tracking-2026-08.html" target="_blank" rel="noopener">打开黄金 ETF 选品对比 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-us50">
+  <h2>美国 50：513850 vs 159577（同指数选品）</h2>
+  <p class="drawer__toc"><span class="chip">2026-08-19</span><span class="chip">跟踪 MSCI USA 50</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>两只跟踪同一指数、前十大重仓完全一致的 QDII ETF，选哪只？同指数选品看什么？</p>
+  <h3>核心发现</h3>
+  <ul>
+    <li>同指数、不同管理人：均跟踪 MSCI USA 50；前十大重仓一致（英伟达 10.77% / 苹果 9.9% / 微软 6.13%…）。</li>
+    <li><b>费率差：513850 总成本 0.60%/年 vs 159577 0.65%/年</b> → 10 年复利差约 0.5%、20 年约 1.0%。</li>
+    <li>跟踪误差打平（年化均 ≈0.87%）；513850 净偏离 +0.39% vs 159577 -0.39%，差额主要就是那 0.05% 费率。</li>
+    <li>规模与成熟度：513850（20.56 亿 / 2023-11 成立）优于 159577（11.26 亿 / 2024-02）。</li>
+    <li>短期回报 159577 略高（近 1 年 +20.82% vs +18.28%），属复制节奏差异，长期应趋收敛。</li>
+  </ul>
+  <h3>可迁移方法论</h3>
+  <ul>
+    <li>同指数选品 = <b>先比费率，再比跟踪质量，再看规模流动性</b>；前十大一致时管理人不构成差异。</li>
+    <li>年化跟踪误差 ≈ 费率差时，说明两边复制能力相当——此时<b>买更便宜的那只</b>。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--blue" href="reports/us50-etf-513850-vs-159577.html" target="_blank" rel="noopener">打开完整研报 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-buyback">
+  <h2>标普 500「回购调整」：为什么 g=14.4% 是失真的</h2>
+  <p class="drawer__toc"><span class="chip">2026-08-28</span><span class="chip">S&amp;P DJI / Shiller / 高盛</span><span class="chip">方法论</span></p>
+  <p><b>回答的问题：</b>标普 500 用 g = ROE × (1−派息率) 估算内生增长到底准不准？为什么「静态回报 15.5% 占优」的旧结论要作废？</p>
+  <h3>回购为何让 g 失真</h3>
+  <ul>
+    <li>标普 500 近 12 个月<b>回购 1.02 万亿美元（回购率 46.4%）</b>、分红 0.67 万亿（派息率 30.5%），合计把净利的 <b>76.8%</b> 返还股东。</li>
+    <li><b>真实留存率仅 23.2%</b>（账面公式隐含 69.5%）——回购是「缩股返还股东」，不是「再投资」。</li>
+    <li>账面 g = ROE×(1−派息率) = 14.4% 隐含「留存全部再投资」，从未在历史数据中实现。</li>
+  </ul>
+  <h3>三种增速口径（必须区分）</h3>
+  <table><thead><tr><th>口径</th><th>含义</th><th>数值</th></tr></thead><tbody>
+    <tr><td>0 · 账面（失真）</td><td>g = ROE×(1−派息率)</td><td>14.4%</td></tr>
+    <tr><td>1 · 净利总量</td><td>g = ROE×真实留存率</td><td>≈4.8%（与历史 4.45% 复合吻合）</td></tr>
+    <tr><td>2 · 每股 EPS</td><td>总量 + 回购缩股增厚</td><td>≈6.3%</td></tr>
+    <tr><td>3 · 股东长期回报</td><td>股息 1.04% + 每股增长</td><td>≈7.4%（估值不变）</td></tr>
+  </tbody></table>
+  <h3>与自定义组合同口径对比</h3>
+  <ul>
+    <li>自定义组合（红利低波）：PE 10.5× / ROE 11.65% / 股息率 3.73% / 真实留存 52% / g 6.05% → <b>股东长期回报 9.78%</b>。</li>
+    <li>标普 500 回购调整后 ≈ <b>7.4%</b>——标普的「每股」高于「总量」，但综合回报仍低于组合，且组合股息占比更高（更落袋为安）。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--purple" href="reports/sp500-vs-composite-buyback-adjusted.html" target="_blank" rel="noopener">打开完整研报 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-species">
+  <h2>沪深 300 / 红利低波 100 / WB-30：三个指数各是什么「物种」</h2>
+  <p class="drawer__toc"><span class="chip">2026-08-28</span><span class="chip">中证 / WB-30 本地计算</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>同样约 9%–10% 的真实长期回报，三个指数的驱动力有何不同？哪个更适合做核心底仓？</p>
+  <h3>核心指标对照</h3>
+  <table><thead><tr><th>指标</th><th>WB-30</th><th>沪深 300</th><th>红利低波 100</th></tr></thead><tbody>
+    <tr><td>PE / PB</td><td>10.50× / ≈1.22</td><td>14.17× / 1.46</td><td>9.06× / 0.887（破净）</td></tr>
+    <tr><td>ROE</td><td>11.65%</td><td>≈10.08%</td><td>8.70%</td></tr>
+    <tr><td>股息率</td><td>3.73%</td><td>2.55%</td><td>4.37%</td></tr>
+    <tr><td>回购 / 净利</td><td>≈4%</td><td>≈2.2%</td><td>&lt;1%</td></tr>
+    <tr><td>内生增长 g</td><td>6.05%</td><td>≈6.4%</td><td>≈5.3%</td></tr>
+    <tr><td>真实长期回报</td><td>≈10.1%</td><td>≈9.1%</td><td>≈9.7%</td></tr>
+  </tbody></table>
+  <h3>结论：同一回报，三种结构</h3>
+  <ul>
+    <li><b>WB-30</b>：盈利质量最高 + 回购最积极（腾讯 2025 回购约占自身净利 1/3）+ 增长居前 → 「进攻 + 质量」核心底仓；代价是估值中位、2026H1 有 11 只成分股净利下滑需盯紧。</li>
+    <li><b>沪深 300</b>：宽基代表，盈利稳健、增长主导，股息偏薄。</li>
+    <li><b>红利低波 100</b>：最便宜但增长最弱，回报一半靠股息；一致预期 2026 净利 -35.5% / 2027 -4.0%，<b>股息可持续性存疑</b>——高股息是用更弱的增长换来的。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--lime" href="reports/three-index-species-csi300-hdsw100-wb30.html" target="_blank" rel="noopener">打开完整研报 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-screening">
+  <h2>价值投资候选筛选：662 只 → 59 只</h2>
+  <p class="drawer__toc"><span class="chip">2026-08-28</span><span class="chip">东财全市场清单</span><span class="chip">方法可复制</span></p>
+  <p><b>回答的问题：</b>中国市场上「值得研究」的大盘价值股到底有哪些？怎么保证不漏、不踩价值陷阱？</p>
+  <h3>筛选漏斗（审计底稿式）</h3>
+  <ul>
+    <li>完整宇宙 · A 股：<b>416 只</b>（总市值 &gt; 500 亿 RMB，沪深主板/创业板/科创板全遍历）。</li>
+    <li>完整宇宙 · 港股通独有：<b>124 只</b>（&gt;500 亿 HKD，剔除 AH 与人民币柜台重复）。</li>
+    <li>AH 双重上市排除 100 只、人民币柜台重复去重 22 只 → 总宇宙 <b>662 只</b>。</li>
+    <li>四条标准人工精选 → <b>59 只短名单</b>（核心 20 / 重点 32 / 观察 7）。</li>
+  </ul>
+  <h3>四条筛选标准（可迁移）</h3>
+  <ul>
+    <li>① 业务护城河高（可解释的竞争优势）；② 看得懂（能力圈内）；</li>
+    <li>③ 可长期持有 10 年以上；④ 不怕永久性亏损（避免「永续下跌」的伪价值）。</li>
+  </ul>
+  <h3>报告还给了什么</h3>
+  <ul>
+    <li>护城河分类透视（银行/公用事业/消费/制造龙头等分组）。</li>
+    <li><b>明确回避 / 谨慎清单</b>：价值陷阱特征（周期顶、ROE 下滑、重资产扩张无回报等）。</li>
+    <li>注意：55 个正盈利标的与 4 个亏损/微利标的被分开标注，避免「只按 PE 买」的陷阱。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--orange" href="reports/china-500e-value-investing-screening.html" target="_blank" rel="noopener">打开完整研报（含全部名单与审计底稿）↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-cjdl">
+  <h2>长江电力 vs 标普 500：未来 10 年年化推演</h2>
+  <p class="drawer__toc"><span class="chip">2026-09-03</span><span class="chip">总回报分解 + 蒙特卡洛 10 万条</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>A 股红利防守（长江电力）与美股宽基（标普 500）二选一，未来十年谁赢？「国内买美股每年 -2% 磨损」怎么算进模型？</p>
+  <h3>三情景基准年化（统一框架：股息 + 盈利增长 + 回购增厚 + 估值变动）</h3>
+  <table><thead><tr><th>情景</th><th>长江电力</th><th>标普 500（国内到手）</th><th>差值</th></tr></thead><tbody>
+    <tr><td>悲观</td><td>—</td><td>≈1.1%</td><td>长江领先 +3.1pct</td></tr>
+    <tr><td><b>基准</b></td><td><b>6.8%</b>（股息 3.6% + 内生 3.2%）</td><td><b>4.7%</b>（本币 6.8% − 2% 磨损）</td><td>+2.2pct</td></tr>
+    <tr><td>乐观</td><td>—</td><td>≈8.8%</td><td>标普仍更高</td></tr>
+  </tbody></table>
+  <h3>四个关键洞见</h3>
+  <ul>
+    <li>长江的优势不是「质量」，而是<b>起点估值优势 + 摩擦成本优势</b>（标普起点估值处历史高分位）。</li>
+    <li>两个资产收益分布高度重叠，单看期望值选边是危险的。</li>
+    <li><b>真正的免费午餐是 50/50 组合</b>：两资产分处中美、驱动几乎不相关，组合波动从 17.6%/15.9% 压到 12.7%，夏普 0.32 高于任一单边（0.29 / 0.19）。</li>
+    <li>「内生增长」口径在两个标的上都不能照抄 g=ROE×留存：长江增长不靠再投资（装机受限），标普被大额回购扭曲。</li>
+  </ul>
+  <h3>报告的自我质疑</h3>
+  <ul>
+    <li>推演高度依赖起点估值假设与 2% 磨损假设；报告专门留了「反向声音：这个推演可能错在哪」一节。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--blue" href="reports/cjdl-vs-sp500-10y-scenarios.html" target="_blank" rel="noopener">打开完整研报 ↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-portfolio">
+  <h2>腾讯 50% + 长江 30% + 标普 20% 组合回测</h2>
+  <p class="drawer__toc"><span class="chip">2016-09 → 2026-09</span><span class="chip">CNY 计价 · 含股息</span><span class="chip">非投资建议</span></p>
+  <p><b>回答的问题：</b>一个「进攻成长 + 防御红利 + 美股宽基」的混合组合，买入持有十年到底表现如何？风险在哪儿？</p>
+  <h3>组合表现</h3>
+  <ul>
+    <li>近 10 年（2016-09 → 2026-09）：年化 <b>14.2%</b>、累计 276.0%、最大回撤 <b>-44.6%</b>。</li>
+    <li>近 5 年（2021-09 起）：年化仅 7.2%、回撤 -33.3%——被腾讯拖累。</li>
+    <li>2022 年组合 -13.1%；2017 年 +95.4%（腾讯 +141.7%）。</li>
+  </ul>
+  <h3>单标的口径</h3>
+  <table><thead><tr><th>标的</th><th>10 年年化</th><th>10 年回撤</th><th>5 年年化</th></tr></thead><tbody>
+    <tr><td>腾讯 00700</td><td>11.4%</td><td>-74.2%</td><td>0.5%</td></tr>
+    <tr><td>长江电力</td><td>17.3%</td><td>-26.4%</td><td>13.2%</td></tr>
+    <tr><td>标普 500（CNY）</td><td>15.1%</td><td>-33.0%</td><td>13.3%</td></tr>
+  </tbody></table>
+  <h3>加权口径（重要）</h3>
+  <ul>
+    <li>组合整体法 PE = 总市值 ÷ 总盈利 = 1 ÷ Σ(权重/PEᵢ) ≈ <b>17.4×</b>；ROE ≈ 20.1%（算术加权）、股息率 ≈ 1.91%。</li>
+    <li>「整体法（调和加权）」与「单只算术加权」口径必须分开标注，不可混用。</li>
+  </ul>
+  <h3>关键判断</h3>
+  <ul>
+    <li>组合名义「50% 成长 + 30% 防御 + 20% 宽基」，实际因腾讯 5 年走平更像「长江 + 标普」二元组合——<b>攻守失衡</b>。</li>
+    <li>风险高度集中于腾讯（50% 权重贡献了 -45% 回撤的主因）；若重回撤控制，可把腾讯降到 30–40%、上提长江/标普。</li>
+    <li>近 10 年 HKD/CNY、USD/CNY 贬值对持有外币资产形成约 +1~2pp/年的正贡献。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--pink" href="reports/tencent50-cjdl30-spx20-portfolio-backtest.html" target="_blank" rel="noopener">打开完整研报（含逐年表与回撤图）↗</a>
+  </div>
+</template>
+
+<template id="tpl-arch-wb30">
+  <h2>WB-30 中国价值投资 30 强指数</h2>
+  <p class="drawer__toc"><span class="chip">27 A 股 + 3 港股</span><span class="chip">单股 ≤15% · 行业 ≤20%</span><span class="chip">快照 2026-08-31</span></p>
+  <p><b>回答的问题：</b>用指数化的纪律持有「中国好公司」，规则怎么定、指标怎么算、比得过宽基吗？</p>
+  <h3>指数规则（全部公开、可复现）</h3>
+  <ul>
+    <li>30 只成分（27 A 股 + 3 港股，含茅台、腾讯、平安、农夫山泉、网易、长江电力等）。</li>
+    <li>约束：<b>单股权重 ≤ 15%、单行业 ≤ 20%</b>；基准日 2026-08-28，总市值约 19.72 万亿元 RMB。</li>
+    <li>加权与指标口径：整体法 PE/ROE（总市值 ÷ 总盈利 / 总净利 ÷ 总净资产），股息率按市值加权——与 S&amp;P 500 / 中证官方规则对齐。</li>
+  </ul>
+  <h3>最新快照（2026-08-31）</h3>
+  <ul>
+    <li>PE-TTM 10.50×、ROE 11.65%、股息率 3.73%、派息率 48%。</li>
+    <li>回购最积极：近 12 个月回购约占盈利 ≈4%（腾讯 2025 回购 800 亿港元、美的百亿级注销、茅台 60 亿等）。</li>
+    <li>估值不变假设下的股东长期回报 ≈ 10.1%（vs 沪深 300 ≈9.1%、红利低波 100 ≈9.7%）。</li>
+  </ul>
+  <h3>使用建议（学到的纪律）</h3>
+  <ul>
+    <li>「回购调整」必须做：账面 g = ROE×(1−派息率) 会系统性高估回购型公司的增长。</li>
+    <li>先定义「永久性亏损 ≠ 账面亏损」：指数规则比个人情绪可靠，但成分股基本面要盯（2026H1 已有 11 只净利下滑）。</li>
+  </ul>
+  <div class="report-links">
+    <a class="btn btn--sm btn--lime" href="reports/wb30-value30-index-snapshot-2026-08-31.html" target="_blank" rel="noopener">打开 WB-30 快照研报 ↗</a>
+  </div>
+</template>
+
 <script>
 (function () {
   'use strict';
@@ -1089,7 +1411,7 @@ $ acmer-compound --monthly 3000 --years 20 --rate 0.08
   } else { bars.forEach(fillBar); }
 
   /* 导航高亮 */
-  var ids = ['learn', 'calc', 'tree', 'scams', 'timeline', 'about'];
+  var ids = ['learn', 'archive', 'calc', 'tree', 'scams', 'timeline', 'about'];
   var secs = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
   if ('IntersectionObserver' in window && secs.length) {

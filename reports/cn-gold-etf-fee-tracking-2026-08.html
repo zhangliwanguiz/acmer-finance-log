@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国内场内黄金ETF 管理费与跟踪误差对比</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1f2329; --sub:#6b7280;
+    --line:#e6e8eb; --red:#e23c3c; --green:#16a34a; --accent:#c8932b;
+    --blue:#2f6fed;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",Helvetica,Arial,sans-serif;
+    line-height:1.6;}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px;}
+  h1{font-size:24px;margin:0 0 4px;}
+  .meta{color:var(--sub);font-size:13px;margin-bottom:20px;}
+  .tldr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .card .tag{display:inline-block;font-size:12px;color:#fff;background:var(--accent);
+    border-radius:6px;padding:2px 8px;margin-bottom:8px;}
+  .card .tag.blue{background:var(--blue);}
+  .card h3{margin:6px 0 4px;font-size:17px;}
+  .card .big{font-size:22px;font-weight:700;color:var(--ink);}
+  .card p{margin:6px 0 0;font-size:13px;color:var(--sub);}
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 10px 6px;margin-bottom:22px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .chart h2{font-size:16px;margin:4px 8px 6px;}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.5px;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  th,td{padding:10px 10px;text-align:center;border-bottom:1px solid var(--line);}
+  th{background:#f1f3f5;font-weight:600;color:#374151;}
+  tr:last-child td{border-bottom:none;}
+  td.name{text-align:left;font-weight:600;}
+  .win{color:var(--green);font-weight:700;}
+  .warn{color:var(--red);font-weight:700;}
+  .note{background:#fffaf0;border:1px solid #f3e0b8;border-radius:10px;padding:14px 16px;
+    font-size:13px;color:#7a5a13;margin-top:18px;}
+  .src{font-size:12px;color:var(--sub);margin-top:14px;line-height:1.7;}
+  .disclaimer{font-size:12px;color:var(--sub);margin-top:22px;padding:12px 14px;
+    border-top:1px dashed var(--line);}
+  .pill{display:inline-block;border-radius:5px;padding:1px 6px;font-size:12px;}
+  .pill.low{background:#e8f6ee;color:var(--green);}
+  .pill.high{background:#fdeaea;color:var(--red);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>国内场内黄金ETF · 管理费与年跟踪误差对比</h1>
+  <div class="meta">数据时点：规模/行情为 2026-08-18 盘中（来源：WESTOCK 行情）；费率与跟踪误差为基金公司F10及公开汇总（详见文末来源）。对比范围：场内实物黄金ETF（直接持有/跟踪上金所黄金现货）。</div>
+
+  <div class="tldr">
+    <div class="card">
+      <span class="tag">年跟踪误差最小</span>
+      <h3>易方达黄金ETF（159934.SZ）</h3>
+      <div class="big">约 0.03%</div>
+      <p>与富国上海金ETF（518680）并列最低；国泰（518800）、华夏（518850）约 0.04% 紧随其后。华安（518880）约 0.23% 最高（规模超千亿、租赁/申赎偏离相对更大）。</p>
+    </div>
+    <div class="card">
+      <span class="tag blue">管理费最低（综合0.20%）</span>
+      <h3>华夏518850 / 工银518660 / 富国518680</h3>
+      <div class="big">0.15% + 0.05%</div>
+      <p>管理费 0.15%、托管费 0.05%，年综合费率 0.20%，显著低于华安/博时/易方达/国泰的 0.60%。长期持有每年省约 0.4 个百分点。</p>
+    </div>
+  </div>
+
+  <div class="chart">
+    <h2>① 年综合费率对比（管理费+托管费，%）</h2>
+    <div id="feeChart" style="width:100%;height:340px;"></div>
+  </div>
+
+  <div class="chart">
+    <h2>② 年化跟踪误差对比（%，越低越好）</h2>
+    <div id="teChart" style="width:100%;height:340px;"></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>代码</th><th>名称</th><th>管理人</th><th>跟踪基准</th>
+        <th>管理费</th><th>托管费</th><th>综合费率</th><th>年化跟踪误差(约)</th><th>规模(亿,08-18)</th><th>备注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>518880.SH</td><td class="name">华安黄金ETF</td><td>华安基金</td><td>SGE黄金9999</td>
+        <td>0.50%</td><td>0.10%</td><td>0.60%</td>
+        <td class="warn">0.23%</td><td>1032.26</td><td>规模最大、流动性最佳；误差偏大</td>
+      </tr>
+      <tr>
+        <td>159937.SZ</td><td class="name">博时黄金ETF</td><td>博时基金</td><td>SGE黄金9999</td>
+        <td>0.50%</td><td>0.10%</td><td>0.60%</td>
+        <td>0.09%</td><td>429.70</td><td>深市龙头，成交活跃</td>
+      </tr>
+      <tr>
+        <td>159934.SZ</td><td class="name">易方达黄金ETF</td><td>易方达基金</td><td>SGE黄金9999</td>
+        <td>0.50%</td><td>0.10%</td><td>0.60%</td>
+        <td class="win">0.03%</td><td>367.10</td><td>跟踪误差最优梯队</td>
+      </tr>
+      <tr>
+        <td>518800.SH</td><td class="name">国泰黄金ETF</td><td>国泰基金</td><td>SGE黄金9999</td>
+        <td>0.50%</td><td>0.10%</td><td>0.60%</td>
+        <td>0.04%</td><td>344.42</td><td>沪市，规模中等</td>
+      </tr>
+      <tr>
+        <td>518850.SH</td><td class="name">华夏黄金ETF</td><td>华夏基金</td><td>SGE黄金9999</td>
+        <td>0.15%</td><td>0.05%</td><td class="win">0.20%</td>
+        <td>0.04%</td><td>167.75</td><td>低费率+优跟踪，综合平衡之选</td>
+      </tr>
+      <tr>
+        <td>518660.SH</td><td class="name">工银黄金ETF</td><td>工银瑞信</td><td>SGE黄金9999</td>
+        <td>0.15%</td><td>0.05%</td><td class="win">0.20%</td>
+        <td>0.09%</td><td>87.73</td><td>低费率，银行系</td>
+      </tr>
+      <tr>
+        <td>518680.SH</td><td class="name">富国上海金ETF</td><td>富国基金</td><td>上海金 SHAU</td>
+        <td>0.15%</td><td>0.05%</td><td class="win">0.20%</td>
+        <td class="win">0.03%</td><td>76.49</td><td>基准为"上海金"非Au99.99</td>
+      </tr>
+      <tr>
+        <td>159812.SZ</td><td class="name">前海开源黄金ETF</td><td>前海开源</td><td>SGE黄金9999</td>
+        <td>0.50%</td><td>0.10%</td><td>0.60%</td>
+        <td>0.07%</td><td>约13*</td><td>规模较小（*旧快照）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>① 关于"跟踪误差最小"：</b>多源数据一致显示 <b>易方达159934 与 富国518680 年化跟踪误差约 0.03%</b> 为第一梯队；国泰518800、华夏518850 约 0.04% 紧随其后；华安518880（约 0.23%）因规模超千亿、黄金租赁/申赎操作带来的偏离相对最大。注意：跟踪误差各来源统计时点不同（有取近1年、近1月等口径），0.03%–0.11% 间的细微差异仅供参考，但"易方达/富国最优、华安偏大"的排序在多个独立来源中一致。
+    <br><br>
+    <b>② 关于"管理费最低"：</b><b>华夏518850、工银518660、富国518680</b> 管理费 0.15%+托管费 0.05%=综合 0.20%，为全场最低；华安/博时/易方达/国泰四只均为 0.50%+0.10%=0.60%。长期持有成本每年相差约 0.4 个百分点。
+    <br><br>
+    <b>③ 基准差异提醒：</b>富国518680 跟踪的是"上海金（SHAU）"集中定价合约，其余多只跟踪"SGE黄金9999（Au99.99）"连续竞价价格，两者并非完全同质，对比精度时需留意。
+    <br><br>
+    <b>④ 综合建议：</b>若同时看重"低费率+低误差"，<b>华夏518850</b>（0.20%费率、0.04%误差、规模约168亿、流动性尚可）是典型"又便宜又准"的平衡之选；若追求极致跟踪精度且能接受上海金基准，<b>富国518680</b> 最优。短线/大资金进出仍可考虑流动性碾压同类的华安518880，但需承担更高费率与偏大误差。
+  </div>
+
+  <div class="src">
+    <b>数据来源与时点：</b><br>
+    · 实时行情与规模：WESTOCK 行情接口，2026-08-18 盘中（华安1032.26亿、博时429.70亿、易方达367.10亿、国泰344.42亿、华夏167.75亿、工银87.73亿、富国76.49亿）。<br>
+    · 管理费率/托管费率：各基金招募说明书及同花顺F10（易方达159934 F10 明确管理费0.50%、托管费0.10%）。<br>
+    · 年化跟踪误差：雪球"投资备用"汇总（被广泛引用的一致数据）及多家财经媒体（新浪财经、金融界、简投8等）交叉印证；华安0.23%、博时0.09%、易方达0.03%、国泰0.04%、华夏0.04%、工银0.09%、前海开源0.07%、富国(上海金)约0.03%。<br>
+    · 注意：跟踪误差为不同年份/口径的汇总值，精确逐年数据以基金年报披露为准。
+  </div>
+
+  <div class="disclaimer">
+    <b>免责声明：</b>以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+  var names = ['华安518880','博时159937','易方达159934','国泰518800','华夏518850','工银518660','富国518680','前海开源159812'];
+  var fees  = [0.60, 0.60, 0.60, 0.60, 0.20, 0.20, 0.20, 0.60];
+  var tes   = [0.23, 0.09, 0.03, 0.04, 0.04, 0.09, 0.03, 0.07];
+
+  echarts.init(document.getElementById('feeChart')).setOption({
+    tooltip:{trigger:'axis', formatter:'{b}<br/>综合费率: {c}%'},
+    grid:{left:90, right:30, top:20, bottom:40},
+    xAxis:{type:'value', name:'%', axisLabel:{formatter:'{value}%'}},
+    yAxis:{type:'category', data:names, inverse:true},
+    series:[{
+      type:'bar', data:fees.map(function(v,i){
+        return {value:v, itemStyle:{color: v<=0.20 ? '#16a34a' : '#e23c3c'}};
+      }),
+      label:{show:true, position:'right', formatter:'{c}%'},
+      barWidth:'58%'
+    }]
+  });
+
+  echarts.init(document.getElementById('teChart')).setOption({
+    tooltip:{trigger:'axis', formatter:'{b}<br/>年化跟踪误差: {c}%'},
+    grid:{left:90, right:30, top:20, bottom:40},
+    xAxis:{type:'value', name:'%', axisLabel:{formatter:'{value}%'}},
+    yAxis:{type:'category', data:names, inverse:true},
+    series:[{
+      type:'bar', data:tes.map(function(v){
+        return {value:v, itemStyle:{color: v<=0.04 ? '#16a34a' : (v<=0.09 ? '#c8932b' : '#e23c3c')}};
+      }),
+      label:{show:true, position:'right', formatter:'{c}%'},
+      barWidth:'58%'
+    }]
+  });
+</script>
+</body>
+</html>
